@@ -1,0 +1,10 @@
+syntax: glob 
+bin/ 
+syntax: glob 
+gen/** 
+syntax: regexp 
+^bin/classes\.dex$ 
+syntax: regexp 
+^bin/HappyMeter\.apk$ 
+syntax: regexp 
+^bin/resources\.ap_$
