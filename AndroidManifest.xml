@@ -16,6 +16,14 @@
         <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.MainActivity"
             android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="be.ac.ucl.lfsab1509.llncampus.LoisirsTitle"
+            android:label="@string/loisirs" >
+        </activity>
+        <activity
+            android:name="be.ac.ucl.lfsab1509.llncampus.MainTitle"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
