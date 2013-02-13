@@ -2,11 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
+    tools:context=".MainTitle" 
+    android:background="#21177D">
 
     <Button
         android:id="@+id/button_etudes"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -14,17 +15,8 @@
         android:text="@string/button_text_etudes" />
 
     <Button
-        android:id="@+id/button_loisirs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/button_etudes"
-        android:layout_below="@+id/button_etudes"
-        android:layout_marginTop="145dp"
-        android:text="@string/button_text_loisirs" />
-
-    <Button
         android:id="@+id/button_options"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -40,6 +32,16 @@
         android:layout_marginTop="69dp"
         android:text="@string/app_name"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/White"
         android:textSize="56dp" />
+
+    <Button
+        android:id="@+id/button_loisirs"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button_etudes"
+        android:layout_below="@+id/button_etudes"
+        android:layout_marginTop="158dp"
+        android:text="@string/button_text_loisirs" />
 
 </RelativeLayout>
