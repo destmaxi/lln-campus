@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
 public class Database {
-	//private String filename;
 		private SQLiteDatabase db;
 		private String filename;
 		/*
