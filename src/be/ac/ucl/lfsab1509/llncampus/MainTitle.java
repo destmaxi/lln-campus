@@ -27,6 +27,8 @@ public class MainTitle extends Activity implements OnClickListener{
     private void setListeners() {
         View myVisitsButton = findViewById(R.id.button_loisirs);
         myVisitsButton.setOnClickListener(this);
+        View studyButton = findViewById(R.id.button_etudes);
+        studyButton.setOnClickListener(this);
     }
     
     // Permet de définir l'action effectuée grâce à l'appui sur un bouton
@@ -35,6 +37,10 @@ public class MainTitle extends Activity implements OnClickListener{
 		switch (v.getId()) {
 		case R.id.button_loisirs:
 			intent = new Intent(this, LoisirsTitle.class);
+			startActivity(intent);
+			break;
+		case R.id.button_etudes:
+			intent = new Intent(this, StudyTitle.class);
 			startActivity(intent);
 			break;
 		}

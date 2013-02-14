@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StudyTitle" 
+    android:background="#21177D">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="69dp"
+        android:text="@string/etudes"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/White"
+        android:textSize="56sp" />
+
+    <Button
+        android:id="@+id/button_horaire"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/auditoires"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="84dp"
+        android:text="@string/horaire" />
+
+    <Button
+        android:id="@+id/auditoires"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/auditoires" />
+
+    <Button
+        android:id="@+id/moodle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/icampus"
+        android:layout_alignBottom="@+id/icampus"
+        android:layout_centerHorizontal="true"
+        android:text="@string/moodle" />
+
+    <Button
+        android:id="@+id/bureau"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/moodle"
+        android:layout_alignBottom="@+id/moodle"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="46dp"
+        android:text="@string/bureau" />
+
+    <Button
+        android:id="@+id/icampus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="80dp"
+        android:layout_marginLeft="55dp"
+        android:text="@string/icampus" />
+
+</RelativeLayout>
