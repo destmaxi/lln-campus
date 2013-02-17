@@ -9,6 +9,10 @@ import android.view.View.OnClickListener;
 
 public class StudyTitle extends Activity implements OnClickListener{
 
+	public final String ICAMPUS_URL="http://icampus.uclouvain.be";
+	public final String MOODLE_URL="http://moodleucl.uclouvain.be";
+	public final String BUREAU_UCL_URL="http://www.uclouvain.be/onglet_bureau.html?";
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,13 +48,13 @@ public class StudyTitle extends Activity implements OnClickListener{
 			startActivity(intent);
 			break;
 		case R.id.icampus:
-			ExternalAppUtility.openBrowser(StudyTitle.this, "http://icampus.uclouvain.be");
+			ExternalAppUtility.openBrowser(StudyTitle.this, ICAMPUS_URL);
 			break;
 		case R.id.moodle:
-			ExternalAppUtility.openBrowser(StudyTitle.this, "http://moodleucl.uclouvain.be");
+			ExternalAppUtility.openBrowser(StudyTitle.this, MOODLE_URL);
 			break;
 		case R.id.bureau:
-			ExternalAppUtility.openBrowser(StudyTitle.this, "http://www.uclouvain.be/onglet_bureau.html");
+			ExternalAppUtility.openBrowser(StudyTitle.this, BUREAU_UCL_URL);
 			break;
 		}
 	}

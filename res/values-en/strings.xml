@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="auditoires">Audiences</string>
+    <string name="button_text_etudes">Study</string>
+    <string name="button_text_loisirs">Leisures</string>
+    <string name="button_text_options">Settings</string>
+    <string name="etudes">Study</string>
+    <string name="horaire">Schedule</string>
+    <string name="loisirs">Leisures</string>
+    <string name="menu_settings">Settings</string>
+
+</resources>
