@@ -7,8 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+/**
+ * Class that defines the actions on the study title screen.
+ * Related with the XML file study_title.xml.
+ * @author Quentin
+ *
+ */
 public class StudyTitle extends Activity implements OnClickListener{
 
+	// Defining the URL used in the code
 	public final String ICAMPUS_URL="https://www.uclouvain.be/cnx_icampus.html";
 	public final String MOODLE_URL="https://www.uclouvain.be/cnx_moodle.html";
 	public final String BUREAU_UCL_URL="http://www.uclouvain.be/onglet_bureau.html?";
@@ -21,7 +28,7 @@ public class StudyTitle extends Activity implements OnClickListener{
     }
 
  
-    // Permet d'avoir des boutons "qui font quelque chose"
+    // Permet d'avoir des boutons "qui font quelque chose" (define the buttons in the XML file)
     private void setListeners() {
         View myVisitsButton = findViewById(R.id.button_horaire);
         myVisitsButton.setOnClickListener(this);

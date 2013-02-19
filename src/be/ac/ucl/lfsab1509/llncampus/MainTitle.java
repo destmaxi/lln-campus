@@ -12,6 +12,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+/**
+ * Class that will be executed when starting the application.
+ * Related with the XML main_title.xml
+ * @author Quentin
+ *
+ */
 public class MainTitle extends Activity implements OnClickListener{
 
     @Override
@@ -39,7 +45,7 @@ public class MainTitle extends Activity implements OnClickListener{
         return true;
     }
  
-    // Permet d'avoir des boutons "qui font quelque chose"
+    // Permet d'avoir des boutons "qui font quelque chose" (define the buttons in the xml file)
     private void setListeners() {
         View myVisitsButton = findViewById(R.id.button_loisirs);
         myVisitsButton.setOnClickListener(this);

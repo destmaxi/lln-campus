@@ -43,6 +43,10 @@ public class Database {
 			return true;
 		}
 
+		/*
+		 * Check if the database is open
+		 * @return true if db is open, false otherwise
+		 */
 		public boolean isOpen(){
 			if(db == null){
 				return false;
@@ -118,6 +122,7 @@ public class Database {
 		public Cursor sqlRawQuery(String query){
 			return sqlRawQuery(query,null);
 		}
+		
 		public Cursor sqlRawQuery(String query, String[] values){
 			if(!isOpen() && !open()){
 				Log.e("Database.java - sqlQuery", "Unable to open database");
@@ -157,9 +162,9 @@ public class Database {
 			return db.query(table, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
 		}
 		
-		
-		
-		
+		/*
+		 * Reset the database in the databases folder by copying the 
+		 */
 		public void reset(){
 			try {
 				copyDB();
@@ -167,6 +172,7 @@ public class Database {
 				Log.e("Database.java - reset","Impossible de reinitialise la db "+e.getMessage());
 			}
 		}
+		
 		public void createDatabase(){
 			if(dbExist()) {
 				Log.d("Database.java - createDatabase", "La DB existe deja");//FIXME
