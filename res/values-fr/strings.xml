@@ -1,4 +1,24 @@
 <resources>
 	<string name="todo">Travail en cours, aidez-nous via vos dons :)</string>
 
+	<string name="app_name">LLN Campus</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <!-- Strings utiles pour main_title -->
+    <string name="menu_settings">Options</string>
+    <string name="button_text_etudes">Études</string>
+	<string name="button_text_loisirs">Loisirs</string>
+	<string name="button_text_options">Options</string>
+	
+	<!-- Strings utiles pour loisirs_title -->
+	<string name="loisirs">Loisirs</string>
+
+	
+	<!-- Strings utiles pour study_title -->
+	<string name="etudes">Études</string>
+	<string name="horaire">Horaire</string>
+	<string name="icampus">iCampus</string>
+	<string name="moodle">Moodle</string>
+	<string name="bureau">Bureau UCL</string>
+	<string name="auditoires">Auditoires</string>
 </resources>

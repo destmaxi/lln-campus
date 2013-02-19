@@ -8,5 +8,15 @@
     <string name="horaire">Schedule</string>
     <string name="loisirs">Leisures</string>
     <string name="menu_settings">Settings</string>
+    
+    <string name="app_name">LLN Campus</string>
+    <string name="hello_world">Hello world!</string>
+	
+	<!-- Strings utiles pour loisirs_title -->
+	<string name="todo">Work in progress, please support us in donating :)</string>
+	
+	<string name="icampus">iCampus</string>
+	<string name="moodle">Moodle</string>
+	<string name="bureau">Bureau UCL</string>
 
 </resources>
