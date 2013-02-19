@@ -16,7 +16,7 @@ public class LLNCampus extends Application{
 	}
 	public Database getDatabase() {
 		if(DB == null){
-			DB = new Database(DATABASE_FILENAME);
+			DB = new Database(DATABASE_FILENAME, this);
 			DB.open();
 		}
 		return DB;
