@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".StudyTitle" 
-    android:background="#21177D">
+    android:background="@color/Blue">
 
     <TextView
         android:id="@+id/textView1"
@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="69dp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="30dp"
         android:text="@string/etudes"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/White"
@@ -21,9 +22,9 @@
         android:id="@+id/button_horaire"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/auditoires"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="84dp"
+        android:layout_alignBottom="@+id/auditoires"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="84dp"
         android:text="@string/horaire" />
 
     <Button
@@ -34,14 +35,14 @@
         android:layout_centerVertical="true"
         android:text="@string/auditoires" />
 
-    <Button
+    <ImageView
         android:id="@+id/moodle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/icampus"
         android:layout_alignBottom="@+id/icampus"
         android:layout_centerHorizontal="true"
-        android:text="@string/moodle" />
+        android:src="@drawable/logo_moodle_ucl" />
 
     <Button
         android:id="@+id/bureau"
@@ -50,17 +51,17 @@
         android:layout_alignBaseline="@+id/moodle"
         android:layout_alignBottom="@+id/moodle"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="46dp"
+        android:layout_marginRight="0dp"
         android:text="@string/bureau" />
 
-    <Button
+    <ImageView
         android:id="@+id/icampus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginBottom="80dp"
-        android:layout_marginLeft="55dp"
-        android:text="@string/icampus" />
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="0dp"
+        android:src="@drawable/icampuslogo3" />
 
 </RelativeLayout>
