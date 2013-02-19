@@ -1,6 +1,8 @@
-package be.ac.ucl.lfsab1509.llncampus;
+package be.ac.ucl.lfsab1509.llncampus.activity;
 
 
+import be.ac.ucl.lfsab1509.llncampus.ExternalAppUtility;
+import be.ac.ucl.lfsab1509.llncampus.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

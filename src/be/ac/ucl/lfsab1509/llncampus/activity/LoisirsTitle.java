@@ -1,5 +1,6 @@
-package be.ac.ucl.lfsab1509.llncampus;
+package be.ac.ucl.lfsab1509.llncampus.activity;
 
+import be.ac.ucl.lfsab1509.llncampus.R;
 import android.os.Bundle;
 import android.app.Activity;
 //import android.view.Menu;

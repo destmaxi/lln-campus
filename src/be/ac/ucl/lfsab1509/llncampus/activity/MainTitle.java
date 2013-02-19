@@ -1,7 +1,9 @@
-package be.ac.ucl.lfsab1509.llncampus;
+package be.ac.ucl.lfsab1509.llncampus.activity;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import be.ac.ucl.lfsab1509.llncampus.R;
 
 import android.os.Bundle;
 import android.app.Activity;
