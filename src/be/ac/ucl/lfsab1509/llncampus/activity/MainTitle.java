@@ -27,17 +27,6 @@ public class MainTitle extends Activity implements OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_title);
         setListeners();
-        /*
-        Database db = new Database("database.sqlite");
-        String result;
-        if (db.open()){
-        	result="Ok :)";
-        }
-        else{
-        	result="Raté";
-        }
-        Toast.makeText(this, result, Toast.LENGTH_LONG).show();
-        */
     }
 
     @Override

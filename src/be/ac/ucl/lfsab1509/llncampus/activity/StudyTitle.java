@@ -53,7 +53,7 @@ public class StudyTitle extends Activity implements OnClickListener{
 			startActivity(intent);
 			break;
 		case R.id.auditoires:
-			intent = new Intent(this, LoisirsTitle.class); // A modifier
+			intent = new Intent(this, AuditoriumActivity.class); // A modifier
 			startActivity(intent);
 			break;
 		case R.id.icampus:
