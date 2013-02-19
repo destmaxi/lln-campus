@@ -9,8 +9,8 @@ import android.view.View.OnClickListener;
 
 public class StudyTitle extends Activity implements OnClickListener{
 
-	public final String ICAMPUS_URL="http://icampus.uclouvain.be";
-	public final String MOODLE_URL="http://moodleucl.uclouvain.be";
+	public final String ICAMPUS_URL="https://www.uclouvain.be/cnx_icampus.html";
+	public final String MOODLE_URL="https://www.uclouvain.be/cnx_moodle.html";
 	public final String BUREAU_UCL_URL="http://www.uclouvain.be/onglet_bureau.html?";
 	
     @Override
