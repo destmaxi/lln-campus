@@ -1,6 +1,12 @@
 package be.ac.ucl.lfsab1509.llncampus;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,12 +15,17 @@ import android.util.Log;
 
 public class Database {
 		private SQLiteDatabase db;
-		private String filename;
+		private final String filename;
+		private final String DB_PATH;
+		private final Context context;
 		/*
 		 * Constructor.
 		 */
-		public Database(String filename) {
+		public Database(String filename, Context context) {
 			this.filename = filename;
+			this.context = context;
+			DB_PATH  = context.getFilesDir().getPath()+context.getApplicationContext().getPackageName()+ "/databases/";
+			createDatabase();
 		}
 
 		/*
@@ -24,7 +35,7 @@ public class Database {
 		public boolean open() {
 			if(isOpen()){ return true; }
 			try{
-				SQLiteDatabase.openDatabase(filename, null, SQLiteDatabase.OPEN_READWRITE);
+				SQLiteDatabase.openDatabase(DB_PATH+filename, null, SQLiteDatabase.OPEN_READWRITE);
 			} catch(SQLiteException e){
 				Log.e("Database.java - open",e.getMessage());
 				return false;
@@ -145,4 +156,57 @@ public class Database {
 			}
 			return db.query(table, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
 		}
+		
+		
+		
+		
+		public void reset(){
+			try {
+				copyDB();
+			} catch (IOException e) {
+				Log.e("Database.java - reset","Impossible de reinitialise la db "+e.getMessage());
+			}
+		}
+		public void createDatabase(){
+			if(dbExist()) {
+				Log.d("Database.java - createDatabase", "La DB existe deja");//FIXME
+		    } else {
+		    	try {
+		    		copyDB();
+		    	} catch(IOException e) {
+		    		Log.e("Database.java - createDatabase", "Erreur lors de la copie de la db "+e.getMessage());
+		    	}
+		    }
+		}
+		
+		private boolean dbExist(){
+			SQLiteDatabase checkDB = null;
+	    	try{
+	    		checkDB = SQLiteDatabase.openDatabase(DB_PATH + filename, null, SQLiteDatabase.OPEN_READWRITE);
+	    		checkDB.query("poi", null, null, null, null, null, null, "0");//FIXME
+	    	}catch(SQLiteException e){
+	    		return false;
+	    	}
+	    	if(checkDB != null){
+	    		checkDB.close();
+	    	}
+	    	return (checkDB != null);
+		}
+
+		/**
+		 * Copie la DB depuis le dossier assets
+		 */
+		 private void copyDB() throws IOException{
+			 InputStream in = context.getAssets().open(filename);
+			 OutputStream out = new FileOutputStream(DB_PATH + filename);
+
+			 byte[] buffer = new byte[1024];
+			 int length;
+			 while ((length = in.read(buffer))>0) {
+				 out.write(buffer,0,length);
+			 }
+			 in.close();
+			 out.flush();
+			 out.close();
+		 }
 }
