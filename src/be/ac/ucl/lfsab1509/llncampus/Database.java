@@ -1,5 +1,6 @@
 package be.ac.ucl.lfsab1509.llncampus;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +25,7 @@ public class Database {
 		public Database(String filename, Context context) {
 			this.filename = filename;
 			this.context = context;
-			DB_PATH  = context.getFilesDir().getPath()+context.getApplicationContext().getPackageName()+ "/databases/";
+			DB_PATH  = context.getFilesDir().getPath()+ "/databases/";
 			createDatabase();
 		}
 
@@ -204,7 +205,7 @@ public class Database {
 		 */
 		 private void copyDB() throws IOException{
 			 InputStream in = context.getAssets().open(filename);
-			 OutputStream out = new FileOutputStream(DB_PATH + filename);
+			 OutputStream out = new FileOutputStream(new File(DB_PATH + filename));
 
 			 byte[] buffer = new byte[1024];
 			 int length;
