@@ -1,28 +1,46 @@
 package be.ac.ucl.lfsab1509.llncampus;
 
+import be.ac.ucl.lfsab1509.llncampus.activity.MainTitle;
 import android.app.Application;
+import android.content.Context;
+import android.util.Log;
 
 public class LLNCampus extends Application{
-	private static LLNCampus APPLICATION_CONTEXT;
+	private static Context APPLICATION_CONTEXT;
 	private static Database DB;
-	private static String DATABASE_FILENAME = "database.sqlite"; 
+	private static final String DATABASE_FILENAME = "database.sqlite"; 
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
 
 		//initialization for the application context here
-		APPLICATION_CONTEXT = this;
+		setContext(this);
 	}
-	public Database getDatabase() {
-		if(DB == null){
-			DB = new Database(DATABASE_FILENAME, this);
-			DB.open();
+	public static void setContext(Context c){
+		APPLICATION_CONTEXT = c;
+	}
+	
+	public synchronized void close(){
+		if(DB!=null){
+			DB.close();
+			DB = null;
 		}
+	}
+	
+	
+	private static void openDatabase(){
+		Log.d("DEBUG", "Application context = "+APPLICATION_CONTEXT);
+		DB = new Database(DATABASE_FILENAME, APPLICATION_CONTEXT);
+		DB.open();
+	}
+	
+	public static Database getDatabase() {
+		if(DB == null){ openDatabase();	}
 		return DB;
 	}
 	
-	public static LLNCampus getContext() {
+	public static Context getContext() {
 		return APPLICATION_CONTEXT;
 	}
 }
