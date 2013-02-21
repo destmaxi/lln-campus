@@ -3,6 +3,7 @@ package be.ac.ucl.lfsab1509.llncampus.activity;
 import java.io.IOException;
 import java.io.InputStream;
 
+import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.R;
 
 import android.os.Bundle;
@@ -27,6 +28,7 @@ public class MainTitle extends Activity implements OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_title);
         setListeners();
+        LLNCampus.setContext(this);
     }
 
     @Override
