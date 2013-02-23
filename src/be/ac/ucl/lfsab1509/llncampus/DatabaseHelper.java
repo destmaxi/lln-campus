@@ -10,6 +10,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * @author Damien
@@ -79,7 +80,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 			String line;
 			while((line = in.readLine()) != null) {
 				//FIXME : Il faut que dans le fichier .sql, les requetes ne soit pas sur plusieurs lignes...
-				db.execSQL(line);
+				//Log.d("DB",line);
+				if(!line.equals("")){
+					db.execSQL(line);
+				}
 			}
 		} catch (IOException e) {
 			throw new RuntimeException("Erreur lors de la copie de la base de donnee",e);
@@ -108,8 +112,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 		reset();
 	}
 
-	private void reset() {
+	public void reset() {
 		//FIXME : A tester
 		context.deleteDatabase(DB_NAME);
+		try {
+			this.createDatabase();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

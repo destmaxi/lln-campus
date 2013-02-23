@@ -158,6 +158,12 @@ public class Database {
 			}
 			return db.query(table, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
 		}
+
+		public void reset() {
+			dbh.reset();
+			// TODO Auto-generated method stub
+			
+		}
 		
 
 	
