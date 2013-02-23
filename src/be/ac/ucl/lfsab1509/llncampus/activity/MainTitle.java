@@ -1,19 +1,14 @@
 package be.ac.ucl.lfsab1509.llncampus.activity;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.R;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Toast;
 
 /**
  * Class that will be executed when starting the application.
