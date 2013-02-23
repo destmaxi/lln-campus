@@ -8,6 +8,7 @@ import java.io.OutputStream;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
@@ -204,6 +205,7 @@ public class Database {
 		 * Copie la DB depuis le dossier assets
 		 */
 		 private void copyDB() throws IOException{
+			 
 			 InputStream in = context.getAssets().open(filename);
 			 OutputStream out = new FileOutputStream(new File(DB_PATH + filename));
 
