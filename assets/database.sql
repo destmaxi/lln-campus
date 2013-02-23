@@ -1,4 +1,4 @@
-CREATE TABLE "Poi" (    "ID" INTEGER NOT NULL,    "NAME" TEXT NOT NULL PRIMARY KEY,    "LATITUDE" REAL NOT NULL,    "LONGITUDE" REAL NOT NULL,    "TYPE" TEXT, "ADDRESS" TEXT DEFAULT NULL);
+CREATE TABLE "Poi" ("ID" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,    "NAME" TEXT NOT NULL UNIQUE,    "LATITUDE" REAL NOT NULL,    "LONGITUDE" REAL NOT NULL,    "TYPE" TEXT, "ADDRESS" TEXT DEFAULT NULL);
 INSERT INTO Poi VALUES(1,'Auditoires Sainte Barbe',50.668178,4.621446,'auditoire','Place Sainte Barbe, 1');
 INSERT INTO Poi VALUES(2,'Auditoires Croix du Sud',50.66701,4.62063,'auditoire','Place Croix du SUD');
 INSERT INTO Poi VALUES(3,'Auditoires Agora',50.66894,4.61155,'auditoire','Place Agora, 19');
@@ -26,4 +26,3 @@ INSERT INTO Poi VALUES(24,'Piscine du Blocry',50.670079,4.605407,'sport','Rue du
 INSERT INTO Poi VALUES(25,'Complexe Sportif du Blocry',50.670272,4.601759,'sport','Place des Sports, 1');
 INSERT INTO Poi VALUES(26,'Royal Bowl',50.669659,4.613523,'activite','Rue Charlemagne, 26');
 INSERT INTO Poi VALUES(27,'Snooker Academy',50.669489,4.615081,'activite','Grand Rue, 58-60 (niv-2)');
-
