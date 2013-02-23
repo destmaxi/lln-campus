@@ -1,6 +1,5 @@
 package be.ac.ucl.lfsab1509.llncampus;
 
-import be.ac.ucl.lfsab1509.llncampus.activity.MainTitle;
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
@@ -8,7 +7,6 @@ import android.util.Log;
 public class LLNCampus extends Application{
 	private static Context APPLICATION_CONTEXT;
 	private static Database DB;
-	private static final String DATABASE_FILENAME = "database.sqlite"; 
 
 	@Override
 	public void onCreate() {
@@ -31,7 +29,7 @@ public class LLNCampus extends Application{
 	
 	private static void openDatabase(){
 		Log.d("DEBUG", "Application context = "+APPLICATION_CONTEXT);
-		DB = new Database(DATABASE_FILENAME, APPLICATION_CONTEXT);
+		DB = new Database(APPLICATION_CONTEXT);
 		DB.open();
 	}
 	
