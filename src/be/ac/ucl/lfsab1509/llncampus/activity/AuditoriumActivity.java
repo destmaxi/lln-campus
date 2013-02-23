@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * This class is intended to create a list of auditoriums in order to make a clickable list for the user.
@@ -32,7 +31,6 @@ public class AuditoriumActivity extends ListActivity{
 		setContentView(R.layout.auditorium);
 		
 		
-		/* FIXME : A reactiver une fois la db ok
 		Database DB = LLNCampus.getDatabase();
 		 
 		String[] cols = {"NAME"};
@@ -43,10 +41,6 @@ public class AuditoriumActivity extends ListActivity{
 			values.add(c.getString(0));
 		}
 		c.close();
-		*/
-		String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-		  "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-		  "Linux", "OS/2" };
 		
 		
 		
