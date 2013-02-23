@@ -9,10 +9,13 @@ import be.ac.ucl.lfsab1509.llncampus.R;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -27,6 +30,7 @@ public class AuditoriumActivity extends ListActivity{
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.auditorium);
+		
 		
 		/* FIXME : A reactiver une fois la db ok
 		Database DB = LLNCampus.getDatabase();
@@ -54,14 +58,39 @@ public class AuditoriumActivity extends ListActivity{
 		// Second parameter - Layout for the row
 		// Third parameter - ID of the TextView to which the data is written
 		// Forth - the Array of data
-
+		/*
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-		  android.R.layout.simple_list_item_1, android.R.id.text1, values);
+			  android.R.layout.simple_list_item_1, android.R.id.text1, values);
+		 */	
 
+		ArrayAdapter<String> adapter=new ArrayAdapter<String>(
+	            this,android.R.layout.simple_list_item_1, values){
 
+	        @Override
+	        public View getView(int position, View convertView,
+	                ViewGroup parent) {
+	            View view =super.getView(position, convertView, parent);
+
+	            TextView textView=(TextView) view.findViewById(android.R.id.text1);
+
+	            /*YOUR CHOICE OF COLOR*/
+	            textView.setTextColor(Color.WHITE);
+
+	            return view;
+	        }
+	    };
+	        /*SET THE ADAPTER TO LISTVIEW*/
+	        setListAdapter(adapter);
+		
 		// Assign adapter to ListView
-		listView.setAdapter(adapter); 
+		//listView.setAdapter(adapter); 
 		listView.setClickable(true);
+		/*setListAdapter(new ArrayAdapter<String>(
+	            this,R.layout.auditorium ,R.id.list_content, values){
+			
+			
+		});
+		*/
 	}
 	
 
@@ -70,7 +99,7 @@ public class AuditoriumActivity extends ListActivity{
      */
     @Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-    	Intent intent = new Intent(this, LoisirsTitle.class); //the intent is used to start a new activity
+    	Intent intent = new Intent(this, DetailsAuditorium.class); //the intent is used to start a new activity
     	/*
 		 * before starting the new activity, we serialize the selected Poi from the list and add it as a parameter to the intent with the method 'putExtra'
 		 * Note that non-serializable fields of the Poi (marked as 'transient') will not be included in the serialized object.

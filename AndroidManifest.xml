@@ -28,6 +28,10 @@
             android:label="@string/etudes" >
         </activity>
         <activity
+            android:name="be.ac.ucl.lfsab1509.llncampus.activity.DetailsAuditorium"
+            android:label="@string/auditoires" >
+        </activity>
+        <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.MainTitle"
             android:label="@string/app_name" >
             <intent-filter>
