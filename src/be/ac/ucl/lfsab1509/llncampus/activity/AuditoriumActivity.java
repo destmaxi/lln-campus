@@ -3,10 +3,7 @@ package be.ac.ucl.lfsab1509.llncampus.activity;
 
 
 import java.util.ArrayList;
-import be.ac.ucl.lfsab1509.llncampus.Database;
-import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.R;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -23,18 +20,16 @@ import android.widget.TextView;
  * @version 19/02/2013
  *
  */
-public class AuditoriumActivity extends ListActivity{
+public class AuditoriumActivity extends LLNCampusListActivity{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.auditorium);
 		
-		
-		Database DB = LLNCampus.getDatabase();
-		 
+				 
 		String[] cols = {"NAME"};
-		Cursor c = DB.select("poi", cols,"TYPE = 'auditoire'",null, null, null, null, null);
+		Cursor c = db.select("poi", cols,"TYPE = 'auditoire'",null, null, null, null, null);
 		
 		ArrayList<String> values = new ArrayList<String>();
 		while(c.moveToNext()){

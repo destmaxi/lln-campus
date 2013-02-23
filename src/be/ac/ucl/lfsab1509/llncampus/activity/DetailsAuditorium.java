@@ -1,7 +1,6 @@
 package be.ac.ucl.lfsab1509.llncampus.activity;
 
 import be.ac.ucl.lfsab1509.llncampus.R;
-import android.app.Activity;
 import android.os.Bundle;
 
 /**
@@ -9,7 +8,7 @@ import android.os.Bundle;
  * @author Quentin
  *
  */
-public class DetailsAuditorium extends Activity{
+public class DetailsAuditorium extends LLNCampusActivity{
 	 @Override
 	    protected void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);

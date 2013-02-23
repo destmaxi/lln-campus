@@ -1,12 +1,9 @@
 package be.ac.ucl.lfsab1509.llncampus.activity;
 
-import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.R;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -16,22 +13,15 @@ import android.view.View.OnClickListener;
  * @author Quentin
  *
  */
-public class MainTitle extends Activity implements OnClickListener{
+public class MainTitle extends LLNCampusActivity implements OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_title);
         setListeners();
-        LLNCampus.setContext(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_title, menu);
-        return true;
-    }
  
     // Permet d'avoir des boutons "qui font quelque chose" (define the buttons in the xml file)
     private void setListeners() {
@@ -52,7 +42,7 @@ public class MainTitle extends Activity implements OnClickListener{
 		case R.id.button_etudes:
 			intent = new Intent(this, StudyTitle.class);
 			startActivity(intent);
-			break;
+			break;			
 		}
 	}
 }

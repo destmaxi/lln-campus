@@ -3,7 +3,6 @@ package be.ac.ucl.lfsab1509.llncampus.activity;
 
 import be.ac.ucl.lfsab1509.llncampus.ExternalAppUtility;
 import be.ac.ucl.lfsab1509.llncampus.R;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +14,7 @@ import android.view.View.OnClickListener;
  * @author Quentin
  *
  */
-public class StudyTitle extends Activity implements OnClickListener{
+public class StudyTitle extends LLNCampusActivity implements OnClickListener{
 
 	// Defining the URL used in the code
 	public final String ICAMPUS_URL="https://www.uclouvain.be/cnx_icampus.html";
