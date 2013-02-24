@@ -83,7 +83,9 @@ public class LLNCampusActivity extends Activity{
 				startActivity(intent);
 				break;
 			case R.id.menu_resetDB: // FIXME : Dispo en mode developpement uniquement
+				db.close();
 				db.reset();
+				db.open();
 				notify("La base de donnée a été rechargée");
 				break;
 			default:
