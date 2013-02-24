@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="todo">Travail en cours, aidez-nous via vos dons :)</string>
 
-    <string name="app_name">LLN Campus</string>
+	<string name="app_name">LLN Campus</string>
+    <string name="hello_world">Hello world!</string>
     
-    <!-- Strings utiles a plusieurs endroits -->
+     <!-- Strings utiles a plusieurs endroits -->
     <string name="settings">Options</string>
     <string name="reset_DB">Recharger la DB</string>
     
@@ -13,11 +14,9 @@
 	<string name="button_text_loisirs">Loisirs</string>
 	<string name="button_text_options">Options</string>
 	
-	<string name="hello_world">Hello world!</string>
-	
 	<!-- Strings utiles pour loisirs_title -->
 	<string name="loisirs">Loisirs</string>
-	<string name="todo">Work in progress, please support us in donating :)</string>
+
 	
 	<!-- Strings utiles pour study_title -->
 	<string name="etudes">Études</string>
@@ -30,9 +29,8 @@
 	<!-- Strings utiles pour auditorium -->
     <string name="error_db">Erreur DB</string>
     
-    <!-- Strings utiles pour auditorium_details -->
+    <!--  Strings utiles pour aditorium_details -->
     <string name="auditorium_address">Adresse: %1$s</string>
     <string name="auditorium_GPS">Guidage GPS</string>
     <string name="sub_auditorium">Sous-auditoires</string>
-    
 </resources>
