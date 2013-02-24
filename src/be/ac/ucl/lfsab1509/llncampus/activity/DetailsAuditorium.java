@@ -30,7 +30,6 @@ public class DetailsAuditorium extends LLNCampusActivity{
 			{
 				/* TODO passer le int et pas le nom */
 				String nameAuditorium = extras.getString("NAME");
-				Log.d("NAME", nameAuditorium);
 				String[] cols = {"ID","NAME","LATITUDE", "LONGITUDE", "ADDRESS"};
 				Cursor c = super.db.select("Poi", cols, "NAME = "+ "'"+nameAuditorium+"'", null, null, null, null, null);
 				c.moveToFirst();
