@@ -8,10 +8,22 @@
 	android:padding="20dip">
 	
     <TextView
-        android:id="@+id/auditorium_detail_name"
+        android:id="@+id/auditorium_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/White" />
+        android:textColor="@color/White" 
+        android:textSize="69sp"
+        android:gravity="top|center_horizontal"/>
+    
+    <TextView 
+        android:id="@+id/auditorium_address"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White" 
+        android:textSize="19sp"
+        android:gravity="top|center_horizontal"
+        android:layout_alignBottom="@+id/auditorium_name"
+        />
     
 	
 

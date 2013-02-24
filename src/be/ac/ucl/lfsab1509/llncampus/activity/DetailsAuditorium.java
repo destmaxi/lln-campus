@@ -24,7 +24,7 @@ public class DetailsAuditorium extends LLNCampusActivity{
 	        
 	        
 	        /*name of Auditorium*/
-	        this.name = (TextView) findViewById(R.id.auditorium_detail_name);
+	        this.name = (TextView) findViewById(R.id.auditorium_name);
 			Bundle extras = getIntent().getExtras(); 
 			if(extras !=null)
 			{
