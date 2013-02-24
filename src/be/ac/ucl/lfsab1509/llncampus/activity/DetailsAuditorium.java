@@ -5,17 +5,21 @@ import java.util.Locale;
 
 import be.ac.ucl.lfsab1509.llncampus.Auditorium;
 import be.ac.ucl.lfsab1509.llncampus.R;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Class intended for showing some information about an Auditorium
  * @author Anh Tuan
  *
  */
-public class DetailsAuditorium extends LLNCampusActivity{
+public class DetailsAuditorium extends LLNCampusActivity implements OnClickListener{
 	private TextView name=null;
 	private TextView address=null;
 	private Auditorium auditorium;
@@ -48,7 +52,30 @@ public class DetailsAuditorium extends LLNCampusActivity{
 				this.address.setText("Adresse: "+ auditorium.getAddress());
 			}	
 			//this.getString(R.id.auditorium_address, auditorium.getAddress());
+			setListeners();
 	    }
+	 
+	 
+	 private void setListeners() {
+	        View GPSButton = findViewById(R.id.button_auditorium_gps);
+	        GPSButton.setOnClickListener(this);
+	        View subButton = findViewById(R.id.button_subauditorium);
+	        subButton.setOnClickListener(this);
+	    }
+	    
+	    // Permet de définir l'action effectuée grâce à l'appui sur un bouton
+		public void onClick(View v) {
+			Intent intent;
+			switch (v.getId()) {
+			case R.id.button_auditorium_gps:
+				Toast.makeText(this, "Sera implémenté plus tard ^_^", 3);
+				break;
+			case R.id.button_subauditorium:
+				intent = new Intent(this, SubAuditoriumActivity.class);
+				startActivity(intent);
+				break;			
+			}
+		}
 	 
 	 
 }
