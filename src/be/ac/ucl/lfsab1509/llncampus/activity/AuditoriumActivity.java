@@ -16,11 +16,12 @@ import android.widget.TextView;
 
 /**
  * This class is intended to create a list of auditoriums in order to make a clickable list for the user.
- * @author Quentin
+ * @author Quentin & Anh Tuan
  * @version 19/02/2013
  *
  */
 public class AuditoriumActivity extends LLNCampusListActivity{
+	ArrayList<String> values = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
@@ -31,7 +32,7 @@ public class AuditoriumActivity extends LLNCampusListActivity{
 		String[] cols = {"NAME"};
 		Cursor c = db.select("poi", cols,"TYPE = 'auditoire'",null, null, null, null, null);
 		
-		ArrayList<String> values = new ArrayList<String>();
+		this.values = new ArrayList<String>();
 		while(c.moveToNext()){
 			values.add(c.getString(0));
 		}
@@ -99,6 +100,8 @@ public class AuditoriumActivity extends LLNCampusListActivity{
     	intent.putExtra(VISITABLE_ENTITY, cities.get(position));
     	intent.putExtra("Index", position);
     	*/
+    	
+    	intent.putExtra("Name", values.get(position));
 		startActivity(intent); //starts the activity denoted by this intent. 
     }
 }

@@ -49,6 +49,8 @@ public interface IAuditorium {
 	 * Set the address of an IAuditorium object to newAdress
 	 */
 	public void setAddress(String newAddress);
+
+	int getID();
 	
 	//TODO probably other methods will be integrated, such as sub-auditoriums,...
 }

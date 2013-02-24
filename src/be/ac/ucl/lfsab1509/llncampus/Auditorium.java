@@ -4,11 +4,12 @@ import be.ac.ucl.lfsab1509.llncampus.interfaces.IAuditorium;
 
 /**
  * Implementation of an Auditorium object
- * @author Quentin
+ * @author Quentin & Anh Tuan
  *
  */
 public class Auditorium implements IAuditorium {
-
+	
+	private int ID;
 	private String name;
 	private double latitude;
 	private double longitude;
@@ -27,11 +28,17 @@ public class Auditorium implements IAuditorium {
 	/**
 	 * Constructor with arguments
 	 */
-	public Auditorium(String name, double latitude, double longitude, String address){
+	public Auditorium(int id, String name, double latitude, double longitude, String address){
+		this.ID=id;
 		this.name=name;
 		this.latitude=latitude;
 		this.longitude=longitude;
 		this.address=address;
+	}
+	
+	@Override
+	public int getID(){
+		return this.ID;
 	}
 	
 	@Override
