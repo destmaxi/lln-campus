@@ -1,4 +1,4 @@
-<LinearLayout
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="horizontal"
 	android:gravity="top"
@@ -14,17 +14,37 @@
         android:textColor="@color/White" 
         android:textSize="69sp"
         android:gravity="top|center_horizontal"/>
-    
-    <TextView 
+
+    <TextView
         android:id="@+id/auditorium_address"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/White" 
-        android:textSize="19sp"
         android:gravity="top|center_horizontal"
-        android:layout_alignBottom="@+id/auditorium_name"
-        />
+        android:layout_below="@+id/auditorium_name"
+        android:layout_marginTop="17dp"
+        android:text="@string/auditorium_address"
+        android:textColor="@color/White"
+        android:textSize="19sp" />
     
-	
 
-</LinearLayout>
+    <Button
+        android:id="@+id/button_auditorium_gps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="bottom|center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:text="@string/auditorium_GPS" />
+
+    <Button
+        android:id="@+id/button_subauditorium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_auditorium_gps"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="54dp"
+        android:gravity="bottom|center_horizontal"
+        android:text="@string/sub_auditorium" />
+
+</RelativeLayout>

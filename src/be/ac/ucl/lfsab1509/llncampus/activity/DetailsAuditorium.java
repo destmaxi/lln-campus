@@ -1,6 +1,8 @@
 package be.ac.ucl.lfsab1509.llncampus.activity;
 
 
+import java.util.Locale;
+
 import be.ac.ucl.lfsab1509.llncampus.Auditorium;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import android.database.Cursor;
@@ -15,6 +17,7 @@ import android.widget.TextView;
  */
 public class DetailsAuditorium extends LLNCampusActivity{
 	private TextView name=null;
+	private TextView address=null;
 	private Auditorium auditorium;
 	
 	 @Override
@@ -25,6 +28,7 @@ public class DetailsAuditorium extends LLNCampusActivity{
 	        
 	        /*name of Auditorium*/
 	        this.name = (TextView) findViewById(R.id.auditorium_name);
+	        this.address=(TextView) findViewById(R.id.auditorium_address);
 			Bundle extras = getIntent().getExtras(); 
 			if(extras !=null)
 			{
@@ -37,6 +41,13 @@ public class DetailsAuditorium extends LLNCampusActivity{
 				auditorium = new Auditorium(c.getInt(0), c.getString(1), c.getDouble(2), c.getDouble(3), c.getString(4));
 			}
 			this.name.setText(auditorium.getName());
+			Log.d("ICI", Locale.getDefault().getDisplayLanguage());
+			if (Locale.getDefault().getDisplayLanguage().compareTo("English") == 0){
+				this.address.setText("Address: "+ auditorium.getAddress());
+			}else{	
+				this.address.setText("Adresse: "+ auditorium.getAddress());
+			}	
+			//this.getString(R.id.auditorium_address, auditorium.getAddress());
 	    }
 	 
 	 

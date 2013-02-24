@@ -26,4 +26,8 @@
 	<!-- Strings utiles pour auditorium -->
     <string name="error_db">Error DB</string>
 
+    <!-- Strings utiles pour auditorium_details -->
+    <string name="auditorium_address">Address: %1$s</string>
+        <string name="auditorium_GPS">Guidance GPS</string>
+    <string name="sub_auditorium">Subauditoriums</string>
 </resources>
