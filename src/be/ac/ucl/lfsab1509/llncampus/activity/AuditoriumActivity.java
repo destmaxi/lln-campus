@@ -101,7 +101,7 @@ public class AuditoriumActivity extends LLNCampusListActivity{
     	intent.putExtra("Index", position);
     	*/
     	
-    	intent.putExtra("Name", values.get(position));
+    	intent.putExtra("NAME", values.get(position));
 		startActivity(intent); //starts the activity denoted by this intent. 
     }
 }
