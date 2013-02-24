@@ -32,7 +32,7 @@ public class DetailsAuditorium extends LLNCampusActivity{
 				String nameAuditorium = extras.getString("NAME");
 				Log.d("NAME", nameAuditorium);
 				String[] cols = {"ID","NAME","LATITUDE", "LONGITUDE", "ADDRESS"};
-				Cursor c = super.db.select("poi", cols, "NAME = "+ "'"+nameAuditorium+"'", null, null, null, null, null);
+				Cursor c = super.db.select("Poi", cols, "NAME = "+ "'"+nameAuditorium+"'", null, null, null, null, null);
 				c.moveToFirst();
 				auditorium = new Auditorium(c.getInt(0), c.getString(1), c.getDouble(2), c.getDouble(3), c.getString(4));
 			}
