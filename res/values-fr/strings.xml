@@ -4,6 +4,10 @@
 	<string name="app_name">LLN Campus</string>
     <string name="hello_world">Hello world!</string>
     
+     <!-- Strings utiles a plusieurs endroits -->
+    <string name="settings">Options</string>
+    <string name="reset_DB">Recharger la DB</string>
+    
     <!-- Strings utiles pour main_title -->
     <string name="menu_settings">Options</string>
     <string name="button_text_etudes">Études</string>
@@ -21,4 +25,7 @@
 	<string name="moodle">Moodle</string>
 	<string name="bureau">Bureau UCL</string>
 	<string name="auditoires">Auditoires</string>
+	
+	<!-- Strings utiles pour auditorium -->
+    <string name="error_db">Erreur DB</string>
 </resources>

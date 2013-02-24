@@ -30,7 +30,7 @@ public class AuditoriumActivity extends LLNCampusListActivity{
 		
 				 
 		String[] cols = {"NAME"};
-		Cursor c = db.select("poi", cols,"TYPE = 'auditoire'",null, null, null, null, null);
+		Cursor c = db.select("poi", cols,"TYPE = 'auditoire'",null, null, null, "NAME ASC", null);
 		
 		this.values = new ArrayList<String>();
 		while(c.moveToNext()){

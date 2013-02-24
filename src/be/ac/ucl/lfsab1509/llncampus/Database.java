@@ -51,7 +51,7 @@ public class Database {
 			return db.isOpen();
 		}
 
-		/*
+		/**
 		 * Insert a row in a table. 
 		 * 
 		 * @param table : Name of the table
@@ -72,7 +72,7 @@ public class Database {
 			}
 		}
 
-		/*
+		/**
 		 * Update a row (or more) in a table
 		 * @param table : Name of the table
 		 * @param values : Values to update
@@ -88,7 +88,7 @@ public class Database {
 			return db.update(table, values, whereMask, whereVal);
 		}
 
-		/*
+		/**
 		 * Remove a row in a table
 		 * @params @see update
 		 * @return The number of rows deleted or -1 in case of error.
@@ -101,14 +101,14 @@ public class Database {
 			return db.delete(table, whereMask,whereVal);
 		}
 
-		/*
+		/**
 		 * Close the database.
 		 */
 		public void close(){
 			db.close();
 		}
 
-		/*
+		/**
 		 * Execute a sql raw query.
 		 * @param query a SQL query
 		 * @param values (optional) Values to insert on the query (if your query contains ? [mask])
@@ -128,7 +128,7 @@ public class Database {
 			return db.rawQuery(query, null);
 		}
 
-		/*
+		/**
 		 * Execute a select request
 		 * @param table	The table name to compile the query against.
 		 * @param columns	A list of which columns to return. Passing null will return all columns, 

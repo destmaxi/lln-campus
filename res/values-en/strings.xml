@@ -9,6 +9,10 @@
     <string name="loisirs">Leisures</string>
     <string name="menu_settings">Settings</string>
     
+     <!-- Strings utiles a plusieurs endroits -->
+     <string name="settings">Setting</string>
+    <string name="reset_DB">Reload the DB</string>
+    
     <string name="app_name">LLN Campus</string>
     <string name="hello_world">Hello world!</string>
 	
@@ -18,5 +22,8 @@
 	<string name="icampus">iCampus</string>
 	<string name="moodle">Moodle</string>
 	<string name="bureau">Bureau UCL</string>
+	
+	<!-- Strings utiles pour auditorium -->
+    <string name="error_db">Error DB</string>
 
 </resources>
