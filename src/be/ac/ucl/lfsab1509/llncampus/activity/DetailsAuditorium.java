@@ -4,9 +4,12 @@ package be.ac.ucl.lfsab1509.llncampus.activity;
 import java.util.Locale;
 
 import be.ac.ucl.lfsab1509.llncampus.Auditorium;
+import be.ac.ucl.lfsab1509.llncampus.ExternalAppUtility;
 import be.ac.ucl.lfsab1509.llncampus.R;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -68,7 +71,12 @@ public class DetailsAuditorium extends LLNCampusActivity implements OnClickListe
 			Intent intent;
 			switch (v.getId()) {
 			case R.id.button_auditorium_gps:
-				Toast.makeText(this, "Sera implémenté plus tard ^_^", 3);
+				intent = new Intent(android.content.Intent.ACTION_VIEW, 
+							Uri.parse("http://maps.google.com/maps?daddr="+auditorium.getLatitude()+","+auditorium.getLongitude()+ "&dirflg=w"));
+			    intent.setComponent(new ComponentName("com.google.android.apps.maps", 
+					            "com.google.android.maps.MapsActivity"));          
+				startActivity(intent);
+				//ExternalAppUtility.openBrowser(DetailsAuditorium.this, "google.navigation:dirflg=w&q="+auditorium.getLatitude()+","+auditorium.getLongitude());
 				break;
 			case R.id.button_subauditorium:
 				intent = new Intent(this, SubAuditoriumActivity.class);
