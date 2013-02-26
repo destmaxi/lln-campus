@@ -36,6 +36,10 @@
             android:label="@string/auditoires" >
         </activity>
         <activity
+            android:name="be.ac.ucl.lfsab1509.llncampus.activity.AboutActivity"
+            android:label="@string/about" >
+        </activity>
+        <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.SubAuditoriumActivity"
             android:label="@string/sub_auditorium" >
         </activity>
