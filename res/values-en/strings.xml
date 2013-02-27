@@ -30,4 +30,8 @@
     <string name="auditorium_address">Address: %1$s</string>
         <string name="auditorium_GPS">Guidance GPS</string>
     <string name="sub_auditorium">Subauditoriums</string>
+    
+    <!--  Strings utiles pour about_activity -->
+    <string name="about">About...</string>
+    <string name="about_text">This application was made by Benjamin Baugnies, Quentin De Coninck, Pham Anh Tuan Le and Damien Mercier for the course LFSAB1509 given at the Université Catholique de Louvain-la-Neuve. This application is distributed under the GPL3 license. Each donation is welcomed =D</string>
 </resources>

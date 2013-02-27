@@ -88,6 +88,10 @@ public class LLNCampusActivity extends Activity{
 				db.open();
 				notify("La base de donnée a été rechargée");
 				break;
+			case R.id.menu_about : 
+				intent = new Intent(this, AboutActivity.class);
+				startActivity(intent);
+				break;
 			default:
 				return super.onOptionsItemSelected(menuItem);
 		}
