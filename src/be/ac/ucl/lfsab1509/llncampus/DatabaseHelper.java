@@ -10,6 +10,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * @author Damien
@@ -18,7 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 	//Nom du fichier de la db.
     private static final String DB_NAME = "database.sql";
     //Nom d'une table requise (pour tester si la db est deja copiee) 
-    private static final String REQUIRED_TABLE_NAME = "poi"; 
+    private static final String REQUIRED_TABLE_NAME = "Poi"; 
     private SQLiteDatabase db; 
     private final Context context;
  
@@ -77,12 +78,18 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 		try {
 			in = new BufferedReader(new InputStreamReader(context.getAssets().open(DB_NAME)));
 			String line;
+			String instruction = "";
 			while((line = in.readLine()) != null) {
-				//FIXME : Il faut que dans le fichier .sql, les requetes ne soit pas sur plusieurs lignes...
-				//Log.d("DB",line);
-				if(!line.equals("")){
-					db.execSQL(line);
+				instruction += line;
+				if(line.trim().charAt(line.trim().length()-1) == ';'){
+					if(!instruction.isEmpty()){
+						db.execSQL(instruction);
+					}
+					instruction = "";
 				}
+			}
+			if(!instruction.isEmpty()){
+				db.execSQL(instruction);
 			}
 		} catch (IOException e) {
 			throw new RuntimeException("Erreur lors de la copie de la base de donnee",e);
