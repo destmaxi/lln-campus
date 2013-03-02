@@ -4,7 +4,6 @@ package be.ac.ucl.lfsab1509.llncampus.activity;
 import java.util.Locale;
 
 import be.ac.ucl.lfsab1509.llncampus.Auditorium;
-import be.ac.ucl.lfsab1509.llncampus.ExternalAppUtility;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -15,7 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Class intended for showing some information about an Auditorium
