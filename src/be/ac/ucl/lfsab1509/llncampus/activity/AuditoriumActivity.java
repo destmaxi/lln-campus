@@ -20,74 +20,23 @@ import android.widget.TextView;
  * @version 19/02/2013
  *
  */
-public class AuditoriumActivity extends LLNCampusListActivity{
+public class AuditoriumActivity extends LLNCampusActivity{
 	ArrayList<String> values = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.auditorium);
+		setContentView(R.layout.auditorium_list_fragment);
 		
 				 
-		String[] cols = {"NAME"};
-		Cursor c = db.select("Poi", cols,"TYPE = 'auditoire'",null, null, null, "NAME ASC", null);
 		
-		this.values = new ArrayList<String>();
-		while(c.moveToNext()){
-			values.add(c.getString(0));
-		}
-		c.close();
-		
-		
-		
-		ListView listView = (ListView) findViewById(android.R.id.list);
-		
-
-		// Define a new Adapter
-		// First parameter - Context
-		// Second parameter - Layout for the row
-		// Third parameter - ID of the TextView to which the data is written
-		// Forth - the Array of data
-		/*
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-			  android.R.layout.simple_list_item_1, android.R.id.text1, values);
-		 */	
-
-		ArrayAdapter<String> adapter=new ArrayAdapter<String>(
-	            this,android.R.layout.simple_list_item_1, values){
-
-	        @Override
-	        public View getView(int position, View convertView,
-	                ViewGroup parent) {
-	            View view =super.getView(position, convertView, parent);
-
-	            TextView textView=(TextView) view.findViewById(android.R.id.text1);
-
-	            /*YOUR CHOICE OF COLOR*/
-	            textView.setTextColor(Color.WHITE);
-
-	            return view;
-	        }
-	    };
-	        /*SET THE ADAPTER TO LISTVIEW*/
-	        setListAdapter(adapter);
-		
-		// Assign adapter to ListView
-		//listView.setAdapter(adapter); 
-		listView.setClickable(true);
-		/*setListAdapter(new ArrayAdapter<String>(
-	            this,R.layout.auditorium ,R.id.list_content, values){
-			
-			
-		});
-		*/
 	}
 	
 
     /*
      * Adding an item click listener to the list
      */
-    @Override
+
 	protected void onListItemClick(ListView l, View v, int position, long id) {
     	Intent intent = new Intent(this, DetailsAuditorium.class); //the intent is used to start a new activity
     	/*

@@ -30,9 +30,9 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener{
         setContentView(R.layout.main_title);
         setListeners();
         
-       /* StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        System.out.println(ADE.getInfos("LFSAB1509"));*/
+        System.out.println(ADE.getInfos("LFSAB1509"));
     }
 
  

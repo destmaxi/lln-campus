@@ -21,12 +21,16 @@ public class LLNCampusActivity extends Activity{
         LLNCampus.setContext(this);
 		this.db = LLNCampus.getDatabase();
 		super.onCreate(savedInstanceState);
+		db.open();
 		
 	}
 	
 	@Override
 	public void onResume() {
-		db.open();
+		if(!db.isOpen())
+		{
+			db.open();
+		}
 		super.onResume();
 	}
 	@Override

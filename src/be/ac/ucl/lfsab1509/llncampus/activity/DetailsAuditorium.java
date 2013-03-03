@@ -28,31 +28,12 @@ public class DetailsAuditorium extends LLNCampusActivity implements OnClickListe
 	 @Override
 	    protected void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
-	        setContentView(R.layout.auditorium_details);
-	        
-	        
-	        /*name of Auditorium*/
-	        this.name = (TextView) findViewById(R.id.auditorium_name);
-	        this.address=(TextView) findViewById(R.id.auditorium_address);
-			Bundle extras = getIntent().getExtras(); 
-			if(extras !=null)
-			{
-				/* TODO passer le int et pas le nom */
-				String nameAuditorium = extras.getString("NAME");
-				Log.d("NAME", nameAuditorium);
-				String[] cols = {"ID","NAME","LATITUDE", "LONGITUDE", "ADDRESS"};
-				Cursor c = super.db.select("Poi", cols, "NAME = "+ "'"+nameAuditorium+"'", null, null, null, null, null);
-				c.moveToFirst();
-				auditorium = new Auditorium(c.getInt(0), c.getString(1), c.getDouble(2), c.getDouble(3), c.getString(4));
-			}
-			this.name.setText(auditorium.getName());
-			Log.d("ICI", Locale.getDefault().getDisplayLanguage());
-			if (Locale.getDefault().getDisplayLanguage().compareTo("English") == 0){
-				this.address.setText("Address: "+ auditorium.getAddress());
-			}else{	
-				this.address.setText("Adresse: "+ auditorium.getAddress());
-			}	
-			//this.getString(R.id.auditorium_address, auditorium.getAddress());
+	        setContentView(R.layout.auditorium_details_fragment);
+	        String name = getIntent().getStringExtra("NAME");
+	        String address = getIntent().getStringExtra("ADDRESS");
+	        double []coord = getIntent().getDoubleArrayExtra("COORD");
+	        int id = getIntent().getIntExtra("ID", 0);
+	        auditorium = new Auditorium (id, name, coord[0], coord[1], address);
 			setListeners();
 	    }
 	 
