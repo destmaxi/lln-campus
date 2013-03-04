@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import be.ac.ucl.lfsab1509.llncampus.Auditorium;
 import be.ac.ucl.lfsab1509.llncampus.R;
+import be.ac.ucl.lfsab1509.llncampus.fragment.AuditoriumDetailsFragment;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -29,11 +31,16 @@ public class DetailsAuditorium extends LLNCampusActivity implements OnClickListe
 	    protected void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.auditorium_details_fragment);
+	        
 	        String name = getIntent().getStringExtra("NAME");
 	        String address = getIntent().getStringExtra("ADDRESS");
 	        double []coord = getIntent().getDoubleArrayExtra("COORD");
 	        int id = getIntent().getIntExtra("ID", 0);
 	        auditorium = new Auditorium (id, name, coord[0], coord[1], address);
+	        
+	        AuditoriumDetailsFragment viewer = (AuditoriumDetailsFragment) getFragmentManager().findFragmentById(R.id.auditorium_details_fragment);
+	        viewer.updateAuditorium(auditorium);
+	        
 			setListeners();
 	    }
 	 

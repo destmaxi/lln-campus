@@ -4,5 +4,5 @@
     android:name="be.ac.ucl.lfsab1509.llncampus.fragment.AuditoriumDetailsFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/tutview_fragment">
+    android:id="@+id/auditorium_details_fragment">
 </fragment>

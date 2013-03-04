@@ -1,12 +1,12 @@
 package be.ac.ucl.lfsab1509.llncampus.fragment;
 
 import java.util.ArrayList;
-
 import be.ac.ucl.lfsab1509.llncampus.Auditorium;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.activity.AuditoriumActivity;
 import be.ac.ucl.lfsab1509.llncampus.activity.DetailsAuditorium;
 import be.ac.ucl.lfsab1509.llncampus.interfaces.IAuditorium;
+import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Intent;
 import android.database.Cursor;
@@ -29,7 +29,8 @@ public class AuditoriumListFragment extends LLNCampusListFragment {
 	ArrayList<String> values = null;
 	final String NAME = "NAME";
 	private ArrayAdapter<String> adapter;
-	IAuditorium auditorium;
+	private IAuditorium auditorium;
+	private OnAuditoriumSelectedListener audSelectedListener;
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
@@ -46,15 +47,7 @@ public class AuditoriumListFragment extends LLNCampusListFragment {
 			c.moveToFirst();
 			auditorium = new Auditorium(c.getInt(0), c.getString(1), c.getDouble(2), c.getDouble(3), c.getString(4));
 		}
-	    
-	    Intent showContent = new Intent(getActivity().getApplicationContext(),
-	            DetailsAuditorium.class);
-	    showContent.putExtra("NAME",auditorium.getName());
-	    showContent.putExtra("ADDRESS", auditorium.getAddress());
-	    double[] coord={ auditorium.getLatitude(), auditorium.getLongitude() };
-	    showContent.putExtra("COORD", coord);
-	    showContent.putExtra("ID", auditorium.getID());
-	    startActivity(showContent);
+	    audSelectedListener.onAuditoriumSelected(auditorium);
 	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -119,5 +112,20 @@ public class AuditoriumListFragment extends LLNCampusListFragment {
         setListAdapter(adapter);
         setHasOptionsMenu(true);
 	}
+	
+	@Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            audSelectedListener = (OnAuditoriumSelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnTutSelectedListener");
+        }
+    }
 
+	public interface OnAuditoriumSelectedListener {
+	    public void onAuditoriumSelected(IAuditorium aud);
+	}
+	
 }
