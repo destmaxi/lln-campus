@@ -23,7 +23,7 @@ public class ADE {
 	
 	/**
 	 * Etablit la connexion a ADE en specifiant les codes des cours dont ont veut les informations.
-	 * @param codes
+	 * @param codes Code des cours a recuperer.
 	 * @return true si la connexion a reussie, false sinon.
 	 * @author Damien
 	 */
@@ -42,6 +42,8 @@ public class ADE {
 	/**
 	 * Charge les informations a propos des cours dont le code est donne en argument. 
 	 * @param codes : Liste des cours sous la forme d'un tableau de String
+	 * @return Une liste d'evenement.
+	 * @see getInfos(String codes)
 	 * @author Damien
 	 */
 	public static ArrayList<Event> getInfos(String[] codes){
@@ -58,6 +60,7 @@ public class ADE {
 	/**
 	 * Charge les informations a propos des cours dont le code est donne en argument. 
 	 * @param codes : codes de cours separes par une virgule.  
+	 * @return Une liste d'evenement.
 	 * @author Damien
 	 */
 	public static ArrayList<Event> getInfos(String codes){
@@ -71,23 +74,23 @@ public class ADE {
 			
 			html = EntityUtils.toString(response.getEntity());
 		
-			String table = getBalisesContent(html,"table").get(0); 
-			ArrayList<String> lignes = getBalisesContent(table,"tr");
+			String table = HTMLAnalyser.getBalisesContent(html,"table").get(0); 
+			ArrayList<String> lignes = HTMLAnalyser.getBalisesContent(table,"tr");
 						
 			// On commence a 2 pour passer les 2 lignes d'en-tete.
 			for(int i = 2; i<lignes.size() ; i++){
-				ArrayList<String> cellules = getBalisesContent(lignes.get(i),"td");
+				ArrayList<String> cellules = HTMLAnalyser.getBalisesContent(lignes.get(i),"td");
 				
-				String date = removeHTML(cellules.get(0));
-				String beginHour = removeHTML(cellules.get(4));
-				String duration = removeHTML(cellules.get(5));
+				String date = HTMLAnalyser.removeHTML(cellules.get(0));
+				String beginHour = HTMLAnalyser.removeHTML(cellules.get(4));
+				String duration = HTMLAnalyser.removeHTML(cellules.get(5));
 				
 				Event event = new Event(date, beginHour, duration);
-				event.addDetail("trainees", removeHTML(cellules.get(6)));
-				event.addDetail("trainers", removeHTML(cellules.get(7)));
-				event.addDetail("room", removeHTML(cellules.get(8)));
-				event.addDetail("course", removeHTML(cellules.get(10)));
-				event.addDetail("activity_name", removeHTML(cellules.get(1)));
+				event.addDetail("trainees", HTMLAnalyser.removeHTML(cellules.get(6)));
+				event.addDetail("trainers", HTMLAnalyser.removeHTML(cellules.get(7)));
+				event.addDetail("room", HTMLAnalyser.removeHTML(cellules.get(8)));
+				event.addDetail("course", HTMLAnalyser.removeHTML(cellules.get(10)));
+				event.addDetail("activity_name", HTMLAnalyser.removeHTML(cellules.get(1)));
 				
 				events.add(event);
 			}
@@ -97,49 +100,5 @@ public class ADE {
 			return null;
 		}
 		return events;
-	}
-
-	/**
-	 * Extrait les parties entre <balise(...)> et </balise> d'un code HTML
-	 * @param html
-	 * @param balise
-	 * @author Damien
-	 */
-	private static ArrayList<String> getBalisesContent(String html, String balise){
-		ArrayList<String> toReturn = new ArrayList<String>();
-		int start, stop, end_start;
-		if(
-			(start = html.indexOf("<"+balise)) != -1 && 
-			(stop = html.indexOf("</"+balise+">")) != -1 &&
-			(end_start = html.indexOf('>', start)) != -1 &&
-			stop > end_start
-		){
-			toReturn.add(html.substring(end_start+1, stop));
-			
-			//Appel recursif jusqu'à ce que la condition du if ne soit plus respectee.. 
-			toReturn.addAll(getBalisesContent(html.substring(stop+3+balise.length()),balise));
-		}
-		return toReturn;
-	}
-	
-	/**
-	 * Supprime les balises HTML pour ne laisser que du texte. 
-	 * @param html
-	 * @return texte sans balise (x)HTML
-	 * @author damien
-	 */
-	private static String removeHTML(String html){
-		int start, stop;
-		//On cherche une ouverture de balise "<" et une fermeture de balise 
-		if((start = html.indexOf('<')) != -1 &&  (stop = html.indexOf('>', start)) != -1){
-			String toReturn = "";
-			if(start > 0){
-				toReturn += html.substring(0,start);
-			}
-			toReturn += html.substring(stop+1);
-			return removeHTML(toReturn);
-		}
-		//Aucune balise restante, on retourne le texte.
-		return html;
 	}
 }
