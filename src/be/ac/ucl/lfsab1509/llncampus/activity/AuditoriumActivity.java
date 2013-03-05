@@ -7,19 +7,13 @@ import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.interfaces.IAuditorium;
 import be.ac.ucl.lfsab1509.llncampus.fragment.AuditoriumDetailsFragment;
 import be.ac.ucl.lfsab1509.llncampus.fragment.AuditoriumListFragment;
-import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 /**
  * This class is intended to create a list of auditoriums in order to make a clickable list for the user.

@@ -1,20 +1,15 @@
 package be.ac.ucl.lfsab1509.llncampus.activity;
 
 
-import java.util.Locale;
-
 import be.ac.ucl.lfsab1509.llncampus.Auditorium;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.fragment.AuditoriumDetailsFragment;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**

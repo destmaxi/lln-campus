@@ -2,17 +2,13 @@ package be.ac.ucl.lfsab1509.llncampus.fragment;
 
 import java.util.Locale;
 
-import be.ac.ucl.lfsab1509.llncampus.Auditorium;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.interfaces.IAuditorium;
-import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
