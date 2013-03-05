@@ -80,7 +80,8 @@ public class Database {
 		 * @param whereVal : Values to put on the mask.
 		 * @return The number of rows affected or -1 in case of error. 
 		 */
-		public int update(final String table, final ContentValues values, final String whereMask, final String[] whereVal){
+		public int update(final String table, final ContentValues values, final String whereMask, 
+				final String[] whereVal) {
 			if (!isOpen() && !open()) {
 				Log.e("Database.java - update", "Unable to open database");
 				return -1;
