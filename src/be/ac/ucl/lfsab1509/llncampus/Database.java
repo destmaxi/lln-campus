@@ -16,7 +16,7 @@ public class Database {
 		/*
 		 * Constructor.
 		 */
-		public Database(Context context) {
+		public Database(final Context context) {
 			this.dbh = new DatabaseHelper(context);
 	        try {
 	        	dbh.createDatabase();
@@ -30,11 +30,11 @@ public class Database {
 		 * @return True in case of success, false otherwise.
 		 */
 		public boolean open() {
-			if(isOpen()){ return true; }
+			if (isOpen()) { return true; }
 			try{
 				db = dbh.open();
-			} catch(SQLiteException e){
-				Log.e("Database.java - open",e.getMessage());
+			} catch (SQLiteException e) {
+				Log.e("Database.java - open", e.getMessage());
 				return false;
 			}
 			return true;
@@ -45,7 +45,7 @@ public class Database {
 		 * @return true if db is open, false otherwise
 		 */
 		public boolean isOpen(){
-			if(db == null){
+			if (db == null) {
 				return false;
 			}
 			return db.isOpen();
@@ -58,16 +58,16 @@ public class Database {
 		 * @param values : Values to insert.
 		 * @return : ID of the new row. An integer <0 in case of error.
 		 */
-		public long insert(String table, ContentValues values){
-			if(!isOpen() && !open()){
+		public long insert(final String table, final ContentValues values) {
+			if(!isOpen() && !open()) {
 				Log.e("Database.java - insert", "Unable to open database");
 				return -1;
 			}
 			
-			try{
+			try {
 				return db.insert(table, null, values);
-			} catch (SQLiteConstraintException e){
-				Log.e("Database.java - insert","SQL Constraint error : "+e.getMessage());
+			} catch (SQLiteConstraintException e) {
+				Log.e("Database.java - insert", "SQL Constraint error : "+e.getMessage());
 				return -2;
 			}
 		}
@@ -80,8 +80,8 @@ public class Database {
 		 * @param whereVal : Values to put on the mask.
 		 * @return The number of rows affected or -1 in case of error. 
 		 */
-		public int update(String table, ContentValues values,String whereMask, String[] whereVal){
-			if(!isOpen() && !open()){
+		public int update(final String table, final ContentValues values, final String whereMask, final String[] whereVal){
+			if (!isOpen() && !open()) {
 				Log.e("Database.java - update", "Unable to open database");
 				return -1;
 			}
@@ -93,18 +93,18 @@ public class Database {
 		 * @params @see update
 		 * @return The number of rows deleted or -1 in case of error.
 		 */
-		public int delete(String table, String whereMask, String[] whereVal){
-			if(!isOpen() && !open()){
+		public int delete(final String table, final String whereMask, final String[] whereVal) {
+			if (!isOpen() && !open()) {
 				Log.e("Database.java - delete", "Unable to open database");
 				return -1;
 			}
-			return db.delete(table, whereMask,whereVal);
+			return db.delete(table, whereMask, whereVal);
 		}
 
 		/**
 		 * Close the database.
 		 */
-		public void close(){
+		public void close() {
 			db.close();
 		}
 
@@ -116,12 +116,12 @@ public class Database {
 		 * 
 		 * see also select
 		 */
-		public Cursor sqlRawQuery(String query){
+		public Cursor sqlRawQuery(final String query) {
 			return sqlRawQuery(query,null);
 		}
 		
-		public Cursor sqlRawQuery(String query, String[] values){
-			if(!isOpen() && !open()){
+		public Cursor sqlRawQuery(final String query, final String[] values) {
+			if (!isOpen() && !open()) {
 				Log.e("Database.java - sqlQuery", "Unable to open database");
 				return null;
 			}
@@ -151,8 +151,8 @@ public class Database {
 		 * 	are not synchronized, see the documentation for more details. And Null in case of error.
 
 		 */
-		public Cursor select(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy, String limit){
-			if(!isOpen() && !open()){
+		public Cursor select(final String table, final String[] columns, final String selection, final String[] selectionArgs, final String groupBy, final String having, final String orderBy, final String limit) {
+			if (!isOpen() && !open()) {
 				Log.e("Database.java - select", "Unable to open database");
 				return null;
 			}

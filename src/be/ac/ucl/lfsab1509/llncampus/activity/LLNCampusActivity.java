@@ -13,7 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class LLNCampusActivity extends Activity{
+public abstract class LLNCampusActivity extends Activity{
 	protected Database db;
 	
 	@Override

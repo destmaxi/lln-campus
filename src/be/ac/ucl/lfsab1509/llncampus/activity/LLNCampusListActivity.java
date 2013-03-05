@@ -13,7 +13,7 @@ import android.view.MenuItem;
  * FIXME Code duplique avec LLNCampusActivity, voir comment eviter ca
  * @author Damien
  */
-public class LLNCampusListActivity extends ListActivity {
+public abstract class LLNCampusListActivity extends ListActivity {
 	protected Database db;
 	
 	@Override
