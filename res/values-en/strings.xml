@@ -8,9 +8,10 @@
     <string name="horaire">Schedule</string>
     <string name="loisirs">Leisures</string>
     <string name="menu_settings">Settings</string>
+    <string name="bibliotheque">Library</string>
     
      <!-- Strings utiles a plusieurs endroits -->
-     <string name="settings">Setting</string>
+     <string name="settings">Settings</string>
     <string name="reset_DB">Reload the DB</string>
     
     <string name="app_name">LLN Campus</string>
