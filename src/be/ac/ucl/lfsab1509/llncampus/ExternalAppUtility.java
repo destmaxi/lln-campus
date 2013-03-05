@@ -1,5 +1,10 @@
 package be.ac.ucl.lfsab1509.llncampus;
 
+import org.apache.http.client.CookieStore;
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpProtocolParams;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,11 +14,28 @@ import android.net.Uri;
  * 
  */
 public class ExternalAppUtility {
-	
+	private static CookieStore cookieStore = null;
+
 	/** Open a browser on the URL specified */
 	public static void openBrowser(Context context, String url) {
-	Uri uri = Uri.parse(url);
-	Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-	context.startActivity(intent);
+		Uri uri = Uri.parse(url);
+		Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+		context.startActivity(intent);
 	}
+	
+	/**
+	 * Cree un nouveau client HTTP avec toujours la meme session de cookiees
+	 * (Utile pour les connexions a ADE par exemple) 
+	 */
+	public static synchronized HttpClient getHttpClient() {
+		final DefaultHttpClient httpClient = new DefaultHttpClient();
+		if (cookieStore == null) {
+			cookieStore = httpClient.getCookieStore();
+		} else {
+			httpClient.setCookieStore(cookieStore);
+		}
+		HttpProtocolParams.setUserAgent(httpClient.getParams(), "Mozilla 5/0");
+		return httpClient;
+	}
+	
 }

@@ -31,7 +31,7 @@
     <string name="error_db">Erreur DB</string>
     
     <!-- Strings utiles pour auditorium_details -->
-    <string name="auditorium_address">Adresse: %1$s</string>
+    <string name="auditorium_address">Sélectionnez un auditoire dans la liste</string>
     <string name="auditorium_GPS">Guidage GPS</string>
     <string name="sub_auditorium">Sous-auditoires</string>
     <string name="bibliotheque">Bibliothèque</string>

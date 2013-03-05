@@ -1,9 +1,11 @@
 package be.ac.ucl.lfsab1509.llncampus.activity;
 
+import be.ac.ucl.lfsab1509.llncampus.ADE;
 import be.ac.ucl.lfsab1509.llncampus.ExternalAppUtility;
 import be.ac.ucl.lfsab1509.llncampus.R;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,6 +29,10 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_title);
         setListeners();
+        
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        System.out.println(ADE.getInfos("LFSAB1509"));
     }
 
  
