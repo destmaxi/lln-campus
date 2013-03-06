@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.TextView;
 
 /**
  * Class intended for showing some information about an Auditorium
@@ -18,8 +17,6 @@ import android.widget.TextView;
  *
  */
 public class DetailsAuditorium extends LLNCampusActivity implements OnClickListener{
-	private TextView name=null;
-	private TextView address=null;
 	private Auditorium auditorium;
 	
 	 @Override
