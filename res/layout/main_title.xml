@@ -34,7 +34,7 @@
         android:layout_alignBottom="@+id/moodle"
         android:layout_alignParentRight="true"
         android:layout_marginRight="0dp"
-        android:src="@drawable/bureau" /> -->
+        android:src="@drawable/bureau" />
     
     
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -154,9 +154,9 @@
 
     		<ImageView
     	    	android:id="@+id/button_plan"
-    	    	android:layout_height="100dp"
+    	    	android:layout_height="115dp"
     	    	android:layout_marginTop="0dp"
-    	    	android:src="@drawable/loisir"
+    	    	android:src="@drawable/plan"
    	 	    	android:layout_column="1" />
     	
   		</TableRow>
