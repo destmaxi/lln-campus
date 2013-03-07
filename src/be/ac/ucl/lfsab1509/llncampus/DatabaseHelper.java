@@ -28,7 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
      * @param context
      * @param filename 
      */
-    public DatabaseHelper(Context context) {
+    public DatabaseHelper(final Context context) {
     	super(context, DB_NAME, null, 1);
         this.context = context;
     }	
@@ -37,8 +37,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
      * Creates a empty database on the system and rewrites it with your own database.
      * 
      */
-    public void createDatabase() throws IOException{ 
-    	if(!dbExist()){
+    public void createDatabase() throws IOException { 
+    	if (!dbExist()) {
         	db = this.getWritableDatabase(); // Pr creer la db sur l'appareil
    			copyDB(db); // Pour copier le .sql dans la db.
     	}
@@ -48,18 +48,18 @@ public class DatabaseHelper extends SQLiteOpenHelper{
      * Check if the database already exist to avoid re-copying the file each time you open the application.
      * @return true if it exists, false if it doesn't
      */
-    private boolean dbExist(){
+    private boolean dbExist() {
     	SQLiteDatabase db = null;
-    	try{
+    	try {
     		db = this.getReadableDatabase();//SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.OPEN_READONLY);
-    	} catch(SQLiteException e){
+    	} catch (SQLiteException e) {
     		return false;
     	}
  
-    	if(db != null){
-    		try{
+    	if (db != null) {
+    		try {
     			db.query(REQUIRED_TABLE_NAME, null, null, null, null, null, null, null);
-    		} catch(SQLException e){
+    		} catch (SQLException e) {
     			return false;
     		}
     		db.close();
@@ -72,36 +72,36 @@ public class DatabaseHelper extends SQLiteOpenHelper{
      * Ouvre le fichier .sql et créer la base de donnée. 
      * @param db2 
      * */
-    private void copyDB(SQLiteDatabase db){
+    private void copyDB(SQLiteDatabase db) {
     	BufferedReader in;
 		try {
 			in = new BufferedReader(new InputStreamReader(context.getAssets().open(DB_NAME)));
 			String line;
 			String instruction = "";
-			while((line = in.readLine()) != null) {
+			while ((line = in.readLine()) != null) {
 				instruction += line;
-				if(line.trim().charAt(line.trim().length()-1) == ';'){
-					if(!instruction.isEmpty()){
+				if (line.trim().charAt(line.trim().length()-1) == ';') {
+					if (!instruction.isEmpty()) {
 						db.execSQL(instruction);
 					}
 					instruction = "";
 				}
 			}
-			if(!instruction.isEmpty()){
+			if (!instruction.isEmpty()) {
 				db.execSQL(instruction);
 			}
 		} catch (IOException e) {
-			throw new RuntimeException("Erreur lors de la copie de la base de donnee",e);
+			throw new RuntimeException("Erreur lors de la copie de la base de donnee", e);
 		}
     }
  
-    public SQLiteDatabase open() throws SQLException{
+    public SQLiteDatabase open() throws SQLException {
     	return db = this.getWritableDatabase();//SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.OPEN_READONLY);
     }
  
     @Override
 	public synchronized void close() {
-    	if(db != null){
+    	if (db != null) {
     		db.close();
     	}	
     	super.close();

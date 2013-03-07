@@ -20,6 +20,10 @@
             android:label="@string/auditoires">
         </activity> 
         <activity 
+            android:name="be.ac.ucl.lfsab1509.llncampus.activity.HoraireActivity"
+            android:label="@string/horaire">
+        </activity> 
+        <activity 
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.SettingsActivity"
             android:label="@string/settings">
         </activity>

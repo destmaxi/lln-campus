@@ -13,7 +13,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class LLNCampusActivity extends Activity{
+/**
+ * Classe abstraite d'activite permettant d'avoir un menu commun et des methodes utiles 
+ * pour les differentes activites 
+ * @author Damien
+ */
+public abstract class LLNCampusActivity extends Activity{
+	/**
+	 * Variable referencant la base de donnee de l'application
+	 */
 	protected Database db;
 	
 	@Override
@@ -39,8 +47,10 @@ public class LLNCampusActivity extends Activity{
     	db.close(); 
     }
 
-	/*
+	/**
 	 * Affiche une alerte à l'utilisateur.
+	 * @param title Titre de l'alerte
+	 * @param msg Message de l'alerte
 	 */
 	public void alert(String title, String msg){
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
@@ -49,18 +59,28 @@ public class LLNCampusActivity extends Activity{
 		adb.setPositiveButton(android.R.string.ok, null);
 		adb.show();
 	}
-	public void alert(int title_res, int msg_res){
-		alert(getString(title_res), getString(msg_res));
+	/**
+	 * Affiche une alerte à l'utilisateur
+	 * @param titleRes Integer referencant le titre de l'alerte
+	 * @param msgRes Integer referencant le message de l'alerte
+	 */
+	public void alert(int titleRes, int msgRes){
+		alert(getString(titleRes), getString(msgRes));
 	}
 	
-    /*
-     * Affiche une notification à l'utilisateur.
+    /**
+     * Affiche une notification a l'utilisateur.
+     * @param text Texte de la notification
      */
     public void notify(String text){
     	Toast t = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
     	t.setGravity(Gravity.CENTER,0,0);
     	t.show(); 	
     }
+    /**
+     * Affiche une notification a l'utilisateur
+     * @param text Integer referencant le texte de la notification. 
+     */
     public void notify(int text){
     	Toast t = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
     	t.setGravity(Gravity.CENTER,0,0);

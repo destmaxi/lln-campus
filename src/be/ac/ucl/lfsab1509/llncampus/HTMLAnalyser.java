@@ -14,15 +14,15 @@ public class HTMLAnalyser {
 	 * @param balise
 	 * @author Damien
 	 */
-	public static ArrayList<String> getBalisesContent(String html, String balise){
+	public static ArrayList<String> getBalisesContent(String html, String balise) {
 		ArrayList<String> toReturn = new ArrayList<String>();
 		int start, stop, end_start;
-		if(
+		if (
 			(start = html.indexOf("<"+balise)) != -1 && 
 			(stop = html.indexOf("</"+balise+">")) != -1 &&
 			(end_start = html.indexOf('>', start)) != -1 &&
 			stop > end_start
-		){
+		) {
 			toReturn.add(html.substring(end_start+1, stop));
 			
 			//Appel recursif jusqu'à ce que la condition du if ne soit plus respectee.. 
@@ -37,12 +37,12 @@ public class HTMLAnalyser {
 	 * @return texte sans balise (x)HTML
 	 * @author damien
 	 */
-	public static String removeHTML(String html){
+	public static String removeHTML(String html) {
 		int start, stop;
 		//On cherche une ouverture de balise "<" et une fermeture de balise 
-		if((start = html.indexOf('<')) != -1 &&  (stop = html.indexOf('>', start)) != -1){
+		if ((start = html.indexOf('<')) != -1 &&  (stop = html.indexOf('>', start)) != -1) {
 			String toReturn = "";
-			if(start > 0){
+			if (start > 0) {
 				toReturn += html.substring(0,start);
 			}
 			toReturn += html.substring(stop+1);

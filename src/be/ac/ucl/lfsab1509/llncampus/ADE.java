@@ -27,9 +27,9 @@ public class ADE {
 	 * @return true si la connexion a reussie, false sinon.
 	 * @author Damien
 	 */
-	private static boolean connectADE(String codes){
+	private static boolean connectADE(String codes) {
 		HttpClient client = ExternalAppUtility.getHttpClient();
-		HttpGet request = new HttpGet(ServerUrl+"/ade/custom/modules/plannings/direct_planning.jsp?weeks=&code="+codes+"&login="+user+"&password="+password+"&projectId="+projectId+"");
+		HttpGet request = new HttpGet(ServerUrl + "/ade/custom/modules/plannings/direct_planning.jsp?weeks=&code=" + codes + "&login=" + user + "&password=" + password + "&projectId=" + projectId + "");
 		try {
 			client.execute(request);
 			return true;
@@ -46,10 +46,10 @@ public class ADE {
 	 * @see getInfos(String codes)
 	 * @author Damien
 	 */
-	public static ArrayList<Event> getInfos(String[] codes){
+	public static ArrayList<Event> getInfos(String[] codes) {
 		String c = "";
-		for(String code : codes){
-			if(!c.isEmpty()){
+		for (String code : codes) {
+			if (!c.isEmpty()) {
 				c += ",";
 			}
 			c += code;
@@ -60,26 +60,26 @@ public class ADE {
 	/**
 	 * Charge les informations a propos des cours dont le code est donne en argument. 
 	 * @param codes : codes de cours separes par une virgule.  
-	 * @return Une liste d'evenement.
+	 * @return Une liste d'evenement ou null en cas d'echec.
 	 * @author Damien
 	 */
-	public static ArrayList<Event> getInfos(String codes){
+	public static ArrayList<Event> getInfos(String codes) {
 		String html = ""; // A long string containing all the HTML
 		ArrayList<Event> events = new ArrayList<Event>();
-		if(!connectADE(codes)){ return null; }
+		if (!connectADE(codes)) { return null; }
 		try {
 			HttpClient client = ExternalAppUtility.getHttpClient();
-			HttpGet request = new HttpGet(ServerUrl+"/ade/custom/modules/plannings/info.jsp?order=slot");
+			HttpGet request = new HttpGet(ServerUrl + "/ade/custom/modules/plannings/info.jsp?order=slot");
 			HttpResponse response = client.execute(request);
 			
 			html = EntityUtils.toString(response.getEntity());
 		
-			String table = HTMLAnalyser.getBalisesContent(html,"table").get(0); 
-			ArrayList<String> lignes = HTMLAnalyser.getBalisesContent(table,"tr");
+			String table = HTMLAnalyser.getBalisesContent(html, "table").get(0); 
+			ArrayList<String> lignes = HTMLAnalyser.getBalisesContent(table, "tr");
 						
 			// On commence a 2 pour passer les 2 lignes d'en-tete.
-			for(int i = 2; i<lignes.size() ; i++){
-				ArrayList<String> cellules = HTMLAnalyser.getBalisesContent(lignes.get(i),"td");
+			for (int i = 2; i < lignes.size(); i++) {
+				ArrayList<String> cellules = HTMLAnalyser.getBalisesContent(lignes.get(i), "td");
 				
 				String date = HTMLAnalyser.removeHTML(cellules.get(0));
 				String beginHour = HTMLAnalyser.removeHTML(cellules.get(4));
@@ -98,6 +98,13 @@ public class ADE {
 			Log.e("ADE.java", "Erreur lors de la connexion ou de l'analyse du code HTML : "+e.getMessage());
 			e.printStackTrace();
 			return null;
+		}
+		// TODO A supprimer 
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return events;
 	}
