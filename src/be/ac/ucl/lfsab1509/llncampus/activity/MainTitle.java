@@ -46,6 +46,8 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener{
         auditButton.setOnClickListener(this);
         View libraryButton = findViewById(R.id.button_library);
         libraryButton.setOnClickListener(this);
+        View planButton = findViewById(R.id.button_plan);
+        planButton.setOnClickListener(this);
         View iCampusButton = findViewById(R.id.icampus);
         iCampusButton.setOnClickListener(this);
         View moodleButton = findViewById(R.id.moodle);
@@ -71,6 +73,10 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener{
 			startActivity(intent);
 			break;
 		case R.id.button_library:
+			intent = new Intent(this, LoisirsTitle.class);
+			startActivity(intent);
+			break;	
+		case R.id.button_plan:
 			intent = new Intent(this, LoisirsTitle.class);
 			startActivity(intent);
 			break;	

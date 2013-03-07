@@ -12,6 +12,7 @@
     <string name="button_text_etudes">Études</string>
 	<string name="button_text_loisirs">Loisirs</string>
 	<string name="button_text_options">Options</string>
+	<string name="button_text_plan">Plan</string>
 	
 	<string name="hello_world">Hello world!</string>
 	
