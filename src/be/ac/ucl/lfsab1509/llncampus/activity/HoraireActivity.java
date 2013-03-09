@@ -6,7 +6,6 @@ import be.ac.ucl.lfsab1509.llncampus.ADE;
 import be.ac.ucl.lfsab1509.llncampus.Event;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import android.app.NotificationManager;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
@@ -30,8 +29,8 @@ public class HoraireActivity extends LLNCampusActivity implements OnClickListene
 	protected void updateADE() {
 		final NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		final Builder nb = new NotificationCompat.Builder(this)
-			.setContentTitle("Mise à jour de ADE")
-			.setContentText("Mise à jour en cours")
+			.setContentTitle("Mise a jour de ADE")
+			.setContentText("Mise a jour en cours")
 			.setSmallIcon(android.R.drawable.stat_notify_sync);		
 		nm.notify(notifyID, nb.build());
 		super.onStart();
@@ -40,7 +39,7 @@ public class HoraireActivity extends LLNCampusActivity implements OnClickListene
 			public void run() {
 				ArrayList<Event> events;
 				if ((events = ADE.getInfos("LFSAB1509")) != null) {
-					nb.setContentText("Terminé");
+					nb.setContentText("Termine");
 					txtview.setText(events.toString());
 				} else {
 					nb.setContentText("Une erreur s'est produite");
