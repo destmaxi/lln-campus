@@ -10,10 +10,13 @@ import org.apache.http.util.EntityUtils;
 import be.ac.ucl.lfsab1509.llncampus.activity.HoraireActivity;
 
 import android.app.NotificationManager;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
+import android.text.format.Time;
 import android.util.Log;
 
 /**
@@ -21,12 +24,10 @@ import android.util.Log;
  * @author damien
  */
 public class ADE {
-	/** Numero des semaines a telecharger. FIXME : A mettre dans les options ? */
-	private static final String WEEKS = "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18";
 	/** Adresse du serveur ADE */
 	private static final String SERVER_URL = "http://horaire.sgsi.ucl.ac.be:8080";
 	/** Page pour les infos */
-	private static final String INFO_PATH = "/ade/custom/modules/plannings/info.jsp?order=slot&weeks="+WEEKS;
+	private static final String INFO_PATH = "/ade/custom/modules/plannings/info.jsp?order=slot";
 	/** Numéro du projet (variable en fonction de l'année) FIXME : A mettre dans les options ? */
 	private static final int PROJECT_ID = 9;
 	/** Nom d'utilisateur ADE */
@@ -40,14 +41,15 @@ public class ADE {
 	/**
 	 * Etablit la connexion a ADE en specifiant les codes des cours dont ont veut les informations.
 	 * @param code Code des cours a recuperer.
+	 * @param weeks Numero des semaines.
 	 * @return true si la connexion a reussie, false sinon.
 	 * @author Damien
 	 */
-	private static boolean connectADE(final String code) {
+	private static boolean connectADE(final String code, final String weeks) {
 		HttpClient client = ExternalAppUtility.getHttpClient();
 		HttpGet request = new HttpGet(
 					SERVER_URL +
-					"/ade/custom/modules/plannings/direct_planning.jsp?weeks=" + WEEKS + 
+					"/ade/custom/modules/plannings/direct_planning.jsp?weeks=" + weeks + 
 					"&code=" + code + 
 					"&login=" + USER + 
 					"&password=" + PASSWORD + 
@@ -64,14 +66,15 @@ public class ADE {
 	
 	/**
 	 * Charge les informations a propos des cours dont le code est donne en argument. 
-	 * @param code : code du cours  
+	 * @param code Code du cours  
+	 * @param weeks Numéro des semaines
 	 * @return Une liste d'evenement ou null en cas d'echec.
 	 * @author Damien
 	 */
-	public static ArrayList<Event> getInfos(final String code) {
+	public static ArrayList<Event> getInfos(final String code, final String weeks) {
 		String html = ""; // A long string containing all the HTML
 		ArrayList<Event> events = new ArrayList<Event>();
-		if (!connectADE(code)) { return null; }
+		if (!connectADE(code, weeks)) { return null; }
 		try {
 			HttpClient client = ExternalAppUtility.getHttpClient();
 			HttpGet request = new HttpGet(SERVER_URL + INFO_PATH);
@@ -110,8 +113,10 @@ public class ADE {
 	 * Lance la mise à jour des infos depuis ADE
 	 * @param ha Activite qui lance le thread de mise à jour
 	 * @author Damien
+	 * @param updateRunnable 
+	 * @param handler 
 	 */
-	public static void runUpdateADE(final HoraireActivity ha) {
+	public static void runUpdateADE(final HoraireActivity ha, final Handler handler, final Runnable updateRunnable) {
 		final NotificationManager nm = (NotificationManager) ha.getSystemService(Context.NOTIFICATION_SERVICE);
 		final Builder nb = new NotificationCompat.Builder(ha)
 			.setContentTitle("Mise a jour de ADE")
@@ -135,16 +140,32 @@ public class ADE {
 				}
 				c.close();
 				
+				
+				/*
+				 * Numéro des semaines
+				 * FIXME : Pour tout télécharger, les numéros vont de 0 à 52 
+				 * (0 = debut 1e quadri, 51 = fin 2e session d'examen) 
+				 */
+				String weeks = "";
+				Time today = new Time(Time.getCurrentTimezone());
+				today.setToNow();
+				for (int i = 0; i  < 6; i++) {
+					if (!weeks.isEmpty()) { weeks += ','; }
+					weeks += (i + today.getWeekNumber() + 10); 
+					//FIXME Trouver qqch de moins variable et qui fonctionne pr les 2 quadri... 
+				}
+				Log.d("ADE", "Weeks : " + weeks + "\n");
+
 				/*
 				 * Recuperation des donnees depuis ADE et mise a jour de la base de donnee
 				 */
 				int nbError = 0;
 				ArrayList<Event> events;
-
+				
 				for (String course_code : courses) {
 					nb.setContentText("Téléchargement pour " + course_code + "...");
 					nm.notify(NOTIFY_ID, nb.build());
-					events = ADE.getInfos(course_code);
+					events = ADE.getInfos(course_code, weeks);
 					if (events == null) {
 						nb.setContentText("Le contenu de " + course_code + " n'a pu etre telecharge");
 						nm.notify(NOTIFY_ID, nb.build());
@@ -155,16 +176,18 @@ public class ADE {
 						LLNCampus.getDatabase().delete("Horaire", "COURSE = ?", new String[]{course_code});
 						// Ajout des nouvelles donnees
 						for (Event e : events) {
-							if (LLNCampus.getDatabase().insert("Horaire", e.toContentValues()) < 0) {
+							ContentValues cv = e.toContentValues();
+							cv.put("COURSE", course_code);
+							if (LLNCampus.getDatabase().insert("Horaire", cv) < 0) {
 								nbError++;
 							}
 						}
 					}
 				}
-				//FIXME : Pas possible de mettre a jour les donnees car c'est pas le thread principal...
-				//ha.showInfos();
 				nb.setContentText("Termine. Nombre d'erreurs : " + nbError);
 				nm.notify(NOTIFY_ID, nb.build());
+				
+				handler.post(updateRunnable);
 
 			}
 		}).start();

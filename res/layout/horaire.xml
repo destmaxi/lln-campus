@@ -13,7 +13,8 @@
         android:layout_below="@+id/updateADE"  
         android:scrollHorizontally="true"
         android:textIsSelectable="true"
-        android:textColor="#FFF">
+        android:textColor="#FFF"
+        android:scrollbarAlwaysDrawVerticalTrack="true">
         
     </TextView>
 

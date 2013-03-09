@@ -3,6 +3,7 @@ package be.ac.ucl.lfsab1509.llncampus;
 import java.util.HashMap;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
+import android.text.format.Time;
 
 /**
  * Decrit un evenement (de ADE, ou ...)
@@ -10,9 +11,8 @@ import android.content.ContentValues;
  *
  */
 public class Event {
-	private int day, month, year;
-	private int beginHour, beginMin;
-	private int endHour, endMin;
+	private Time begin;
+	private Time end;
 	private HashMap<String,String> details;
 	/**
 	 * Constructeur
@@ -21,14 +21,26 @@ public class Event {
 	 * @param duration
 	 */
 	public Event(final String date, final String beginTime, final String duration) {
+		this.begin = new Time();
+		this.end = new Time();
 		try {
-			setDate(date);
-			setBeginHour(beginTime);
+			setBegin(date, beginTime);
 			setDuration(duration);
 		} catch(NumberFormatException e) {
 			e.printStackTrace();//TODO
 		}
-		
+		details = new HashMap<String,String>();
+	}
+	/**
+	 * Constructeur
+	 * @param beginTime (en miliseconde depuis epoch [1 jan 1970])
+	 * @param endTime (en miliseconde depuis epoch [1 jan 1970])
+	 */
+	public Event(final int beginTime, final int endTime){
+		this.begin = new Time();
+		this.begin.set(beginTime);
+		this.end = new Time();
+		this.end.set(endTime);
 		details = new HashMap<String,String>();
 	}
 	
@@ -40,34 +52,36 @@ public class Event {
 	public void addDetail(final String key, final String value) {
 		details.put(key, value);
 	}
-	
-	private void setDate(final String date) {
-		this.day = Integer.valueOf(date.substring(3, 5));
-		this.month = Integer.valueOf(date.substring(0, 2));
-		this.year = Integer.valueOf(date.substring(6, 10));
-	}
-	private void setBeginHour(final String hour) {
-		this.beginHour = Integer.valueOf(hour.substring(0, 2));
-		this.beginMin = Integer.valueOf(hour.substring(3, 5));
+	private void setBegin(final String date, final String beginT) {
+		int day = Integer.valueOf(date.substring(3, 5));
+		int month = Integer.valueOf(date.substring(0, 2));
+		int year = Integer.valueOf(date.substring(6, 10));
+		
+		int beginHour = Integer.valueOf(beginT.substring(0, 2));
+		int beginMin = Integer.valueOf(beginT.substring(3, 5));
+		
+		begin.set(0, beginMin, beginHour, day, month, year);
 	}
 	private void setDuration(final String duration) {
 		int i;
 		String d = duration;
-		this.endHour = this.beginHour;
-		this.endMin = this.beginMin;
+		int endHour = this.begin.hour;
+		int endMin = this.begin.minute;
 		i = d.indexOf('h');
 		if (i != -1) {
-			this.endHour += Integer.valueOf(d.substring(0,i));
+			endHour += Integer.valueOf(d.substring(0,i));
 			d = d.substring(i+1);
 		}
 		i = d.indexOf("min");
 		if (i != -1) {
-			this.endMin += Integer.valueOf(d.substring(0, i));
+			endMin += Integer.valueOf(d.substring(0, i));
 		}
-		if (this.endMin >= 60) {
-			this.endHour++;
-			this.endMin-=60;
+		if (endMin >= 60) {
+			endHour++;
+			endMin-=60;
 		}
+		
+		end.set(0, endMin, endHour, this.begin.monthDay, this.begin.month, this.begin.year);
 	}
 	/**
 	 * Retourne le detail demande ou null si le detail n'existe pas 
@@ -77,49 +91,25 @@ public class Event {
 	public String getDetail(final String key) { return details.get(key); }
 	
 	/**
-	 * Retourne l'annee de l'event
-	 * @return l'annee
+	 * Retourne la date/heure de début
 	 */
-	public int getYear() { return this.year; }
+	public Time getBeginTime() {
+		return begin;
+	}
+	
 	/**
-	 * Retourne le mois de l'event
-	 * @return le mois
+	 * Retourne la date/heure de fin
 	 */
-	public int getMonth() { return this.month; }
-	/**
-	 * Retourne le jour de l'event
-	 * @return le jour de l'event
-	 */
-	public int getDay() { return this.day; }
-	/**
-	 * Retourne l'heure de debut
-	 * @return l'heure de debut ([0;23])
-	 */
-	public int getBeginHour() { return this.beginHour; }
-	/**
-	 * Retourne la minute de debut
-	 * @return la minute de debut ([0;59])
-	 */
-	public int getBeginMin() { return this.beginMin; }
-	/**
-	 * Retourne l'heure de fin
-	 * @return l'heure de fin ([0;23])
-	 */
-	public int getEndHour() { return this.endHour; }
-	/**
-	 * Retourne la minute de fin
-	 * @return la minute de fin ([0;59])
-	 */
-	public int getEndMin() { return this.endMin; }
-
+	public Time getEndTime() {
+		return end;
+	}
 	
 	/**
 	 * 
 	 */
 	public String toString() {
-		return "Date : "+day+"/"+month+"/"+year+"\n"
-				+"Heure de début : "+beginHour+"h"+beginMin+"\n"
-				+"Heure de fin : "+endHour+"h"+endMin+"\n"
+		return "Début : "+begin.format("%d/%m/%Y %H:%M")+"\n"
+				+"Fin : "+end.format("%d/%m/%Y %H:%M")+"\n"
 				+"Détails :"+ details+"\n";
 	}
 
@@ -130,8 +120,8 @@ public class Event {
 	@SuppressLint("DefaultLocale")
 	public ContentValues toContentValues() {
 		ContentValues cv = new ContentValues();
-		cv.put("DATE_BEGIN", this.year + "/" + this.month + "/" + this.day + " " + this.beginHour + ":" + this.beginMin );
-		cv.put("DATE_END", this.year + "/" + this.month + "/" + this.day + " " + this.endHour + ":" + this.endMin );
+		cv.put("TIME_BEGIN", begin.toMillis(false));
+		cv.put("TIME_END", end.toMillis(false));
 		
 		for ( String key : this.details.keySet()) {
 			cv.put(key.toUpperCase(), this.details.get(key));
