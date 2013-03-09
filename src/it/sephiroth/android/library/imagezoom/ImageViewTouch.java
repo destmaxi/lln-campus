@@ -84,6 +84,7 @@ public class ImageViewTouch extends ImageViewTouchBase {
 		float v[] = new float[9];
 		mSuppMatrix.getValues( v );
 		mCurrentScaleFactor = v[Matrix.MSCALE_X];
+		
 	}
 
 	@Override

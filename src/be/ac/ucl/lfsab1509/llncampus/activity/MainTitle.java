@@ -1,17 +1,23 @@
 package be.ac.ucl.lfsab1509.llncampus.activity;
 
 
+import java.io.File;
+
 import it.sephiroth.android.library.imagezoom.test.ImageViewTestActivity;
 import be.ac.ucl.lfsab1509.llncampus.ADE;
 import be.ac.ucl.lfsab1509.llncampus.ExternalAppUtility;
+import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.R;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.StrictMode;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 /**
  * Class that will be executed when starting the application.
@@ -25,6 +31,7 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener{
 	public final String ICAMPUS_URL="https://www.uclouvain.be/cnx_icampus.html";
 	public final String MOODLE_URL="https://www.uclouvain.be/cnx_moodle.html";
 	public final String BUREAU_UCL_URL="http://www.uclouvain.be/onglet_bureau.html?";
+	public final String MAP_NAME="plan_2007recto.pdf";
 	
 
     @Override
@@ -32,7 +39,7 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_title);
         setListeners();
-        
+        LLNCampus.copyAssets();
         /* 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -87,8 +94,22 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener{
 			Uri uri = Uri.parse("file:///android_asset/plan_2007recto2.png");
 			intent.setData(uri);
 			*/
-			intent = new Intent(this, ImageViewTestActivity.class);
-			startActivity(intent);
+			try
+			{
+			 Intent intentUrl = new Intent(Intent.ACTION_VIEW);
+			 
+			 
+			 Uri url = Uri.fromFile(new File("/"+Environment.getExternalStorageDirectory().getPath()+"/"+MAP_NAME));
+			 intentUrl.setDataAndType(url, "application/pdf");
+			 intentUrl.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			 startActivity(intentUrl);
+			}
+			catch (ActivityNotFoundException e)
+			{
+			 Toast.makeText(this, "Pas de lecteur de PDF installé: tentative de connection par le net...", Toast.LENGTH_LONG).show();
+			 intent = new Intent(this, MapActivity.class);
+			 startActivity(intent);
+			}
 			break;	
 		case R.id.icampus:
 			ExternalAppUtility.openBrowser(MainTitle.this, ICAMPUS_URL);

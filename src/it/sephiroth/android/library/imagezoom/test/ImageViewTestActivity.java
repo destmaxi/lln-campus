@@ -1,6 +1,10 @@
 package it.sephiroth.android.library.imagezoom.test;
 
+import java.io.File;
+import java.io.IOException;
+
 import be.ac.ucl.lfsab1509.llncampus.R;
+import be.ac.ucl.lfsab1509.llncampus.activity.LLNCampusActivity;
 import it.sephiroth.android.library.imagezoom.ImageViewTouch;
 import it.sephiroth.android.library.imagezoom.test.utils.DecodeUtils;
 import android.app.Activity;
@@ -16,7 +20,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class ImageViewTestActivity extends Activity {
+public class ImageViewTestActivity extends LLNCampusActivity {
 
 	ImageViewTouch mImage;
 	Button mButton;
@@ -33,9 +37,14 @@ public class ImageViewTestActivity extends Activity {
 	public void onContentChanged() {
 		super.onContentChanged();
 		mImage = (ImageViewTouch) findViewById( R.id.image );
-
-		Uri path = Uri.parse("android.resource://be.ac.ucl.lfsab1509.llncampus/" + R.drawable.plan_2007recto2);
+		
+		//Uri path = Uri.parse("android.resource://be.ac.ucl.lfsab1509.llncampus.activity/" + R.drawable.plan_2007recto2);
 		//Uri path = Uri.parse("android.resource://be.ac.ucl.lfsab1509.llncampus/drawable/plan_2007recto2dfg");
+		
+		getAssets();
+		
+		//Uri path = Uri.fromFile(new File("/tmp/android.txt"));
+		Uri path = Uri.fromFile(new File("/sdcard/plan_2007recto.png"));
 		Log.d("PATH", path.toString());
 		Bitmap bitmap = DecodeUtils.decode( this,path, 1280, 1280 );
 		if( null != bitmap )
