@@ -221,6 +221,8 @@ INSERT INTO "Auditorium" VALUES(206,'SOCR 28',21,30,'T',NULL,'E',NULL,'R',NULL,N
 INSERT INTO "Auditorium" VALUES(207,'SOCR 41',21,30,'T',NULL,'E',NULL,'R',NULL,NULL,'I','YES');
 INSERT INTO "Auditorium" VALUES(208,'SOCR 42',21,30,'T',NULL,'E',NULL,'R',NULL,NULL,'I','YES');
 INSERT INTO "Auditorium" VALUES(209,'SOCR 43',21,59,'Tf',NULL,'E','S','R',NULL,'VD','I','YES');
+INSERT INTO "Auditorium" VALUES(210,'STUD 11',37,430,'G',NULL,'E','S','R',NULL,'VD','I*','YES');
+INSERT INTO "Auditorium" VALUES(211,'STUD 13',37,143,'G',NULL,'E','S','R',NULL,'VD','I*','NO');
 DROP TABLE IF EXISTS "Poi";
 CREATE TABLE "Poi" ("ID" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,    "NAME" TEXT NOT NULL UNIQUE,    "LATITUDE" REAL NOT NULL,    "LONGITUDE" REAL NOT NULL,    "TYPE" TEXT, "ADDRESS" TEXT DEFAULT NULL);
 INSERT INTO "Poi" VALUES(1,'Sainte Barbe',50.668178,4.621446,'auditoire','Place Sainte Barbe, 1');
@@ -259,3 +261,4 @@ INSERT INTO "Poi" VALUES(33,'Bibliothèque de Psychologie et des Sciences de l''
 INSERT INTO "Poi" VALUES(34,'Bibliothèque des Sciences de la Motricité',50.670684,4.6069,'bibliotheque','Place Pierre de Coubertin, 1');
 INSERT INTO "Poi" VALUES(35,'Bibliothèque des Sciences Economiques, Sociales, Politiques et Communications',50.668081,4.612085,'bibliotheque','Place Montesquieu, 5');
 INSERT INTO "Poi" VALUES(36,'Bibliothèque de Théologie',50.670006,4.61039,'bibliotheque','Place Cardinal Mercier, 31');
+INSERT INTO "Poi" VALUES(37,'Studio Agora',50.669227,4.61227,'auditoire','Place Agora, 19');
