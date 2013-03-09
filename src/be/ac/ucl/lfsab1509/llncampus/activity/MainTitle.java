@@ -1,9 +1,12 @@
 package be.ac.ucl.lfsab1509.llncampus.activity;
 
+
+import it.sephiroth.android.library.imagezoom.test.ImageViewTestActivity;
 import be.ac.ucl.lfsab1509.llncampus.ADE;
 import be.ac.ucl.lfsab1509.llncampus.ExternalAppUtility;
 import be.ac.ucl.lfsab1509.llncampus.R;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.content.Intent;
@@ -30,9 +33,11 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener{
         setContentView(R.layout.main_title);
         setListeners();
         
+        /* 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         System.out.println(ADE.getInfos("LFSAB1509"));
+        */
     }
 
  
@@ -77,7 +82,12 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener{
 			startActivity(intent);
 			break;	
 		case R.id.button_plan:
-			intent = new Intent(this, LoisirsTitle.class);
+			/*
+			intent = new Intent(Intent.ACTION_VIEW);
+			Uri uri = Uri.parse("file:///android_asset/plan_2007recto2.png");
+			intent.setData(uri);
+			*/
+			intent = new Intent(this, ImageViewTestActivity.class);
 			startActivity(intent);
 			break;	
 		case R.id.icampus:
