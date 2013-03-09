@@ -30,7 +30,7 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener{
 	public final String ICAMPUS_URL="https://www.uclouvain.be/cnx_icampus.html";
 	public final String MOODLE_URL="https://www.uclouvain.be/cnx_moodle.html";
 	public final String BUREAU_UCL_URL="http://www.uclouvain.be/onglet_bureau.html?";
-	public final String MAP_NAME="plan_2007recto.pdf";
+	public final String MAP_NAME="plan_lln.pdf";
 	
 
     @Override
