@@ -57,7 +57,7 @@ public class DetailsAuditorium extends LLNCampusActivity implements OnClickListe
 		else if(auditorium.getName().equals("Leclercq")) {return R.drawable.leclercq;}
 		else if(auditorium.getName().equals("Marie Curie")) {return R.drawable.mariecurie;}
 		else if(auditorium.getName().equals("Mercator")) {return R.drawable.mercator;}
-		else if(auditorium.getName().equals("Montesqieu")) {return R.drawable.montesquieu;}
+		else if(auditorium.getName().equals("Montesquieu")) {return R.drawable.montesquieu;}
 		else if(auditorium.getName().equals("Pierre Curie")) {return R.drawable.pierrecurie;}
 		else if(auditorium.getName().equals("Sainte Barbe")) {return R.drawable.saintebarbe;}
 		else if(auditorium.getName().equals("Sciences")) {return R.drawable.sciences;}
