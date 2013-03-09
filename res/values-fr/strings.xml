@@ -1,10 +1,8 @@
 <resources>
-	<string name="todo">Travail en cours, aidez-nous via vos dons :)</string>
 
-	<string name="app_name">LLN Campus</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">LLN Campus</string>
     
-     <!-- Strings utiles a plusieurs endroits -->
+    <!-- Strings utiles a plusieurs endroits -->
     <string name="settings">Options</string>
     <string name="reset_DB">Recharger la DB</string>
     
@@ -13,10 +11,13 @@
     <string name="button_text_etudes">Études</string>
 	<string name="button_text_loisirs">Loisirs</string>
 	<string name="button_text_options">Options</string>
+	<string name="button_text_plan">Plan</string>
+	
+	<string name="hello_world">Hello world!</string>
 	
 	<!-- Strings utiles pour loisirs_title -->
 	<string name="loisirs">Loisirs</string>
-
+	<string name="todo">Work in progress, please support us in donating :)</string>
 	
 	<!-- Strings utiles pour study_title -->
 	<string name="etudes">Études</string>
@@ -29,15 +30,17 @@
 	<!-- Strings utiles pour auditorium -->
     <string name="error_db">Erreur DB</string>
     
-    <!--  Strings utiles pour aditorium_details -->
+    <!-- Strings utiles pour auditorium_details -->
     <string name="auditorium_address">Sélectionnez un auditoire dans la liste</string>
     <string name="auditorium_GPS">Guidage GPS</string>
     <string name="sub_auditorium">Sous-auditoires</string>
+    <string name="bibliotheque">Bibliothèque</string>
+    <string name="auditorium_picture_description">Aperçu de l entree du bâtiment</string>
     
     <!--  Strings utiles pour about_activity -->
-    <string name="about">À propos de...</string>
-     <string name="about_text">Cette application a été développée par Benjamin Baugnies, Quentin De Coninck, Pham Anh Tuan Le et Damien Mercier dans le cadre du cours LFSAB1509 donné à l Université Catholique de Louvain-la-Neuve. Cette application est distribuée sous licence GPL3. Tout don est le bienvenu =D</string>
-
-	<!--  Strings utiles pour MapActivity -->
-    <string name="map">Plan</string>
+    <string name="about">À propos de</string>
+    <string name="about_text">Cette application a été développée par Benjamin Baugnies, Quentin De Coninck, Pham Anh Tuan Le et Damien Mercier dans le cadre du cours LFSAB1509 donné à l Université Catholique de Louvain-la-Neuve. Cette application est distribuée sous licence GPL3. Tout don est le bienvenu =D</string>
+    
+    <!--  Strings utiles pour MapActivity -->
+    <string name="map">Map</string>
 </resources>
