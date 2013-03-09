@@ -93,12 +93,14 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener{
 			Uri uri = Uri.parse("file:///android_asset/plan_2007recto2.png");
 			intent.setData(uri);
 			*/
+			
+			// Ici, on va regarder si il y a un lecteur de PDF; sinon, on lance MapActivity
 			try
 			{
 			 Intent intentUrl = new Intent(Intent.ACTION_VIEW);
 			 
 			 
-			 Uri url = Uri.fromFile(new File("/"+Environment.getExternalStorageDirectory().getPath()+"/"+MAP_NAME));
+			 Uri url = Uri.fromFile(new File("/" + Environment.getExternalStorageDirectory().getPath() + "/" + MAP_NAME));
 			 intentUrl.setDataAndType(url, "application/pdf");
 			 intentUrl.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			 startActivity(intentUrl);

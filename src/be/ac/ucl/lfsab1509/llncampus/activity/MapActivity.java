@@ -1,11 +1,8 @@
 package be.ac.ucl.lfsab1509.llncampus.activity;
 
 import be.ac.ucl.lfsab1509.llncampus.R;
-import android.net.Uri;
 import android.os.Bundle;
-import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
-import android.widget.ImageView;
 
 
 /**
@@ -16,7 +13,8 @@ import android.widget.ImageView;
  */
 public class MapActivity extends LLNCampusActivity {
 	
-		final String FILE_PATH = "file:///android_asset/plan_2007recto2.png";
+		// final String FILE_PATH = "file:///android_asset/plan_2007recto2.png";
+		final String URL = "https://docs.google.com/file/d/0B2KSzm3Kdk4LQmcwRjg3TXdFWDA/edit?usp=sharing";
 		
 		@Override
 		protected void onCreate(Bundle savedInstanceState){
@@ -26,7 +24,7 @@ public class MapActivity extends LLNCampusActivity {
 	        WebView webview = (WebView) findViewById(R.id.map_webview);
 	        
 	        // TODO
-	        webview.loadUrl("http://docs.google.com/gview?embedded=true&url=http://myurl.com/demo.pdf");
+	        webview.loadUrl(URL);
 	        
 	        /*
 	        webview.getSettings().setBuiltInZoomControls(true);

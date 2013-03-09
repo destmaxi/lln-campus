@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.os.Environment;
 import android.util.Log;
 
 public class LLNCampus extends Application{
@@ -34,7 +35,7 @@ public class LLNCampus extends Application{
 	
 	
 	private static void openDatabase(){
-		Log.d("DEBUG", "Application context = "+APPLICATION_CONTEXT);
+		Log.d("DEBUG", "Application context = " + APPLICATION_CONTEXT);
 		DB = new Database(APPLICATION_CONTEXT);
 		DB.open();
 	}
@@ -61,7 +62,7 @@ public class LLNCampus extends Application{
 	        OutputStream out = null;
 	        try {
 	          in = assetManager.open(filename);
-	          out = new FileOutputStream("/sdcard/" + filename);
+	          out = new FileOutputStream("/" + Environment.getExternalStorageDirectory().getPath() + "/" + filename);
 	          copyFile(in, out);
 	          in.close();
 	          in = null;
