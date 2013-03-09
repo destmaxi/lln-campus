@@ -3,7 +3,6 @@ package be.ac.ucl.lfsab1509.llncampus.activity;
 
 import java.io.File;
 
-import it.sephiroth.android.library.imagezoom.test.ImageViewTestActivity;
 import be.ac.ucl.lfsab1509.llncampus.ADE;
 import be.ac.ucl.lfsab1509.llncampus.ExternalAppUtility;
 import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
