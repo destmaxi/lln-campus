@@ -26,6 +26,18 @@
         android:textColor="@color/White"
         android:textSize="19sp" />
     
+    <ImageView 
+        android:id="@+id/auditorium_picture"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|center_horizontal"
+        android:layout_below="@+id/auditorium_address"
+        android:layout_marginTop="17dp"
+        android:text="@string/auditorium_address"
+        android:contentDescription="@string/auditorium_picture_description"
+        android:textColor="@color/White"
+        android:textSize="19sp"/>
+    
 
     <Button
         android:id="@+id/button_auditorium_gps"
