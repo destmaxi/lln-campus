@@ -9,11 +9,9 @@ import org.apache.http.util.EntityUtils;
 
 import be.ac.ucl.lfsab1509.llncampus.activity.HoraireActivity;
 
-import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.database.Cursor;
-import android.os.Handler.Callback;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.util.Log;
@@ -23,21 +21,35 @@ import android.util.Log;
  * @author damien
  */
 public class ADE {
+	/** Adresse du serveur ADE */
 	private static final String SERVER_URL = "http://horaire.sgsi.ucl.ac.be:8080";
+	/** Page pour les infos */
+	private static final String INFO_PATH = "/ade/custom/modules/plannings/info.jsp?order=slot";
+	/** Numéro du projet (variable en fonction de l'année */
 	private static final int PROJECT_ID = 9;
+	/** Nom d'utilisateur ADE */
 	private static final String USER = "etudiant";
+	/** Mot de passe ADE */
 	private static final String PASSWORD = "student";
-	private static final int NOTIFY_ID = 1;
+	/** ID pour les notifications */
+	private static final Integer NOTIFY_ID = 1;
+	
 	
 	/**
 	 * Etablit la connexion a ADE en specifiant les codes des cours dont ont veut les informations.
-	 * @param codes Code des cours a recuperer.
+	 * @param code Code des cours a recuperer.
 	 * @return true si la connexion a reussie, false sinon.
 	 * @author Damien
 	 */
-	private static boolean connectADE(String code) {
+	private static boolean connectADE(final String code) {
 		HttpClient client = ExternalAppUtility.getHttpClient();
-		HttpGet request = new HttpGet(SERVER_URL + "/ade/custom/modules/plannings/direct_planning.jsp?weeks=&code=" + code + "&login=" + USER + "&password=" + PASSWORD + "&projectId=" + PROJECT_ID + "");
+		HttpGet request = new HttpGet(
+					SERVER_URL 
+					+ "/ade/custom/modules/plannings/direct_planning.jsp?weeks=&code=" + code + 
+					"&login=" + USER + 
+					"&password=" + PASSWORD + 
+					"&projectId=" + PROJECT_ID + ""
+				);
 		try {
 			client.execute(request);
 			return true;
@@ -53,13 +65,13 @@ public class ADE {
 	 * @return Une liste d'evenement ou null en cas d'echec.
 	 * @author Damien
 	 */
-	public static ArrayList<Event> getInfos(String code) {
+	public static ArrayList<Event> getInfos(final String code) {
 		String html = ""; // A long string containing all the HTML
 		ArrayList<Event> events = new ArrayList<Event>();
 		if (!connectADE(code)) { return null; }
 		try {
 			HttpClient client = ExternalAppUtility.getHttpClient();
-			HttpGet request = new HttpGet(SERVER_URL + "/ade/custom/modules/plannings/info.jsp?order=slot");
+			HttpGet request = new HttpGet(SERVER_URL + INFO_PATH);
 			HttpResponse response = client.execute(request);
 			
 			html = EntityUtils.toString(response.getEntity());
@@ -85,13 +97,17 @@ public class ADE {
 				events.add(event);
 			}
 		} catch (Exception e) {
-			Log.e("ADE.java", "Erreur lors de la connexion ou de l'analyse du code HTML : "+e.getMessage());
+			Log.e("ADE.java", "Erreur lors de la connexion ou de l'analyse du code HTML : " + e.getMessage());
 			e.printStackTrace();
 			return null;
 		}
 		return events;
 	}
-	
+	/**
+	 * Lance la mise à jour des infos depuis ADE
+	 * @param ha Activite qui lance le thread de mise à jour
+	 * @author Damien
+	 */
 	public static void runUpdateADE(final HoraireActivity ha) {
 		final NotificationManager nm = (NotificationManager) ha.getSystemService(Context.NOTIFICATION_SERVICE);
 		final Builder nb = new NotificationCompat.Builder(ha)
@@ -111,7 +127,7 @@ public class ADE {
 						LLNCampus.getDatabase().select(
 								"Options_courses", new String[]{"course"}, 
 								null, null, null, null, null, null);
-				while(c.moveToNext()){
+				while (c.moveToNext()) {
 					courses.add(c.getString(0));
 				}
 				c.close();
@@ -123,8 +139,10 @@ public class ADE {
 				ArrayList<Event> events;
 
 				for (String course_code : courses) {
+					nb.setContentText("Téléchargement pour " + course_code + "...");
+					nm.notify(NOTIFY_ID, nb.build());
 					events = ADE.getInfos(course_code);
-					if(events == null){
+					if (events == null) {
 						nb.setContentText("Le contenu de " + course_code + " n'a pu etre telecharge");
 						nm.notify(NOTIFY_ID, nb.build());
 						Log.e("ADE", "Le contenu de " + course_code + " n'a pu etre telecharge");
@@ -133,15 +151,16 @@ public class ADE {
 						// Suppression des anciennes donnees
 						LLNCampus.getDatabase().delete("Horaire", "COURSE = ?", new String[]{course_code});
 						// Ajout des nouvelles donnees
-						for(Event e : events){
-							if(LLNCampus.getDatabase().insert("Horaire", e.toContentValues())<0){
+						for (Event e : events) {
+							if (LLNCampus.getDatabase().insert("Horaire", e.toContentValues()) < 0) {
 								nbError++;
 							}
 						}
 					}
 				}
-				ha.showInfos();
-				nb.setContentText("Termine. Nombre d'erreur : " + nbError );
+				//FIXME : Pas possible de mettre a jour les donnees car c'est pas le thread principal...
+				//ha.showInfos();
+				nb.setContentText("Termine. Nombre d'erreur : " + nbError);
 				nm.notify(NOTIFY_ID, nb.build());
 
 			}
