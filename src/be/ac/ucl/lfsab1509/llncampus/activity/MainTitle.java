@@ -95,22 +95,24 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener{
 			*/
 			
 			// Ici, on va regarder si il y a un lecteur de PDF; sinon, on lance MapActivity
+			
 			try
 			{
 			 Intent intentUrl = new Intent(Intent.ACTION_VIEW);
 			 
 			 
-			 Uri url = Uri.fromFile(new File("/" + Environment.getExternalStorageDirectory().getPath() + "/" + MAP_NAME));
+			 Uri url = Uri.fromFile(new File("/" + Environment.getExternalStorageDirectory().getPath() + "/" +MAP_NAME));
 			 intentUrl.setDataAndType(url, "application/pdf");
 			 intentUrl.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			 startActivity(intentUrl);
 			}
 			catch (ActivityNotFoundException e)
 			{
-			 Toast.makeText(this, "Pas de lecteur de PDF install�: tentative de connection par le net...", Toast.LENGTH_LONG).show();
+			 Toast.makeText(this, "Pas de lecteur de PDF installe: tentative de connection par le net...", Toast.LENGTH_LONG).show();
 			 intent = new Intent(this, MapActivity.class);
 			 startActivity(intent);
 			}
+			
 			break;	
 		case R.id.icampus:
 			ExternalAppUtility.openBrowser(MainTitle.this, ICAMPUS_URL);

@@ -10,9 +10,7 @@
         android:id="@+id/horaire_txt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/updateADE" 
-        android:textIsSelectable="true"
-        android:scrollHorizontally="true">
+        android:layout_below="@+id/updateADE" >
         
     </TextView>
 
@@ -22,6 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="Update" />
+        android:text="@string/button_ADE" />
 
  </RelativeLayout>

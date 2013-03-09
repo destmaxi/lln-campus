@@ -58,6 +58,7 @@ public class LLNCampus extends Application{
 	        Log.e("tag", "Failed to get asset file list.", e);
 	    }
 	    for(String filename : files) {
+	    	Log.d("FILE", filename);
 	        InputStream in = null;
 	        OutputStream out = null;
 	        try {
