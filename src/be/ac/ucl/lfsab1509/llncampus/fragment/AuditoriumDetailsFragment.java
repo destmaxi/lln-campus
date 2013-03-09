@@ -10,17 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class AuditoriumDetailsFragment extends LLNCampusFragment{
 
-	private RelativeLayout viewer;
+	private View viewer;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	        Bundle savedInstanceState) {
-	    viewer = (RelativeLayout) inflater.inflate(R.layout.auditorium_details, container, false);   
+	    viewer = inflater.inflate(R.layout.auditorium_details, container, false);   
 	    return viewer;
 	}
 	
