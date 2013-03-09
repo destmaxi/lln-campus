@@ -1,6 +1,8 @@
 package be.ac.ucl.lfsab1509.llncampus;
 
 import java.util.HashMap;
+import android.annotation.SuppressLint;
+import android.content.ContentValues;
 
 /**
  * Decrit un evenement (de ADE, ou ...)
@@ -70,5 +72,21 @@ public class Event {
 				+"Heure de début : "+beginHour+"h"+beginMin+"\n"
 				+"Heure de fin : "+endHour+"h"+endMin+"\n"
 				+"Détails :"+ details+"\n";
+	}
+
+	/**
+	 * Pour l'insertion dans la table Horaire. 
+	 * @return
+	 */
+	@SuppressLint("DefaultLocale")
+	public ContentValues toContentValues() {
+		ContentValues cv = new ContentValues();
+		cv.put("DATE_BEGIN", this.year + "/" + this.month + "/" + this.day + " " + this.beginHour + ":" + this.beginMin );
+		cv.put("DATE_END", this.year + "/" + this.month + "/" + this.day + " " + this.endHour + ":" + this.endMin );
+		
+		for ( String key : this.details.keySet()) {
+			cv.put(key.toUpperCase(), this.details.get(key));
+		}
+		return cv;
 	}
 }

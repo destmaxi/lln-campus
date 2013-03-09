@@ -76,7 +76,7 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener{
 			startActivity(intent);
 			break;
 		case R.id.button_horaire:
-			intent = new Intent(this, LoisirsTitle.class);
+			intent = new Intent(this, HoraireActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.button_auditoire:
@@ -107,7 +107,7 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener{
 			}
 			catch (ActivityNotFoundException e)
 			{
-			 Toast.makeText(this, "Pas de lecteur de PDF installé: tentative de connection par le net...", Toast.LENGTH_LONG).show();
+			 Toast.makeText(this, "Pas de lecteur de PDF installï¿½: tentative de connection par le net...", Toast.LENGTH_LONG).show();
 			 intent = new Intent(this, MapActivity.class);
 			 startActivity(intent);
 			}
