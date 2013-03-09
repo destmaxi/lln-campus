@@ -21,11 +21,13 @@ import android.util.Log;
  * @author damien
  */
 public class ADE {
+	/** Numero des semaines a telecharger. FIXME : A mettre dans les options ? */
+	private static final String WEEKS = "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18";
 	/** Adresse du serveur ADE */
 	private static final String SERVER_URL = "http://horaire.sgsi.ucl.ac.be:8080";
 	/** Page pour les infos */
-	private static final String INFO_PATH = "/ade/custom/modules/plannings/info.jsp?order=slot";
-	/** Numéro du projet (variable en fonction de l'année */
+	private static final String INFO_PATH = "/ade/custom/modules/plannings/info.jsp?order=slot&weeks="+WEEKS;
+	/** Numéro du projet (variable en fonction de l'année) FIXME : A mettre dans les options ? */
 	private static final int PROJECT_ID = 9;
 	/** Nom d'utilisateur ADE */
 	private static final String USER = "etudiant";
@@ -44,8 +46,9 @@ public class ADE {
 	private static boolean connectADE(final String code) {
 		HttpClient client = ExternalAppUtility.getHttpClient();
 		HttpGet request = new HttpGet(
-					SERVER_URL 
-					+ "/ade/custom/modules/plannings/direct_planning.jsp?weeks=&code=" + code + 
+					SERVER_URL +
+					"/ade/custom/modules/plannings/direct_planning.jsp?weeks=" + WEEKS + 
+					"&code=" + code + 
 					"&login=" + USER + 
 					"&password=" + PASSWORD + 
 					"&projectId=" + PROJECT_ID + ""
@@ -160,7 +163,7 @@ public class ADE {
 				}
 				//FIXME : Pas possible de mettre a jour les donnees car c'est pas le thread principal...
 				//ha.showInfos();
-				nb.setContentText("Termine. Nombre d'erreur : " + nbError);
+				nb.setContentText("Termine. Nombre d'erreurs : " + nbError);
 				nm.notify(NOTIFY_ID, nb.build());
 
 			}
