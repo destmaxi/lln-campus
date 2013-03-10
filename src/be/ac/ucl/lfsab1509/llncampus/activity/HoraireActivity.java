@@ -1,17 +1,29 @@
 package be.ac.ucl.lfsab1509.llncampus.activity;
 
+import java.util.ArrayList;
+
 import be.ac.ucl.lfsab1509.llncampus.ADE;
+import be.ac.ucl.lfsab1509.llncampus.Event;
 import be.ac.ucl.lfsab1509.llncampus.R;
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.format.Time;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLayoutChangeListener;
+import android.widget.CalendarView;
+import android.widget.CalendarView.OnDateChangeListener;
 import android.widget.TextView;
 
-public class HoraireActivity extends LLNCampusActivity implements OnClickListener {
-	TextView txtview; 
+public class HoraireActivity extends LLNCampusActivity implements OnDateChangeListener {
+	private TextView txtview;
+	private CalendarView calendarView;
 	
 	//create an handler
 	private final Handler handler = new Handler();
@@ -21,39 +33,42 @@ public class HoraireActivity extends LLNCampusActivity implements OnClickListene
 			updateInfos();
 		}
 	};
+
+	private ArrayList<Event> events;
+	private Time actualDate;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.horaire);
 		txtview = (TextView) this.findViewById(R.id.horaire_txt);
-		View updateButton = findViewById(R.id.updateADE);
-        updateButton.setOnClickListener(this);
+		     
+        calendarView=(CalendarView) findViewById(R.id.calendarView);
+        calendarView.setOnDateChangeListener(this);
+       	this.actualDate = new Time();
+       	actualDate.setToNow();
+
         updateInfos();
+        
 	}
 
 	public void updateInfos(){
-		String infos = "";
+		this.events = new ArrayList<Event>();
 		Cursor c = 	db.select(
 						"Horaire", 
 						new String[]{"COURSE", "TIME_BEGIN", "TIME_END", "TRAINEES", "TRAINERS", "ROOM", "ACTIVITY_NAME"}, 
 						null, null, null, null, "TIME_BEGIN ASC", null);
 		while(c.moveToNext()){
-			Time begin = new Time();
-			begin.set(c.getLong(1));
-			Time end = new Time();
-			end.set(c.getLong(2));
-			
-			infos = infos + "Code du cours : " + c.getString(0) + "\n"
-					+ "Date  : " + begin.format("%d/%m/%Y de %H:%M") + " à " + end.format("%H:%M") + "\n"
-					+ "Trainees : " + c.getString(3) + "\n"
-					+ "Trainers : " + c.getString(4) + "\n"
-					+ "Room : " + c.getString(5) + "\n"
-					+ "Activity name : " + c.getString(6) + "\n"
-					+ "------------ \n";
+			Event e = new Event(c.getLong(1), c.getLong(2));
+			e.addDetail("course", c.getString(0));			
+			e.addDetail("trainees", c.getString(3));
+			e.addDetail("trainers", c.getString(4));
+			e.addDetail("room", c.getString(5));
+			e.addDetail("activity_name", c.getString(6));
+			this.events.add(e);
 		}
 		c.close();
-		txtview.setText(infos);
+		updateViewInfos();
 	}
 	
 	@Override
@@ -62,11 +77,54 @@ public class HoraireActivity extends LLNCampusActivity implements OnClickListene
 	}
 
 	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.updateADE:
-			ADE.runUpdateADE(this, handler, updateRunnable);
-			break;
+	public void onSelectedDayChange(CalendarView cv, int y, int m,
+			int d) {
+		this.actualDate.set(d,m,y);
+		calendarView = cv;
+		updateViewInfos();
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		MenuItem adeUpdate = menu.findItem(R.id.ade_update);
+		adeUpdate.setVisible(true);
+		return true;
+	}
+	
+
+	private void updateViewInfos() {
+		String infos =  "+-------------------------------------+\n"
+					  + "|         COURS POUR LE " 
+					  		+ this.actualDate.format("%d/%m/%Y") 
+					  							   + "         |\n"
+					  + "+-------------------------------------+\n";
+		for (Event e : this.events) {
+			if (e.getBeginTime().monthDay == this.actualDate.monthDay 
+					&& e.getBeginTime().month == this.actualDate.month
+					&& e.getBeginTime().year == this.actualDate.year) {
+				infos += "Cours : "+e.getDetail("course") + "\n"
+						+ "Heure : " 
+							+ "De " + e.getBeginTime().format("%H:%M") 
+							+ " à " + e.getEndTime().format("%H:%M") + "\n"
+						+ "Prof : " + e.getDetail("trainers") + "\n"
+						+ "Lieu : " + e.getDetail("room") + "\n"
+						+ "Étudiants concernés : " + e.getDetail("trainees") + "\n"
+						+ "------------ \n";
+			}
 		}
+		txtview.setText(infos);
+        calendarView.setDate(actualDate.toMillis(false));
+
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem menuItem) {
+		super.onOptionsItemSelected(menuItem);
+		switch(menuItem.getItemId()) {
+			case R.id.ade_update:
+				ADE.runUpdateADE(this, handler, updateRunnable);
+				break;
+		}
+		return true;
 	}
 }

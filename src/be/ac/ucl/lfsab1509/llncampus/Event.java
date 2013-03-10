@@ -33,14 +33,14 @@ public class Event {
 	}
 	/**
 	 * Constructeur
-	 * @param beginTime (en miliseconde depuis epoch [1 jan 1970])
-	 * @param endTime (en miliseconde depuis epoch [1 jan 1970])
+	 * @param l (en miliseconde depuis epoch [1 jan 1970])
+	 * @param m (en miliseconde depuis epoch [1 jan 1970])
 	 */
-	public Event(final int beginTime, final int endTime){
+	public Event(final long l, final long m){
 		this.begin = new Time();
-		this.begin.set(beginTime);
+		this.begin.set(l);
 		this.end = new Time();
-		this.end.set(endTime);
+		this.end.set(m);
 		details = new HashMap<String,String>();
 	}
 	
@@ -108,9 +108,14 @@ public class Event {
 	 * 
 	 */
 	public String toString() {
-		return "Début : "+begin.format("%d/%m/%Y %H:%M")+"\n"
-				+"Fin : "+end.format("%d/%m/%Y %H:%M")+"\n"
-				+"Détails :"+ details+"\n";
+		String detailsTxt = "";
+		for (String key : details.keySet()) {
+			detailsTxt += key + " : " + details.get(key) + "\n";
+		}
+		return "Date : " + 
+					begin.format("Le %d/%m/%Y de %H:%M") + 
+					" à " + end.format("%H:%M")+"\n"
+				+ detailsTxt;
 	}
 
 	/**
