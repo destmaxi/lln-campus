@@ -89,7 +89,7 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
 
 	private void updateViewInfos() {
 		String infos =  "+-------------------------------------+\n"
-					  + "|         COURS POUR LE " 
+					  + "|         COURS POUR�LE�" 
 					  		+ this.actualDate.format("%d/%m/%Y") 
 					  							   + "         |\n"
 					  + "+-------------------------------------+\n";
@@ -103,7 +103,7 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
 							+ " à " + e.getEndTime().format("%H:%M") + "\n"
 						+ "Prof : " + e.getDetail("trainers") + "\n"
 						+ "Lieu : " + e.getDetail("room") + "\n"
-						+ "Étudiants concernés : " + e.getDetail("trainees") + "\n"
+						+ "Etudiants concernes : " + e.getDetail("trainees") + "\n"
 						+ "------------ \n";
 			}
 		}
