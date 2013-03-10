@@ -75,6 +75,10 @@ public class AuditoriumActivity extends LLNCampusActivity implements AuditoriumL
 	    }
 	}
 	
+	/*
+	 * Les deux methodes qui suivent ne seront utilisees quand dans le cas ou la tablette serait en
+	 * paysage; gerer ce qu'aurait du faire DetailsAuditorium.
+	 */
 	
 	 private void setListeners() {
 	        View GPSButton = findViewById(R.id.button_auditorium_gps);
