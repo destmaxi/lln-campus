@@ -30,6 +30,7 @@ public abstract class LLNCampusActivity extends Activity{
 		this.db = LLNCampus.getDatabase();
 		super.onCreate(savedInstanceState);
 		db.open();
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 	}
 	
@@ -102,6 +103,12 @@ public abstract class LLNCampusActivity extends Activity{
 		super.onOptionsItemSelected(menuItem);
 		Intent intent;
 		switch(menuItem.getItemId()) {
+			case android.R.id.home:
+				// app icon in action bar clicked; go home
+				intent = new Intent(this, MainTitle.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+            return true;
 			case R.id.menu_settings : 
 				intent = new Intent(this, SettingsActivity.class);
 				startActivity(intent);
