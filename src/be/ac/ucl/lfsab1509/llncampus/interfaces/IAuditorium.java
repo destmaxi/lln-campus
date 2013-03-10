@@ -8,6 +8,12 @@ package be.ac.ucl.lfsab1509.llncampus.interfaces;
 public interface IAuditorium {
 	
 	/**
+	 * Get the Id of an IAuditorium object
+	 */
+	public int getID();
+	
+	
+	/**
 	 * Return the name of an IAuditorium object
 	 * @return this.name
 	 */
@@ -50,7 +56,11 @@ public interface IAuditorium {
 	 */
 	public void setAddress(String newAddress);
 
-	int getID();
+	/**
+	  * Return the path integer of the auditorium picture
+	  * 
+	  */
+	public int takePicture();
 	
 	//TODO probably other methods will be integrated, such as sub-auditoriums,...
 }

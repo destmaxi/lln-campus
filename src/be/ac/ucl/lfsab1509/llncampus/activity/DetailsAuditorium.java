@@ -7,7 +7,6 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -31,46 +30,13 @@ public class DetailsAuditorium extends LLNCampusActivity implements OnClickListe
 	        int id = getIntent().getIntExtra("ID", 0);
 	        auditorium = new Auditorium (id, name, coord[0], coord[1], address);
 	        ImageView image = (ImageView) findViewById(R.id.auditorium_picture);
-	        image.setImageResource(this.takePicture());
+	        image.setImageResource(auditorium.takePicture());
 	        
 	        AuditoriumDetailsFragment viewer = (AuditoriumDetailsFragment) getFragmentManager().findFragmentById(R.id.auditorium_details_fragment);
 	        viewer.updateAuditorium(auditorium);
 	        
 			setListeners();
 	    }
-	 
-	 /**
-	  * @return le chemin jusque l'image de l auditoire
-	  * 
-	  */
-	private int takePicture(){
-		  
-		if(auditorium.getName().equals("Agora")) {return R.drawable.agora;}
-		else if(auditorium.getName().equals("Coubertin")) {return R.drawable.coubertin;}
-		else if(auditorium.getName().equals("Croix du Sud")) {return R.drawable.croixdusud;}
-		else if(auditorium.getName().equals("Cyclotron")) {return R.drawable.cyclotron;}
-		else if(auditorium.getName().equals("Descamps")) {return R.drawable.descamps;}
-		else if(auditorium.getName().equals("Doyens")) {return R.drawable.doyens;}
-		else if(auditorium.getName().equals("Dupriez")) {return R.drawable.dupriez;}
-		else if(auditorium.getName().equals("Erasme")) {return R.drawable.erasme;}
-		else if(auditorium.getName().equals("Lavoisier")) {return R.drawable.lavoisier;}
-		else if(auditorium.getName().equals("Leclercq")) {return R.drawable.leclercq;}
-		else if(auditorium.getName().equals("Marie Curie")) {return R.drawable.mariecurie;}
-		else if(auditorium.getName().equals("Mercator")) {return R.drawable.mercator;}
-		else if(auditorium.getName().equals("Montesquieu")) {return R.drawable.montesquieu;}
-		else if(auditorium.getName().equals("Pierre Curie")) {return R.drawable.pierrecurie;}
-		else if(auditorium.getName().equals("Sainte Barbe")) {return R.drawable.saintebarbe;}
-		else if(auditorium.getName().equals("Sciences")) {return R.drawable.sciences;}
-		else if(auditorium.getName().equals("Socrate")) {return R.drawable.socrate;}
-		else if(auditorium.getName().equals("Studio Agora")) {return R.drawable.studioagora;}
-		else if(auditorium.getName().equals("Thomas More")) {return R.drawable.thomasmore;}
-		else if(auditorium.getName().equals("Van Helmont")) {return R.drawable.vanhelmont;}
-		else {
-			Log.e("DetailsAuditorium.java", "Ne trouve pas l'image vers l auditoire de Takepicture");
-			return 0;
-		}
-		
-	 }
 	 
 	 
 	 private void setListeners() {
