@@ -36,7 +36,7 @@
         android:layout_alignBottom="@+id/moodle"
         android:layout_alignParentRight="true"
         android:layout_marginRight="0dp"
-        android:src="@drawable/bureau" /> -->
+        android:src="@drawable/bureau" />
     
     
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"

@@ -44,4 +44,8 @@
 
 	<!--  Strings utiles pour MapActivity -->
     <string name="map">Map</string>
+    
+      <!-- Strings utiles pour horaire -->
+    <string name="button_ADE">Button</string>
+    <string name="ade_update">Update from ADE</string>
 </resources>

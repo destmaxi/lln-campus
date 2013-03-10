@@ -48,10 +48,6 @@
             android:label="@string/map" >
         </activity>
         
-         <activity
-            android:name="it.sephiroth.android.library.imagezoom.test.ImageViewTestActivity"
-            android:label="@string/map" >
-        </activity>
         <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.SubAuditoriumActivity"
             android:label="@string/sub_auditorium" >
