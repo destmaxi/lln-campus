@@ -1,3 +1,5 @@
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -5,38 +7,174 @@
     tools:context=".MainTitle" 
     android:background="@color/Blue">
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_gravity="top|center_horizontal"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="69dp"
-        android:text="@string/app_name"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/White"
-        android:textSize="52sp" />
-
-    <Button
-        android:id="@+id/button_loisirs"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/button_etudes"
-        android:layout_marginTop="18dp"
-        android:text="@string/button_text_loisirs" />
-
-    <Button
-        android:id="@+id/button_etudes"
-        android:layout_centerVertical="true"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        
-        android:layout_centerHorizontal="true"
-        
-        android:text="@string/button_text_etudes" />
     
+	<ImageView
+	    android:id="@+id/icampus"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/icampuslogo3" />
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/moodle"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/icampus"
+        android:layout_alignBottom="@+id/icampus"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo_moodle_ucl" />
+
+    <ImageView
+        android:id="@+id/bureau"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/moodle"
+        android:layout_alignBottom="@+id/moodle"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="0dp"
+        android:src="@drawable/bureau" />
+    
+    
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   		xmlns:tools="http://schemas.android.com/tools"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	tools:context=".MainTitle" 
+    	android:background="@color/Blue"
+    	android:shrinkColumns="*"
+    	android:stretchColumns="*" >
+    	
+        
+        <TableRow 
+            android:layout_marginTop="20dp">
+            
+            <TextView
+        		android:id="@+id/textView1"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:text="@string/app_name"
+        		android:textAppearance="?android:attr/textAppearanceLarge"
+        		android:textColor="@color/White"
+        		android:textSize="52sp" 
+        		android:layout_span="3"
+        		android:gravity="center" />
+        </TableRow>
+    	
+        <TableRow
+            android:layout_marginTop="20dp">
+    	
+   	 		<ImageView
+   	 		    android:id="@+id/button_horaire"
+   	 		    android:layout_height="100dp"
+   	 	    	android:contentDescription="@string/horaire"
+   	 		    android:src="@drawable/horaire" 
+   	 		    android:layout_gravity="center_horizontal"
+   	 	    />
+   	 	
+
+    		<ImageView
+        		android:id="@+id/button_library"
+        		android:layout_height="100dp"
+        		android:src="@drawable/library" 
+   	 	    	android:layout_gravity="center_horizontal"
+   	 	    	android:layout_column="2"
+   	 	    />
+    	</TableRow>
+    	
+        <TableRow>
+        	<TextView
+        		android:id="@+id/text_horaire"
+        		android:layout_height="wrap_content"
+        		android:text="@string/horaire"
+        		android:textAppearance="?android:attr/textAppearanceLarge"
+        		android:textColor="@color/Black"
+        		android:textSize="20sp"  
+        		android:layout_marginBottom="30dp"
+   	 	    	android:layout_gravity="center_horizontal"
+   	 	     />
+               	 	
+            <TextView
+        		android:id="@+id/text_biblio"
+        		android:layout_height="wrap_content"
+        		android:text="@string/bibliotheque"
+        		android:textAppearance="?android:attr/textAppearanceLarge"
+        		android:textColor="@color/Black"
+        		android:textSize="20sp"  
+   	 	    	android:layout_gravity="center_horizontal"
+   	 	    	android:layout_column="2"
+   	 	     />
+   	 	    	
+        </TableRow>
+        
+    	<TableRow>      	 
+    		<ImageView
+        		android:id="@+id/button_auditoire"
+        		android:layout_height="100dp"
+        		android:layout_marginTop="0dp"
+        		android:src="@drawable/auditoire"  
+   	 		    android:layout_gravity="center_horizontal"
+   	 	    />
+
+    		<ImageView
+    		    android:id="@+id/button_loisirs"
+    		    android:layout_height="100dp"
+    		    android:layout_marginTop="0dp"
+    		    android:src="@drawable/loisir"
+   	 		    android:layout_column="2" />
+    	</TableRow>
+    	
+  		<TableRow>
+         	<TextView
+        		android:id="@+id/text_auditoire"
+        		android:layout_height="wrap_content"
+        		android:text="@string/auditoires"
+        		android:textAppearance="?android:attr/textAppearanceLarge"
+        		android:textColor="@color/Black"
+        		android:textSize="20sp"  
+   	 	   	 android:layout_gravity="center_horizontal"
+   	 	     />
+               	 	
+            <TextView
+        		android:id="@+id/text_loisir"
+        		android:layout_height="wrap_content"
+        		android:text="@string/button_text_loisirs"
+        		android:textAppearance="?android:attr/textAppearanceLarge"
+        		android:textColor="@color/Black"
+       		 	android:textSize="20sp"  
+   	 		    android:layout_gravity="center_horizontal"
+   	 		    android:layout_column="2"
+   	 	     />
+   	 	    	
+        </TableRow>
+        
+    	
+   		<TableRow>      
+
+    		<ImageView
+    	    	android:id="@+id/button_plan"
+    	    	android:layout_height="115dp"
+    	    	android:layout_marginTop="0dp"
+    	    	android:src="@drawable/plan"
+   	 	    	android:layout_column="1" />
+    	
+  		</TableRow>
+  		
+   		<TableRow>      
+
+    		<TextView
+    	    	android:id="@+id/text_plan"
+    	    	android:layout_height="wrap_content"
+    	    	android:layout_marginTop="0dp"
+        		android:text="@string/button_text_plan"
+        		android:textAppearance="?android:attr/textAppearanceLarge"
+        		android:textColor="@color/Black"
+       		 	android:textSize="20sp"  
+   	 	    	android:layout_column="1"
+   	 		    android:layout_gravity="center_horizontal" />
+    	
+  		</TableRow>
+
+	</TableLayout>
+</RelativeLayout> 

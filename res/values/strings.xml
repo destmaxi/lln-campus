@@ -12,6 +12,7 @@
     <string name="button_text_etudes">Études</string>
 	<string name="button_text_loisirs">Loisirs</string>
 	<string name="button_text_options">Options</string>
+	<string name="button_text_plan">Plan</string>
 	
 	<string name="hello_world">Hello world!</string>
 	
@@ -31,8 +32,20 @@
     <string name="error_db">Erreur DB</string>
     
     <!-- Strings utiles pour auditorium_details -->
-    <string name="auditorium_address">Adresse: %1$s</string>
+    <string name="auditorium_address">Sélectionnez un auditoire dans la liste</string>
     <string name="auditorium_GPS">Guidage GPS</string>
     <string name="sub_auditorium">Sous-auditoires</string>
+    <string name="bibliotheque">Bibliothèque</string>
+    <string name="auditorium_picture_description">Aperçu de l entree du bâtiment</string>
     
+    <!--  Strings utiles pour about_activity -->
+    <string name="about">À propos de</string>
+    <string name="about_text">Cette application a été développée par Benjamin Baugnies, Quentin De Coninck, Pham Anh Tuan Le et Damien Mercier dans le cadre du cours LFSAB1509 donné à l Université Catholique de Louvain-la-Neuve. Cette application est distribuée sous licence GPL3. Tout don est le bienvenu =D</string>
+    
+    <!--  Strings utiles pour MapActivity -->
+    <string name="map">Map</string>
+    
+    <!-- Strings utiles pour horaire -->
+    <string name="button_ADE">Bouton</string>
+    <string name="ade_update">Mettre à jour depuis ADE</string>
 </resources>

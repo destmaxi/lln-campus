@@ -4,15 +4,16 @@ package be.ac.ucl.lfsab1509.llncampus.activity;
 
 import java.util.ArrayList;
 import be.ac.ucl.lfsab1509.llncampus.R;
+import be.ac.ucl.lfsab1509.llncampus.interfaces.IAuditorium;
+import be.ac.ucl.lfsab1509.llncampus.fragment.AuditoriumDetailsFragment;
+import be.ac.ucl.lfsab1509.llncampus.fragment.AuditoriumListFragment;
+import android.content.ComponentName;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.view.View.OnClickListener;
 import android.widget.ListView;
-import android.widget.TextView;
 
 /**
  * This class is intended to create a list of auditoriums in order to make a clickable list for the user.
@@ -20,74 +21,23 @@ import android.widget.TextView;
  * @version 19/02/2013
  *
  */
-public class AuditoriumActivity extends LLNCampusListActivity{
+public class AuditoriumActivity extends LLNCampusActivity implements AuditoriumListFragment.OnAuditoriumSelectedListener, OnClickListener {
 	ArrayList<String> values = null;
-
+	private IAuditorium current_auditorium;
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.auditorium);
-		
+		setContentView(R.layout.auditorium_list_fragment);
 				 
-		String[] cols = {"NAME"};
-		Cursor c = db.select("Poi", cols,"TYPE = 'auditoire'",null, null, null, "NAME ASC", null);
-		
-		this.values = new ArrayList<String>();
-		while(c.moveToNext()){
-			values.add(c.getString(0));
-		}
-		c.close();
-		
-		
-		
-		ListView listView = (ListView) findViewById(android.R.id.list);
-		
-
-		// Define a new Adapter
-		// First parameter - Context
-		// Second parameter - Layout for the row
-		// Third parameter - ID of the TextView to which the data is written
-		// Forth - the Array of data
-		/*
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-			  android.R.layout.simple_list_item_1, android.R.id.text1, values);
-		 */	
-
-		ArrayAdapter<String> adapter=new ArrayAdapter<String>(
-	            this,android.R.layout.simple_list_item_1, values){
-
-	        @Override
-	        public View getView(int position, View convertView,
-	                ViewGroup parent) {
-	            View view =super.getView(position, convertView, parent);
-
-	            TextView textView=(TextView) view.findViewById(android.R.id.text1);
-
-	            /*YOUR CHOICE OF COLOR*/
-	            textView.setTextColor(Color.WHITE);
-
-	            return view;
-	        }
-	    };
-	        /*SET THE ADAPTER TO LISTVIEW*/
-	        setListAdapter(adapter);
-		
-		// Assign adapter to ListView
-		//listView.setAdapter(adapter); 
-		listView.setClickable(true);
-		/*setListAdapter(new ArrayAdapter<String>(
-	            this,R.layout.auditorium ,R.id.list_content, values){
-			
-			
-		});
-		*/
+		View vue = findViewById(R.id.auditorium_list_fragment);
+		vue.setBackgroundColor(getResources().getColor(R.color.Blue)); 
 	}
 	
 
     /*
      * Adding an item click listener to the list
      */
-    @Override
+
 	protected void onListItemClick(ListView l, View v, int position, long id) {
     	Intent intent = new Intent(this, DetailsAuditorium.class); //the intent is used to start a new activity
     	/*
@@ -104,4 +54,56 @@ public class AuditoriumActivity extends LLNCampusListActivity{
     	intent.putExtra("NAME", values.get(position));
 		startActivity(intent); //starts the activity denoted by this intent. 
     }
+	
+	public void onAuditoriumSelected(IAuditorium auditorium){
+		
+		current_auditorium = auditorium;
+		AuditoriumDetailsFragment viewer = (AuditoriumDetailsFragment) getFragmentManager()
+	            .findFragmentById(R.id.auditorium_details_fragment);
+	    if (viewer == null || !viewer.isInLayout()) {
+	    	Intent showContent = new Intent(getApplicationContext(),
+					DetailsAuditorium.class);
+			showContent.putExtra("NAME",auditorium.getName());
+			showContent.putExtra("ADDRESS", auditorium.getAddress());
+			double[] coord={ auditorium.getLatitude(), auditorium.getLongitude() };
+			showContent.putExtra("COORD", coord);
+			showContent.putExtra("ID", auditorium.getID());
+			startActivity(showContent);
+	    } else {
+	        viewer.updateAuditorium(auditorium);
+	        setListeners();
+	    }
+	}
+	
+	/*
+	 * Les deux methodes qui suivent ne seront utilisees quand dans le cas ou la tablette serait en
+	 * paysage; gerer ce qu'aurait du faire DetailsAuditorium.
+	 */
+	
+	 private void setListeners() {
+	        View GPSButton = findViewById(R.id.button_auditorium_gps);
+	        GPSButton.setOnClickListener(this);
+	        View subButton = findViewById(R.id.button_subauditorium);
+	        subButton.setOnClickListener(this);
+	    }
+	    
+	    // Permet de définir l'action effectuée grâce à l'appui sur un bouton
+		public void onClick(View v) {
+			Intent intent;
+			switch (v.getId()) {
+			case R.id.button_auditorium_gps:
+				intent = new Intent(android.content.Intent.ACTION_VIEW, 
+							Uri.parse("http://maps.google.com/maps?daddr="+current_auditorium.getLatitude()+","+current_auditorium.getLongitude()+ "&dirflg=w"));
+			    intent.setComponent(new ComponentName("com.google.android.apps.maps", 
+					            "com.google.android.maps.MapsActivity"));          
+				startActivity(intent);
+				//ExternalAppUtility.openBrowser(DetailsAuditorium.this, "google.navigation:dirflg=w&q="+auditorium.getLatitude()+","+auditorium.getLongitude());
+				break;
+			case R.id.button_subauditorium:
+				intent = new Intent(this, SubAuditoriumActivity.class);
+				startActivity(intent);
+				break;			
+			}
+		}
+	 
 }

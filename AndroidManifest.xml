@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="be.ac.ucl.lfsab1509.llncampus"
-    android:versionCode="3"
-    android:versionName="0.1.1" >
+    android:versionCode="4"
+    android:versionName="0.2" >
 
     <uses-sdk
         android:minSdkVersion="17"
         android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> 
     
     <application
         android:allowBackup="true"
@@ -18,6 +19,10 @@
         <activity 
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.AuditoriumActivity"
             android:label="@string/auditoires">
+        </activity> 
+        <activity 
+            android:name="be.ac.ucl.lfsab1509.llncampus.activity.HoraireActivity"
+            android:label="@string/horaire">
         </activity> 
         <activity 
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.SettingsActivity"
@@ -35,6 +40,15 @@
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.DetailsAuditorium"
             android:label="@string/auditoires" >
         </activity>
+        <activity
+            android:name="be.ac.ucl.lfsab1509.llncampus.activity.AboutActivity"
+            android:label="@string/about" >
+        </activity>
+        <activity
+            android:name="be.ac.ucl.lfsab1509.llncampus.activity.MapActivity"
+            android:label="@string/map" >
+        </activity>
+        
         <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.SubAuditoriumActivity"
             android:label="@string/sub_auditorium" >
