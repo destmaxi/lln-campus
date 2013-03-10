@@ -14,6 +14,7 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
@@ -39,11 +40,7 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener{
         setContentView(R.layout.main_title);
         setListeners();
         LLNCampus.copyAssets();
-        /* 
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-        System.out.println(ADE.getInfos("LFSAB1509"));
-        */
+		getActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
  
@@ -124,5 +121,13 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener{
 			ExternalAppUtility.openBrowser(MainTitle.this, BUREAU_UCL_URL);
 			break;						
 		}
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem menuItem) {
+		if (menuItem.getItemId() == android.R.id.home) {
+			//Nothing to do...
+			return true;
+		}
+		return super.onOptionsItemSelected(menuItem);
 	}
 }
