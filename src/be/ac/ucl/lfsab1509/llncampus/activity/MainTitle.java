@@ -23,7 +23,7 @@ import android.widget.Toast;
  * @author Quentin
  *
  */
-public class MainTitle extends LLNCampusActivity implements OnClickListener{
+public class MainTitle extends LLNCampusActivity implements OnClickListener {
 
 	// Defining the URL used in the code
 	public final String ICAMPUS_URL="https://www.uclouvain.be/cnx_icampus.html";
