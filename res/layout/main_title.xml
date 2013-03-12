@@ -10,16 +10,17 @@
     
 	<ImageView
 	    android:id="@+id/icampus"
-        android:layout_width="100dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="20dp"
+        android:layout_marginLeft="5dp"
         android:src="@drawable/icampuslogo3" />
 
     <ImageView
         android:id="@+id/moodle"
-        android:layout_width="100dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/icampus"
         android:layout_alignBottom="@+id/icampus"
@@ -28,12 +29,12 @@
 
     <ImageView
         android:id="@+id/bureau"
-        android:layout_width="100dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/moodle"
         android:layout_alignBottom="@+id/moodle"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="0dp"
+        android:layout_marginRight="5dp"
         android:src="@drawable/bureau" />
     
     
@@ -89,7 +90,7 @@
         		android:layout_height="wrap_content"
         		android:text="@string/horaire"
         		android:textAppearance="?android:attr/textAppearanceLarge"
-        		android:textColor="@color/Black"
+        		android:textColor="@color/White"
         		android:textSize="20sp"  
         		android:layout_marginBottom="30dp"
    	 	    	android:layout_gravity="center_horizontal"
@@ -100,7 +101,7 @@
         		android:layout_height="wrap_content"
         		android:text="@string/bibliotheque"
         		android:textAppearance="?android:attr/textAppearanceLarge"
-        		android:textColor="@color/Black"
+        		android:textColor="@color/White"
         		android:textSize="20sp"  
    	 	    	android:layout_gravity="center_horizontal"
    	 	    	android:layout_column="2"
@@ -131,7 +132,7 @@
         		android:layout_height="wrap_content"
         		android:text="@string/auditoires"
         		android:textAppearance="?android:attr/textAppearanceLarge"
-        		android:textColor="@color/Black"
+        		android:textColor="@color/White"
         		android:textSize="20sp"  
    	 	   	 android:layout_gravity="center_horizontal"
    	 	     />
@@ -141,7 +142,7 @@
         		android:layout_height="wrap_content"
         		android:text="@string/button_text_loisirs"
         		android:textAppearance="?android:attr/textAppearanceLarge"
-        		android:textColor="@color/Black"
+        		android:textColor="@color/White"
        		 	android:textSize="20sp"  
    	 		    android:layout_gravity="center_horizontal"
    	 		    android:layout_column="2"
@@ -169,7 +170,7 @@
     	    	android:layout_marginTop="0dp"
         		android:text="@string/button_text_plan"
         		android:textAppearance="?android:attr/textAppearanceLarge"
-        		android:textColor="@color/Black"
+        		android:textColor="@color/White"
        		 	android:textSize="20sp"  
    	 	    	android:layout_column="1"
    	 		    android:layout_gravity="center_horizontal" />
