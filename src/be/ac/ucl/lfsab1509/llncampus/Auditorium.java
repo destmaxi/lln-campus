@@ -5,7 +5,6 @@ import be.ac.ucl.lfsab1509.llncampus.interfaces.IAuditorium;
 
 /**
  * Implementation of an Auditorium object
- * @author Quentin & Anh Tuan
  *
  */
 public class Auditorium implements IAuditorium {
