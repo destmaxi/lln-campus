@@ -55,6 +55,7 @@ public class AuditoriumActivity extends LLNCampusActivity implements AuditoriumL
 		startActivity(intent); //starts the activity denoted by this intent. 
     }
 	
+	
 	public void onAuditoriumSelected(IAuditorium auditorium){
 		
 		current_auditorium = auditorium;

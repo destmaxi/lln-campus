@@ -12,4 +12,5 @@ public interface IAuditorium extends IBuilding{
 	public int takePicture();
 	
 	//TODO probably other methods will be integrated, such as sub-auditoriums,...
+	
 }
