@@ -29,7 +29,6 @@ public class AuditoriumListFragment extends LLNCampusListFragment {
 	    
 	    if(content !=null)
 		{
-			/* TODO passer le int et pas le nom */
 			String nameAuditorium = content;
 			Log.d("NAME", nameAuditorium);
 			String[] cols = {"ID","NAME","LATITUDE", "LONGITUDE", "ADDRESS"};
@@ -53,22 +52,6 @@ public class AuditoriumListFragment extends LLNCampusListFragment {
 		}
 		c.close();
 		
-		
-		
-		//ListView listView = (ListView) findViewById(android.R.id.list);
-		
-
-		// Define a new Adapter
-		// First parameter - Context
-		// Second parameter - Layout for the row
-		// Third parameter - ID of the TextView to which the data is written
-		// Forth - the Array of data
-		
-
-		
-		
-        
-        
 
 		adapter=new ArrayAdapter<String>(
 	            this.getActivity(),android.R.layout.simple_list_item_1, values){
@@ -86,18 +69,6 @@ public class AuditoriumListFragment extends LLNCampusListFragment {
 	            return view;
 	        }
 	    };
-	        //SET THE ADAPTER TO LISTVIEW
-	        setListAdapter(adapter);
-		
-		// Assign adapter to ListView
-		//listView.setAdapter(adapter); 
-		//listView.setClickable(true);
-/*		setListAdapter(new ArrayAdapter<String>(
-	            this,R.layout.auditorium ,R.id.list_content, values){
-			
-			
-		});*/
-		
 
         setListAdapter(adapter);
         setHasOptionsMenu(true);
