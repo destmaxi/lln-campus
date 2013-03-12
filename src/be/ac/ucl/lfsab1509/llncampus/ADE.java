@@ -20,26 +20,30 @@ import android.text.format.Time;
 import android.util.Log;
 
 /**
- * Gere la connexion a ADE et la recuperation des informations.  
+ * Gere la connexion a ADE et la recuperation des informations.
  * @author damien
  */
-public class ADE {
-	/** Adresse du serveur ADE */
+public final class ADE {
+
+	/** Adresse du serveur ADE. */
 	private static final String SERVER_URL = "http://horaire.sgsi.ucl.ac.be:8080";
-	/** Page pour les infos */
+	/** Page pour les infos. */
 	private static final String INFO_PATH = "/ade/custom/modules/plannings/info.jsp?order=slot";
-	/** Numéro du projet (variable en fonction de l'année) FIXME : A mettre dans les options ? */
+	/** Numéro du projet (variable en fonction de l'année). */
 	private static final int PROJECT_ID = 9;
-	/** Nom d'utilisateur ADE */
+	/** Nom d'utilisateur ADE. */
 	private static final String USER = "etudiant";
-	/** Mot de passe ADE */
+	/** Mot de passe ADE. */
 	private static final String PASSWORD = "student";
-	/** ID pour les notifications */
+	/** ID pour les notifications. */
 	private static final Integer NOTIFY_ID = 1;
 	
-	
+	private ADE() {
+		
+	}
 	/**
-	 * Etablit la connexion a ADE en specifiant les codes des cours dont ont veut les informations.
+	 * Etablit la connexion a ADE en specifiant les codes des cours dont ont veut 
+	 * les informations.
 	 * @param code Code des cours a recuperer.
 	 * @param weeks Numero des semaines.
 	 * @return true si la connexion a reussie, false sinon.
@@ -48,12 +52,12 @@ public class ADE {
 	private static boolean connectADE(final String code, final String weeks) {
 		HttpClient client = ExternalAppUtility.getHttpClient();
 		HttpGet request = new HttpGet(
-					SERVER_URL +
-					"/ade/custom/modules/plannings/direct_planning.jsp?weeks=" + weeks + 
-					"&code=" + code + 
-					"&login=" + USER + 
-					"&password=" + PASSWORD + 
-					"&projectId=" + PROJECT_ID + ""
+					SERVER_URL
+					+ "/ade/custom/modules/plannings/direct_planning.jsp?weeks=" + weeks
+					+ "&code=" + code 
+					+ "&login=" + USER
+					+ "&password=" + PASSWORD 
+					+ "&projectId=" + PROJECT_ID + ""
 				);
 		try {
 			client.execute(request);
@@ -62,10 +66,10 @@ public class ADE {
 			return false;
 		}
 	}
-	
+
 	
 	/**
-	 * Charge les informations a propos des cours dont le code est donne en argument. 
+	 * Charge les informations a propos des cours dont le code est donne en argument.
 	 * @param code Code du cours  
 	 * @param weeks Numéro des semaines
 	 * @return Une liste d'evenement ou null en cas d'echec.
@@ -79,9 +83,9 @@ public class ADE {
 			HttpClient client = ExternalAppUtility.getHttpClient();
 			HttpGet request = new HttpGet(SERVER_URL + INFO_PATH);
 			HttpResponse response = client.execute(request);
-			
+
 			html = EntityUtils.toString(response.getEntity());
-		
+
 			String table = HTMLAnalyser.getBalisesContent(html, "table").get(0); 
 			ArrayList<String> lignes = HTMLAnalyser.getBalisesContent(table, "tr");
 						
@@ -103,21 +107,25 @@ public class ADE {
 				events.add(event);
 			}
 		} catch (Exception e) {
-			Log.e("ADE.java", "Erreur lors de la connexion ou de l'analyse du code HTML : " + e.getMessage());
+			Log.e("ADE.java", 
+					"Erreur lors de la connexion ou de l'analyse du code HTML : "
+							+ e.getMessage());
 			e.printStackTrace();
 			return null;
 		}
 		return events;
 	}
 	/**
-	 * Lance la mise à jour des infos depuis ADE
+	 * Lance la mise à jour des infos depuis ADE.
 	 * @param ha Activite qui lance le thread de mise à jour
 	 * @author Damien
 	 * @param updateRunnable 
 	 * @param handler 
 	 */
-	public static void runUpdateADE(final HoraireActivity ha, final Handler handler, final Runnable updateRunnable) {
-		final NotificationManager nm = (NotificationManager) ha.getSystemService(Context.NOTIFICATION_SERVICE);
+	public static void runUpdateADE(final HoraireActivity ha, final Handler handler, 
+			final Runnable updateRunnable) {
+		final NotificationManager nm = 
+				(NotificationManager) ha.getSystemService(Context.NOTIFICATION_SERVICE);
 		final Builder nb = new NotificationCompat.Builder(ha)
 			.setContentTitle("Mise a jour de ADE")
 			.setContentText("Mise a jour en cours")
@@ -163,22 +171,24 @@ public class ADE {
 				int nbError = 0;
 				ArrayList<Event> events;
 				
-				for (String course_code : courses) {
-					nb.setContentText("Téléchargement pour " + course_code + "...");
+				for (String courseCode : courses) {
+					nb.setContentText("Téléchargement pour " + courseCode + "...");
 					nm.notify(NOTIFY_ID, nb.build());
-					events = ADE.getInfos(course_code, weeks);
+					events = ADE.getInfos(courseCode, weeks);
 					if (events == null) {
-						nb.setContentText("Le contenu de " + course_code + " n'a pu etre telecharge");
+						nb.setContentText("Le contenu de " + courseCode 
+								+ " n'a pu etre telecharge");
 						nm.notify(NOTIFY_ID, nb.build());
-						Log.e("ADE", "Le contenu de " + course_code + " n'a pu etre telecharge");
+						Log.e("ADE", "Le contenu de " + courseCode + " n'a pu etre telecharge");
 						nbError++;
 					} else {
 						// Suppression des anciennes donnees
-						LLNCampus.getDatabase().delete("Horaire", "COURSE = ?", new String[]{course_code});
+						LLNCampus.getDatabase().delete("Horaire", "COURSE = ?", 
+								new String[]{courseCode});
 						// Ajout des nouvelles donnees
 						for (Event e : events) {
 							ContentValues cv = e.toContentValues();
-							cv.put("COURSE", course_code);
+							cv.put("COURSE", courseCode);
 							if (LLNCampus.getDatabase().insert("Horaire", cv) < 0) {
 								nbError++;
 							}

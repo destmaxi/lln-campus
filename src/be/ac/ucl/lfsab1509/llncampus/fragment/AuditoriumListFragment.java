@@ -27,8 +27,7 @@ public class AuditoriumListFragment extends LLNCampusListFragment {
 		
 	    String content = values.get(position);
 	    
-	    if(content !=null)
-		{
+	    if(content !=null) {
 			String nameAuditorium = content;
 			Log.d("NAME", nameAuditorium);
 			String[] cols = {"ID","NAME","LATITUDE", "LONGITUDE", "ADDRESS"};

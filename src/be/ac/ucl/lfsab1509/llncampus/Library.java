@@ -5,7 +5,7 @@ import be.ac.ucl.lfsab1509.llncampus.interfaces.ILibrary;
 /**
  * Implementation of an Library object
  * 
- * A amŽliorer en integrant les horaires des bibilotheques
+ * A amï¿½liorer en integrant les horaires des bibilotheques
  */
 public class Library implements ILibrary {
 	private int ID;
@@ -14,67 +14,75 @@ public class Library implements ILibrary {
 	private double longitude;
 	private String address;
 	
-	public Library(){
-		name=null;
-		latitude=0.0;
-		longitude=0.0;
-		address=null;
+	/**
+	 * Constructeur.
+	 */
+	public Library() {
+		name = null;
+		latitude = 0.0;
+		longitude = 0.0;
+		address = null;
 	}
 	
 	/**
-	 * Constructor with arguments
+	 * 
+	 * @param id ID de la bibliothÃ¨que
+	 * @param name Nom
+	 * @param latitude Latitude
+	 * @param longitude Longitutude
+	 * @param address
 	 */
 	public Library(int id, String name, double latitude, double longitude, String address){
-		this.ID=id;
-		this.name=name;
-		this.latitude=latitude;
-		this.longitude=longitude;
-		this.address=address;
+		this.ID = id;
+		this.name = name;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.address = address;
 	}
 
 	@Override
-	public int getID(){
+	public final int getID() {
 		return this.ID;
 	}
 	
 	@Override
-	public String getName() {
+	public final String getName() {
 		return name;
 	}
 
 	@Override
-	public void setName(String newName) {
-		name=newName;
+	public final void setName(String newName) {
+		name = newName;
 	}
 
 	@Override
-	public double getLatitude() {
+	public final double getLatitude() {
 		return latitude;
 	}
 
 	@Override
-	public void setLatitude(double newLatitude) {
-		latitude=newLatitude;
+	public final void setLatitude(double newLatitude) {
+		latitude = newLatitude;
 	}
 
 	@Override
-	public double getLongitude() {
+	public final double getLongitude() {
 		return longitude;
 	}
 
 	@Override
-	public void setLongitude(double newLongitude) {
-		longitude=newLongitude;
+	public final void setLongitude(double newLongitude) {
+		longitude = newLongitude;
 	}
 
 	@Override
-	public String getAddress() {
+	public final String getAddress() {
 		return address;
 	}
 
 	@Override
-	public void setAddress(String newAddress) {
-		address=newAddress;
+	public final void setAddress(String newAddress) {
+		address = newAddress;
 	}
 	
 	
