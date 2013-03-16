@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 public class AuditoriumListFragment extends LLNCampusListFragment {
 	
-	ArrayList<String> values = null;
+	ArrayList<String> auditoriumsName = null;
 	final String NAME = "NAME";
 	private ArrayAdapter<String> adapter;
 	private IAuditorium auditorium;
@@ -25,7 +25,7 @@ public class AuditoriumListFragment extends LLNCampusListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		
-	    String content = values.get(position);
+	    String content = auditoriumsName.get(position);
 	    
 	    if(content !=null) {
 			String nameAuditorium = content;
@@ -45,15 +45,15 @@ public class AuditoriumListFragment extends LLNCampusListFragment {
 		String[] cols = {"NAME"};
 		Cursor c = db.select("Poi", cols,"TYPE = 'auditoire'",null, null, null, "NAME ASC", null);
 		
-		this.values = new ArrayList<String>();
+		this.auditoriumsName = new ArrayList<String>();
 		while(c.moveToNext()){
-			values.add(c.getString(0));
+			auditoriumsName.add(c.getString(0));
 		}
 		c.close();
 		
 
 		adapter=new ArrayAdapter<String>(
-	            this.getActivity(),android.R.layout.simple_list_item_1, values){
+	            this.getActivity(),android.R.layout.simple_list_item_1, auditoriumsName){
 
 	        @Override
 	        public View getView(int position, View convertView,

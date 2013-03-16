@@ -1,11 +1,12 @@
 package be.ac.ucl.lfsab1509.llncampus;
 
+import android.util.Log;
 import be.ac.ucl.lfsab1509.llncampus.interfaces.ILibrary;
 
 /**
  * Implementation of an Library object
  * 
- * A am�liorer en integrant les horaires des bibilotheques
+ * A ameliorer en integrant les horaires des bibilotheques
  */
 public class Library implements ILibrary {
 	private int ID;
@@ -26,7 +27,7 @@ public class Library implements ILibrary {
 	
 	/**
 	 * 
-	 * @param id ID de la bibliothèque
+	 * @param id ID de la bibliotheque
 	 * @param name Nom
 	 * @param latitude Latitude
 	 * @param longitude Longitutude
@@ -85,6 +86,23 @@ public class Library implements ILibrary {
 		address = newAddress;
 	}
 	
+	@Override
+	public final int takePicture() {
+		switch (this.ID) {
+			case 28 : return R.drawable.bst;
+			case 29 : return R.drawable.bdrt;
+			case 30 : return R.drawable.bpsp;
+			case 31 : return R.drawable.pasencore;
+			case 32 : return R.drawable.pasencore;
+			case 33 : return R.drawable.bisp;
+			case 34 : return R.drawable.bsm;
+			case 35 : return R.drawable.bspo;
+			case 36 : return R.drawable.pasencore;
+			default :
+				Log.e("Library.java", "Ne trouve pas l'image vers l'auditoire de Takepicture");
+				return 0;
+		}
+	 }
 	
 
 }

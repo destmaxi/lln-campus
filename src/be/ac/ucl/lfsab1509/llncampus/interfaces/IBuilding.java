@@ -51,5 +51,11 @@ public interface IBuilding {
 	 * Set the address of an IBuilding object to newAdress
 	 */
 	public void setAddress(String newAddress);
+	
+	/**
+	  * Return the path integer of the building picture
+	  * 
+	  */
+	public int takePicture();
 
 }

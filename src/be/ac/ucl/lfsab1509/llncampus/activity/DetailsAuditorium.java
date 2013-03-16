@@ -13,10 +13,9 @@ import android.widget.ImageView;
 
 /**
  * Class intended for showing some information about an Auditorium
- * @author Anh Tuan
  *
  */
-public class DetailsAuditorium extends LLNCampusActivity implements OnClickListener{
+public class DetailsAuditorium extends LLNCampusActivity implements OnClickListener {
 	private Auditorium auditorium;
 	
 	 @Override
