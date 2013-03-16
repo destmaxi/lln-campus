@@ -27,7 +27,7 @@
 	<string name="moodle">Moodle</string>
 	<string name="bureau">Bureau UCL</string>
 	<string name="auditoires">Auditoriums</string>
-	<string name="bibliotheque">Libraries</string>
+	<string name="bibliotheques">Libraries</string>
 	
 	<!-- Strings utiles pour auditorium et library-->
     <string name="error_db">Error DB</string>
