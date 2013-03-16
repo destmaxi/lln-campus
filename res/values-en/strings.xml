@@ -32,8 +32,9 @@
 	<!-- Strings utiles pour auditorium et library-->
     <string name="error_db">Error DB</string>
 
-    <!-- Strings utiles pour auditorium_details et library_details-->
+    <!-- Strings utiles pour auditorium_details, subauditorium_details et library_details-->
     <string name="auditorium_address">Please select an auditorium from the list</string>
+    <string name="subauditorium_address">Please select an subauditorium from the list</string>
     <string name="library_address">Please select a library from the list</string>
     <string name="GPS">Guidance GPS</string>
     <string name="sub_auditorium">Subauditoriums</string>
