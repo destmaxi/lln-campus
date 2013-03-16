@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
  
     <string name="app_name">LLN Campus</string>
@@ -7,7 +8,7 @@
     <string name="reset_DB">Reload the DB</string>
     
     <!-- Strings utiles pour main_title -->
-        <string name="menu_settings">Settings</string>
+    <string name="menu_settings">Settings</string>
     <string name="button_text_etudes">Studies</string>
     <string name="button_text_loisirs">Leisures</string>
     <string name="button_text_options">Settings</string>
@@ -26,17 +27,18 @@
 	<string name="moodle">Moodle</string>
 	<string name="bureau">Bureau UCL</string>
 	<string name="auditoires">Auditoriums</string>
+	<string name="bibliotheque">Libraries</string>
 	
-	<!-- Strings utiles pour auditorium -->
+	<!-- Strings utiles pour auditorium et library-->
     <string name="error_db">Error DB</string>
 
-    <!-- Strings utiles pour auditorium_details -->
+    <!-- Strings utiles pour auditorium_details et library_details-->
     <string name="auditorium_address">Please select an auditorium from the list</string>
-    <string name="auditorium_GPS">Guidance GPS</string>
+    <string name="library_address">Please select a library from the list</string>
+    <string name="GPS">Guidance GPS</string>
     <string name="sub_auditorium">Subauditoriums</string>
-    <string name="bibliotheque">Library</string>
-    <string name="auditorium_picture_description">Overview of building entrance</string>
-    
+    <string name="library_schedule">The opening schedule of the library</string>
+    <string name="building_picture_description">Overview of building entrance</string>
     
     <!--  Strings utiles pour about_activity -->
 	<string name="about">About</string>

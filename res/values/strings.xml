@@ -27,16 +27,18 @@
 	<string name="moodle">Moodle</string>
 	<string name="bureau">Bureau UCL</string>
 	<string name="auditoires">Auditoires</string>
+	<string name="bibliotheque">Bibliothèques</string>
 	
-	<!-- Strings utiles pour auditorium -->
+	<!-- Strings utiles pour auditorium  et library-->
     <string name="error_db">Erreur DB</string>
     
-    <!-- Strings utiles pour auditorium_details -->
+    <!-- Strings utiles pour auditorium_details et library_details-->
     <string name="auditorium_address">Sélectionnez un auditoire dans la liste</string>
-    <string name="auditorium_GPS">Guidage GPS</string>
+    <string name="library_address">Sélectionnez une bibliothèque dans la liste</string>
+    <string name="GPS">Guidage GPS</string>
     <string name="sub_auditorium">Sous-auditoires</string>
-    <string name="bibliotheque">Bibliothèque</string>
-    <string name="auditorium_picture_description">Aperçu de l entree du bâtiment</string>
+    <string name="library_schedule">Horaire des ouvertures de la bibliothèque</string>
+    <string name="building_picture_description">Aperçu de l entree du bâtiment</string>
     
     <!--  Strings utiles pour about_activity -->
     <string name="about">À propos de</string>
