@@ -268,7 +268,7 @@ INSERT INTO "Poi" VALUES(29,'Bibliothèque de Droit',50.668132,4.611363,'bibliot
 INSERT INTO "Poi" VALUES(30,'Bibliothèque de Philosophie',50.670104,4.610484,'bibliotheque','Place du Cardinal Mercier, 14');
 INSERT INTO "Poi" VALUES(31,'Bibliothèque des Arts et Lettres',50.669929,4.610323,'bibliotheque','Place Cardinal Mercier, 31');
 INSERT INTO "Poi" VALUES(32,'Bibliothèque du Centre d''études théâtrales',50.670155,4.604395,'bibliotheque','Place de l''Hocaille, 4B');
-INSERT INTO "Poi" VALUES(33,'Bibliothèque de Psychologie et des Sciences de l''Education',50.670094,4.610867,'bibliothèque','Place de l''Hocaille, 4B');
+INSERT INTO "Poi" VALUES(33,'Bibliothèque de Psychologie et des Sciences de l''Education',50.670094,4.610867,'bibliotheque','Place de l''Hocaille, 4B');
 INSERT INTO "Poi" VALUES(34,'Bibliothèque des Sciences de la Motricité',50.670684,4.6069,'bibliotheque','Place Pierre de Coubertin, 1');
 INSERT INTO "Poi" VALUES(35,'Bibliothèque des Sciences Economiques, Sociales, Politiques et Communications',50.668081,4.612085,'bibliotheque','Place Montesquieu, 5');
 INSERT INTO "Poi" VALUES(36,'Bibliothèque de Théologie',50.670006,4.61039,'bibliotheque','Place Cardinal Mercier, 31');
