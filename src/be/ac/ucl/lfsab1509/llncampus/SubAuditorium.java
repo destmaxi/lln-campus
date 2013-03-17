@@ -30,6 +30,7 @@ public class SubAuditorium implements ISubAuditorium {
 		ecran = false;
 		retro = false;
 		sono = false;
+		dia = false;
 		video = null;
 		network = false;
 		access = false;
