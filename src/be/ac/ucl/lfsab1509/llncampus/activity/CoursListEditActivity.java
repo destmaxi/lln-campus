@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.format.Time;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -70,6 +71,7 @@ public class CoursListEditActivity extends LLNCampusActivity implements OnClickL
                         mProgress.setMessage(nextStep);
                     }
                 });
+        		Log.d("CoursListEditActivity", nextStep);
         	}
         	public void sendError(String msg) {
         		notify("Erreur : " + msg);
@@ -98,7 +100,12 @@ public class CoursListEditActivity extends LLNCampusActivity implements OnClickL
         		ArrayList<Cours> cours = new ArrayList<Cours>();
         		for (Offre o : offres) {
             		progress(i, "Récupération de la liste des cours pour " + o.offreName);
-            		cours.addAll(uclouvain.getCourses(o));
+            		ArrayList<Cours> c = uclouvain.getCourses(o);
+            		if (c != null && !c.isEmpty()){
+            			cours.addAll(c);
+            		} else {
+            			Log.e("CoursListEditActivity", "Erreur : Aucun cours pour l'offre [" + o.offreCode + "] " + o.offreName);
+            		}
         			i += (int) (30. / offres.size());
         		}
         		

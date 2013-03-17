@@ -173,7 +173,12 @@ public class UCLouvain {
 		if (!connected) { return null; }
 
 		ArrayList<Offre> offres = new ArrayList<Offre>();
-		for (Offre o : getOffres()) {
+		ArrayList<Offre> allOffres = getOffres();
+		if (allOffres.isEmpty()) {
+			Log.e("UCLouvain", "Aucune offres n'a pu être récupéré");
+			return null;
+		}
+		for (Offre o : allOffres) {
 			if (o.anac == anac) {
 				offres.add(o);
 			}
