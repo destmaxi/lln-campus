@@ -59,7 +59,7 @@ public class Event {
 	 */
 	private void setBegin(final String date, final String beginT) {
 		int day = Integer.valueOf(date.substring(3, 5));
-		int month = Integer.valueOf(date.substring(0, 2));
+		int month = Integer.valueOf(date.substring(0, 2)) - 1;
 		int year = Integer.valueOf(date.substring(6, 10));
 		
 		int beginHour = Integer.valueOf(beginT.substring(0, 2));

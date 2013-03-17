@@ -160,8 +160,6 @@ public final class ADE {
 				for (int i = 0; i  < 51; i++) {
 					if (!weeks.isEmpty()) { weeks += ','; }
 					weeks += i; 
-					//weeks += (i + today.getWeekNumber() + 13); 
-					//FIXME Trouver qqch de moins variable et qui fonctionne pr les 2 quadri... 
 				}
 				Log.d("ADE", "Weeks : " + weeks + "\n");
 
