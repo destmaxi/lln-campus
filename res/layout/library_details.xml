@@ -28,7 +28,7 @@
     <ImageView
         android:id="@+id/library_picture"
         android:layout_width="match_parent"
-        android:layout_height="0dip"
+        android:layout_height="match_parent"
         android:layout_marginTop="17dp"
         android:layout_weight="1"
         android:contentDescription="@string/building_picture_description"
@@ -55,9 +55,9 @@
 
      	<Button
         	android:id="@+id/button_library_gps"
-         	android:layout_width="wrap_content"
+         	android:layout_width="fill_parent"
          	android:layout_height="wrap_content"
-         	android:gravity="top|center_horizontal"
+         	android:gravity="center"
          	android:text="@string/GPS" />
      	
      </LinearLayout>
