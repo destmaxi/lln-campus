@@ -141,7 +141,7 @@ public final class ADE {
 				ArrayList<String> courses = new ArrayList<String>();
 				Cursor c = 
 						LLNCampus.getDatabase().select(
-								"Options_courses", new String[]{"course"}, 
+								"Courses", new String[]{"CODE"}, 
 								null, null, null, null, null, null);
 				while (c.moveToNext()) {
 					courses.add(c.getString(0));

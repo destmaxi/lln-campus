@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import be.ac.ucl.lfsab1509.llncampus.ADE;
 import be.ac.ucl.lfsab1509.llncampus.Event;
 import be.ac.ucl.lfsab1509.llncampus.R;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
@@ -81,15 +82,15 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		MenuItem adeUpdate = menu.findItem(R.id.ade_update);
-		adeUpdate.setVisible(true);
+		menu.findItem(R.id.ade_update).setVisible(true);
+		menu.findItem(R.id.course_list_edit).setVisible(true);
 		return true;
 	}
 	
 
 	private void updateViewInfos() {
 		String infos =  "+-------------------------------------+\n"
-					  + "|         COURS POUR LE " 
+					  + "|         COURS POUR LE " 
 					  		+ this.actualDate.format("%d/%m/%Y") 
 					  							   + "         |\n"
 					  + "+-------------------------------------+\n";
@@ -118,6 +119,9 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
 			case R.id.ade_update:
 				ADE.runUpdateADE(this, handler, updateRunnable);
 				break;
+			case R.id.course_list_edit:
+				Intent intent = new Intent(this,CoursListEditActivity.class);
+				startActivity(intent);
 		}
 		return true;
 	}

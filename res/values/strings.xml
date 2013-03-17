@@ -51,4 +51,9 @@
     <!-- Strings utiles pour horaire -->
     <string name="button_ADE">Bouton</string>
     <string name="ade_update">Mettre à jour depuis ADE</string>
+    <string name="identifiantUCL">Identifiant global UCL</string>
+    <string name="password">Mot de passe</string>
+    <string name="course_list_edit">Modifier la liste des cours</string>
+    <string name="update_from_uclouvain">Télécharger depuis UCLouvain</string>
+    <string name="annee_acad">Année académique</string>
 </resources>

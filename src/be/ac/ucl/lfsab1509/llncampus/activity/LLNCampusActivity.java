@@ -30,8 +30,11 @@ public abstract class LLNCampusActivity extends Activity{
 		this.db = LLNCampus.getDatabase();
 		super.onCreate(savedInstanceState);
 		db.open();
+		editActionBar();
+	}
+	
+	protected void editActionBar(){
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-		
 	}
 	
 	@Override
