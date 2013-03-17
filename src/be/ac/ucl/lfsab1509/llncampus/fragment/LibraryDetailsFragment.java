@@ -12,14 +12,14 @@ import android.widget.TextView;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.interfaces.ILibrary;
 
-public class LibraryDetailsFragment extends LLNCampusListFragment {
+public class LibraryDetailsFragment extends LLNCampusFragment {
 
 	private View viewer;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	        Bundle savedInstanceState) {
-	    viewer = inflater.inflate(R.layout.library_details, container, false);   
+	    viewer = inflater.inflate(R.layout.library_details, container, false);  
 	    return viewer;
 	}
 	

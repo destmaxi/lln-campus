@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import be.ac.ucl.lfsab1509.llncampus.Library;
-import be.ac.ucl.lfsab1509.llncampus.interfaces.ILibrary;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.fragment.LibraryDetailsFragment;
 
@@ -17,8 +16,7 @@ import be.ac.ucl.lfsab1509.llncampus.fragment.LibraryDetailsFragment;
  *
  */
 public class DetailsLibrary extends LLNCampusActivity implements OnClickListener {
-	
-	private ILibrary library;
+	private Library library;
 	
 	 @Override
 	    protected void onCreate(Bundle savedInstanceState) {
