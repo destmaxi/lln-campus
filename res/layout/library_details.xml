@@ -13,7 +13,7 @@
         android:gravity="top|center_horizontal"
         android:textColor="@color/White"
         android:textIsSelectable="true"
-        android:textSize="69sp" />
+        android:textSize="40sp" />
 
     <TextView
         android:id="@+id/library_address"

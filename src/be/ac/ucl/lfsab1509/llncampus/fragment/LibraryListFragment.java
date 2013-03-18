@@ -53,6 +53,7 @@ public class LibraryListFragment extends LLNCampusListFragment {
 
 	            //YOUR CHOICE OF COLOR
 	            textView.setTextColor(Color.WHITE);
+	            textView.setTextSize(16);
 
 	            return view;
 	        }
