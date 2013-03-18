@@ -27,9 +27,10 @@ public class AuditoriumDetailsFragment extends LLNCampusFragment {
 		    String name = auditorium.getName();
 		    String address_t = auditorium.getAddress();
 		    TextView text = (TextView) viewer.findViewById(R.id.auditorium_name);
+		    text.setText(name);
 		    
 	        TextView address=(TextView) viewer.findViewById(R.id.auditorium_address);
-	        text.setText(name);
+	        
 	        
 	        ImageView image = (ImageView) viewer.findViewById(R.id.auditorium_picture);
 	        image.setImageResource(auditorium.takePicture());

@@ -22,21 +22,7 @@ public class AuditoriumListFragment extends LLNCampusListFragment {
 	private IAuditorium auditorium;
 	private OnAuditoriumSelectedListener audSelectedListener;
 	
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		
-	    String content = auditoriumsName.get(position);
-	    
-	    if(content !=null) {
-			String nameAuditorium = content;
-			Log.d("NAME", nameAuditorium);
-			String[] cols = {"ID","NAME","LATITUDE", "LONGITUDE", "ADDRESS"};
-			Cursor c = super.db.select("Poi", cols, "NAME = "+ "'"+nameAuditorium+"'", null, null, null, null, null);
-			c.moveToFirst();
-			auditorium = new Auditorium(c.getInt(0), c.getString(1), c.getDouble(2), c.getDouble(3), c.getString(4));
-		}
-	    audSelectedListener.onAuditoriumSelected(auditorium);
-	}
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		
@@ -51,6 +37,12 @@ public class AuditoriumListFragment extends LLNCampusListFragment {
 		}
 		c.close();
 		
+		
+		// Define a new Adapter
+		// First parameter - Context
+		// Second parameter - Layout for the row
+		// Third parameter - ID of the TextView to which the data is written
+		// Forth - the Array of data
 
 		adapter=new ArrayAdapter<String>(
 	            this.getActivity(),android.R.layout.simple_list_item_1, auditoriumsName){
@@ -68,7 +60,17 @@ public class AuditoriumListFragment extends LLNCampusListFragment {
 	            return view;
 	        }
 	    };
-
+	        //SET THE ADAPTER TO LISTVIEW
+		
+		// Assign adapter to ListView
+		//listView.setAdapter(adapter); 
+		//listView.setClickable(true);
+/*		setListAdapter(new ArrayAdapter<String>(
+	            this,R.layout.auditorium ,R.id.list_content, values){
+			
+			
+		});*/
+		
         setListAdapter(adapter);
         setHasOptionsMenu(true);
 	}
@@ -80,10 +82,30 @@ public class AuditoriumListFragment extends LLNCampusListFragment {
             audSelectedListener = (OnAuditoriumSelectedListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement OnTutSelectedListener");
+                    + " must implement OnAuditoriumSelectedListener");
         }
     }
 
+	
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		
+	    String content = auditoriumsName.get(position);
+	    
+	    if(content !=null)
+		{
+			/* TODO passer le int et pas le nom */
+			String nameAuditorium = content;
+			Log.d("NAME", nameAuditorium);
+			String[] cols = {"ID","NAME","LATITUDE", "LONGITUDE", "ADDRESS"};
+			Cursor c = super.db.select("Poi", cols, "NAME = "+ "'"+nameAuditorium+"'", null, null, null, null, null);
+			c.moveToFirst();
+			auditorium = new Auditorium(c.getInt(0), c.getString(1), c.getDouble(2), c.getDouble(3), c.getString(4));
+		}
+	    audSelectedListener.onAuditoriumSelected(auditorium);
+	}
+	
+	
 	public interface OnAuditoriumSelectedListener {
 	    public void onAuditoriumSelected(IAuditorium aud);
 	}
