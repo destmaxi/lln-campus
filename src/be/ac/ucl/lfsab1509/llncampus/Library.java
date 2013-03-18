@@ -14,6 +14,7 @@ public class Library implements ILibrary {
 	private double latitude;
 	private double longitude;
 	private String address;
+	private String schedule;
 	
 	/**
 	 * Constructeur.
@@ -23,6 +24,7 @@ public class Library implements ILibrary {
 		latitude = 0.0;
 		longitude = 0.0;
 		address = null;
+		schedule = null;
 	}
 	
 	/**
@@ -33,12 +35,13 @@ public class Library implements ILibrary {
 	 * @param longitude Longitutude
 	 * @param address
 	 */
-	public Library(int id, String name, double latitude, double longitude, String address){
+	public Library(int id, String name, double latitude, double longitude, String address, String schedule){
 		this.ID = id;
 		this.name = name;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.address = address;
+		this.schedule = schedule;
 	}
 
 	@Override
@@ -103,6 +106,19 @@ public class Library implements ILibrary {
 				return 0;
 		}
 	 }
+
+	@Override
+	public String getSchedule() {
+		return this.schedule;
+	}
+
+	@Override
+	public void setSchedule(String schedule) {
+		this.schedule = schedule;
+	}
+	
+	
+	
 	
 
 }

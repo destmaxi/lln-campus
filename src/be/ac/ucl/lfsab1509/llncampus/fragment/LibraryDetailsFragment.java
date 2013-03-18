@@ -26,12 +26,20 @@ public class LibraryDetailsFragment extends LLNCampusFragment {
 	public void updateLibrary(ILibrary library){
 		    String name = library.getName();
 		    String address_t = library.getAddress();
+		    String schedule = library.getSchedule();
+		    
 		    TextView text = (TextView) viewer.findViewById(R.id.library_name);
 		    
 	        TextView address=(TextView) viewer.findViewById(R.id.library_address);
 	        text.setText(name);
+	        text.setTextSize(35);
 	        ImageView image = (ImageView) viewer.findViewById(R.id.library_picture);
 	        image.setImageResource(library.takePicture());
+	        
+	        TextView scheduleView = (TextView) viewer.findViewById(R.id.library_schedule);
+	        
+	        String stringSchedule = this.getString(R.string.library_schedule);
+	        scheduleView.setText(stringSchedule + "\n" + schedule);
 	        
 	        
 			Log.d("ICI", Locale.getDefault().getDisplayLanguage());

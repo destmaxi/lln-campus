@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 import be.ac.ucl.lfsab1509.llncampus.Library;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.fragment.LibraryDetailsFragment;
@@ -27,9 +26,8 @@ public class DetailsLibrary extends LLNCampusActivity implements OnClickListener
 	        String address = getIntent().getStringExtra("ADDRESS");
 	        double []coord = getIntent().getDoubleArrayExtra("COORD");
 	        int id = getIntent().getIntExtra("ID", 0);
-	        library = new Library (id, name, coord[0], coord[1], address);
-	        ImageView image = (ImageView) findViewById(R.id.library_picture);
-	        image.setImageResource(library.takePicture());
+	        String schedule = getIntent().getStringExtra("SCHEDULE");
+	        library = new Library (id, name, coord[0], coord[1], address, schedule);
 	         
 	        
 	        LibraryDetailsFragment viewer = (LibraryDetailsFragment) getFragmentManager().findFragmentById(R.id.library_details_fragment);

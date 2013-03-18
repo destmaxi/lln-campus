@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 
 /**
  * Class intended for showing some information about an Auditorium
@@ -28,8 +27,6 @@ public class DetailsAuditorium extends LLNCampusActivity implements OnClickListe
 	        double []coord = getIntent().getDoubleArrayExtra("COORD");
 	        int id = getIntent().getIntExtra("ID", 0);
 	        auditorium = new Auditorium (id, name, coord[0], coord[1], address);
-	        ImageView image = (ImageView) findViewById(R.id.auditorium_picture);
-	        image.setImageResource(auditorium.takePicture());
 	        
 	        AuditoriumDetailsFragment viewer = (AuditoriumDetailsFragment) getFragmentManager().findFragmentById(R.id.auditorium_details_fragment);
 	        viewer.updateAuditorium(auditorium);
