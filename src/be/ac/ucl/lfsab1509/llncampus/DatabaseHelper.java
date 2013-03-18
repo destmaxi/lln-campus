@@ -14,19 +14,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * @author Damien
  */
-public class DatabaseHelper extends SQLiteOpenHelper{
-	//Nom du fichier de la db.
+public class DatabaseHelper extends SQLiteOpenHelper {
+	/** Nom du fichier de la db. */
     private static final String DB_NAME = "database.sql";
-    //Nom d'une table requise (pour tester si la db est deja copiee) 
+    /** Nom d'une table requise (pour tester si la db est deja copiee). */ 
     private static final String REQUIRED_TABLE_NAME = "Poi"; 
     private SQLiteDatabase db; 
     private final Context context;
  
     /**
      * Constructor
-     * Takes and keeps a reference of the passed context in order to access to the application assets and resources.
-     * @param context
-     * @param filename 
+     * Takes and keeps a reference of the passed context in order to access to 
+     * the application assets and resources.
+     * @param context Contexte de l'application.
      */
     public DatabaseHelper(final Context context) {
     	super(context, DB_NAME, null, 1);
@@ -35,9 +35,9 @@ public class DatabaseHelper extends SQLiteOpenHelper{
  
     /**
      * Creates a empty database on the system and rewrites it with your own database.
-     * 
+     * @throws IOException If a IOException occur
      */
-    public void createDatabase() throws IOException { 
+    public final void createDatabase() throws IOException { 
     	if (!dbExist()) {
         	db = this.getWritableDatabase(); // Pr creer la db sur l'appareil
    			copyDB(db); // Pour copier le .sql dans la db.
@@ -45,13 +45,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
  
     /**
-     * Check if the database already exist to avoid re-copying the file each time you open the application.
+     * Check if the database already exist to avoid re-copying 
+     * the file each time you open the application.
      * @return true if it exists, false if it doesn't
      */
     private boolean dbExist() {
     	SQLiteDatabase db = null;
     	try {
-    		db = this.getReadableDatabase();//SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.OPEN_READONLY);
+    		db = this.getReadableDatabase();
     	} catch (SQLiteException e) {
     		return false;
     	}
@@ -70,7 +71,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
  
     /**
      * Ouvre le fichier .sql et créer la base de donnée. 
-     * @param db2 
+     * @param db The database.
      * */
     private void copyDB(SQLiteDatabase db) {
     	BufferedReader in;
@@ -80,7 +81,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 			String instruction = "";
 			while ((line = in.readLine()) != null) {
 				instruction += line;
-				if (line.trim().charAt(line.trim().length()-1) == ';') {
+				if (line.trim().charAt(line.trim().length() - 1) == ';') {
 					if (!instruction.isEmpty()) {
 						db.execSQL(instruction);
 					}
@@ -95,12 +96,17 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 		}
     }
  
-    public SQLiteDatabase open() throws SQLException {
-    	return db = this.getWritableDatabase();//SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.OPEN_READONLY);
+    /**
+     * 
+     * @return the SQLiteDatabase
+     * @throws SQLException If a SQL Exception occur
+     */
+    public final SQLiteDatabase open() throws SQLException {
+    	return db = this.getWritableDatabase();
     }
  
     @Override
-	public synchronized void close() {
+	public final synchronized void close() {
     	if (db != null) {
     		db.close();
     	}	
@@ -113,11 +119,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 	}
  
 	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+	public final void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		reset();
 	}
-
-	public void reset() {
+	
+	/**
+	 * Reset the database. 
+	 */
+	public final void reset() {
 		//FIXME : A tester
 		context.deleteDatabase(DB_NAME);
 		try {

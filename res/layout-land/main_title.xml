@@ -40,8 +40,7 @@
         android:src="@drawable/bureau" />
     
     
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   		xmlns:tools="http://schemas.android.com/tools"
+    <TableLayout 
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
     	tools:context=".MainTitle" 
@@ -112,7 +111,7 @@
             <TextView
         		android:id="@+id/text_biblio"
         		android:layout_height="wrap_content"
-        		android:text="@string/bibliotheque"
+        		android:text="@string/bibliotheques"
         		android:textAppearance="?android:attr/textAppearanceLarge"
         		android:textColor="@color/White"
         		android:textSize="20sp"  

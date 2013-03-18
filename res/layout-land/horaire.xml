@@ -12,7 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="left|center_vertical"
-        android:layout_weight="3" />
+        android:layout_weight="3" 
+        android:firstDayOfWeek="2"
+        android:textColor="#FFF"
+        />
 
     <TextView
         android:id="@+id/horaire_txt"

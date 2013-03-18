@@ -11,12 +11,12 @@ import android.content.res.AssetManager;
 import android.os.Environment;
 import android.util.Log;
 
-public class LLNCampus extends Application{
+public class LLNCampus extends Application {
 	private static Context APPLICATION_CONTEXT;
 	private static Database DB;
 
 	@Override
-	public void onCreate() {
+	public final void onCreate() {
 		super.onCreate();
 
 		//initialization for the application context here
@@ -26,15 +26,17 @@ public class LLNCampus extends Application{
 		APPLICATION_CONTEXT = c;
 	}
 	
-	public synchronized void close(){
-		if(DB!=null){
+	public final synchronized void close(){
+		if (DB != null) {
 			DB.close();
 			DB = null;
 		}
 	}
 	
-	
-	private static void openDatabase(){
+	/**
+	 * 
+	 */
+	private static void openDatabase() {
 		Log.d("DEBUG", "Application context = " + APPLICATION_CONTEXT);
 		DB = new Database(APPLICATION_CONTEXT);
 		DB.open();

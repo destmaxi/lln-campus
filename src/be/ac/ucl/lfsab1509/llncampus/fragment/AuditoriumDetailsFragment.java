@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class AuditoriumDetailsFragment extends LLNCampusFragment{
+public class AuditoriumDetailsFragment extends LLNCampusFragment {
 
 	private View viewer;
 	
