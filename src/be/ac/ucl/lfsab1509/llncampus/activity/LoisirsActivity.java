@@ -4,13 +4,9 @@ package be.ac.ucl.lfsab1509.llncampus.activity;
 
 import java.util.ArrayList;
 import be.ac.ucl.lfsab1509.llncampus.R;
-import be.ac.ucl.lfsab1509.llncampus.interfaces.IAuditorium;
-import be.ac.ucl.lfsab1509.llncampus.fragment.AuditoriumDetailsFragment;
 import be.ac.ucl.lfsab1509.llncampus.fragment.LoisirListFragment;
 import be.ac.ucl.lfsab1509.llncampus.fragment.LoisirsDetailsFragment;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -80,7 +76,7 @@ public class LoisirsActivity extends LLNCampusActivity implements LoisirListFrag
 				startActivity(intent);
 			} else {
 				viewer.updateLoisir(current_category);
-				//setListeners();
+				setListeners();
 			}
 		}
 	}

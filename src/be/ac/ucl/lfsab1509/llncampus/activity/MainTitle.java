@@ -69,7 +69,7 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener {
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.button_loisirs:
-			intent = new Intent(this, LoisirsTitle.class);
+			intent = new Intent(this, LoisirsActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.button_horaire:
