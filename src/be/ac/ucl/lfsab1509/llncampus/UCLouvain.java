@@ -26,11 +26,7 @@ public class UCLouvain {
 	private static final String SERVER_URL = "https://www.uclouvain.be";
 	/** Page pour les infos. */
 	private static final String LOGIN_PATH = "/page_login.html";
-	private static final String BEGIN_HTML_NOTES_TABLE = 
-			"<td class=\"composant-titre-inter\">Crédit</td>\n</tr>";
-	private static final String END_HTML_NOTES_TABLE = 
-			"</table>\n<p>\n</p>\n<table align=\"center\" border=\"0\" cellpadding=\"2\" cellspacing=\"2\">";
-	
+
 	private String cookies = null;
 	private boolean connected = false;
 	
@@ -89,7 +85,7 @@ public class UCLouvain {
 		ArrayList<Offre> offres = new ArrayList<Offre>();
 		try {
 			HttpClient client = ExternalAppUtility.getHttpClient();
-			HttpGet request = new HttpGet(SERVER_URL + "/onglet_etudes.html");
+			HttpGet request = new HttpGet(SERVER_URL + "/cmp_formations.html");
 			
 			request.addHeader("Cookie", cookies);
 
@@ -198,25 +194,24 @@ public class UCLouvain {
 			throws ParseException, IOException {
 		HttpClient client = ExternalAppUtility.getHttpClient();
 		HttpGet request = new HttpGet(SERVER_URL 
-					+ "/onglet_etudes.html?cmp=cmp_formations.html&fct=notes&numOffre=" + numOffre 
+					+ "/cmp_formations.html?fct=notes&numOffre=" + numOffre 
 					+ "&anac=" + anac);
 		request.addHeader("Cookie", cookies);
 		HttpResponse response = client.execute(request);
 		String html = EntityUtils.toString(response.getEntity());
 		
+		ArrayList<String> tables = HTMLAnalyser.getBalisesContent(html, "table");
 		
-		int start = html.indexOf(BEGIN_HTML_NOTES_TABLE);
-		if (start == -1) {
-			return null;
-		}
-		int stop = html.indexOf(END_HTML_NOTES_TABLE, start);
-		if (stop == -1) {
+		if (tables.size() < 3) {
+			Log.e("UCLouvain", 
+					"Impossible de trouver la table des points. Liste des tables trouvées : " 
+							+ tables.toString());
 			return null;
 		}
 		
 		ArrayList<Cours> cours = new ArrayList<Cours>();
 		
-		String notesTable = html.substring(start + BEGIN_HTML_NOTES_TABLE.length(), stop);
+		String notesTable = tables.get(2);
 
 		ArrayList<String> lignes = HTMLAnalyser.getBalisesContent(notesTable, "tr");
 
