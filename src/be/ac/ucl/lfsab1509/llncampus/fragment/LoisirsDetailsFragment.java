@@ -19,7 +19,7 @@ public class LoisirsDetailsFragment extends LLNCampusFragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	        Bundle savedInstanceState) {
-	    viewer = inflater.inflate(R.layout.auditorium_details, container, false);   
+	    viewer = inflater.inflate(R.layout.loisirs_details, container, false);   
 	    return viewer;
 	}
 	
