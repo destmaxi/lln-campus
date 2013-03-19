@@ -80,4 +80,7 @@
     <string name="course_list_edit">Modifier la liste des cours</string>
     <string name="update_from_uclouvain">Télécharger depuis UCLouvain</string>
     <string name="annee_acad">Année académique</string>
+    <string name="cours_add">Ajouter un cours</string>
+    <string name="cours_code">Code du cours</string>
+    <string name="cours_name">Nom du cours</string>
 </resources>

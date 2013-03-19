@@ -239,13 +239,12 @@ public class UCLouvain {
 		for (int i = 3; i < lignes.size(); i++) {
 			ArrayList<String> cellules = HTMLAnalyser.getBalisesContent(lignes.get(i), "td");
 			Log.d("UCLouvain", "Cellules : " + cellules);
-			Cours c = new Cours();
-				
-			c.coursCode = HTMLAnalyser.removeHTML(
+			String code = HTMLAnalyser.removeHTML(
 					cellules.get(0)).replaceAll("[^A-Za-z0-9éùàèê ]", "");
-			c.coursName = HTMLAnalyser.removeHTML(
-					cellules.get(1)).replaceAll("[^A-Za-z0-9éùàèê ]", "");
-			if (c.coursCode.length() > 6) {
+			if (code.length() > 6) {
+				String name =  HTMLAnalyser.removeHTML(
+						cellules.get(1)).replaceAll("[^A-Za-z0-9éùàèê ]", "");
+				Cours c = new Cours(code, name);
 				cours.add(c);
 			}
 		}

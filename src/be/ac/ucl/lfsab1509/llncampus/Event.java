@@ -124,11 +124,13 @@ public class Event {
 			detailsTxt += key + " : " + details.get(key) + "\n";
 		}
 		return "Date : " + 
-					begin.format("Le %d/%m/%Y de %H:%M") + 
-					" à " + end.format("%H:%M")+"\n"
+					getTime()+"\n"
 				+ detailsTxt;
 	}
 
+	public final String getTime() {
+		return begin.format("%H:%M") + " - " + end.format("%H:%M");
+	}
 	/**
 	 * Pour l'insertion dans la table Horaire. 
 	 * @return
