@@ -24,28 +24,35 @@
         android:text="@string/library_address"
         android:textColor="@color/White"
         android:textSize="19sp" />
-
-    <ImageView
-        android:id="@+id/library_picture"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="17dp"
-        android:layout_weight="1"
-        android:contentDescription="@string/building_picture_description"
-        android:gravity="top|center_horizontal"
-        android:text="@string/library_address"
-        android:textColor="@color/White"
-        android:textSize="19sp" />
     
-     <TextView
-        android:id="@+id/library_schedule"
-        android:layout_width="fill_parent"
+     <LinearLayout
+        style="android:attr/buttonBarStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:gravity="top|center_horizontal"
-        android:text="@string/library_schedule"
-        android:textColor="@color/White"
-        android:textSize="19sp" />
+        android:layout_gravity="center" >
+
+   		 <ImageView
+        	android:id="@+id/library_picture"
+        	android:layout_width="match_parent"
+        	android:layout_height="match_parent"
+        	android:layout_marginTop="17dp"
+        	android:layout_weight="1"
+        	android:contentDescription="@string/building_picture_description"
+        	android:gravity="top|center_horizontal"
+        	android:text="@string/library_address"
+        	android:textColor="@color/White"
+        	android:textSize="19sp" />
+    
+     	<TextView
+        	android:id="@+id/library_schedule"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_marginTop="17dp"
+        	android:gravity="top|center_horizontal"
+        	android:text="@string/library_schedule"
+        	android:textColor="@color/White"
+        	android:textSize="19sp" />
+     </LinearLayout>
      
      <LinearLayout
         style="android:attr/buttonBarStyle"
