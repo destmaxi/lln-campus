@@ -120,9 +120,14 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
 				ADE.runUpdateADE(this, handler, updateRunnable);
 				break;
 			case R.id.course_list_edit:
-				Intent intent = new Intent(this,CoursListEditActivity.class);
+				Intent intent = new Intent(this, CoursListEditActivity.class);
 				startActivity(intent);
 		}
 		return true;
+	}
+	@Override
+	public void onResume() {
+		updateInfos();
+		super.onResume();
 	}
 }

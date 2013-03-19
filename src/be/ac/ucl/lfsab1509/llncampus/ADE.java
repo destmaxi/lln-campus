@@ -154,14 +154,7 @@ public final class ADE {
 				 * FIXME : Pour tout télécharger, les numéros vont de 0 à 51
 				 * (0 = debut 1e quadri, 51 = fin 2e session d'examen) 
 				 */
-				String weeks = "";
-				Time today = new Time(Time.getCurrentTimezone());
-				today.setToNow();
-				for (int i = 0; i  < 51; i++) {
-					if (!weeks.isEmpty()) { weeks += ','; }
-					weeks += i; 
-				}
-				Log.d("ADE", "Weeks : " + weeks + "\n");
+				String weeks = getWeeks();
 
 				/*
 				 * Recuperation des donnees depuis ADE et mise a jour de la base de donnee
@@ -200,6 +193,14 @@ public final class ADE {
 
 			}
 		}).start();
+	}
+	public static String getWeeks() {
+		String weeks = "";
+		for (int i = 0; i  < 51; i++) {
+			if (!weeks.isEmpty()) { weeks += ','; }
+			weeks += i; 
+		}
+		return weeks;
 	}
 
 }

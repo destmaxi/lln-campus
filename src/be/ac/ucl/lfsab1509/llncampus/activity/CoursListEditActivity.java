@@ -11,7 +11,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+import be.ac.ucl.lfsab1509.llncampus.ADE;
 import be.ac.ucl.lfsab1509.llncampus.Cours;
+import be.ac.ucl.lfsab1509.llncampus.Event;
 import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.Offre;
 import be.ac.ucl.lfsab1509.llncampus.R;
@@ -117,9 +119,9 @@ public class CoursListEditActivity extends LLNCampusActivity implements OnClickL
        			//Suppression des anciens cours
         		progress(70, "Nettoyage de la base de donnée  ");
        			LLNCampus.getDatabase().delete("Courses", "",null);
+       			LLNCampus.getDatabase().delete("Horaire", "",null);
         		
        			// Ajout des nouvelles donnees
-
         		i = 80;
         		for (Cours c : cours) {
             		progress(i, "Ajout des nouveaux cours dans la base de donnée");
@@ -131,9 +133,29 @@ public class CoursListEditActivity extends LLNCampusActivity implements OnClickL
         			i += (int) (20. / cours.size());
         		}
         		
+        		/*String weeks = ADE.getWeeks();
+				
+				ArrayList<Event> events;
+				i = 80;
+				for (Cours c : cours) {
+            		progress(i, "Récupération de l'horaire pour " + c.coursCode + " : " + c.coursName);
+					events = ADE.getInfos(c.coursCode, weeks);
+					if (events == null) {
+						Log.e("CoursListEditActivity", "Le contenu de " + c.coursCode + " n'a pu etre telecharge");
+					} else {
+						// Ajout des nouvelles donnees
+						for (Event e : events) {
+							ContentValues cv = e.toContentValues();
+							cv.put("COURSE", c.coursCode);
+							LLNCampus.getDatabase().insert("Horaire", cv);
+						}
+					}
+					i += (int) (20. / cours.size());
+				}*/
+        		
         		progress(100, "Fin");
         		mProgress.cancel();
-        		notify("Liste des cours correctement téléchargée");
+        		notify("Liste des cours correctement téléchargée.");
             }
         }).start();
 	}
