@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ListView;
+import be.ac.ucl.lfsab1509.llncampus.ExternalAppUtility;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.fragment.LibraryListFragment;
 import be.ac.ucl.lfsab1509.llncampus.fragment.LibraryDetailsFragment;
@@ -85,6 +86,9 @@ public class LibraryActivity extends LLNCampusActivity implements LibraryListFra
 	 private void setListeners() {
 	        View GPSButton = findViewById(R.id.button_library_gps);
 	        GPSButton.setOnClickListener(this);
+	        
+	        View ScheduleButton = findViewById(R.id.button_library_scpecialSchedule);
+	        ScheduleButton.setOnClickListener(this);
 	    }
 	    
 	    // Permet de définir l'action effectuée grâce à l'appui sur un bouton
@@ -98,7 +102,10 @@ public class LibraryActivity extends LLNCampusActivity implements LibraryListFra
 					            "com.google.android.maps.MapsActivity"));          
 				startActivity(intent);
 				//ExternalAppUtility.openBrowser(DetailsLibrary.this, "google.navigation:dirflg=w&q="+library.getLatitude()+","+library.getLongitude());
-				break;		
+				break;	
+			case R.id.button_library_scpecialSchedule:
+				ExternalAppUtility.openBrowser(this, current_library.getScheduleUrl());          
+				break;
 			}
 		}
 
