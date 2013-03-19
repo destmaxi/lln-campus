@@ -38,8 +38,12 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_title);
-        setListeners();
-        LLNCampus.copyAssets();
+        setListeners(); 
+        new Thread(new Runnable() {
+        	public void run(){
+        		LLNCampus.copyAssets();
+        	}
+        }).start();
 		getActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
