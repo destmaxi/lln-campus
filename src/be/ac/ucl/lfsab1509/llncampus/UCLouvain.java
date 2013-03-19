@@ -27,6 +27,11 @@ public class UCLouvain {
 	/** Page pour les infos. */
 	private static final String LOGIN_PATH = "/page_login.html";
 
+	private static final String BEGIN_HTML_NOTES_TABLE = 
+				"<td class=\"composant-titre-inter\">Crédit</td>\n</tr>";
+	private static final String END_HTML_NOTES_TABLE = 
+				"</table>\n<p>\n</p>\n<table align=\"center\" border=\"0\" cellpadding=\"2\" cellspacing=\"2\">";
+	
 	private String cookies = null;
 	private boolean connected = false;
 	
@@ -100,7 +105,7 @@ public class UCLouvain {
 			// On commence a 2 pour passer les 2 lignes d'en-tete.
 			for (int i = 2; i < lignes.size(); i++) {
 				ArrayList<String> cellules = HTMLAnalyser.getBalisesContent(lignes.get(i), "td");
-				Log.d("DEBUG UCLouvain", "Cellules : " + cellules);
+				Log.d("UCLouvain", "Cellules : " + cellules);
 				Offre o = new Offre();
 				String anneeAnac = HTMLAnalyser.removeHTML(cellules.get(0));
 				o.anac = Integer.parseInt(anneeAnac.substring(0, 4));
@@ -125,41 +130,6 @@ public class UCLouvain {
 	}
 	
 	/**
-	 * Retourne la liste des cours pour les offres passées en arguments.
-	 * @param offres Liste des offres pour lesquels il faut récupérer les cours. 
-	 * @return La liste des cours ou null en cas d'erreur. 
-	 */
-	public ArrayList<Cours> getCourses(final ArrayList<Offre> offres) {
-		if (!connected) { return null; }
-
-		ArrayList<Cours> cours = new ArrayList<Cours>();
-		if (offres == null) {
-			return null;
-		}
-		for (Offre o : offres) {
-			cours.addAll(getCourses(o));
-		}
-		return cours;
-	}
-	/**
-	 * Retourne la liste des cours pour une offre passé en argument.
-	 * @param o L'offre a considerer
-	 * @return Une liste de cours ou null en cas d'erreur
-	 * @see getCourses
-	 */
-	public ArrayList<Cours> getCourses(final Offre o) {
-		try {
-			return getCourses(o.anac, o.numOffre);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-	/**
 	 * Fournit la liste des offres de l'annee académique passé en argument. 
 	 * @param anac année académique.
 	 * @return 	La liste des offres pour l'année académique passé en argument
@@ -181,6 +151,43 @@ public class UCLouvain {
 		}
 		return offres;
 	}
+	
+	/**
+	 * Retourne la liste des cours pour une offre passé en argument.
+	 * @param o L'offre a considerer
+	 * @return Une liste de cours ou null en cas d'erreur
+	 * @see getCourses
+	 */
+	public ArrayList<Cours> getCourses(final Offre o) {
+		try {
+			return getCourses(o.anac, o.numOffre);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * Retourne la liste des cours pour les offres passées en arguments.
+	 * @param offres Liste des offres pour lesquels il faut récupérer les cours. 
+	 * @return La liste des cours ou null en cas d'erreur. 
+	 */
+	public ArrayList<Cours> getCourses(final ArrayList<Offre> offres) {
+		if (!connected) { return null; }
+
+		ArrayList<Cours> cours = new ArrayList<Cours>();
+		if (offres == null) {
+			return null;
+		}
+		for (Offre o : offres) {
+			cours.addAll(getCourses(o));
+		}
+		return cours;
+	}
 
 	/**
 	 * Retourne la liste des cours pour un numéro d'offre et une année académique.
@@ -200,7 +207,7 @@ public class UCLouvain {
 		HttpResponse response = client.execute(request);
 		String html = EntityUtils.toString(response.getEntity());
 		
-		ArrayList<String> tables = HTMLAnalyser.getBalisesContent(html, "table");
+		/*ArrayList<String> tables = HTMLAnalyser.getBalisesContent(html, "table");
 		
 		if (tables.size() < 3) {
 			Log.e("UCLouvain", 
@@ -209,9 +216,22 @@ public class UCLouvain {
 			return null;
 		}
 		
-		ArrayList<Cours> cours = new ArrayList<Cours>();
 		
-		String notesTable = tables.get(2);
+		String notesTable = tables.get(tables.size() - 2);*/
+		ArrayList<Cours> cours = new ArrayList<Cours>();
+
+		int start = html.indexOf(BEGIN_HTML_NOTES_TABLE);
+		if (start == -1) {
+			Log.e("UCLouvain","Impossible de trouver le début de la table des notes");
+			return null;
+		}
+		int stop = html.indexOf(END_HTML_NOTES_TABLE, start);
+		if (stop == -1) {
+			Log.e("UCLouvain", "Impossible de trouver la fin de la table des notes");
+			return null;
+		}
+		String notesTable = html.substring(start + BEGIN_HTML_NOTES_TABLE.length(), stop);
+
 
 		ArrayList<String> lignes = HTMLAnalyser.getBalisesContent(notesTable, "tr");
 
@@ -225,10 +245,11 @@ public class UCLouvain {
 					cellules.get(0)).replaceAll("[^A-Za-z0-9éùàèê ]", "");
 			c.coursName = HTMLAnalyser.removeHTML(
 					cellules.get(1)).replaceAll("[^A-Za-z0-9éùàèê ]", "");
-			if (!c.coursCode.isEmpty()) {
+			if (c.coursCode.length() > 6) {
 				cours.add(c);
 			}
 		}
+		Log.d("UCLouvain", "Résultat de getCourses(" + anac + ", " + numOffre + ") : \n" + cours);
 		return cours;
 	}
 }
