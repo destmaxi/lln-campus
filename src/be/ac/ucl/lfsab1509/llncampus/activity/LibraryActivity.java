@@ -68,6 +68,8 @@ public class LibraryActivity extends LLNCampusActivity implements LibraryListFra
 			showContent.putExtra("COORD", coord);
 			showContent.putExtra("ID", library.getID());
 			showContent.putExtra("SCHEDULE", library.getSchedule());
+			showContent.putExtra("SIGLE", library.getSigle());
+			showContent.putExtra("SCHEDULE_URL", library.getScheduleUrl());
 			startActivity(showContent);
 	    } else {
 	        viewer.updateLibrary(library);
