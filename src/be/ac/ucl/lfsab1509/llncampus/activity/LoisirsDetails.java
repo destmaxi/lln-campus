@@ -20,7 +20,7 @@ public class LoisirsDetails extends LLNCampusActivity implements OnClickListener
 	        
 	        String name = getIntent().getStringExtra("NAME");
 	        
-	        LoisirsDetailsFragment viewer = (LoisirsDetailsFragment) getFragmentManager().findFragmentById(R.id.auditorium_details_fragment);
+	        LoisirsDetailsFragment viewer = (LoisirsDetailsFragment) getFragmentManager().findFragmentById(R.id.loisirs_details_fragment);
 	        viewer.updateLoisir(name);
 	        
 			setListeners();
