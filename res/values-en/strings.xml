@@ -33,6 +33,7 @@
     <string name="error_db">Error DB</string>
 
     <!-- Strings utiles pour auditorium_details, subauditorium_details et library_details-->
+    <string name="auditorium_address_selected">Address :</string>
     <string name="auditorium_address">Please select an auditorium from the list</string>
     <string name="subauditorium_address">Please select an subauditorium from the list</string>
     <string name="library_address">Please select a library from the list</string>

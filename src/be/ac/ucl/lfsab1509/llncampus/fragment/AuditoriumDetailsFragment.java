@@ -1,11 +1,7 @@
 package be.ac.ucl.lfsab1509.llncampus.fragment;
-
-import java.util.Locale;
-
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.interfaces.IAuditorium;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,12 +31,6 @@ public class AuditoriumDetailsFragment extends LLNCampusFragment {
 	        ImageView image = (ImageView) viewer.findViewById(R.id.auditorium_picture);
 	        image.setImageResource(auditorium.takePicture());
 	        
-			Log.d("ICI", Locale.getDefault().getDisplayLanguage());
-			if (Locale.getDefault().getDisplayLanguage().compareTo("English") == 0){
-				address.setText("Address: "+ address_t);
-			}else{	
-				address.setText("Adresse: "+ address_t);
-			}	
-		    
+	        address.setText(this.getString(R.string.auditorium_address_selected) +" "+ address_t);
 	}
 }
