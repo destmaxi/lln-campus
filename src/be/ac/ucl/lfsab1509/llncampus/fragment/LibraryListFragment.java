@@ -72,9 +72,15 @@ public class LibraryListFragment extends LLNCampusListFragment {
 			String nameLibrary = content;
 			Log.d("NAME", nameLibrary);
 			String[] cols = {"ID","NAME","LATITUDE", "LONGITUDE", "ADDRESS"};
+			String[] cols2 = {"DAY", "SCHEDULE"};
 			Cursor c = super.db.select("Poi", cols, "NAME = "+ "'"+nameLibrary+"'", null, null, null, null, null);
 			c.moveToFirst();
-			library = new Library(c.getInt(0), c.getString(1), c.getDouble(2), c.getDouble(3), c.getString(4));
+			int id_library=c.getInt(0);
+			Cursor d = super.db.select("Library_Schedule", cols2, "BUILDING_ID = "+ String.valueOf(id_library), null, null, null, null, null);
+			d.moveToFirst();
+			String schedule = d.getString(0) + " : " + d.getString(1) + "\n";
+			while(d.moveToNext()){schedule+= d.getString(0) + " : " + d.getString(1) + "\n";}
+			library = new Library(id_library, c.getString(1), c.getDouble(2), c.getDouble(3), c.getString(4), schedule);
 		}
 	    libSelectedListener.onLibrarySelected(library);
 	}

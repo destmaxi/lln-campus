@@ -67,6 +67,7 @@ public class LibraryActivity extends LLNCampusActivity implements LibraryListFra
 			double[] coord={ library.getLatitude(), library.getLongitude() };
 			showContent.putExtra("COORD", coord);
 			showContent.putExtra("ID", library.getID());
+			showContent.putExtra("SCHEDULE", library.getSchedule());
 			startActivity(showContent);
 	    } else {
 	        viewer.updateLibrary(library);
