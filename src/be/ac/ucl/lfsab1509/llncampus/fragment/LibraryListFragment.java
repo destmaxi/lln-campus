@@ -71,16 +71,28 @@ public class LibraryListFragment extends LLNCampusListFragment {
 	    if(content !=null) {
 			String nameLibrary = content;
 			Log.d("NAME", nameLibrary);
+			
+			/* Chargement du batiments de la bibliothèque */
 			String[] cols = {"ID","NAME","LATITUDE", "LONGITUDE", "ADDRESS"};
-			String[] cols2 = {"DAY", "SCHEDULE"};
 			Cursor c = super.db.select("Poi", cols, "NAME = "+ "'"+nameLibrary+"'", null, null, null, null, null);
 			c.moveToFirst();
 			int id_library=c.getInt(0);
+			
+			/* Chargment des horaires normaux*/
+			String[] cols2 = {"DAY", "SCHEDULE"};
 			Cursor d = super.db.select("Library_Schedule", cols2, "BUILDING_ID = "+ String.valueOf(id_library), null, null, null, null, null);
 			d.moveToFirst();
 			String schedule = d.getString(0) + " : " + d.getString(1) + "\n";
 			while(d.moveToNext()){schedule+= d.getString(0) + " : " + d.getString(1) + "\n";}
-			library = new Library(id_library, c.getString(1), c.getDouble(2), c.getDouble(3), c.getString(4), schedule);
+			
+			/* Charmgemtn des infos sur la bibliothèques */
+			String[] cols3 = {"SIGLE", "URL_SCHEDULE"};
+			Cursor e = super.db.select("Library", cols3, "BUILDING_ID = "+ String.valueOf(id_library), null, null, null, null, null);
+			e.moveToFirst();
+			
+			
+			library = new Library(id_library, c.getString(1), c.getDouble(2), c.getDouble(3), c.getString(4), schedule,
+									e.getString(0), e.getString(1));
 		}
 	    libSelectedListener.onLibrarySelected(library);
 	}

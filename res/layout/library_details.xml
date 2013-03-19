@@ -66,7 +66,8 @@
          	android:layout_width="fill_parent"
          	android:layout_height="fill_parent"
          	android:gravity="top|center"
-         	android:text="@string/library_specialSchedule" />
+         	android:text="@string/library_specialSchedule"
+         	android:padding="20dip"  />
      	
      </LinearLayout>
 </LinearLayout>
