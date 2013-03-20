@@ -172,7 +172,7 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 		final Event e = currentEvents.get(position);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(e.getDetail("Informations")).setMessage(e.toString());
+        builder.setTitle("Informations").setMessage(e.toString());
 	    builder.setPositiveButton(android.R.string.ok, null);
 	    AlertDialog dialog = builder.create();
         dialog.show();	        

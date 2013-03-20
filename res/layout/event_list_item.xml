@@ -1,45 +1,62 @@
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/event_list_item"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:columnCount="2"
     android:orientation="vertical"
-    android:rowCount="3" >
+    android:rowCount="3" 
+    android:paddingTop="10dip"
+                   android:paddingBottom="10dip"
+                    android:paddingRight="5dip"
+                    android:paddingLeft="5dip">
 
     <TextView
         android:id="@+id/cours_time"
+        android:layout_height="wrap_content"
         android:layout_column="0"
+        android:layout_columnSpan="1"
         android:layout_gravity="left|top"
         android:layout_row="0"
-        android:textColor="#FFF"
+        android:layout_rowSpan="1"
         android:textAppearance="?android:attr/textAppearanceMedium"
-      />
+        android:textColor="#FFF"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/cours_code"
+        android:layout_height="wrap_content"
         android:layout_column="1"
+        android:layout_columnSpan="1"
         android:layout_gravity="right|top"
         android:layout_row="0"
-        android:textColor="#FFF"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:layout_rowSpan="1"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#FFF" />
     
     <TextView
         android:id="@+id/cours_room"
+		android:singleLine="false"
+		android:maxLines="3"
+        android:layout_height="wrap_content"
         android:layout_column="0"
+        android:layout_columnSpan="1"
         android:layout_gravity="left|bottom"
         android:layout_row="1"
-        android:textColor="#FFF"
+        android:layout_rowSpan="1"
         android:textAppearance="?android:attr/textAppearanceMedium"
-       />
-
+        android:textColor="#FFF" 
+      />
 
     <TextView
         android:id="@+id/cours_title"
+        android:layout_height="wrap_content"
         android:layout_column="1"
+        android:layout_columnSpan="1"
         android:layout_gravity="right|bottom"
         android:layout_row="1"
-        android:textColor="#FFF"
+        android:layout_rowSpan="1"
+        android:gravity="right"
         android:textAppearance="?android:attr/textAppearanceMedium"
-         />
+        android:textColor="#FFF" />
 
 </GridLayout>
