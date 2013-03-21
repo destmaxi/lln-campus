@@ -1,9 +1,7 @@
 package be.ac.ucl.lfsab1509.llncampus.fragment;
 
 import java.util.ArrayList;
-import be.ac.ucl.lfsab1509.llncampus.Auditorium;
 import be.ac.ucl.lfsab1509.llncampus.SubAuditorium;
-import be.ac.ucl.lfsab1509.llncampus.interfaces.IAuditorium;
 import be.ac.ucl.lfsab1509.llncampus.interfaces.ISubAuditorium;
 import android.app.Activity;
 import android.database.Cursor;
