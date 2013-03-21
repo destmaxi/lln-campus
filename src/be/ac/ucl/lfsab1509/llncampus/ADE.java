@@ -138,15 +138,8 @@ public final class ADE {
 				/*
 				 * Recuperation des codes des cours a charger 
 				 */
-				ArrayList<String> courses = new ArrayList<String>();
-				Cursor c = 
-						LLNCampus.getDatabase().select(
-								"Courses", new String[]{"CODE"}, 
-								null, null, null, null, null, null);
-				while (c.moveToNext()) {
-					courses.add(c.getString(0));
-				}
-				c.close();
+				
+				ArrayList<Cours> courses = Cours.getList();
 				
 				
 				/*
@@ -154,14 +147,7 @@ public final class ADE {
 				 * FIXME : Pour tout télécharger, les numéros vont de 0 à 51
 				 * (0 = debut 1e quadri, 51 = fin 2e session d'examen) 
 				 */
-				String weeks = "";
-				Time today = new Time(Time.getCurrentTimezone());
-				today.setToNow();
-				for (int i = 0; i  < 51; i++) {
-					if (!weeks.isEmpty()) { weeks += ','; }
-					weeks += i; 
-				}
-				Log.d("ADE", "Weeks : " + weeks + "\n");
+				String weeks = getWeeks();
 
 				/*
 				 * Recuperation des donnees depuis ADE et mise a jour de la base de donnee
@@ -169,24 +155,24 @@ public final class ADE {
 				int nbError = 0;
 				ArrayList<Event> events;
 				
-				for (String courseCode : courses) {
-					nb.setContentText("Téléchargement pour " + courseCode + "...");
+				for (Cours course : courses) {
+					nb.setContentText("Téléchargement pour " + course.coursCode + "...");
 					nm.notify(NOTIFY_ID, nb.build());
-					events = ADE.getInfos(courseCode, weeks);
+					events = ADE.getInfos(course.coursCode, weeks);
 					if (events == null) {
-						nb.setContentText("Le contenu de " + courseCode 
+						nb.setContentText("Le contenu de " + course.coursCode 
 								+ " n'a pu etre telecharge");
 						nm.notify(NOTIFY_ID, nb.build());
-						Log.e("ADE", "Le contenu de " + courseCode + " n'a pu etre telecharge");
+						Log.e("ADE", "Le contenu de " + course.coursCode + " n'a pu etre telecharge");
 						nbError++;
 					} else {
 						// Suppression des anciennes donnees
 						LLNCampus.getDatabase().delete("Horaire", "COURSE = ?", 
-								new String[]{courseCode});
+								new String[]{course.coursCode});
 						// Ajout des nouvelles donnees
 						for (Event e : events) {
 							ContentValues cv = e.toContentValues();
-							cv.put("COURSE", courseCode);
+							cv.put("COURSE", course.coursCode);
 							if (LLNCampus.getDatabase().insert("Horaire", cv) < 0) {
 								nbError++;
 							}
@@ -200,6 +186,14 @@ public final class ADE {
 
 			}
 		}).start();
+	}
+	public static String getWeeks() {
+		String weeks = "";
+		for (int i = 0; i  < 51; i++) {
+			if (!weeks.isEmpty()) { weeks += ','; }
+			weeks += i; 
+		}
+		return weeks;
 	}
 
 }

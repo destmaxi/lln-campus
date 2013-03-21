@@ -36,9 +36,10 @@
     <string name="library_address">Sélectionnez une bibliothèque dans la liste</string>
     <string name="GPS">Guidage GPS</string>
     <string name="sub_auditorium">Sous-auditoires</string>
-    <string name="library_schedule">Horaire des ouvertures de la bibliothèque</string>
+    <string name="library_schedule">Horaires de la bibliothèque</string>
     <string name="building_picture_description">Aperçu de l entree du bâtiment</string>
     <string name="access_description">Indique si l endroit est accessible pour les personnes à mobilité réduite</string>
+    <string name="library_specialSchedule">Horaires spéciaux</string>
     
     <!-- Listage des strings utilises dans le XML subauditorium_details -->
     <string name="yes">Oui</string>
@@ -79,4 +80,7 @@
     <string name="course_list_edit">Modifier la liste des cours</string>
     <string name="update_from_uclouvain">Télécharger depuis UCLouvain</string>
     <string name="annee_acad">Année académique</string>
+    <string name="cours_add">Ajouter un cours</string>
+    <string name="cours_code">Code du cours</string>
+    <string name="cours_name">Nom du cours</string>
 </resources>

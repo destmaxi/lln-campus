@@ -7,8 +7,8 @@ package be.ac.ucl.lfsab1509.llncampus.interfaces;
 public interface ILibrary extends IBuilding{
 	
 	/**
-	 * classe qui servira à par exemple les heures d'ouverture des bibliothèques
-	 * ou des infos spécifiques aux bibliothèques
+	 * classe qui servira √† par exemple les heures d'ouverture des biblioth√®ques
+	 * ou des infos sp√©cifiques aux biblioth√®ques
 	 */
 	
 	/**
@@ -19,8 +19,33 @@ public interface ILibrary extends IBuilding{
 	
 	/**
 	 * 
-	 * @param schedule  nouvel horaire à modifier
+	 * @param schedule  nouvel horaire √† modifier
 	 */
 	public void setSchedule(String schedule);
+	
+	/**
+	 * 
+	 * @return le sigle de la biblioth√®que
+	 */
+	public String getSigle();
+	
+	/**
+	 * 
+	 * @param sigle
+	 */
+	public void setSigle (String sigle);
+	
+	/**
+	 * 
+	 * @return l url des horaires sp√©ciaux de la biblioth√®que
+	 */
+	public String getScheduleUrl();
+	
+	/**
+	 * 
+	 * @param scheduleUrl
+	 */
+	public void setScheduleUrl(String scheduleUrl);
+	
 
 }

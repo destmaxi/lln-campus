@@ -2,6 +2,7 @@ package be.ac.ucl.lfsab1509.llncampus;
 
 import java.util.ArrayList;
 
+
 /**
  * Classe permettant d'analyser du code HTML et d'y extraire du code.
  * @author damien
@@ -24,15 +25,15 @@ public class HTMLAnalyser {
 		ArrayList<String> toReturn = new ArrayList<String>();
 		int start, stop, endStart, i, nextStart;
 		if ((start = html.indexOf("<" + balise)) != -1
-				&& (endStart = html.indexOf('>', start)) != -1
-				&& (stop = html.indexOf("</" + balise + ">", endStart)) != -1) {
+			&& (endStart = html.indexOf('>', start)) != -1
+			&& (stop = html.indexOf("</" + balise + ">", endStart)) != -1) {
 			i = endStart;
 			
-			while((nextStart = html.indexOf("<" + balise, i)) < stop && nextStart > 0){ 
-				i = nextStart + 1;
+			/* Pour gérer les balises du même type imbriquée */
+			while ((nextStart = html.indexOf("<" + balise, i)) < stop && nextStart > 0) { 
+				i = nextStart + balise.length() + 2;
 				stop = html.indexOf("</" + balise + ">", stop);
 			}
-			
 			toReturn.add(html.substring(endStart + 1, stop));
 			
 			//Appel recursif jusqu'à ce que la condition du if ne soit plus respectee.. 

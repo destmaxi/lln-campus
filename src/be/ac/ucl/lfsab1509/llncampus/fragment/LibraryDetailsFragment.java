@@ -1,9 +1,6 @@
 package be.ac.ucl.lfsab1509.llncampus.fragment;
 
-import java.util.Locale;
-
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,10 +26,10 @@ public class LibraryDetailsFragment extends LLNCampusFragment {
 		    String schedule = library.getSchedule();
 		    
 		    TextView text = (TextView) viewer.findViewById(R.id.library_name);
+		    text.setText(name + " (" + library.getSigle() + ")");
+	        text.setTextSize(35);
 		    
 	        TextView address=(TextView) viewer.findViewById(R.id.library_address);
-	        text.setText(name);
-	        text.setTextSize(35);
 	        ImageView image = (ImageView) viewer.findViewById(R.id.library_picture);
 	        image.setImageResource(library.takePicture());
 	        
@@ -41,13 +38,7 @@ public class LibraryDetailsFragment extends LLNCampusFragment {
 	        String stringSchedule = this.getString(R.string.library_schedule);
 	        scheduleView.setText(stringSchedule + "\n" + schedule);
 	        
-	        
-			Log.d("ICI", Locale.getDefault().getDisplayLanguage());
-			if (Locale.getDefault().getDisplayLanguage().compareTo("English") == 0){
-				address.setText("Address: "+ address_t);
-			}else{	
-				address.setText("Adresse: "+ address_t);
-			}	
+	        address.setText(this.getString(R.string.auditorium_address_selected) +" "+ address_t);
 		    
 	}
 

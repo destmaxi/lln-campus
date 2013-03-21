@@ -39,9 +39,10 @@
     <string name="library_address">Sélectionnez une bibliothèque dans la liste</string>
     <string name="GPS">Guidage GPS</string>
     <string name="sub_auditorium">Sous-auditoires</string>
-    <string name="library_schedule">Horaire des ouvertures de la bibliothèque</string>
+    <string name="library_schedule">Horaires de la bibliothèque</string>
     <string name="building_picture_description">Aperçu de l entree du bâtiment</string>
     <string name="access_description">Indique si l endroit est accessible pour les personnes à mobilité réduite</string>
+    <string name="library_specialSchedule">Horaires spéciaux</string>
     
     <!--  Strings utiles pour about_activity -->
     <string name="about">À propos de</string>
