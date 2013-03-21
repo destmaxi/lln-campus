@@ -1,6 +1,5 @@
 package be.ac.ucl.lfsab1509.llncampus.fragment;
 import be.ac.ucl.lfsab1509.llncampus.R;
-import be.ac.ucl.lfsab1509.llncampus.interfaces.IAuditorium;
 import be.ac.ucl.lfsab1509.llncampus.interfaces.ISubAuditorium;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -76,8 +75,34 @@ public class SubAuditoriumDetailsFragment extends LLNCampusFragment {
 	        textDia.setText(dia);
 	        
 	        TextView textVideo = (TextView) viewer.findViewById(R.id.video_rep);
-	        // CODE VIDEO
-	        
+	        if (video == null)
+	        	textVideo.setText(getString(R.string.rien));
+	        else {
+	        	if (video.compareTo("VF") == 0)
+	        	{
+	        		textVideo.setText(getString(R.string.video_projecteur));
+	        	}
+	        	
+	        	else if (video.compareTo("VD") == 0)
+	        	{
+	        		textVideo.setText(getString(R.string.video_projecteur_data));
+	        	}
+	        	
+	        	else if (video.compareTo("MD") == 0)
+	        	{
+	        		textVideo.setText(getString(R.string.moniteur_data));
+	        	}
+	        	
+	        	else if (video.compareTo("TV") == 0)
+	        	{
+	        		textVideo.setText(getString(R.string.tele));
+	        	}
+	        	
+	        	else
+	        	{
+	        		textVideo.setText(getString(R.string.rien));
+	        	}
+	        }
 	        TextView textSono = (TextView) viewer.findViewById(R.id.sono_rep);
 	        textSono.setText(sono);
 	        
@@ -86,6 +111,29 @@ public class SubAuditoriumDetailsFragment extends LLNCampusFragment {
 	        
 	        TextView textMobilier = (TextView) viewer.findViewById(R.id.mobilier_rep);
 	        // CODE MOBILIER
+	        if (mobilier == null)
+	        	textMobilier.setText(getString(R.string.rien));
+	        else {
+	        	if (mobilier.compareTo("T") == 0)
+	        	{
+	        		textMobilier.setText(getString(R.string.table));
+	        	}
+	        	
+	        	else if (mobilier.compareTo("Tf") == 0)
+	        	{
+	        		textMobilier.setText(getString(R.string.table_fixe));
+	        	}
+	        	
+	        	else if (mobilier.compareTo("G") == 0)
+	        	{
+	        		textMobilier.setText(getString(R.string.gradin));
+	        	}
+	        	
+	        	else
+	        	{
+	        		textMobilier.setText(getString(R.string.rien));
+	        	}
+	        }
 	        
 	        
 	}

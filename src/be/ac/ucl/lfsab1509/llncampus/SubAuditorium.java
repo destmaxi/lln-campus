@@ -56,6 +56,7 @@ public class SubAuditorium implements ISubAuditorium {
 		setID(id);
 		setName(name);
 		setNbPlaces(nbplaces);
+		setMobilier(mobilier);
 		setCabine(cabine);
 		setEcran(ecran);
 		setSono(sono);
