@@ -19,8 +19,8 @@ import android.widget.ListView;
 public class LoisirsActivity extends LLNCampusActivity implements LoisirListFragment.OnCategorySelectedListener, OnClickListener {
 	ArrayList<String> values = null;
 	private String current_category;
-	
-	
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -31,23 +31,8 @@ public class LoisirsActivity extends LLNCampusActivity implements LoisirListFrag
 	}
 	
 
-    /*
-     * Adding an item click listener to the list
-     */
-
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		/*Intent intent;
-		
-		if (current_category == "Cinema") {
-			intent = new Intent(this, TodoActivity.class);
-			intent.putExtra("NAME", current_category);
-		}
-		else {
-			intent = new Intent(this, TodoActivity.class);
-			intent.putExtra("Name", current_category);
-		}
-		startActivity(intent);*/
-			
+		// effect of the buttons is defined in the fragment and onCategorySelected
     }
 	
 	public void onCategorySelected(String cat){
@@ -90,30 +75,20 @@ public class LoisirsActivity extends LLNCampusActivity implements LoisirListFrag
 	}
 	
 	/*
-	 * Les deux methodes qui suivent ne seront utilisees quand dans le cas ou la tablette serait en
-	 * paysage; gerer ce qu'aurait du faire DetailsAuditorium.
+	 * Methods used when the tablet is in landscape.
 	 */
-	
-	 private void setListeners() {
-		 
-		 if (current_category == "Cinema") {
-				 View webButton = findViewById(R.id.website);
-		        webButton.setOnClickListener(this);
-		 }
-	       /* View GPSButton = findViewById(R.id.button_auditorium_gps);
-	        GPSButton.setOnClickListener(this);
-	        View subButton = findViewById(R.id.button_subauditorium);
-	        subButton.setOnClickListener(this); */
-	    }
-	    
-	    // Permet de définir l'action effectuée grâce à l'appui sur un bouton
-		public void onClick(View v) {
-			switch (v.getId()) {
+	private void setListeners() {
+		if (current_category == "Cinema") {
+			View webButton = findViewById(R.id.website);
+		    webButton.setOnClickListener(this);
+		}
+	}
+
+	public void onClick(View v) {
+		switch (v.getId()) {
 			case R.id.website:
 				ExternalAppUtility.openBrowser(LoisirsActivity.this, "http://www.cinescope.be/fr/louvain-la-neuve/accueil/");
 				break;
-		
-			}
 		}
-	 
+	} 
 }

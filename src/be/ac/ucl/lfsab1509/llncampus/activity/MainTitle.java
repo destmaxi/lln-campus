@@ -19,7 +19,6 @@ import android.widget.Toast;
 /**
  * Class that will be executed when starting the application.
  * Related with the XML main_title.xml
- * @author Quentin
  *
  */
 public class MainTitle extends LLNCampusActivity implements OnClickListener {
@@ -45,7 +44,7 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener {
     }
 
  
-    // Permet d'avoir des boutons "qui font quelque chose" (define the buttons in the xml file)
+    //  buttons defined in the XML file
     private void setListeners() {
         View myVisitsButton = findViewById(R.id.button_loisirs);
         myVisitsButton.setOnClickListener(this);
@@ -65,7 +64,7 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener {
         bureauButton.setOnClickListener(this);
     }
     
-    // Permet de définir l'action effectuée grâce à l'appui sur un bouton
+    // defines the action for each button
 	public void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {
@@ -92,8 +91,7 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener {
 			intent.setData(uri);
 			*/
 			
-			// Ici, on va regarder si il y a un lecteur de PDF; sinon, on lance MapActivity
-			
+			// Uses the tablet's default PDF reader. Starts MapActivity if none is found.
 			try
 			{
 			 Intent intentUrl = new Intent(Intent.ACTION_VIEW);

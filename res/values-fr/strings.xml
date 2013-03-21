@@ -14,8 +14,6 @@
 	<string name="button_text_options">Options</string>
 	<string name="button_text_plan">Plan</string>
 	
-	<string name="hello_world">Hello world!</string>
-	
 	<!-- Strings utiles pour loisirs_title -->
 	<string name="loisirs">Loisirs</string>
 	<string name="todo">Work in progress, please support us in donating :)</string>

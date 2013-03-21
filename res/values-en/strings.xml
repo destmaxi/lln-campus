@@ -13,8 +13,6 @@
     <string name="button_text_loisirs">Leisures</string>
     <string name="button_text_options">Settings</string>
     <string name="button_text_plan">Map</string>
-    
-    <string name="hello_world">Hello world!</string>
 	
 	<!-- Strings utiles pour loisirs_title -->
 	<string name="loisirs">Leisures</string>
@@ -46,7 +44,7 @@
     
     <!--  Strings utiles pour about_activity -->
 	<string name="about">About</string>
-    <string name="about_text">This application was made by Benjamin Baugnies, Quentin De Coninck, Pham Anh Tuan Le and Damien Mercier for the course LFSAB1509 given at the Université Catholique de Louvain-la-Neuve. This application is distributed under the GPL3 license. Version 0.2.1. Each donation is welcomed =D</string>
+    <string name="about_text">This application was developed by Benjamin Baugnies, Quentin De Coninck, Pham Anh Tuan Le and Damien Mercier for the course LFSAB1509 given at the Université Catholique de Louvain-la-Neuve. This application is distributed under the GPL3 license. Version 0.2.1. Each donation is welcomed =D</string>
 
 	<!--  Strings utiles pour MapActivity -->
     <string name="map">Map</string>

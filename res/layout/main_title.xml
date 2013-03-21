@@ -16,7 +16,8 @@
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="5dp"
-        android:src="@drawable/icampuslogo3" />
+        android:src="@drawable/icampuslogo3"
+   	 	android:contentDescription="@string/icampus" />
 
     <ImageView
         android:id="@+id/moodle"
@@ -25,7 +26,8 @@
         android:layout_alignBaseline="@+id/icampus"
         android:layout_alignBottom="@+id/icampus"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/logo_moodle_ucl" />
+        android:src="@drawable/logo_moodle_ucl"
+   	 	android:contentDescription="@string/moodle"  />
 
     <ImageView
         android:id="@+id/bureau"
@@ -35,7 +37,8 @@
         android:layout_alignBottom="@+id/moodle"
         android:layout_alignParentRight="true"
         android:layout_marginRight="5dp"
-        android:src="@drawable/bureau" />
+        android:src="@drawable/bureau"
+   	 	android:contentDescription="@string/bureau"  />
     
     
     <TableLayout 
@@ -68,19 +71,17 @@
    	 		<ImageView
    	 		    android:id="@+id/button_horaire"
    	 		    android:layout_height="100dp"
-   	 	    	android:contentDescription="@string/horaire"
    	 		    android:src="@drawable/horaire" 
    	 		    android:layout_gravity="center_horizontal"
-   	 	    />
+   	 	    	android:contentDescription="@string/horaire" />
    	 	
-
     		<ImageView
         		android:id="@+id/button_library"
         		android:layout_height="100dp"
         		android:src="@drawable/library" 
    	 	    	android:layout_gravity="center_horizontal"
    	 	    	android:layout_column="2"
-   	 	    />
+   	 	    	android:contentDescription="@string/bibliotheques" />
     	</TableRow>
     	
         <TableRow>
@@ -115,6 +116,7 @@
         		android:layout_marginTop="0dp"
         		android:src="@drawable/auditoire"  
    	 		    android:layout_gravity="center_horizontal"
+   	 	    	android:contentDescription="@string/auditoires"
    	 	    />
 
     		<ImageView
@@ -122,7 +124,8 @@
     		    android:layout_height="100dp"
     		    android:layout_marginTop="0dp"
     		    android:src="@drawable/loisir"
-   	 		    android:layout_column="2" />
+   	 		    android:layout_column="2"
+   	 	    	android:contentDescription="@string/button_text_loisirs"/>
     	</TableRow>
     	
   		<TableRow>
@@ -157,7 +160,8 @@
     	    	android:layout_height="115dp"
     	    	android:layout_marginTop="0dp"
     	    	android:src="@drawable/plan"
-   	 	    	android:layout_column="1" />
+   	 	    	android:layout_column="1"
+   	 	    	android:contentDescription="@string/button_text_plan" />
     	
   		</TableRow>
   		

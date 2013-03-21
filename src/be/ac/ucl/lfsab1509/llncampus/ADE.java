@@ -12,11 +12,9 @@ import be.ac.ucl.lfsab1509.llncampus.activity.HoraireActivity;
 import android.app.NotificationManager;
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
-import android.text.format.Time;
 import android.util.Log;
 
 /**
