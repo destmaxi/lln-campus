@@ -103,6 +103,7 @@ public class AuditoriumActivity extends LLNCampusActivity implements AuditoriumL
 				break;
 			case R.id.button_subauditorium:
 				intent = new Intent(this, SubAuditoriumActivity.class);
+				intent.putExtra("IDPARENT", current_auditorium.getID());
 				startActivity(intent);
 				break;
 			}

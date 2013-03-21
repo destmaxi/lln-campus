@@ -47,10 +47,14 @@ public class SubAuditoriumDetailsFragment extends LLNCampusFragment {
 		    String cabine = ouiNon(subauditorium.hasCabine());
 		    String mobilier = subauditorium.getMobilier(); // A RETRAVAILLER
 		    
+	    	ImageView imageAccess = (ImageView) viewer.findViewById(R.id.access_picture);
 		    if (access)
 		    {
-		    	ImageView imageAccess = (ImageView) viewer.findViewById(R.id.access_picture);
 		    	imageAccess.setVisibility(View.VISIBLE);
+		    }
+		    else
+		    {
+		    	imageAccess.setVisibility(View.INVISIBLE);
 		    }
 		    
 		    TextView textName = (TextView) viewer.findViewById(R.id.subauditorium_name);
