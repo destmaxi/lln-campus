@@ -29,6 +29,10 @@
             android:label="@string/loisirs">
         </activity> 
         <activity 
+            android:name="be.ac.ucl.lfsab1509.llncampus.activity.Cinema"
+            android:label="@string/loisirs">
+        </activity> 
+        <activity 
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.HoraireActivity"
             android:label="@string/horaire">
         </activity> 

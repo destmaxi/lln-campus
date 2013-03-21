@@ -1,5 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:name="be.ac.ucl.lfsab1509.llncampus.fragment.LoisirsDetails"
+    android:name="be.ac.ucl.lfsab1509.llncampus.fragment.cinema"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/Blue"
@@ -8,12 +8,21 @@
     android:padding="20dip" >
 
     <TextView
-        android:id="@+id/loisir_name"
+        android:id="@+id/name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="top|center_horizontal"
         android:textColor="@color/White"
         android:textIsSelectable="true"
         android:textSize="69sp" />
+    
+    <TextView
+        android:id="@+id/website"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/White"
+        android:textIsSelectable="true"
+        android:textSize="30sp" />
 
 </LinearLayout>

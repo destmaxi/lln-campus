@@ -3,7 +3,10 @@ package be.ac.ucl.lfsab1509.llncampus.activity;
 
 
 import java.util.ArrayList;
+
+import be.ac.ucl.lfsab1509.llncampus.ExternalAppUtility;
 import be.ac.ucl.lfsab1509.llncampus.R;
+import be.ac.ucl.lfsab1509.llncampus.fragment.CinemaFragment;
 import be.ac.ucl.lfsab1509.llncampus.fragment.LoisirListFragment;
 import be.ac.ucl.lfsab1509.llncampus.fragment.LoisirsDetailsFragment;
 import android.content.Intent;
@@ -13,12 +16,6 @@ import android.view.View.OnClickListener;
 import android.widget.ListView;
 
 
-/**
- * This class is intended to create a list of auditoriums in order to make a clickable list for the user.
- * @author Quentin & Anh Tuan
- * @version 19/02/2013
- *
- */
 public class LoisirsActivity extends LLNCampusActivity implements LoisirListFragment.OnCategorySelectedListener, OnClickListener {
 	ArrayList<String> values = null;
 	private String current_category;
@@ -39,7 +36,7 @@ public class LoisirsActivity extends LLNCampusActivity implements LoisirListFrag
      */
 
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		Intent intent;
+		/*Intent intent;
 		
 		if (current_category == "Cinema") {
 			intent = new Intent(this, TodoActivity.class);
@@ -49,7 +46,7 @@ public class LoisirsActivity extends LLNCampusActivity implements LoisirListFrag
 			intent = new Intent(this, TodoActivity.class);
 			intent.putExtra("Name", current_category);
 		}
-		startActivity(intent);
+		startActivity(intent);*/
 			
     }
 	
@@ -66,6 +63,17 @@ public class LoisirsActivity extends LLNCampusActivity implements LoisirListFrag
 			intent = new Intent(this, TodoActivity.class);
 			intent.putExtra("NAME", current_category);
 			startActivity(intent);
+		}
+		else if (current_category == "Cinema") {
+			CinemaFragment viewer = (CinemaFragment) getFragmentManager().findFragmentById(R.id.cinema_fragment);
+			if (viewer == null || !viewer.isInLayout()) {
+				intent = new Intent(getApplicationContext(), Cinema.class);
+				intent.putExtra("NAME", current_category);
+				startActivity(intent);
+			} else {
+				viewer.update();
+				setListeners();
+			}
 		}
 		else {
 			LoisirsDetailsFragment viewer = (LoisirsDetailsFragment) getFragmentManager()
@@ -87,6 +95,11 @@ public class LoisirsActivity extends LLNCampusActivity implements LoisirListFrag
 	 */
 	
 	 private void setListeners() {
+		 
+		 if (current_category == "Cinema") {
+				 View webButton = findViewById(R.id.website);
+		        webButton.setOnClickListener(this);
+		 }
 	       /* View GPSButton = findViewById(R.id.button_auditorium_gps);
 	        GPSButton.setOnClickListener(this);
 	        View subButton = findViewById(R.id.button_subauditorium);
@@ -95,21 +108,12 @@ public class LoisirsActivity extends LLNCampusActivity implements LoisirListFrag
 	    
 	    // Permet de définir l'action effectuée grâce à l'appui sur un bouton
 		public void onClick(View v) {
-			/*Intent intent;
 			switch (v.getId()) {
-			case R.id.button_auditorium_gps:
-				intent = new Intent(android.content.Intent.ACTION_VIEW, 
-							Uri.parse("http://maps.google.com/maps?daddr="+current_auditorium.getLatitude()+","+current_auditorium.getLongitude()+ "&dirflg=w"));
-			    intent.setComponent(new ComponentName("com.google.android.apps.maps", 
-					            "com.google.android.maps.MapsActivity"));          
-				startActivity(intent);
-				//ExternalAppUtility.openBrowser(DetailsAuditorium.this, "google.navigation:dirflg=w&q="+auditorium.getLatitude()+","+auditorium.getLongitude());
+			case R.id.website:
+				ExternalAppUtility.openBrowser(LoisirsActivity.this, "http://www.cinescope.be/fr/louvain-la-neuve/accueil/");
 				break;
-			case R.id.button_subauditorium:
-				intent = new Intent(this, SubAuditoriumActivity.class);
-				startActivity(intent);
-				break;			
-			} */
+		
+			}
 		}
 	 
 }

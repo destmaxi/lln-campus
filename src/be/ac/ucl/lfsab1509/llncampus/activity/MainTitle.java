@@ -6,14 +6,11 @@ import java.io.File;
 import be.ac.ucl.lfsab1509.llncampus.ExternalAppUtility;
 import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.R;
-import be.ac.ucl.lfsab1509.llncampus.UCLouvain;
-
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
