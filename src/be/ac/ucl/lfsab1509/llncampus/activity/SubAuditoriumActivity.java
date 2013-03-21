@@ -9,11 +9,9 @@ import android.widget.ListView;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.fragment.AuditoriumDetailsFragment;
 import be.ac.ucl.lfsab1509.llncampus.interfaces.IAuditorium;
-import be.ac.ucl.lfsab1509.llncampus.interfaces.ISubAuditorium;
 
 public class SubAuditoriumActivity extends LLNCampusActivity {
 	ArrayList<String> values = null;
-	private ISubAuditorium current_subauditorium;
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
