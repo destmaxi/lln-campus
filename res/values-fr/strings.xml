@@ -52,4 +52,5 @@
     <!-- Strings utiles pour horaire -->
     <string name="button_ADE">Bouton</string>
     <string name="ade_update">Mettre à jour depuis ADE</string>
+    <string name="site">Site web</string>
 </resources>

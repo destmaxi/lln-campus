@@ -4,16 +4,15 @@ package be.ac.ucl.lfsab1509.llncampus.activity;
 
 import java.util.ArrayList;
 
-import be.ac.ucl.lfsab1509.llncampus.ExternalAppUtility;
-import be.ac.ucl.lfsab1509.llncampus.R;
-import be.ac.ucl.lfsab1509.llncampus.fragment.CinemaFragment;
-import be.ac.ucl.lfsab1509.llncampus.fragment.LoisirListFragment;
-import be.ac.ucl.lfsab1509.llncampus.fragment.LoisirsDetailsFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ListView;
+import be.ac.ucl.lfsab1509.llncampus.ExternalAppUtility;
+import be.ac.ucl.lfsab1509.llncampus.R;
+import be.ac.ucl.lfsab1509.llncampus.fragment.LoisirListFragment;
+import be.ac.ucl.lfsab1509.llncampus.fragment.LoisirsDetailsFragment;
 
 
 public class LoisirsActivity extends LLNCampusActivity implements LoisirListFragment.OnCategorySelectedListener, OnClickListener {
@@ -49,7 +48,7 @@ public class LoisirsActivity extends LLNCampusActivity implements LoisirListFrag
 			intent.putExtra("NAME", current_category);
 			startActivity(intent);
 		}
-		else if (current_category == "Cinema") {
+		/*else if (current_category == "Cinema") {
 			CinemaFragment viewer = (CinemaFragment) getFragmentManager().findFragmentById(R.id.cinema_fragment);
 			if (viewer == null || !viewer.isInLayout()) {
 				intent = new Intent(getApplicationContext(), Cinema.class);
@@ -59,7 +58,7 @@ public class LoisirsActivity extends LLNCampusActivity implements LoisirListFrag
 				viewer.update();
 				setListeners();
 			}
-		}
+		} */
 		else {
 			LoisirsDetailsFragment viewer = (LoisirsDetailsFragment) getFragmentManager()
 					.findFragmentById(R.id.loisirs_details_fragment);
@@ -85,9 +84,10 @@ public class LoisirsActivity extends LLNCampusActivity implements LoisirListFrag
 	}
 
 	public void onClick(View v) {
+		final String URL = "http://www.cinescope.be/fr/louvain-la-neuve/accueil/";
 		switch (v.getId()) {
 			case R.id.website:
-				ExternalAppUtility.openBrowser(LoisirsActivity.this, "http://www.cinescope.be/fr/louvain-la-neuve/accueil/");
+				ExternalAppUtility.openBrowser(LoisirsActivity.this, URL);
 				break;
 		}
 	} 
