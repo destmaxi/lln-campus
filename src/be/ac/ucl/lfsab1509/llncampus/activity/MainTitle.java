@@ -6,7 +6,6 @@ import java.io.File;
 import be.ac.ucl.lfsab1509.llncampus.ExternalAppUtility;
 import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.R;
-
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,7 +19,6 @@ import android.widget.Toast;
 /**
  * Class that will be executed when starting the application.
  * Related with the XML main_title.xml
- * @author Quentin
  *
  */
 public class MainTitle extends LLNCampusActivity implements OnClickListener {
@@ -36,13 +34,17 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_title);
-        setListeners();
-        LLNCampus.copyAssets();
+        setListeners(); 
+        new Thread(new Runnable() {
+        	public void run(){
+        		LLNCampus.copyAssets();
+        	}
+        }).start();
 		getActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
  
-    // Permet d'avoir des boutons "qui font quelque chose" (define the buttons in the xml file)
+    //  buttons defined in the XML file
     private void setListeners() {
         View myVisitsButton = findViewById(R.id.button_loisirs);
         myVisitsButton.setOnClickListener(this);
@@ -62,12 +64,12 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener {
         bureauButton.setOnClickListener(this);
     }
     
-    // Permet de définir l'action effectuée grâce à l'appui sur un bouton
+    // defines the action for each button
 	public void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.button_loisirs:
-			intent = new Intent(this, LoisirsTitle.class);
+			intent = new Intent(this, LoisirsActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.button_horaire:
@@ -79,7 +81,7 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener {
 			startActivity(intent);
 			break;
 		case R.id.button_library:
-			intent = new Intent(this, LoisirsTitle.class);
+			intent = new Intent(this, LibraryActivity.class);
 			startActivity(intent);
 			break;	
 		case R.id.button_plan:
@@ -89,14 +91,13 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener {
 			intent.setData(uri);
 			*/
 			
-			// Ici, on va regarder si il y a un lecteur de PDF; sinon, on lance MapActivity
-			
+			// Uses the tablet's default PDF reader. Starts MapActivity if none is found.
 			try
 			{
 			 Intent intentUrl = new Intent(Intent.ACTION_VIEW);
 			 
 			 
-			 Uri url = Uri.fromFile(new File("/" + Environment.getExternalStorageDirectory().getPath() + "/" +MAP_NAME));
+			 Uri url = Uri.fromFile(new File("/" + Environment.getExternalStorageDirectory().getPath() + "/" + LLNCampus.LLNREPOSITORY + "/" +MAP_NAME));
 			 intentUrl.setDataAndType(url, "application/pdf");
 			 intentUrl.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			 startActivity(intentUrl);

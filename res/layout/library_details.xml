@@ -1,0 +1,71 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/Blue"
+    android:gravity="top"
+    android:orientation="vertical"
+    android:padding="20dip" >
+
+    <TextView
+        android:id="@+id/library_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|center_horizontal"
+        android:textColor="@color/White"
+        android:textIsSelectable="true"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/library_address"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:gravity="top|center_horizontal"
+        android:text="@string/library_address"
+        android:textColor="@color/White"
+        android:textSize="19sp" />
+
+    <ImageView
+        android:id="@+id/library_picture"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="17dp"
+        android:layout_weight="1"
+        android:contentDescription="@string/building_picture_description"
+        android:gravity="top|center_horizontal"
+        android:text="@string/library_address"
+        android:textColor="@color/White"
+        android:textSize="19sp" />
+    
+     <TextView
+        android:id="@+id/library_schedule"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:gravity="top|center_horizontal"
+        android:text="@string/library_schedule"
+        android:textColor="@color/White"
+        android:textSize="19sp" />
+     
+     <LinearLayout
+        style="android:attr/buttonBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" >
+
+     	<Button
+        	android:id="@+id/button_library_gps"
+         	android:layout_width="fill_parent"
+         	android:layout_height="fill_parent"
+         	android:gravity="center"
+         	android:text="@string/GPS"/>
+         	     	
+     	<Button
+        	android:id="@+id/button_library_scpecialSchedule"
+         	android:layout_width="fill_parent"
+         	android:layout_height="fill_parent"
+         	android:gravity="center"
+         	android:text="@string/library_specialSchedule"/>
+     	
+     </LinearLayout>
+</LinearLayout>

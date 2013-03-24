@@ -1,5 +1,6 @@
 package be.ac.ucl.lfsab1509.llncampus;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,12 +12,13 @@ import android.content.res.AssetManager;
 import android.os.Environment;
 import android.util.Log;
 
-public class LLNCampus extends Application{
+public class LLNCampus extends Application {
 	private static Context APPLICATION_CONTEXT;
 	private static Database DB;
+	public static String LLNREPOSITORY = "LLNCampus";
 
 	@Override
-	public void onCreate() {
+	public final void onCreate() {
 		super.onCreate();
 
 		//initialization for the application context here
@@ -26,15 +28,17 @@ public class LLNCampus extends Application{
 		APPLICATION_CONTEXT = c;
 	}
 	
-	public synchronized void close(){
-		if(DB!=null){
+	public final synchronized void close(){
+		if (DB != null) {
 			DB.close();
 			DB = null;
 		}
 	}
 	
-	
-	private static void openDatabase(){
+	/**
+	 * 
+	 */
+	private static void openDatabase() {
 		Log.d("DEBUG", "Application context = " + APPLICATION_CONTEXT);
 		DB = new Database(APPLICATION_CONTEXT);
 		DB.open();
@@ -49,6 +53,9 @@ public class LLNCampus extends Application{
 		return APPLICATION_CONTEXT;
 	}
 	
+	/**
+	 * Cree et copie les assets dans le dossier sdcard/LLNCampus
+	 */
 	public static void copyAssets() {
 	    AssetManager assetManager = getContext().getAssets();
 	    String[] files = null;
@@ -57,13 +64,17 @@ public class LLNCampus extends Application{
 	    } catch (IOException e) {
 	        Log.e("tag", "Failed to get asset file list.", e);
 	    }
+	    File f = new File("/" + Environment.getExternalStorageDirectory().getPath() + "/" + LLNREPOSITORY);
+	    if (!f.exists()) {
+	      f.mkdir();
+	    }
 	    for(String filename : files) {
 	    	Log.d("FILE", filename);
 	        InputStream in = null;
 	        OutputStream out = null;
 	        try {
 	          in = assetManager.open(filename);
-	          out = new FileOutputStream("/" + Environment.getExternalStorageDirectory().getPath() + "/" + filename);
+	          out = new FileOutputStream("/" + Environment.getExternalStorageDirectory().getPath() + "/" + LLNREPOSITORY + "/" + filename);
 	          copyFile(in, out);
 	          in.close();
 	          in = null;

@@ -9,14 +9,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 
 /**
  * Class intended for showing some information about an Auditorium
- * @author Anh Tuan
  *
  */
-public class DetailsAuditorium extends LLNCampusActivity implements OnClickListener{
+public class DetailsAuditorium extends LLNCampusActivity implements OnClickListener {
 	private Auditorium auditorium;
 	
 	 @Override
@@ -29,8 +27,6 @@ public class DetailsAuditorium extends LLNCampusActivity implements OnClickListe
 	        double []coord = getIntent().getDoubleArrayExtra("COORD");
 	        int id = getIntent().getIntExtra("ID", 0);
 	        auditorium = new Auditorium (id, name, coord[0], coord[1], address);
-	        ImageView image = (ImageView) findViewById(R.id.auditorium_picture);
-	        image.setImageResource(auditorium.takePicture());
 	        
 	        AuditoriumDetailsFragment viewer = (AuditoriumDetailsFragment) getFragmentManager().findFragmentById(R.id.auditorium_details_fragment);
 	        viewer.updateAuditorium(auditorium);
@@ -46,7 +42,7 @@ public class DetailsAuditorium extends LLNCampusActivity implements OnClickListe
 	        subButton.setOnClickListener(this);
 	    }
 	    
-	    // Permet de définir l'action effectuée grâce à l'appui sur un bouton
+	    // Permet de dÃ©finir l'action effectuÃ©e grÃ¢ce Ã  l'appui sur un bouton
 		public void onClick(View v) {
 			Intent intent;
 			switch (v.getId()) {
@@ -60,6 +56,7 @@ public class DetailsAuditorium extends LLNCampusActivity implements OnClickListe
 				break;
 			case R.id.button_subauditorium:
 				intent = new Intent(this, SubAuditoriumActivity.class);
+				intent.putExtra("IDPARENT", auditorium.getID());
 				startActivity(intent);
 				break;			
 			}

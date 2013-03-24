@@ -2,7 +2,8 @@
 <resources>
     <color name="Blue">#2A4588</color>
     <color name="Blue_Old">#21177D</color>
-    <color name="White">#FFFFFF</color>
+    <color name="White">#FFF</color>
     <color name="Black">#000</color>
+    <color name="Blue_light">#3E599C</color>
 
 </resources>

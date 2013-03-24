@@ -31,7 +31,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="17dp"
         android:layout_weight="1"
-        android:contentDescription="@string/auditorium_picture_description"
+        android:contentDescription="@string/building_picture_description"
         android:gravity="top|center_horizontal"
         android:text="@string/auditorium_address"
         android:textColor="@color/White"
@@ -56,6 +56,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/auditorium_GPS" />
+            android:text="@string/GPS" />
     </LinearLayout>
 </LinearLayout>

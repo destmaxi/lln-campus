@@ -16,29 +16,13 @@ import android.widget.TextView;
 
 public class AuditoriumListFragment extends LLNCampusListFragment {
 	
-	ArrayList<String> values = null;
+	ArrayList<String> auditoriumsName = null;
 	final String NAME = "NAME";
 	private ArrayAdapter<String> adapter;
 	private IAuditorium auditorium;
 	private OnAuditoriumSelectedListener audSelectedListener;
 	
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		
-	    String content = values.get(position);
-	    
-	    if(content !=null)
-		{
-			/* TODO passer le int et pas le nom */
-			String nameAuditorium = content;
-			Log.d("NAME", nameAuditorium);
-			String[] cols = {"ID","NAME","LATITUDE", "LONGITUDE", "ADDRESS"};
-			Cursor c = super.db.select("Poi", cols, "NAME = "+ "'"+nameAuditorium+"'", null, null, null, null, null);
-			c.moveToFirst();
-			auditorium = new Auditorium(c.getInt(0), c.getString(1), c.getDouble(2), c.getDouble(3), c.getString(4));
-		}
-	    audSelectedListener.onAuditoriumSelected(auditorium);
-	}
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		
@@ -47,31 +31,21 @@ public class AuditoriumListFragment extends LLNCampusListFragment {
 		String[] cols = {"NAME"};
 		Cursor c = db.select("Poi", cols,"TYPE = 'auditoire'",null, null, null, "NAME ASC", null);
 		
-		this.values = new ArrayList<String>();
+		this.auditoriumsName = new ArrayList<String>();
 		while(c.moveToNext()){
-			values.add(c.getString(0));
+			auditoriumsName.add(c.getString(0));
 		}
 		c.close();
 		
 		
-		
-		//ListView listView = (ListView) findViewById(android.R.id.list);
-		
-
 		// Define a new Adapter
 		// First parameter - Context
 		// Second parameter - Layout for the row
 		// Third parameter - ID of the TextView to which the data is written
 		// Forth - the Array of data
-		
-
-		
-		
-        
-        
 
 		adapter=new ArrayAdapter<String>(
-	            this.getActivity(),android.R.layout.simple_list_item_1, values){
+	            this.getActivity(),android.R.layout.simple_list_item_1, auditoriumsName){
 
 	        @Override
 	        public View getView(int position, View convertView,
@@ -87,7 +61,6 @@ public class AuditoriumListFragment extends LLNCampusListFragment {
 	        }
 	    };
 	        //SET THE ADAPTER TO LISTVIEW
-	        setListAdapter(adapter);
 		
 		// Assign adapter to ListView
 		//listView.setAdapter(adapter); 
@@ -98,7 +71,6 @@ public class AuditoriumListFragment extends LLNCampusListFragment {
 			
 		});*/
 		
-
         setListAdapter(adapter);
         setHasOptionsMenu(true);
 	}
@@ -110,10 +82,30 @@ public class AuditoriumListFragment extends LLNCampusListFragment {
             audSelectedListener = (OnAuditoriumSelectedListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement OnTutSelectedListener");
+                    + " must implement OnAuditoriumSelectedListener");
         }
     }
 
+	
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		
+	    String content = auditoriumsName.get(position);
+	    
+	    if(content !=null)
+		{
+			/* TODO passer le int et pas le nom */
+			String nameAuditorium = content;
+			Log.d("NAME", nameAuditorium);
+			String[] cols = {"ID","NAME","LATITUDE", "LONGITUDE", "ADDRESS"};
+			Cursor c = super.db.select("Poi", cols, "NAME = "+ "'"+nameAuditorium+"'", null, null, null, null, null);
+			c.moveToFirst();
+			auditorium = new Auditorium(c.getInt(0), c.getString(1), c.getDouble(2), c.getDouble(3), c.getString(4));
+		}
+	    audSelectedListener.onAuditoriumSelected(auditorium);
+	}
+	
+	
 	public interface OnAuditoriumSelectedListener {
 	    public void onAuditoriumSelected(IAuditorium aud);
 	}
