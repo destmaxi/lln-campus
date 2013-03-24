@@ -64,6 +64,10 @@
     <string name="moniteur_data">Moniteur data</string>
     <string name="tele">Télévision</string>
     
+    <string name="subauditorium_picture_description">Photo du sous-auditoire</string>
+    
+    <string name="subauditorium_picture_message">Attente de connexion internet...</string>
+    
     
     <!--  Strings utiles pour about_activity -->
     <string name="about">À propos de</string>

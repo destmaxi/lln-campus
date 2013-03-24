@@ -258,6 +258,18 @@
     
     
     </TableLayout>
+    
+    <ImageView
+        android:id="@+id/subauditorium_picture"
+        android:layout_width="match_parent"
+        android:layout_marginTop="3dp"
+        android:layout_height="fill_parent"
+        android:contentDescription="@string/subauditorium_picture_description"
+        android:visibility="visible"
+        android:layout_gravity="right"
+        android:text="@string/subauditorium_picture_message"
+        android:textColor="@color/White"
+        android:textSize="19sp" />
 
   
     

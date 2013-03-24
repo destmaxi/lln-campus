@@ -1,5 +1,6 @@
 package be.ac.ucl.lfsab1509.llncampus;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +15,7 @@ import android.util.Log;
 public class LLNCampus extends Application {
 	private static Context APPLICATION_CONTEXT;
 	private static Database DB;
+	public static String LLNREPOSITORY = "LLNCampus";
 
 	@Override
 	public final void onCreate() {
@@ -51,6 +53,9 @@ public class LLNCampus extends Application {
 		return APPLICATION_CONTEXT;
 	}
 	
+	/**
+	 * Cree et copie les assets dans le dossier sdcard/LLNCampus
+	 */
 	public static void copyAssets() {
 	    AssetManager assetManager = getContext().getAssets();
 	    String[] files = null;
@@ -59,13 +64,17 @@ public class LLNCampus extends Application {
 	    } catch (IOException e) {
 	        Log.e("tag", "Failed to get asset file list.", e);
 	    }
+	    File f = new File("/" + Environment.getExternalStorageDirectory().getPath() + "/" + LLNREPOSITORY);
+	    if (!f.exists()) {
+	      f.mkdir();
+	    }
 	    for(String filename : files) {
 	    	Log.d("FILE", filename);
 	        InputStream in = null;
 	        OutputStream out = null;
 	        try {
 	          in = assetManager.open(filename);
-	          out = new FileOutputStream("/" + Environment.getExternalStorageDirectory().getPath() + "/" + filename);
+	          out = new FileOutputStream("/" + Environment.getExternalStorageDirectory().getPath() + "/" + LLNREPOSITORY + "/" + filename);
 	          copyFile(in, out);
 	          in.close();
 	          in = null;
