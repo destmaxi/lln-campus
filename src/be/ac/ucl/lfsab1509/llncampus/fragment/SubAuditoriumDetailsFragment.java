@@ -159,7 +159,7 @@ public class SubAuditoriumDetailsFragment extends LLNCampusFragment {
 	        
 	        String nameT = subauditorium.getName();
 	        
-	        picture.setImageRessource(R.id.sablier);
+	        picture.setImageResource(R.drawable.sablier);
 	        new PictureUtilityTask().execute(nameT);
 	        
 	}
