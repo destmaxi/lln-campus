@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:name="be.ac.ucl.lfsab1509.llncampus.fragment.LoisirsDetails"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/Blue"
+    android:gravity="top"
+    android:orientation="vertical"
+    android:padding="20dip" >
+
+    <TextView
+        android:id="@+id/loisir_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|center_horizontal"
+        android:textColor="@color/White"
+        android:textIsSelectable="true"
+        android:text="@string/loisirs"
+        android:textSize="69sp" />
+    
+    <Button
+        android:id="@+id/website"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/White"
+        android:textIsSelectable="true"
+        android:text="@string/site"
+        android:textSize="30sp" />
+
+</LinearLayout>
