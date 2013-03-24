@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="be.ac.ucl.lfsab1509.llncampus"
-    android:versionCode="5"
-    android:versionName="0.2.1" >
+    android:versionCode="6"
+    android:versionName="0.3" >
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -70,7 +70,8 @@
         </activity> 
         <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.AboutActivity"
-            android:label="@string/about" >
+            android:label="@string/about" 
+            android:theme="@android:style/Theme.Holo.Dialog">
         </activity>
         <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.MapActivity"
