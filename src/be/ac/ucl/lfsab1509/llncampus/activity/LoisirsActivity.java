@@ -38,28 +38,7 @@ public class LoisirsActivity extends LLNCampusActivity implements LoisirListFrag
 		Intent intent;
 		current_category = cat;
 		
-		if (current_category == "Sports") {
-			intent = new Intent(this, TodoActivity.class);
-			intent.putExtra("NAME", current_category);
-			startActivity(intent);
-		}
-		else if (current_category == "Kaps") {
-			intent = new Intent(this, TodoActivity.class);
-			intent.putExtra("NAME", current_category);
-			startActivity(intent);
-		}
-		/*else if (current_category == "Cinema") {
-			CinemaFragment viewer = (CinemaFragment) getFragmentManager().findFragmentById(R.id.cinema_fragment);
-			if (viewer == null || !viewer.isInLayout()) {
-				intent = new Intent(getApplicationContext(), Cinema.class);
-				intent.putExtra("NAME", current_category);
-				startActivity(intent);
-			} else {
-				viewer.update();
-				setListeners();
-			}
-		} */
-		else {
+		if (current_category == "Cinema") {
 			LoisirsDetailsFragment viewer = (LoisirsDetailsFragment) getFragmentManager()
 					.findFragmentById(R.id.loisirs_details_fragment);
 			if (viewer == null || !viewer.isInLayout()) {
@@ -71,6 +50,13 @@ public class LoisirsActivity extends LLNCampusActivity implements LoisirListFrag
 				setListeners();
 			}
 		}
+		
+		else {
+			intent = new Intent(this, TodoActivity.class);
+			intent.putExtra("NAME", current_category);
+			startActivity(intent);
+		}
+
 	}
 	
 	/*

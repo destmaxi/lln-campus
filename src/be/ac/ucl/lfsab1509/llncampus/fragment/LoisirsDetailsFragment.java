@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class LoisirsDetailsFragment extends LLNCampusFragment{
@@ -22,5 +24,7 @@ public class LoisirsDetailsFragment extends LLNCampusFragment{
 		    String name = category;
 		    TextView text = (TextView) viewer.findViewById(R.id.loisir_name);
 		    text.setText(name);
+		    LinearLayout site = (LinearLayout) viewer.findViewById(R.id.bouttons);
+		    site.setVisibility(View.VISIBLE);
 	}
 }
