@@ -24,7 +24,6 @@
         android:gravity="center_vertical|center_horizontal"
         android:layout_marginTop="30dp"
         android:textColor="@color/White"
-        android:textIsSelectable="true"
         android:text="@string/site"
         android:textSize="30sp" />
 
