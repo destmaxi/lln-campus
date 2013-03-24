@@ -38,7 +38,7 @@ public class LoisirsActivity extends LLNCampusActivity implements LoisirListFrag
 		Intent intent;
 		current_category = cat;
 		
-		if (current_category == "Cinema") {
+		if (current_category.equals("Cinema") || current_category.equals("Sports")) {
 			LoisirsDetailsFragment viewer = (LoisirsDetailsFragment) getFragmentManager()
 					.findFragmentById(R.id.loisirs_details_fragment);
 			if (viewer == null || !viewer.isInLayout()) {
@@ -63,14 +63,16 @@ public class LoisirsActivity extends LLNCampusActivity implements LoisirListFrag
 	 * Methods used when the tablet is in landscape.
 	 */
 	private void setListeners() {
-		if (current_category == "Cinema") {
+		if (current_category.equals("Cinema")  || current_category.equals("Sports")) {
 			View webButton = findViewById(R.id.website);
 		    webButton.setOnClickListener(this);
 		}
 	}
 
 	public void onClick(View v) {
-		final String URL = "http://www.cinescope.be/fr/louvain-la-neuve/accueil/";
+		String URL = null;
+		if (current_category.equals("Cinema")) URL = "http://www.cinescope.be/fr/louvain-la-neuve/accueil/";
+		else if (current_category.equals("Sports")) URL = "http://www.uclouvain.be/77819.html";
 		switch (v.getId()) {
 			case R.id.website:
 				ExternalAppUtility.openBrowser(LoisirsActivity.this, URL);

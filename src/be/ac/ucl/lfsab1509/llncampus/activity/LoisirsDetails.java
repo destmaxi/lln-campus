@@ -13,13 +13,14 @@ import android.view.View.OnClickListener;
  *
  */
 public class LoisirsDetails extends LLNCampusActivity implements OnClickListener{
+
 	
 	 @Override
 	    protected void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.loisirs_details_fragment);
 	        
-	        String name = getIntent().getStringExtra("NAME");
+			String name = getIntent().getStringExtra("NAME");
 	        
 	        LoisirsDetailsFragment viewer = (LoisirsDetailsFragment) getFragmentManager().findFragmentById(R.id.loisirs_details_fragment);
 	        viewer.updateLoisir(name);
@@ -36,7 +37,11 @@ public class LoisirsDetails extends LLNCampusActivity implements OnClickListener
 	    
 	 
 		public void onClick(View v) {
-			final String URL = "http://www.cinescope.be/fr/louvain-la-neuve/accueil/";
+			String URL = "http://google.be";
+			String name = getIntent().getStringExtra("NAME");
+	       	if (name.equals("Cinema")) URL = "http://www.cinescope.be/fr/louvain-la-neuve/accueil/";
+			else if (name.equals("Sports")) URL = "http://www.uclouvain.be/77819.html";
+			
 			switch (v.getId()) {
 				case R.id.website:
 					ExternalAppUtility.openBrowser(LoisirsDetails.this, URL);
