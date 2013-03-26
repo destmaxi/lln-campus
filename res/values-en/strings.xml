@@ -3,6 +3,8 @@
  
     <string name="app_name">LLN Campus</string>
     
+    <string name="main_menu">Main menu</string>
+    
     <!-- Strings utiles a plusieurs endroits -->
     <string name="settings">Settings</string>
     <string name="reset_DB">Reload the DB</string>
