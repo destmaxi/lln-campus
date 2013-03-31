@@ -89,4 +89,5 @@
     <string name="cours_add">Ajouter un cours</string>
     <string name="cours_code">Code du cours</string>
     <string name="cours_name">Nom du cours</string>
+    <string name="cours_list_explanation">"Afin de récupérer votre horaire, vous devez indiquer les différents codes des cours que vous suivez (les codes des cours doivent correspondre avec ceux indiqués sur ADE). Afin de vous facilitez la tâche, l'application peut télécharger la liste des cours depuis uclouvain.be, pour ce faire cliquez sur \"Télécharger depuis UCLouvain\". Pour supprimer un cours de la liste cliquez simplement dessus. "</string>
 </resources>

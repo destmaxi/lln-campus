@@ -11,9 +11,12 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.view.MenuItem;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.Toast;
 
 /**
@@ -29,21 +32,65 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener {
 	public final String BUREAU_UCL_URL="http://www.uclouvain.be/onglet_bureau.html?";
 	public final String MAP_NAME="plan_lln.pdf";
 	
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_title);
+        
         setListeners(); 
+		getActionBar().setDisplayHomeAsUpEnabled(false);
+
         new Thread(new Runnable() {
         	public void run(){
         		LLNCampus.copyAssets();
         	}
         }).start();
-		getActionBar().setDisplayHomeAsUpEnabled(false);
+    }
+    
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+       super.onWindowFocusChanged(hasFocus);
+       //get/set the size here.
+       /** Afin d'avoir une largeur ou une hauteur optimale **/
+      
+       GridLayout gl = (GridLayout) findViewById(R.id.maingridlayout);
+       Button buttontmp;
+
+       //Stretch buttons
+       int idealChildWidth = (int) (gl.getWidth() / gl.getColumnCount());
+       int idealChildHeight = (int) ((gl.getHeight()) / gl.getRowCount());
+       for (int i = 0; i < gl.getChildCount(); i++) {
+    	   buttontmp = (Button) gl.getChildAt(i);
+           buttontmp.setWidth(idealChildWidth);
+           buttontmp.setHeight(idealChildHeight);
+           Drawable[] drawables = buttontmp.getCompoundDrawables();
+           Drawable d;
+           for (int j=0; j < drawables.length; j++) {
+        	   if ((d = drawables[j]) != null) {
+        		   d.setBounds(0, 0, 
+        				   (int) (d.getIntrinsicWidth() * 0.9),  
+        				   (int) (d.getIntrinsicHeight() * 0.9));
+                   ScaleDrawable sd = new ScaleDrawable(d, 0, (float) 1, (float) 1);
+                   switch (j) {
+                   case 0 : 
+                  		buttontmp.setCompoundDrawables(sd.getDrawable(), null, null, null);
+                  		break;
+                   case 1 : 
+                  		buttontmp.setCompoundDrawables(null, sd.getDrawable(), null, null);
+                  		break;
+                   case 2 : 
+                  		buttontmp.setCompoundDrawables(null, null, sd.getDrawable(),  null);
+                  		break;
+                   case 3 : 
+                  		buttontmp.setCompoundDrawables(null, null, null, sd.getDrawable());
+                  		break;
+                  	}
+
+        	   }
+           }
+       }
     }
 
- 
     //  buttons defined in the XML file
     private void setListeners() {
         View myVisitsButton = findViewById(R.id.button_loisirs);
@@ -52,15 +99,17 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener {
         studyButton.setOnClickListener(this);
         View auditButton = findViewById(R.id.button_auditoire);
         auditButton.setOnClickListener(this);
-        View libraryButton = findViewById(R.id.button_library);
+        View libraryButton = findViewById(R.id.button_bibliotheque);
         libraryButton.setOnClickListener(this);
-        View planButton = findViewById(R.id.button_plan);
+        View planButton = findViewById(R.id.button_map);
         planButton.setOnClickListener(this);
-        View iCampusButton = findViewById(R.id.icampus);
+        View aboutButton = findViewById(R.id.button_about);
+        aboutButton.setOnClickListener(this);
+        View iCampusButton = findViewById(R.id.button_icampus);
         iCampusButton.setOnClickListener(this);
-        View moodleButton = findViewById(R.id.moodle);
+        View moodleButton = findViewById(R.id.button_moodle);
         moodleButton.setOnClickListener(this);
-        View bureauButton = findViewById(R.id.bureau);
+        View bureauButton = findViewById(R.id.button_bureau);
         bureauButton.setOnClickListener(this);
     }
     
@@ -80,11 +129,11 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener {
 			intent = new Intent(this, AuditoriumActivity.class);
 			startActivity(intent);
 			break;
-		case R.id.button_library:
+		case R.id.button_bibliotheque:
 			intent = new Intent(this, LibraryActivity.class);
 			startActivity(intent);
 			break;	
-		case R.id.button_plan:
+		case R.id.button_map:
 			/*
 			intent = new Intent(Intent.ACTION_VIEW);
 			Uri uri = Uri.parse("file:///android_asset/plan_2007recto2.png");
@@ -110,23 +159,20 @@ public class MainTitle extends LLNCampusActivity implements OnClickListener {
 			}
 			
 			break;	
-		case R.id.icampus:
+		case R.id.button_about:
+			intent = new Intent(this, AboutActivity.class);
+			startActivity(intent);
+			break;
+		case R.id.button_icampus:
 			ExternalAppUtility.openBrowser(MainTitle.this, ICAMPUS_URL);
 			break;
-		case R.id.moodle:
+		case R.id.button_moodle:
 			ExternalAppUtility.openBrowser(MainTitle.this, MOODLE_URL);
 			break;
-		case R.id.bureau:
+		case R.id.button_bureau:
 			ExternalAppUtility.openBrowser(MainTitle.this, BUREAU_UCL_URL);
 			break;						
 		}
-	}
-	@Override
-	public boolean onOptionsItemSelected(MenuItem menuItem) {
-		if (menuItem.getItemId() == android.R.id.home) {
-			//Nothing to do...
-			return true;
-		}
-		return super.onOptionsItemSelected(menuItem);
+		
 	}
 }

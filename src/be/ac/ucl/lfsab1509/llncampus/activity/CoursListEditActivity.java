@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.format.Time;
@@ -37,6 +38,8 @@ public class CoursListEditActivity extends LLNCampusActivity implements OnClickL
     private CoursListAdapter coursListAdapter;
     private ListView coursListView;
     private ArrayList<Cours> coursList;
+    
+    private boolean onFirstPage = true;
 
 
 	@Override
@@ -45,8 +48,17 @@ public class CoursListEditActivity extends LLNCampusActivity implements OnClickL
 		context = this;
 		loadCoursList();
 	}
+	
+	@Override
+	public final void onPause() {
+		super.onPause();
+		if (!onFirstPage) { 
+			startActivity(new Intent(this, CoursListEditActivity.class));
+		}
+	}
 
 	private void loadCoursList() {
+		onFirstPage = true;
 		setContentView(R.layout.cours_list_edit);
 		findViewById(R.id.cours_download).setOnClickListener(this);
 		findViewById(R.id.cours_add).setOnClickListener(this);
@@ -59,7 +71,7 @@ public class CoursListEditActivity extends LLNCampusActivity implements OnClickL
 	}
 
 	private void startDownloadActivity(){
-
+		onFirstPage = false;
 		setContentView(R.layout.download_from_uclouvain);
 		findViewById(R.id.update_from_internet).setOnClickListener(this);
 		EditText anac = (EditText) findViewById(R.id.anac);
@@ -72,6 +84,7 @@ public class CoursListEditActivity extends LLNCampusActivity implements OnClickL
 	}
 
 	private void startAddCoursActivity() {
+		onFirstPage = false;
 		setContentView(R.layout.cours_add);
 		findViewById(R.id.cours_add_button).setOnClickListener(this);
 	}

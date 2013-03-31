@@ -44,20 +44,17 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
 		setContentView(R.layout.horaire);
 		//txtview = (TextView) this.findViewById(R.id.horaire_txt);
 		     
-        calendarView=(CalendarView) findViewById(R.id.calendar_view);
+        calendarView = (CalendarView) findViewById(R.id.calendar_view);
         calendarView.setOnDateChangeListener(this);
        	this.currentDate = new Time();
        	currentDate.setToNow();
 
        	updateInfos();
 	}
+	
 
-	public void updateInfos(){
+	private void updateInfos() {
 		this.events = new ArrayList<Event>();
-		/*Cursor c = 	db.select(
-						"Horaire", 
-						new String[]{"COURSE", "TIME_BEGIN", "TIME_END", "TRAINEES", "TRAINERS", "ROOM", "ACTIVITY_NAME"}, 
-						null, null, null, null, "TIME_BEGIN ASC", null);*/
 		Cursor c = db.sqlRawQuery(
 				"SELECT " +
 						"h.COURSE, " +
