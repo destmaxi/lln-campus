@@ -21,7 +21,7 @@
             android:label="@string/auditoires">
         </activity> 
         <activity 
-            android:name="be.ac.ucl.lfsab1509.llncampus.activity.LibraryActivity"
+            android:name="be.ac.ucl.lfsab1509.llncampus.activity.BibliothequesActivity"
             android:label="@string/bibliotheques">
         </activity> 
         <activity 

@@ -8,6 +8,8 @@
     <!-- Strings utiles a plusieurs endroits -->
     <string name="settings">Options</string>
     <string name="reset_DB">Recharger la DB</string>
+    <string name="open">Ouvert</string>
+    <string name="close">Fermé</string>
     
     <!-- Strings utiles pour main_title -->
     <string name="menu_settings">Options</string>
