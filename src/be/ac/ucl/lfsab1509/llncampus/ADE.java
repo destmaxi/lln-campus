@@ -9,9 +9,13 @@ import org.apache.http.util.EntityUtils;
 
 import be.ac.ucl.lfsab1509.llncampus.activity.HoraireActivity;
 
+import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.media.RingtoneManager;
 import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
@@ -49,13 +53,13 @@ public final class ADE {
 	 */
 	private static boolean connectADE(final String code, final String weeks) {
 		HttpClient client = ExternalAppUtility.getHttpClient();
-		HttpGet request = new HttpGet(
+		HttpGet request = new HttpGet((
 					SERVER_URL
 					+ "/ade/custom/modules/plannings/direct_planning.jsp?weeks=" + weeks
 					+ "&code=" + code 
 					+ "&login=" + USER
 					+ "&password=" + PASSWORD 
-					+ "&projectId=" + PROJECT_ID + ""
+					+ "&projectId=" + PROJECT_ID + "").replace(' ', '+')
 				);
 		try {
 			client.execute(request);
@@ -124,10 +128,16 @@ public final class ADE {
 			final Runnable updateRunnable) {
 		final NotificationManager nm = 
 				(NotificationManager) ha.getSystemService(Context.NOTIFICATION_SERVICE);
-		final Builder nb = new NotificationCompat.Builder(ha)
-			.setContentTitle("Mise a jour de ADE")
-			.setContentText("Mise a jour en cours")
-			.setSmallIcon(android.R.drawable.stat_notify_sync);		
+
+		final NotificationCompat.Builder nb = new NotificationCompat.Builder(ha)
+	    .setSmallIcon(android.R.drawable.stat_sys_download)
+	    .setContentTitle("Téléchargement de l'horaire depuis ADE")
+	    .setContentText("Téléchargement en cours...")
+	    .setAutoCancel(true);
+		
+		final NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+		inboxStyle.setBigContentTitle("Téléchargement de l'horaire depuis ADE");
+		
 		nm.notify(NOTIFY_ID, nb.build());
 		new Thread(new Runnable() {
 			@Override
@@ -150,19 +160,19 @@ public final class ADE {
 				/*
 				 * Recuperation des donnees depuis ADE et mise a jour de la base de donnee
 				 */
+
 				int nbError = 0;
+				int i = 0;
 				ArrayList<Event> events;
-				
 				for (Cours course : courses) {
+					i++;
+					nb.setProgress(courses.size(), i, false);
 					nb.setContentText("Téléchargement pour " + course.coursCode + "...");
 					nm.notify(NOTIFY_ID, nb.build());
 					events = ADE.getInfos(course.coursCode, weeks);
 					if (events == null) {
-						nb.setContentText("Le contenu de " + course.coursCode 
-								+ " n'a pu etre telecharge");
-						nm.notify(NOTIFY_ID, nb.build());
-						Log.e("ADE", "Le contenu de " + course.coursCode + " n'a pu etre telecharge");
 						nbError++;
+						inboxStyle.addLine(course.coursCode + " : Erreur de téléchargement");
 					} else {
 						// Suppression des anciennes donnees
 						LLNCampus.getDatabase().delete("Horaire", "COURSE = ?", 
@@ -175,9 +185,25 @@ public final class ADE {
 								nbError++;
 							}
 						}
+						inboxStyle.addLine(course.coursCode + " : " + events.size() + " evenements");
+						nb.setStyle(inboxStyle);
 					}
 				}
-				nb.setContentText("Termine. Nombre d'erreurs : " + nbError);
+
+				nb.setProgress(courses.size(), courses.size(), false);
+
+				if (nbError == 0) {
+					nb.setContentText("Téléchargement terminé.");
+					inboxStyle.setBigContentTitle("Téléchargement terminé.");
+					nb.setSmallIcon(android.R.drawable.stat_sys_download_done);
+					nb.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+				} else {
+					nb.setContentText("Téléchargement terminé. Nombre d'erreur : " + nbError + " :/");
+					inboxStyle.setBigContentTitle("Téléchargement terminé. Nombre d'erreur : " + nbError + " :/");
+					nb.setSmallIcon(android.R.drawable.stat_notify_error);
+					nb.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+				}
+				nb.setStyle(inboxStyle);
 				nm.notify(NOTIFY_ID, nb.build());
 				
 				handler.post(updateRunnable);

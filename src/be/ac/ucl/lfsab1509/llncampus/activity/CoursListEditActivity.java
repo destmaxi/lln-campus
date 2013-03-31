@@ -46,7 +46,11 @@ public class CoursListEditActivity extends LLNCampusActivity implements OnClickL
 	protected final void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
-		loadCoursList();
+		if(getIntent().getBooleanExtra("startUCLouvain", false)){
+			startDownloadActivity();
+		} else {
+			loadCoursList();
+		}
 	}
 	
 	@Override

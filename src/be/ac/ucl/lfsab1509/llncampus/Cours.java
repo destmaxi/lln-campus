@@ -8,6 +8,7 @@ import android.database.Cursor;
 public class Cours {
 	public String coursCode;
 	public String coursName;
+	private static boolean listChanged = false;
 	public Cours (String c, String n) {
 		coursCode = c;
 		coursName = n;
@@ -15,6 +16,13 @@ public class Cours {
 	public String toString(){
 		return "Code : " + coursCode
 				+ " - Nom : " + coursName;
+	}
+	
+	public static boolean listChanged() {
+		return listChanged;
+	}
+	public static void setListChangeSeen() {
+		listChanged = false;
 	}
 	
 	public static ArrayList<Cours> getList() {
@@ -29,6 +37,7 @@ public class Cours {
 		return courses;
 	}
 	public static boolean add(String code, String name) {
+		listChanged = true;
 		Database db = LLNCampus.getDatabase();
 		ContentValues values = new ContentValues();
 		values.put("CODE", code);
@@ -39,6 +48,7 @@ public class Cours {
 		return false;
 	}
 	public static boolean remove(Cours cours) {
+		listChanged = true;
 		Database db = LLNCampus.getDatabase();
 		return db.delete("Courses", "CODE = ?", new String[]{cours.coursCode}) > 0;
 	}
