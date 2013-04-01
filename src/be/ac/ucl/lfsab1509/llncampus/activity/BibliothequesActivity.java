@@ -182,5 +182,4 @@ public class BibliothequesActivity extends LLNCampusActivity implements
 			super.onBackPressed();
 		}
 	}
-
 }

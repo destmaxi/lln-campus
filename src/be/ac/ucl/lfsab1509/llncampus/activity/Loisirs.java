@@ -10,7 +10,7 @@ import android.os.Bundle;
  * @author quentin
  *
  */
-public class LoisirsTitle extends LLNCampusActivity {
+public class Loisirs extends LLNCampusActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

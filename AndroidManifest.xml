@@ -28,11 +28,7 @@
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.LoisirsActivity"
             android:label="@string/loisirs">
         </activity> 
-        <activity 
-            android:name="be.ac.ucl.lfsab1509.llncampus.activity.Cinema"
-            android:label="@string/loisirs">
-        </activity> 
-        <activity 
+              <activity 
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.HoraireActivity"
             android:label="@string/horaire">
         </activity> 
@@ -49,25 +45,9 @@
             >
         </activity>
         <activity
-            android:name="be.ac.ucl.lfsab1509.llncampus.activity.LoisirsTitle"
-            android:label="@string/loisirs" >
-        </activity>
-        <activity
-            android:name="be.ac.ucl.lfsab1509.llncampus.activity.StudyTitle"
-            android:label="@string/etudes" >
-        </activity>
-        <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.DetailsAuditorium"
             android:label="@string/auditoires" >
         </activity>
-        <activity 
-            android:name="be.ac.ucl.lfsab1509.llncampus.activity.DetailsLibrary"
-            android:label="@string/bibliotheques">
-        </activity>
-        <activity 
-            android:name="be.ac.ucl.lfsab1509.llncampus.activity.LoisirsDetails"
-            android:label="@string/loisirs">
-        </activity> 
         <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.AboutActivity"
             android:label="@string/about" 
@@ -103,6 +83,8 @@
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.MainActivity"
             android:label="@string/main_menu" >
            
+        </activity>
+        <activity android:name="be.ac.ucl.lfsab1509.llncampus.activity.WebviewActivity">
         </activity>
     </application>
 

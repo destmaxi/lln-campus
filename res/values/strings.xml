@@ -29,6 +29,10 @@
 
     <!-- Strings utiles pour loisirs_title -->
     <string name="loisirs">Loisirs</string>
+    <string name="cinema">Programme du cinéma</string>
+    <string name="sports">Horaire des sports</string>
+    <string name="restaurants">Restaurants</string>
+    <string name="carpestudentem">Agenda de l\'animation</string>
     <string name="todo">Travail en cours, aidez nous via vos dons :)</string>
 
     <!-- Strings utiles pour study_title -->
