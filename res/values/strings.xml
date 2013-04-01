@@ -107,6 +107,13 @@
 	<string name="nb_error">Nombre d\'erreurs</string>
 	<string name="download_from_ADE">Téléchargement de l\'horaire depuis ADE</string>
 	<string name="download_progress">Téléchargement en cours…</string>
+	
+	
 	<string name="site">Site web</string>
+	<string name="nom">Nom</string>
+	<string name="prenom">Prénom</string>
+	<string name="entite">Entité</string>
+	<string name="sigle_ou_acro">(sigle ou acronyme)</string>
+	<string name="repertoire">Répertoire (des profs)</string>
 	
 </resources>

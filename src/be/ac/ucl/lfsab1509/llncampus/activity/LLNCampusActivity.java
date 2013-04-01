@@ -34,7 +34,9 @@ public abstract class LLNCampusActivity extends Activity {
 		editActionBar();
 	}
 	protected void editActionBar() {
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		if( getActionBar() != null) {
+			getActionBar().setDisplayHomeAsUpEnabled(true);
+		}
 	}
 
 	@Override

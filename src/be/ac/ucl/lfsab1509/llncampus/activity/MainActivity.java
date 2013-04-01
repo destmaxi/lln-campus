@@ -103,26 +103,17 @@ public class MainActivity extends LLNCampusActivity implements OnClickListener {
 	 * Définit les listeners sur les boutons.
 	 */
 	private void setListeners() {
-		View myVisitsButton = findViewById(R.id.button_loisirs);
-		myVisitsButton.setOnClickListener(this);
-		View studyButton = findViewById(R.id.button_horaire);
-		studyButton.setOnClickListener(this);
-		View auditButton = findViewById(R.id.button_auditoire);
-		auditButton.setOnClickListener(this);
-		View libraryButton = findViewById(R.id.button_bibliotheque);
-		libraryButton.setOnClickListener(this);
-		View planButton = findViewById(R.id.button_map);
-		planButton.setOnClickListener(this);
-		View aboutButton = findViewById(R.id.button_about);
-		aboutButton.setOnClickListener(this);
-		View iCampusButton = findViewById(R.id.button_icampus);
-		iCampusButton.setOnClickListener(this);
-		View moodleButton = findViewById(R.id.button_moodle);
-		moodleButton.setOnClickListener(this);
-		View bureauButton = findViewById(R.id.button_bureau);
-		bureauButton.setOnClickListener(this);
+		findViewById(R.id.button_loisirs).setOnClickListener(this);
+		findViewById(R.id.button_horaire).setOnClickListener(this);
+		findViewById(R.id.button_auditoire).setOnClickListener(this);
+		findViewById(R.id.button_bibliotheque).setOnClickListener(this);
+		findViewById(R.id.button_map).setOnClickListener(this);
+		findViewById(R.id.button_repertoire).setOnClickListener(this);
+		findViewById(R.id.button_icampus).setOnClickListener(this);
+		findViewById(R.id.button_moodle).setOnClickListener(this);
+		findViewById(R.id.button_bureau).setOnClickListener(this);
 	}
-
+	
 	@Override
 	public final void onClick(View v) {
 		Intent intent;
@@ -166,8 +157,8 @@ public class MainActivity extends LLNCampusActivity implements OnClickListener {
 			}
 
 			break;
-		case R.id.button_about:
-			intent = new Intent(this, AboutActivity.class);
+		case R.id.button_repertoire:
+			intent = new Intent(this, RepertoireActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.button_icampus:

@@ -81,16 +81,15 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
          <Button
-            android:id="@+id/button_about"
+            android:id="@+id/button_repertoire"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:contentDescription="@string/about"
+            android:contentDescription="@string/repertoire"
             android:drawableTop="@drawable/about"
             android:gravity="center_vertical|center_horizontal"
-            android:text="@string/about"
+            android:text="@string/repertoire"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
 
         <Button
             android:id="@+id/button_icampus"
