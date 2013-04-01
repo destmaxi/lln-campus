@@ -40,7 +40,8 @@ public class LoisirsDetails extends LLNCampusActivity implements OnClickListener
 			String URL = "http://google.be";
 			String name = getIntent().getStringExtra("NAME");
 	       	if (name.equals("Cinema")) URL = "http://www.cinescope.be/fr/louvain-la-neuve/accueil/";
-			else if (name.equals("Sports")) URL = "http://www.uclouvain.be/77819.html";
+			else if (name.equals("Sports")) URL = "http://fmserver2.sipr.ucl.ac.be/Ucl_Sport/recordlist.php";
+	       	//"http://www.uclouvain.be/77819.html";
 			
 			switch (v.getId()) {
 				case R.id.website:
