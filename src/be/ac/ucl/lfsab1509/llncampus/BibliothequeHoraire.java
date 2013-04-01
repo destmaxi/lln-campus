@@ -63,8 +63,7 @@ public class BibliothequeHoraire {
 
 		Calendar now = Calendar.getInstance();
 		int actualWeekday = (now.get(Calendar.DAY_OF_WEEK) - 1 + 5) % 6;
-		int actualHourMin = (now.get(Calendar.HOUR) * 60 + now
-				.get(Calendar.MINUTE));
+		int actualHourMin = (now.get(Calendar.HOUR_OF_DAY) * 60 + now.get(Calendar.MINUTE));
 		for (PlageHoraire ph : plagesHoraires) {
 			if (ph.getDay() == actualWeekday
 					&& ph.getBeginTime() <= actualHourMin
