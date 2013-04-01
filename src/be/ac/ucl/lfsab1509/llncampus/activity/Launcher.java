@@ -13,7 +13,7 @@ public class Launcher extends LLNCampusActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
-    	Intent intent = new Intent(this, MainTitle.class);
+    	Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 		finish();

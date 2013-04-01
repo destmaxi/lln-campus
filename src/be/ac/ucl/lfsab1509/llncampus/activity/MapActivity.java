@@ -6,8 +6,8 @@ import android.webkit.WebView;
 
 
 /**
- * Cette classe ne sera appelée que si l'appareil ne possède pas de lecteur PDF
- * Elle consiste simplement à utiliser le GoogleDocs avec le PDF (requiert une connection Internet!)
+ * Cette classe ne sera appelÃ©e que si l'appareil ne possÃ¨de pas de lecteur PDF
+ * Elle consiste simplement Ã  utiliser le GoogleDocs avec le PDF (requiert une connection Internet!)
  * @author Quentin
  *
  */

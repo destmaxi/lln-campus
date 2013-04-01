@@ -15,7 +15,7 @@ public class LoisirsTitle extends LLNCampusActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.loisirs_title);
+        setContentView(R.layout.loisirs);
     }
     
 }

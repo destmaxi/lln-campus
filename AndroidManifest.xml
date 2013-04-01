@@ -100,7 +100,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="be.ac.ucl.lfsab1509.llncampus.activity.MainTitle"
+            android:name="be.ac.ucl.lfsab1509.llncampus.activity.MainActivity"
             android:label="@string/main_menu" >
            
         </activity>

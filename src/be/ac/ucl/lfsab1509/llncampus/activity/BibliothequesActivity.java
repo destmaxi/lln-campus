@@ -23,6 +23,9 @@ import be.ac.ucl.lfsab1509.llncampus.ExternalAppUtility;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.activity.adapter.BibliothequesListAdapter;
 
+/**
+ * Activité pour l'affichage de la liste et des détails pour les bibliothèques.
+ */
 public class BibliothequesActivity extends LLNCampusActivity implements
 		OnItemClickListener, OnClickListener {
 	private GridView bibliothequesListView;
@@ -32,7 +35,7 @@ public class BibliothequesActivity extends LLNCampusActivity implements
 	private int currentBibliothequePos = -1;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected final void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.bibliotheques);
 		if (bibliothequesList == null) {
@@ -51,13 +54,13 @@ public class BibliothequesActivity extends LLNCampusActivity implements
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle savedInstanceState) {
+	public final void onSaveInstanceState(Bundle savedInstanceState) {
 		super.onSaveInstanceState(savedInstanceState);
 		savedInstanceState.putInt("currentBibPos", currentBibliothequePos);
 	}
 
 	@Override
-	public void onRestoreInstanceState(Bundle savedInstanceState) {
+	public final void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
 		if (bibliothequesList == null) {
 			bibliothequesList = Bibliotheque.getBibliothequesList();
@@ -66,21 +69,29 @@ public class BibliothequesActivity extends LLNCampusActivity implements
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+	public final void onItemClick(AdapterView<?> arg0, View arg1, int position,
 			long arg3) {
 		currentBibliothequePos = position;
 		updateDisplay();
-
 	}
 
+	/**
+	 * Met à jour l'affichage.
+	 */
 	private void updateDisplay() {
-		int orientation = this.getResources().getConfiguration().orientation;
-		Log.d("BibActi", "currentBib : " + getCurrentBibliotheque()
-				+ " - Orientation : " + orientation);
-
+		// Vue pour le détails
 		View detailsView = (View) findViewById(R.id.bibliotheque_details);
+
+		// On met la liste des bibliothèque visible par défaut.
 		bibliothequesListView.setVisibility(View.VISIBLE);
+
 		if (getCurrentBibliotheque() != null) {
+			// Si l'utilisateur a choisis une bibliothèque
+
+			// ... on rend la vue de détail visible
+			detailsView.setVisibility(View.VISIBLE);
+
+			// ... et on complète les infos.
 			TextView bibName = (TextView) findViewById(R.id.bibliotheque_details_name);
 			bibName.setText(getCurrentBibliotheque().getName() + " ("
 					+ getCurrentBibliotheque().getSigle() + ")");
@@ -92,19 +103,28 @@ public class BibliothequesActivity extends LLNCampusActivity implements
 			bibHoraire
 					.setText(getCurrentBibliotheque().getHoraire().toString());
 
+			// Orientation de l'écran
+			int orientation = this.getResources().getConfiguration().orientation;
+
+			// On récupère la largeur de l'écran.
 			Display display = getWindowManager().getDefaultDisplay();
 			Point size = new Point();
 			display.getSize(size);
 			int width = size.x;
+
 			if (orientation != Configuration.ORIENTATION_LANDSCAPE) {
+				// Si on est pas en mode paysage, alors on masque la liste et on
+				// affiche les détails sur toute la largeur.
 				bibliothequesListView.setVisibility(View.GONE);
 				detailsView.getLayoutParams().width = width;
 			} else {
+				// Si on est en mode paysage, on affiche la liste sur 35% de
+				// l'écran.
 				bibliothequesListView.getLayoutParams().width = (int) (0.35 * width);
 				detailsView.getLayoutParams().width = (int) (0.65 * width);
 			}
-			detailsView.setVisibility(View.VISIBLE);
 		} else {
+			// Sinon on masque la vue des détails.
 			detailsView.setVisibility(View.GONE);
 		}
 
@@ -113,9 +133,16 @@ public class BibliothequesActivity extends LLNCampusActivity implements
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
+		// Dès que l'affichage est changé (changement d'orientation / lancement
+		// de l'activité) on met à jour l'affichage.
 		updateDisplay();
 	}
 
+	/**
+	 * Fournit la bibliothèque courante.
+	 * 
+	 * @return Bibliothèque courante ou null si on est dans la liste.
+	 */
 	private Bibliotheque getCurrentBibliotheque() {
 		if (currentBibliothequePos == -1) {
 			return null;
@@ -124,23 +151,35 @@ public class BibliothequesActivity extends LLNCampusActivity implements
 	}
 
 	@Override
-	public void onClick(View v) {
+	public final void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.bibliotheque_details_button_navigation:
 			intent = new Intent(android.content.Intent.ACTION_VIEW,
 					Uri.parse("http://maps.google.com/maps?daddr="
 							+ getCurrentBibliotheque().getLatitude() + ","
-							+ getCurrentBibliotheque().getLongitude() + "&dirflg=w"));
+							+ getCurrentBibliotheque().getLongitude()
+							+ "&dirflg=w"));
 			intent.setComponent(new ComponentName(
 					"com.google.android.apps.maps",
 					"com.google.android.maps.MapsActivity"));
 			startActivity(intent);
 			break;
 		case R.id.bibliotheque_details_button_horaire:
-			ExternalAppUtility.openBrowser(this,
-					getCurrentBibliotheque().getScheduleUrl());
+			ExternalAppUtility.openBrowser(this, getCurrentBibliotheque()
+					.getScheduleUrl());
 			break;
+		}
+	}
+
+	@Override
+	public final void onBackPressed() {
+		if (currentBibliothequePos != -1
+				&& this.getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
+			currentBibliothequePos = -1;
+			updateDisplay();
+		} else {
+			super.onBackPressed();
 		}
 	}
 
