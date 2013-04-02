@@ -19,6 +19,22 @@ import android.widget.GridLayout;
 import android.widget.Toast;
 
 /**
+ * LLNCampus. A application for students at the UCL (Belgium).
+    Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
  * Class that will be executed when starting the application. Related with the
  * XML main_title.xml
  * 
@@ -138,6 +154,7 @@ public class MainActivity extends LLNCampusActivity implements OnClickListener {
 
 			// Uses the tablet's default PDF reader. Starts MapActivity if none
 			// is found.
+			
 			try {
 				Intent intentUrl = new Intent(Intent.ACTION_VIEW);
 
@@ -150,11 +167,12 @@ public class MainActivity extends LLNCampusActivity implements OnClickListener {
 			} catch (ActivityNotFoundException e) {
 				Toast.makeText(
 						this,
-						"Pas de lecteur de PDF installe: tentative de connection par le net...",
+						this.getString(R.string.no_pdf_player),
 						Toast.LENGTH_LONG).show();
 				intent = new Intent(this, MapActivity.class);
 				startActivity(intent);
 			}
+			
 
 			break;
 		case R.id.button_repertoire:
