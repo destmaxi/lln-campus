@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SubAuditoriumDetailsFragment extends LLNCampusFragment {
 
@@ -196,13 +197,17 @@ public class SubAuditoriumDetailsFragment extends LLNCampusFragment {
 		}
 		
 		protected void onPostExecute(Bitmap bitmap) {
-			if (bitmap != null)
+			if (bitmap != null) // Si vient d'etre cree
 			{
 				picture.setImageBitmap(bitmap);
 			}
-			else if (nameExist != null)
+			else if (nameExist != null) // Si existait deja
 			{
 				picture.setImageDrawable(Drawable.createFromPath("/" + Environment.getExternalStorageDirectory().getPath() + "/" + LLNCampus.LLNREPOSITORY + "/" + nameExist));
+			}
+			else // Si n'existe pas
+			{
+				new PictureUtilityTask().execute("non_disponible");
 			}
 	    }
 		
