@@ -14,7 +14,7 @@ import android.webkit.WebView;
 public class MapActivity extends LLNCampusActivity {
 	
 		// URL ou est stockee l'image (avec lecteur de PDF integre puisque Google Docs)
-		final String URL = "https://docs.google.com/file/d/0B2KSzm3Kdk4LQmcwRjg3TXdFWDA/edit?usp=sharing";
+		final String URL = "https://docs.google.com/file/d/0B2KSzm3Kdk4LSHZRMWNyTkJnbTA/edit?usp=sharing";
 		
 		@Override
 		protected void onCreate(Bundle savedInstanceState){

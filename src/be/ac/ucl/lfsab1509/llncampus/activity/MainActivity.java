@@ -155,6 +155,8 @@ public class MainActivity extends LLNCampusActivity implements OnClickListener {
 			// Uses the tablet's default PDF reader. Starts MapActivity if none
 			// is found.
 			
+			
+			
 			try {
 				Intent intentUrl = new Intent(Intent.ACTION_VIEW);
 
@@ -172,6 +174,7 @@ public class MainActivity extends LLNCampusActivity implements OnClickListener {
 				intent = new Intent(this, MapActivity.class);
 				startActivity(intent);
 			}
+			
 			
 
 			break;
