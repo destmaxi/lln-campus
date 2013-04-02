@@ -29,7 +29,7 @@ public class AuditoriumActivity extends LLNCampusActivity implements AuditoriumL
 		setContentView(R.layout.auditorium_list_fragment);
 
 		View vue = findViewById(R.id.auditorium_list_fragment);
-		vue.setBackgroundColor(getResources().getColor(R.color.Blue));
+		// vue.setBackgroundColor(getResources().getColor(R.color.Blue));
 	}
 
 
