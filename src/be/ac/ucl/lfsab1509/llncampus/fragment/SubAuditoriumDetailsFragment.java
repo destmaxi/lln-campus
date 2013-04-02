@@ -207,6 +207,10 @@ public class SubAuditoriumDetailsFragment extends LLNCampusFragment {
 			}
 			else // Si n'existe pas
 			{
+				/* Relance la procedure mais avec le nom "non_disponible".
+				 * Soit on a l'image en memoire, et on va la chercher, soit on
+				 * la telecharge tout en la copiant en memoire
+				 */
 				new PictureUtilityTask().execute("non_disponible");
 			}
 	    }
