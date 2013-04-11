@@ -51,7 +51,7 @@ public class AuditoriumListAdapter extends BaseAdapter {
 		IAuditorium aud = list.get(position);
 		name.setText(aud.getName());
 		address.setText(aud.getAddress());
-		picture.setImageResource(aud.takePicture());
+		picture.setImageResource(aud.getImgMini());
 		
 		return convertView;
 	}

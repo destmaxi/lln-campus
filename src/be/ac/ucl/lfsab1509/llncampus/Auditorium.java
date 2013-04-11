@@ -116,4 +116,33 @@ public class Auditorium implements IAuditorium {
 		}
 	 }
 
+	@Override
+	public int getImgMini() {
+		switch (this.ID) {
+		case 3 : return R.drawable.agora_mini;
+		case 7 : return R.drawable.coubertin_mini;
+		case 2 : return R.drawable.croixdusud_mini;
+		case 10 : return R.drawable.cyclotron_mini;
+		case 8 : return R.drawable.descamps_mini;
+		case 9 : return R.drawable.doyens_mini;
+		case 17 : return R.drawable.dupriez_mini;
+		case 18 : return R.drawable.erasme_mini;
+		case 11 : return R.drawable.lavoisier_mini;
+		case 19 : return R.drawable.leclercq_mini;
+		case 13 : return R.drawable.mariecurie_mini;
+		case 12 : return R.drawable.mercator_mini;
+		case 6 : return R.drawable.montesquieu_mini;
+		case 16 : return R.drawable.pierrecurie_mini;
+		case 1 : return R.drawable.saintebarbe_mini;
+		case 15 : return R.drawable.sciences_mini;
+		case 21 : return R.drawable.socrate_mini; 
+		case 37 : return R.drawable.studioagora_mini;
+		case 20 : return R.drawable.thomasmore_mini;
+		case 14 : return R.drawable.vanhelmont_mini; 
+		default :
+			Log.e("Auditorium.java", "Ne trouve pas l'image miniature vers l'auditoire de getImgMini()");
+			return 0;
+	}
+	}
+
 }

@@ -54,7 +54,6 @@ public final class Bibliotheque {
 
 	/**
 	 * Fournit l'ID de la bibliothèque.
-	 * 
 	 * @return ID de la bibliothèque.
 	 */
 	public int getID() {
@@ -63,7 +62,6 @@ public final class Bibliotheque {
 
 	/**
 	 * Fournit le nom de la bibliothèque.
-	 * 
 	 * @return Nom de la bibliothèque
 	 */
 	public String getName() {
@@ -72,7 +70,6 @@ public final class Bibliotheque {
 
 	/**
 	 * Fournit la latitude de la bibliothèque.
-	 * 
 	 * @return Latitude
 	 */
 	public double getLatitude() {
@@ -81,7 +78,6 @@ public final class Bibliotheque {
 
 	/**
 	 * Fournit la longitude de la bibliothèque.
-	 * 
 	 * @return Longitude
 	 */
 	public double getLongitude() {
@@ -90,13 +86,12 @@ public final class Bibliotheque {
 
 	/**
 	 * Fournit l'adresse de la bibliothèque.
-	 * 
 	 * @return Adresse
 	 */
 	public String getAddress() {
 		return address;
 	}
-
+	
 	/**
 	 * Fournit l'image de la bibliothèque.
 	 * 
@@ -111,7 +106,7 @@ public final class Bibliotheque {
 		case 30:
 			return R.drawable.bpsp;
 		case 31:
-			return R.drawable.pasencore;
+			return R.drawable.bflt;
 		case 32:
 			return R.drawable.pasencore;
 		case 33:
@@ -121,10 +116,10 @@ public final class Bibliotheque {
 		case 35:
 			return R.drawable.bspo;
 		case 36:
-			return R.drawable.pasencore;
+			return R.drawable.btec;
 		default:
 			Log.e("Library.java",
-					"Ne trouve pas l'image vers l'auditoire de Takepicture");
+					"Ne trouve pas l'image vers l'auditoire de getImg()");
 			return 0;
 		}
 	}
