@@ -19,7 +19,7 @@ public class SubAuditoriumActivity extends LLNCampusActivity implements SubAudit
 		setContentView(R.layout.subauditorium_list_fragment);
 				 
 		View vue = findViewById(R.id.subauditorium_list_fragment);
-		vue.setBackgroundColor(getResources().getColor(R.color.Blue)); 
+		//vue.setBackgroundColor(getResources().getColor(R.color.Blue)); 
 	}
 	
 

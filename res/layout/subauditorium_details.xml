@@ -1,7 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/Blue"
     android:gravity="top"
     android:orientation="vertical"
     android:padding="20dip" >
@@ -11,11 +10,10 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="top|center_horizontal"
-        android:textColor="@color/White"
         android:textIsSelectable="true"
         android:text="@string/subauditorium_address"
         android:textSize="42sp" />
-    
+        
     <TableLayout
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
@@ -37,8 +35,8 @@
         android:contentDescription="@string/access_description"
         android:visibility="invisible"
         android:layout_gravity="right"
-        android:textColor="@color/White"
         android:textSize="19sp" />
+    
     </TableRow>
     </TableLayout>
     
@@ -58,7 +56,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:textColor="@color/White"
         android:textIsSelectable="true"
         android:text="@string/nbplaces"
         android:textSize="20sp" />
@@ -67,7 +64,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:textColor="@color/White"
         android:textIsSelectable="true"
         android:textSize="20sp" />
     </TableRow>
@@ -87,7 +83,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:textColor="@color/White"
         android:textIsSelectable="true"
         android:text="@string/reseau"
         android:textSize="20sp" />
@@ -96,16 +91,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:textColor="@color/White"
         android:textIsSelectable="true"
         android:textSize="20sp" />
-        
-        
-        
-        
-        
-        
-        
+          
     </TableRow>
     
     <TableRow>
@@ -114,7 +102,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:textColor="@color/White"
         android:textIsSelectable="true"
         android:text="@string/ecran"
         android:textSize="20sp" />
@@ -123,7 +110,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:textColor="@color/White"
         android:textIsSelectable="true"
         android:textSize="20sp" />
       
@@ -135,7 +121,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:textColor="@color/White"
         android:textIsSelectable="true"
         android:text="@string/retro"
         android:textSize="20sp" />
@@ -144,7 +129,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:textColor="@color/White"
         android:textIsSelectable="true"
         android:textSize="20sp" />
       
@@ -157,7 +141,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:textColor="@color/White"
         android:textIsSelectable="true"
         android:text="@string/dia"
         android:textSize="20sp" />
@@ -166,7 +149,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:textColor="@color/White"
         android:textIsSelectable="true"
         android:textSize="20sp" />
       
@@ -178,7 +160,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:textColor="@color/White"
         android:textIsSelectable="true"
         android:text="@string/video"
         android:textSize="20sp" />
@@ -187,7 +168,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:textColor="@color/White"
         android:textIsSelectable="true"
         android:textSize="20sp" />
       
@@ -199,7 +179,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:textColor="@color/White"
         android:textIsSelectable="true"
         android:text="@string/sono"
         android:textSize="20sp" />
@@ -208,8 +187,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:textColor="@color/White"
-        android:textIsSelectable="true"
+                android:textIsSelectable="true"
         android:textSize="20sp" />
       
     </TableRow>
@@ -220,7 +198,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:textColor="@color/White"
         android:textIsSelectable="true"
         android:text="@string/cabine"
         android:textSize="20sp" />
@@ -229,7 +206,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:textColor="@color/White"
         android:textIsSelectable="true"
         android:textSize="20sp" />
       
@@ -241,7 +217,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:textColor="@color/White"
         android:textIsSelectable="true"
         android:text="@string/mobilier"
         android:textSize="20sp" />
@@ -250,7 +225,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:textColor="@color/White"
         android:textIsSelectable="true"
         android:textSize="20sp" />
       
@@ -268,7 +242,6 @@
         android:visibility="visible"
         android:layout_gravity="right"
         android:text="@string/subauditorium_picture_message"
-        android:textColor="@color/White"
         android:textSize="19sp" />
 
   

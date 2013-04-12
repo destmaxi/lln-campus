@@ -58,7 +58,7 @@ public class SubAuditoriumListFragment extends LLNCampusListFragment {
 	            TextView textView=(TextView) view.findViewById(android.R.id.text1);
 
 	            //YOUR CHOICE OF COLOR
-	            textView.setTextColor(Color.WHITE);
+	            textView.setTextColor(Color.BLACK);
 
 	            return view;
 	        }
