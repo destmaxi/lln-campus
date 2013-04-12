@@ -18,7 +18,7 @@
     <string name="dimanche">Dimanche</string>
     
     <!-- Strings utile dans MainActivity -->
-	<string name="no_pdf_player">Pas de lecteur de PDF installe: tentative de connection par le net...</string>
+	<string name="no_pdf_player">Pas de lecteur de PDF installe: tentative de connection par le net#8230</string>
 
     <!-- Strings utiles pour main_title -->
     <string name="menu_settings">Options</string>
@@ -26,7 +26,7 @@
     <string name="button_text_loisirs">Loisirs</string>
     <string name="button_text_options">Options</string>
     <string name="button_text_plan">Plan</string>
-<string name="icampus">iCampus</string>
+	<string name="icampus">iCampus</string>
 	<string name="moodle">Moodle</string>
 	<string name="bureau">Bureau UCL</string>
 
@@ -111,12 +111,10 @@
 	<string name="download_from_ADE">Téléchargement de l\'horaire depuis ADE</string>
 	<string name="download_progress">Téléchargement en cours…</string>
 	
-	
 	<string name="site">Site web</string>
 	<string name="nom">Nom</string>
 	<string name="prenom">Prénom</string>
 	<string name="entite">Entité</string>
 	<string name="sigle_ou_acro">(sigle ou acronyme)</string>
 	<string name="repertoire">Répertoire (des profs)</string>
-	
 </resources>
