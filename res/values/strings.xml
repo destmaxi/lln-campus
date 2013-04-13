@@ -62,7 +62,7 @@
     <!-- Listage des strings utilises dans le XML subauditorium_details -->
     <string name="yes">Oui</string>
     <string name="no">Non</string>
-    <string name="nbplaces">Nombres de places:</string>
+    <string name="nbplaces">Nombre de places:</string>
     <string name="mobilier">Mobilier:</string>
     <string name="cabine">Cabine:</string>
     <string name="ecran">Ecran:</string>
