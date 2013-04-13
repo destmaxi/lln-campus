@@ -1,82 +1,116 @@
 package be.ac.ucl.lfsab1509.llncampus.activity;
 
-
-
-import java.util.ArrayList;
-
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ListView;
-import be.ac.ucl.lfsab1509.llncampus.ExternalAppUtility;
+import android.widget.Button;
+import android.widget.GridLayout;
 import be.ac.ucl.lfsab1509.llncampus.R;
-import be.ac.ucl.lfsab1509.llncampus.fragment.LoisirListFragment;
-import be.ac.ucl.lfsab1509.llncampus.fragment.LoisirsDetailsFragment;
 
+public class LoisirsActivity extends LLNCampusActivity implements
+		OnClickListener {
 
-public class LoisirsActivity extends LLNCampusActivity implements LoisirListFragment.OnCategorySelectedListener, OnClickListener {
-	ArrayList<String> values = null;
-	private String current_category;
-
+	private static final String URL_SPORT = "http://fmserver2.sipr.ucl.ac.be/Ucl_Sport/recordlist.php";
+	private static final String URL_CINE = "http://www.cinescope.be/fr/louvain-la-neuve/accueil/";
+	private static final String URL_CARPESTUDENTEM = "http://www.carpestudentem.org/pub/agenda.php";
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState){
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.loisirs_list_fragment);
-				 
-		View vue = findViewById(R.id.loisirs_list_fragment);
-		vue.setBackgroundColor(getResources().getColor(R.color.Blue)); 
-	}
-	
+		setContentView(R.layout.loisirs);
+		// Resources r = this.getResources();
 
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		// effect of the buttons is defined in the fragment and onCategorySelected
-    }
-	
-	public void onCategorySelected(String cat){
-		Intent intent;
-		current_category = cat;
-		
-		if (current_category.equals("Cinema") || current_category.equals("Sports")) {
-			LoisirsDetailsFragment viewer = (LoisirsDetailsFragment) getFragmentManager()
-					.findFragmentById(R.id.loisirs_details_fragment);
-			if (viewer == null || !viewer.isInLayout()) {
-				intent = new Intent(getApplicationContext(), LoisirsDetails.class);
-				intent.putExtra("NAME", current_category);
-				startActivity(intent);
-			} else {
-				viewer.updateLoisir(current_category);
-				setListeners();
+		setThisOnClickListener(R.id.button_cinema);
+		setThisOnClickListener(R.id.button_carpestudentem);
+		setThisOnClickListener(R.id.button_sports);
+		setThisOnClickListener(R.id.button_restaurants);
+	}
+
+	private void setThisOnClickListener(int btnId) {
+		Button tmp = (Button) findViewById(btnId);
+		tmp.setOnClickListener(this);
+	}
+
+	/**
+	 * Au chargement du layout et au changement d'orientation : Redéfinit les
+	 * dimensions des boutons et des images pour occuper toute la place de
+	 * manière constante.
+	 */
+	@Override
+	public final void onWindowFocusChanged(boolean hasFocus) {
+		super.onWindowFocusChanged(hasFocus);
+		/** Afin d'avoir une largeur ou une hauteur optimale **/
+		GridLayout gl = (GridLayout) findViewById(R.id.loisirs_list);
+		Button buttontmp;
+
+		// Stretch buttons
+		int idealChildWidth = (int) (gl.getWidth() / gl.getColumnCount());
+		int idealChildHeight = (int) ((gl.getHeight()) / gl.getRowCount());
+		for (int i = 0; i < gl.getChildCount(); i++) {
+			buttontmp = (Button) gl.getChildAt(i);
+			buttontmp.setWidth(idealChildWidth);
+			buttontmp.setHeight(idealChildHeight);
+			Drawable[] drawables = buttontmp.getCompoundDrawables();
+			Drawable d;
+			for (int j = 0; j < drawables.length; j++) {
+				if ((d = drawables[j]) != null) {
+					d.setBounds(0, 0, (int) (d.getIntrinsicWidth() * 0.9),
+							(int) (d.getIntrinsicHeight() * 0.9));
+					ScaleDrawable sd = new ScaleDrawable(d, 0, (float) 1,
+							(float) 1);
+					switch (j) {
+					case 0:
+						buttontmp.setCompoundDrawables(sd.getDrawable(), null,
+								null, null);
+						break;
+					case 1:
+						buttontmp.setCompoundDrawables(null, sd.getDrawable(),
+								null, null);
+						break;
+					case 2:
+						buttontmp.setCompoundDrawables(null, null,
+								sd.getDrawable(), null);
+						break;
+					case 3:
+						buttontmp.setCompoundDrawables(null, null, null,
+								sd.getDrawable());
+						break;
+					}
+
+				}
 			}
 		}
-		
-		else {
-			intent = new Intent(this, TodoActivity.class);
-			intent.putExtra("NAME", current_category);
-			startActivity(intent);
-		}
-
-	}
-	
-	/*
-	 * Methods used when the tablet is in landscape.
-	 */
-	private void setListeners() {
-		if (current_category.equals("Cinema")  || current_category.equals("Sports")) {
-			View webButton = findViewById(R.id.website);
-		    webButton.setOnClickListener(this);
-		}
 	}
 
+	@Override
 	public void onClick(View v) {
-		String URL = null;
-		if (current_category.equals("Cinema")) URL = "http://www.cinescope.be/fr/louvain-la-neuve/accueil/";
-		else if (current_category.equals("Sports")) URL = "http://www.uclouvain.be/77819.html";
+		Resources r = getResources();
+		Intent intent = new Intent(this, WebviewActivity.class);
 		switch (v.getId()) {
-			case R.id.website:
-				ExternalAppUtility.openBrowser(LoisirsActivity.this, URL);
-				break;
+		case R.id.button_cinema:
+			intent.putExtra("TITLE", r.getString(R.string.cinema));
+			intent.putExtra("URL", URL_CINE);
+			intent.putExtra(
+					"CSS",
+					"#NewsLetter, #BandTitel, #StaticSocials, #HeaderWrapper, #HeaderLogo, #ContainerFooter, #ContentTeaserAndPubWrapper, #MovieScroller, #ContentTeaserAndPubBg {display:none;} body{background:#FFF;} #fullVisualBg{ background:transparent; padding:0;}");
+			startActivity(intent);
+			break;
+		case R.id.button_sports:
+			intent.putExtra("TITLE", r.getString(R.string.sports));
+			intent.putExtra("URL", URL_SPORT);
+			startActivity(intent);
+			break;
+		case R.id.button_carpestudentem:
+			intent.putExtra("TITLE", r.getString(R.string.carpestudentem));
+			intent.putExtra("URL", URL_CARPESTUDENTEM);
+			startActivity(intent);
+			break;
+		default:
+			notify(r.getString(R.string.todo));
 		}
-	} 
+	}
 }

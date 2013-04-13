@@ -29,8 +29,8 @@ public class CoursListAdapter extends BaseAdapter {
         TextView sub = (TextView) convertView.findViewById(android.R.id.text2);
  
         Cours info = list.get(position);
-        title.setText(info.coursCode);
-        sub.setText(info.coursName);
+        title.setText(info.getCoursCode());
+        sub.setText(info.getCoursName());
         return convertView;
     }
  

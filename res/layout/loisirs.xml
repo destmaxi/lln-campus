@@ -1,0 +1,60 @@
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loisirs_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical|fill_vertical|center_horizontal|fill_horizontal"
+    android:columnCount="2"
+    android:rowCount="2"
+    android:scrollbars="horizontal|vertical"
+    tools:context=".Loisirs" >
+
+    <Button
+        android:id="@+id/button_cinema"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:padding="10dp"
+        android:contentDescription="@string/cinema"
+        android:drawableTop="@drawable/cinema"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/cinema"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/button_sports"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:padding="10dp"
+        android:contentDescription="@string/sports"
+        android:drawableTop="@drawable/sport"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/sports"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/button_carpestudentem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:padding="10dp"
+        android:contentDescription="@string/carpestudentem"
+        android:drawableTop="@drawable/carpestudentem"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/carpestudentem"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/button_restaurants"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:padding="10dp"
+        android:contentDescription="@string/restaurants"
+        android:drawableTop="@drawable/restaurant"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/restaurants"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</GridLayout>

@@ -3,10 +3,12 @@ package be.ac.ucl.lfsab1509.llncampus.activity;
 import java.util.ArrayList;
 
 import be.ac.ucl.lfsab1509.llncampus.ADE;
+import be.ac.ucl.lfsab1509.llncampus.Cours;
 import be.ac.ucl.lfsab1509.llncampus.Event;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.activity.adapter.EventListAdapter;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -22,7 +24,6 @@ import android.widget.ListView;
 import android.widget.CalendarView.OnDateChangeListener;
 
 public class HoraireActivity extends LLNCampusActivity implements OnDateChangeListener, OnItemClickListener {
-	//private TextView txtview;
 	private CalendarView calendarView;
 	
 	//create an handler
@@ -34,6 +35,7 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
 		}
 	};
 
+	private ArrayList<Cours> coursList;
 	private ArrayList<Event> events;
 	private ArrayList<Event> currentEvents;
 	private Time currentDate;
@@ -42,22 +44,50 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.horaire);
-		//txtview = (TextView) this.findViewById(R.id.horaire_txt);
 		     
-        calendarView=(CalendarView) findViewById(R.id.calendar_view);
+        calendarView = (CalendarView) findViewById(R.id.calendar_view);
         calendarView.setOnDateChangeListener(this);
        	this.currentDate = new Time();
        	currentDate.setToNow();
+       	coursList = Cours.getList();
+       	
+       	if (coursList.isEmpty()) {
+       		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(getString(R.string.emptyCoursListDialogTitle)).setMessage(getString(R.string.emptyCoursListDialogText));
+            builder.setNeutralButton(getString(R.string.course_list_edit),
+            		new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							handler.post(new Runnable(){
+								public void run(){
+									startCoursListEditActivity();
+								}
+							});
+						}
+					});
+            builder.setPositiveButton(getString(R.string.update_from_uclouvain),
+            		new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							handler.post(new Runnable(){
+								public void run(){
+									startUpdateFromUCLouvainActivity();
+								}
+							});
+						}
+					});
+            builder.setCancelable(true);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+       	}
 
        	updateInfos();
 	}
+	
 
-	public void updateInfos(){
+	private void updateInfos() {
+		coursList = Cours.getList();
 		this.events = new ArrayList<Event>();
-		/*Cursor c = 	db.select(
-						"Horaire", 
-						new String[]{"COURSE", "TIME_BEGIN", "TIME_END", "TRAINEES", "TRAINERS", "ROOM", "ACTIVITY_NAME"}, 
-						null, null, null, null, "TIME_BEGIN ASC", null);*/
 		Cursor c = db.sqlRawQuery(
 				"SELECT " +
 						"h.COURSE, " +
@@ -74,7 +104,7 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
 					"h.COURSE = c.CODE " +
 				"ORDER BY " +
 					"TIME_BEGIN ASC");
-		while(c.moveToNext()){
+		while (c.moveToNext()) {
 			Event e = new Event(c.getLong(1), c.getLong(2));
 			e.addDetail("course", c.getString(0));			
 			e.addDetail("trainees", c.getString(3));
@@ -125,27 +155,7 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
 		EventListAdapter eventListAdapter = new EventListAdapter(this, currentEvents);
 		eventListView.setAdapter(eventListAdapter);
 		eventListView.setOnItemClickListener(this);
-		/*
-		String infos =  "+-------------------------------------+\n"
-					  + "|         COURS POUR LE " 
-					  		+ this.actualDate.format("%d/%m/%Y") 
-					  							   + "         |\n"
-					  + "+-------------------------------------+\n";
-		for (Event e : this.events) {
-			if (e.getBeginTime().monthDay == this.actualDate.monthDay 
-					&& e.getBeginTime().month == this.actualDate.month
-					&& e.getBeginTime().year == this.actualDate.year) {
-				infos += "Cours : "+e.getDetail("course") + "\n"
-						+ "Heure : " 
-							+ "De " + e.getBeginTime().format("%H:%M") 
-							+ " à " + e.getEndTime().format("%H:%M") + "\n"
-						+ "Prof : " + e.getDetail("trainers") + "\n"
-						+ "Lieu : " + e.getDetail("room") + "\n"
-						+ "Etudiants concernes : " + e.getDetail("trainees") + "\n"
-						+ "------------ \n";
-			}
-		}
-		//txtview.setText(infos);*/
+
         calendarView.setDate(currentDate.toMillis(false));
 
 	}
@@ -157,14 +167,33 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
 				ADE.runUpdateADE(this, handler, updateRunnable);
 				break;
 			case R.id.course_list_edit:
-				Intent intent = new Intent(this, CoursListEditActivity.class);
-				startActivity(intent);
+				startCoursListEditActivity();
+				break;
 		}
 		return true;
 	}
+	
+	private void startCoursListEditActivity() {
+		Intent intent = new Intent(this, CoursListEditActivity.class);
+		startActivity(intent);
+	}
+	private void startUpdateFromUCLouvainActivity() {
+		Intent intent = new Intent(this, CoursListEditActivity.class);
+		intent.putExtra("startUCLouvain", true);
+		startActivity(intent);
+	}
 	@Override
 	public void onResume() {
-		updateInfos();
+		/** 
+		 * Si la liste des cours a été mise à jour, on lance la mise a jour
+		 * depuis ADE de manière automatique. 
+		 */
+		if (Cours.listChanged()) {
+			Cours.setListChangeSeen();
+			ADE.runUpdateADE(this, handler, updateRunnable);
+		} else {
+			updateInfos();
+		}
 		super.onResume();
 	}
 

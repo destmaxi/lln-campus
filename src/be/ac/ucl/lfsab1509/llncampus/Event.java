@@ -1,75 +1,92 @@
 package be.ac.ucl.lfsab1509.llncampus;
 
 import java.util.HashMap;
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.text.format.Time;
 
 /**
- * Decrit un evenement (de ADE, ou ...).
- * @author damien
- *
+ * Decrit un evenement (de ADE par exemple).
  */
 public class Event {
 	private Time begin;
 	private Time end;
 	private HashMap<String, String> details;
+
 	/**
 	 * Constructeur.
-	 * @param date Date of begin
-	 * @param beginTime Hour of begin
-	 * @param duration Duration
+	 * 
+	 * @param date
+	 *            Date of begin
+	 * @param beginTime
+	 *            Hour of begin
+	 * @param duration
+	 *            Duration
 	 */
-	public Event(final String date, final String beginTime, final String duration) {
+	public Event(final String date, final String beginTime,
+			final String duration) {
 		this.begin = new Time();
 		this.end = new Time();
 		try {
 			setBegin(date, beginTime);
 			setDuration(duration);
 		} catch (NumberFormatException e) {
-			e.printStackTrace(); //TODO
+			e.printStackTrace(); // TODO
 		}
 		details = new HashMap<String, String>();
 	}
+
 	/**
 	 * Constructeur.
-	 * @param l (en miliseconde depuis epoch [1 jan 1970])
-	 * @param m (en miliseconde depuis epoch [1 jan 1970])
+	 * 
+	 * @param begin
+	 *            Datetime de début (en miliseconde depuis epoch [1 jan 1970])
+	 * @param end
+	 *            Datetime de fin (en miliseconde depuis epoch [1 jan 1970])
 	 */
-	public Event(final long l, final long m){
+	public Event(final long begin, final long end) {
 		this.begin = new Time();
-		this.begin.set(l);
+		this.begin.set(begin);
 		this.end = new Time();
-		this.end.set(m);
+		this.end.set(end);
 		details = new HashMap<String, String>();
 	}
-	
+
 	/**
-	 * Ajouter des details a l'evenement
+	 * Ajouter des details a l'evenement.
+	 * 
 	 * @param key
+	 *            Clé du détail
 	 * @param value
+	 *            Valeur du détail
 	 */
 	public final void addDetail(final String key, final String value) {
 		details.put(key, value);
 	}
+
 	/**
+	 * Indique le début de l'évenement.
 	 * 
-	 * @param date Date
-	 * @param beginT Time
+	 * @param date
+	 *            Date de l'évènement
+	 * @param beginT
+	 *            Heure de l'évènement
 	 */
 	private void setBegin(final String date, final String beginT) {
 		int day = Integer.valueOf(date.substring(3, 5));
 		int month = Integer.valueOf(date.substring(0, 2)) - 1;
 		int year = Integer.valueOf(date.substring(6, 10));
-		
+
 		int beginHour = Integer.valueOf(beginT.substring(0, 2));
 		int beginMin = Integer.valueOf(beginT.substring(3, 5));
-		
+
 		begin.set(0, beginMin, beginHour, day, month, year);
 	}
+
 	/**
-	 * Define the duration
-	 * @param duration Duration
+	 * Indique la durée de l'évènement.
+	 * 
+	 * @param duration
+	 *            Durée de l'évènement
 	 */
 	private void setDuration(final String duration) {
 		int i;
@@ -87,61 +104,72 @@ public class Event {
 		}
 		if (endMin >= 60) {
 			endHour++;
-			endMin-= 60;
+			endMin -= 60;
 		}
-		
-		end.set(0, endMin, endHour, this.begin.monthDay, this.begin.month, this.begin.year);
+
+		end.set(0, endMin, endHour, this.begin.monthDay, this.begin.month,
+				this.begin.year);
 	}
+
 	/**
-	 * Retourne le detail demande ou null si le detail n'existe pas .
-	 * @param key Key of the detail
-	 * @return le detail demande ou null si le detail n'existe pas
+	 * Fournit le detail demandé ou null si le detail n'existe pas .
+	 * 
+	 * @param key
+	 *            Clé du detail
+	 * @return Valeur du détail demande ou null si le detail n'existe pas
 	 */
-	public final String getDetail(final String key) { return details.get(key); }
-	
+	public final String getDetail(final String key) {
+		return details.get(key);
+	}
+
 	/**
-	 * Retourne la date/heure de début.
-	 * @return The time of begin
+	 * Fournit la date/heure de début.
+	 * 
+	 * @return Le datetime de début
 	 */
 	public final Time getBeginTime() {
 		return begin;
 	}
-	
+
 	/**
-	 * Retourne la date/heure de fin.
-	 * @return The time of end
+	 * Fournit la date/heure de fin.
+	 * 
+	 * @return Le datetime de fin
 	 */
 	public final Time getEndTime() {
 		return end;
 	}
-	
-	/**
-	 * To string @see Object.toString
-	 */
+
+	@Override
 	public final String toString() {
 		String detailsTxt = "";
 		for (String key : details.keySet()) {
 			detailsTxt += key + " : " + details.get(key) + "\n";
 		}
-		return "Date : " + 
-					getTime()+"\n"
-				+ detailsTxt;
+		return "Date : " + getTime() + "\n" + detailsTxt;
 	}
 
+	/**
+	 * Fournit les heures de début et de fin.
+	 * 
+	 * @return Heures de début et de fin.
+	 */
 	public final String getTime() {
 		return begin.format("%H:%M") + " - " + end.format("%H:%M");
 	}
+
 	/**
-	 * Pour l'insertion dans la table Horaire. 
-	 * @return
+	 * Fournit les clé-valeurs pour l'insertion dans 
+	 * la table Horaire de la base de donnée.
+	 * 
+	 * @return ContentValues pour l'insertion dans la base de donnée
 	 */
-	@SuppressLint("DefaultLocale")
 	public final ContentValues toContentValues() {
 		ContentValues cv = new ContentValues();
 		cv.put("TIME_BEGIN", begin.toMillis(false));
 		cv.put("TIME_END", end.toMillis(false));
-		
-		for ( String key : this.details.keySet()) {
+
+		for (String key : this.details.keySet()) {
 			cv.put(key.toUpperCase(), this.details.get(key));
 		}
 		return cv;

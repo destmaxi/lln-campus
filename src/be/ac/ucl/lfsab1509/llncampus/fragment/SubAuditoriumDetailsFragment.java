@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Locale;
 
 import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.R;
@@ -16,22 +17,28 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * This class is intended to manage information shown about details
+ * of an subauditorium selected.
+ * Related with the xml file subauditorium_list_fragment.xml or subauditorium_details_fragment.xml
+ * Note: a fragment is called by the xml file!
+ *
+ */
 public class SubAuditoriumDetailsFragment extends LLNCampusFragment {
 
 	private View viewer;
 	private static String SUBPIC = "http://www.uclouvain.be/cps/ucl/doc/audi/images/";
 	private ImageView picture;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	        Bundle savedInstanceState) {
@@ -40,7 +47,7 @@ public class SubAuditoriumDetailsFragment extends LLNCampusFragment {
 	}
 	
 	/**
-	 * Retourne oui si value == true, non si false
+	 * Retourne oui si value == true, non si false (le tout dans la bonne langue)
 	 * @param value
 	 * @return oui si value == true, non si false
 	 */
@@ -53,21 +60,27 @@ public class SubAuditoriumDetailsFragment extends LLNCampusFragment {
 		return this.getString(R.string.no);
 	}
 	
-	public void updateSubAuditorium(ISubAuditorium subauditorium){
-		    String name = subauditorium.getName();
-		    boolean access = subauditorium.hasAccess();
-		    String places = String.valueOf(subauditorium.getNbPlaces());
-		    String network = ouiNon(subauditorium.hasNetwork());
-		    String ecran = ouiNon(subauditorium.hasEcran());
-		    String retro = ouiNon(subauditorium.hasRetro());
-		    String dia = ouiNon(subauditorium.hasDia());
-		    String video = subauditorium.getVideo(); // A RETRAVAILLER
-		    String sono = ouiNon(subauditorium.hasSono());
-		    String cabine = ouiNon(subauditorium.hasCabine());
-		    String mobilier = subauditorium.getMobilier(); // A RETRAVAILLER
+	/**
+	 * Update information shown about an ISubAuditorium
+	 * @pre subAuditorium is not null
+	 * @post the layout shows information about subAuditorium
+	 * @param subAuditorium
+	 */
+	public void updateSubAuditorium(ISubAuditorium subAuditorium){
+		    String name = subAuditorium.getName();
+		    boolean access = subAuditorium.hasAccess();
+		    String places = String.valueOf(subAuditorium.getNbPlaces());
+		    String network = ouiNon(subAuditorium.hasNetwork());
+		    String ecran = ouiNon(subAuditorium.hasEcran());
+		    String retro = ouiNon(subAuditorium.hasRetro());
+		    String dia = ouiNon(subAuditorium.hasDia());
+		    String video = subAuditorium.getVideo();
+		    String sono = ouiNon(subAuditorium.hasSono());
+		    String cabine = ouiNon(subAuditorium.hasCabine());
+		    String mobilier = subAuditorium.getMobilier();
 		    
+		    // If access is true, then shows the picture for disabled people, otherwise not
 		    picture = (ImageView) viewer.findViewById(R.id.subauditorium_picture);
-		    
 	    	ImageView imageAccess = (ImageView) viewer.findViewById(R.id.access_picture);
 		    if (access)
 		    {
@@ -78,6 +91,7 @@ public class SubAuditoriumDetailsFragment extends LLNCampusFragment {
 		    	imageAccess.setVisibility(View.INVISIBLE);
 		    }
 		    
+		    // Set all the text on the layout
 		    TextView textName = (TextView) viewer.findViewById(R.id.subauditorium_name);
 		    textName.setText(name);
 		    
@@ -132,7 +146,7 @@ public class SubAuditoriumDetailsFragment extends LLNCampusFragment {
 	        textCabine.setText(cabine);
 	        
 	        TextView textMobilier = (TextView) viewer.findViewById(R.id.mobilier_rep);
-	        // CODE MOBILIER
+	      
 	        if (mobilier == null)
 	        	textMobilier.setText(getString(R.string.rien));
 	        else {
@@ -157,26 +171,40 @@ public class SubAuditoriumDetailsFragment extends LLNCampusFragment {
 	        	}
 	        }
 	        
-	        String nameT = subauditorium.getName();
+	        String nameT = subAuditorium.getName();
 	        
+	        // Fetch the picture of the subauditorium on the device or on the Internet
 	        picture.setImageResource(R.drawable.sablier);
 	        new PictureUtilityTask().execute(nameT);
 	        
 	}
 	
+	/**
+	 * This class is intended to fetch the picture of the subauditorium.
+	 * First, it will go on the device, then on the Internet if not on the device.
+	 * Note: all this will run on background!
+	 *
+	 */
 	public class PictureUtilityTask extends AsyncTask<String, Void, Bitmap>{
 
+		String nameExist = null;
 
-		    String nameExist = null;
-		    
+		// In background
 		@Override
 		protected Bitmap doInBackground(String... params) {
 			return downloadImage(parseToPicName(params[0]));
 		}
-		
+
+		/**
+		 * Return name with lower cases and without any '.' or ' '
+		 * @pre name != null
+		 * @post name is unchanged
+		 * @param name
+		 * @return name with lower cases and without any '.' or ' '
+		 */
 		private String parseToPicName(String name)
 		{
-			String newName = name.toLowerCase();
+			String newName = name.toLowerCase(Locale.getDefault());
 			String returnName = null;
 			for (int i = 0; i < newName.length(); i++)
 			{
@@ -194,21 +222,30 @@ public class SubAuditoriumDetailsFragment extends LLNCampusFragment {
 			}
 			return returnName;
 		}
-		
+
+		// After the background execution
 		protected void onPostExecute(Bitmap bitmap) {
-			if (bitmap != null)
+			if (bitmap != null) // Si vient d'etre cree
 			{
 				picture.setImageBitmap(bitmap);
 			}
-			else if (nameExist != null)
+			else if (nameExist != null) // Si existait deja
 			{
 				picture.setImageDrawable(Drawable.createFromPath("/" + Environment.getExternalStorageDirectory().getPath() + "/" + LLNCampus.LLNREPOSITORY + "/" + nameExist));
 			}
-	    }
-		
+			else // Si n'existe pas
+			{
+				/* Relance la procedure mais avec le nom "non_disponible".
+				 * Soit on a l'image en memoire, et on va la chercher, soit on
+				 * la telecharge tout en la copiant en memoire
+				 */
+				new PictureUtilityTask().execute("non_disponible");
+			}
+		}
+
+		//create a file on the device to write bitmap data downloaded
 		private void copyBitmap(File f, String name, Bitmap bitmap)
 		{
-			//create a file to write bitmap data
 
 			//Convert bitmap to byte array
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -224,57 +261,40 @@ public class SubAuditoriumDetailsFragment extends LLNCampusFragment {
 				fos.flush();
 				fos.close();
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
-		
+
+		// Go download the picture (only if the picture is NOT on the device)
 		private Bitmap downloadImage(String name) {
-			
 			nameExist = null;
-			
-			Log.d("Name", name);
-
 			Bitmap bitmap = null;
-
 			try {
-
-			File f = new File("/" + Environment.getExternalStorageDirectory().getPath() + "/" + LLNCampus.LLNREPOSITORY + "/" + name);
-			
-			if (f.exists())
-			{
-				nameExist = name;
-				return null;
-			}
-			
-			Log.d("Fichier", "n'existe pas");
-			
-			URL urlImage = new URL(SUBPIC + name + ".gif");
-
-			HttpURLConnection connection = (HttpURLConnection) urlImage.openConnection();
-
-			InputStream inputStream = connection.getInputStream();
-
-			bitmap = BitmapFactory.decodeStream(inputStream);
-			
-			copyBitmap(f, name, bitmap);
-
+				File f = new File("/" + Environment.getExternalStorageDirectory().getPath() + "/" + LLNCampus.LLNREPOSITORY + "/" + name);
+				// Check if the file is already on the device
+				if (f.exists())
+				{
+					nameExist = name;
+					return null;
+				}
+				// So, the picture is not on the device: go download!
+				URL urlImage = new URL(SUBPIC + name + ".gif");
+				HttpURLConnection connection = (HttpURLConnection) urlImage.openConnection();
+				// Take the inputstream and transform it to bitmap
+				InputStream inputStream = connection.getInputStream();
+				bitmap = BitmapFactory.decodeStream(inputStream);
+				// Create the bitmap on the device
+				copyBitmap(f, name, bitmap);
 			} catch (MalformedURLException e) {
-
-			e.printStackTrace();
-
+				e.printStackTrace();
 			} catch (IOException e) {
-
-			e.printStackTrace();
-
+				e.printStackTrace();
 			}
 			return bitmap;
-
-			}
+		}
 	}
-	
+
 }

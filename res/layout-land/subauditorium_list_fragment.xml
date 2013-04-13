@@ -8,7 +8,6 @@
  	  android:name="be.ac.ucl.lfsab1509.llncampus.fragment.SubAuditoriumListFragment"
   	  android:layout_width="match_parent"
   	  android:layout_height="match_parent"
-  	  android:background="@color/Blue"
   	  android:layout_weight="2"
  	  android:id="@+id/subauditorium_list_fragment">
 </fragment>

@@ -2,79 +2,70 @@ package be.ac.ucl.lfsab1509.llncampus.fragment;
 
 import java.util.ArrayList;
 import be.ac.ucl.lfsab1509.llncampus.Auditorium;
+import be.ac.ucl.lfsab1509.llncampus.activity.adapter.AuditoriumListAdapter;
 import be.ac.ucl.lfsab1509.llncampus.interfaces.IAuditorium;
 import android.app.Activity;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
+/**
+ * This class is intended to manage information shown on the list of
+ * auditorium when the AuditoriumActivity is called.
+ * Related with the xml file auditorium_list_fragment.xml
+ * Note: a fragment is called by the xml file!
+ *
+ */
 public class AuditoriumListFragment extends LLNCampusListFragment {
 	
-	ArrayList<String> auditoriumsName = null;
+	private ArrayList<String> auditoriumsName = null;
 	final String NAME = "NAME";
-	private ArrayAdapter<String> adapter;
 	private IAuditorium auditorium;
 	private OnAuditoriumSelectedListener audSelectedListener;
 	
+	private AuditoriumListAdapter auditoriumListAdapter;
+	private ArrayList<IAuditorium> auditoriumList;
 	
+	// To do at the creation of the fragment
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
 		
-		String[] cols = {"NAME"};
-		Cursor c = db.select("Poi", cols,"TYPE = 'auditoire'",null, null, null, "NAME ASC", null);
-		
-		this.auditoriumsName = new ArrayList<String>();
-		while(c.moveToNext()){
-			auditoriumsName.add(c.getString(0));
+		// If we don't have the auditorium's names yet, then go to the DB and fetch them
+		if (auditoriumsName == null) {
+			// Prepare the query to fetch the auditoriums
+			String[] cols = {"NAME"};
+			// Result of the query
+			Cursor c = db.select("Poi", cols,"TYPE = 'auditoire'",null, null, null, "NAME ASC", null);
+			// Set the result in an ArrayList
+			this.auditoriumsName = new ArrayList<String>();
+			while(c.moveToNext()){
+				auditoriumsName.add(c.getString(0));
+			}
+			// Then create an ArrayList of IAuditorium with the ArrayList of auditorium's names
+			this.auditoriumList = new ArrayList<IAuditorium>();
+			for (int i=0; i < auditoriumsName.size(); i++)
+			{
+				String[] cols1 = {"ID","NAME","LATITUDE", "LONGITUDE", "ADDRESS"};
+				Cursor c1 = super.db.select("Poi", cols1, "NAME = "+ "'"+auditoriumsName.get(i)+"'", null, null, null, null, null);
+				c1.moveToFirst();
+				auditoriumList.add(new Auditorium(c1.getInt(0), c1.getString(1), c1.getDouble(2), c1.getDouble(3), c1.getString(4)));
+			}
+			// Don't forget to close the Cursor!
+			c.close();
 		}
-		c.close();
-		
-		
-		// Define a new Adapter
-		// First parameter - Context
-		// Second parameter - Layout for the row
-		// Third parameter - ID of the TextView to which the data is written
-		// Forth - the Array of data
-
-		adapter=new ArrayAdapter<String>(
-	            this.getActivity(),android.R.layout.simple_list_item_1, auditoriumsName){
-
-	        @Override
-	        public View getView(int position, View convertView,
-	                ViewGroup parent) {
-	            View view =super.getView(position, convertView, parent);
-
-	            TextView textView=(TextView) view.findViewById(android.R.id.text1);
-
-	            //YOUR CHOICE OF COLOR
-	            textView.setTextColor(Color.WHITE);
-
-	            return view;
-	        }
-	    };
-	        //SET THE ADAPTER TO LISTVIEW
-		
-		// Assign adapter to ListView
-		//listView.setAdapter(adapter); 
-		//listView.setClickable(true);
-/*		setListAdapter(new ArrayAdapter<String>(
-	            this,R.layout.auditorium ,R.id.list_content, values){
-			
-			
-		});*/
-		
-        setListAdapter(adapter);
+		// Create an instance of AuditoriumListAdapter to create the list with pictures
+		auditoriumListAdapter = new AuditoriumListAdapter(getActivity(),
+				auditoriumList);
+		// Set the list
+		setListAdapter(auditoriumListAdapter);
+		// Set the options' menu
         setHasOptionsMenu(true);
 	}
 	
+	// When the junction between activity and fragment is done, set the listener for
 	@Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -86,28 +77,23 @@ public class AuditoriumListFragment extends LLNCampusListFragment {
         }
     }
 
-	
+	// When an item is clicked, then delegate the action to the listener attached
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		
-	    String content = auditoriumsName.get(position);
-	    
-	    if(content !=null)
-		{
-			/* TODO passer le int et pas le nom */
-			String nameAuditorium = content;
-			Log.d("NAME", nameAuditorium);
-			String[] cols = {"ID","NAME","LATITUDE", "LONGITUDE", "ADDRESS"};
-			Cursor c = super.db.select("Poi", cols, "NAME = "+ "'"+nameAuditorium+"'", null, null, null, null, null);
-			c.moveToFirst();
-			auditorium = new Auditorium(c.getInt(0), c.getString(1), c.getDouble(2), c.getDouble(3), c.getString(4));
-		}
+	    auditorium = auditoriumList.get(position);
 	    audSelectedListener.onAuditoriumSelected(auditorium);
 	}
 	
-	
+	// Interface defined for the list of auditorium
 	public interface OnAuditoriumSelectedListener {
-	    public void onAuditoriumSelected(IAuditorium aud);
+		/**
+		 * Shows information about auditorium on the layout.
+		 * The behavior can differ if it's in landscape or not
+		 * @pre auditorium != null
+		 * @post Shows information about auditorium on the layout, auditorium not changed
+		 * @param auditorium
+		 */
+	    public void onAuditoriumSelected(IAuditorium auditorium);
 	}
 	
 }

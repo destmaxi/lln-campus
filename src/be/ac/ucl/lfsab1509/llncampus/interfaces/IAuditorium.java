@@ -5,6 +5,11 @@ package be.ac.ucl.lfsab1509.llncampus.interfaces;
  */
 public interface IAuditorium extends IBuilding{
 	
-	//TODO probably other methods will be integrated, such as sub-auditoriums,...
+	/**
+	 * Fournit l'image miniature de l auditoire.
+	 * @return la ressource ID de l'image miniature
+	 */
+	public int getImgMini();
+	
 	
 }

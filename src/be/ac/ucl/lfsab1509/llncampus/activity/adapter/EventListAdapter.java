@@ -37,18 +37,18 @@ public class EventListAdapter extends BaseAdapter {
         room.setText(info.getDetail("room"));
         code.setText(info.getDetail("course"));
        	title.setText(info.getDetail("title"));
-       	//int txtColor;
+       	int txtColor;
        	if (position % 2 == 1) {
-       		//convertView.findViewById(R.id.event_list_item).setBackgroundColor(LLNCampus.getContext().getResources().getColor(android.R.color.));
-       	//	txtColor = LLNCampus.getContext().getResources().getColor(android.R.color.primary_text_light);
+       		convertView.findViewById(R.id.event_list_item).setBackgroundColor(LLNCampus.getContext().getResources().getColor(android.R.color.holo_blue_light));
+       		txtColor = LLNCampus.getContext().getResources().getColor(android.R.color.primary_text_dark);
        	} else {
-       		convertView.findViewById(R.id.event_list_item).setBackgroundColor(LLNCampus.getContext().getResources().getColor(R.color.Blue_light));
-       	//	txtColor = LLNCampus.getContext().getResources().getColor(android.R.color.primary_text_dark);
+       		convertView.findViewById(R.id.event_list_item).setBackgroundColor(LLNCampus.getContext().getResources().getColor(android.R.color.holo_blue_dark));
+       		txtColor = LLNCampus.getContext().getResources().getColor(android.R.color.primary_text_dark);
        	}
-       	/*time.setTextColor(txtColor);
+       	time.setTextColor(txtColor);
        	room.setTextColor(txtColor);
        	code.setTextColor(txtColor);
-       	title.setTextColor(txtColor);*/
+       	title.setTextColor(txtColor);
         
         return convertView;
     }

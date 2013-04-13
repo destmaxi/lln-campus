@@ -8,10 +8,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * This class is intended to manage information shown about details
+ * of an auditorium selected.
+ * Related with the xml file auditorium_list_fragment.xml or the auditorium_details_fragment.xml
+ * Note: a fragment is called by the xml file!
+ *
+ */
 public class AuditoriumDetailsFragment extends LLNCampusFragment {
 
 	private View viewer;
 	
+	// Attach the layout with the fragment
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	        Bundle savedInstanceState) {
@@ -19,6 +27,12 @@ public class AuditoriumDetailsFragment extends LLNCampusFragment {
 	    return viewer;
 	}
 	
+	/**
+	 * Update information shown about an IAuditorium
+	 * @pre auditorium is not null
+	 * @post the layout shows information about auditorium
+	 * @param auditorium
+	 */
 	public void updateAuditorium(IAuditorium auditorium){
 		    String name = auditorium.getName();
 		    String address_t = auditorium.getAddress();

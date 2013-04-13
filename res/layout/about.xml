@@ -8,5 +8,6 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="@string/about_text" />
+        android:text="@string/about_text" 
+        android:layout_margin="0dp"/>
 </RelativeLayout>

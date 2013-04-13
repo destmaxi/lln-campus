@@ -1,19 +1,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/Blue"
     android:gravity="top"
     android:orientation="vertical"
     android:padding="20dip" >
+    <!--  android:background="@color/Blue" -->
 
     <TextView
         android:id="@+id/auditorium_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="top|center_horizontal"
-        android:textColor="@color/White"
         android:textIsSelectable="true"
         android:textSize="69sp" />
+        <!-- android:textColor="@color/White" -->
 
     <TextView
         android:id="@+id/auditorium_address"
@@ -22,9 +22,9 @@
         android:layout_marginTop="17dp"
         android:gravity="top|center_horizontal"
         android:text="@string/auditorium_address"
-        android:textColor="@color/White"
         android:textSize="19sp" />
-
+ 	   <!-- android:textColor="@color/White" -->
+	
     <ImageView
         android:id="@+id/auditorium_picture"
         android:layout_width="match_parent"
@@ -42,20 +42,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="36dp" >
+        android:layout_marginLeft="0dp" >
 
         <Button
             android:id="@+id/button_subauditorium"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="center|left"
+            android:drawableLeft="@android:drawable/ic_menu_add"
             android:text="@string/sub_auditorium" />
 
         <Button
             android:id="@+id/button_auditorium_gps"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="center|right"
+            android:drawableLeft="@android:drawable/ic_menu_directions"
             android:text="@string/GPS" />
     </LinearLayout>
 </LinearLayout>

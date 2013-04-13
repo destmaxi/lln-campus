@@ -1,0 +1,130 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/maintitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="52sp" />
+
+    <GridLayout
+        android:id="@+id/maingridlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical|fill_vertical|center_horizontal|fill_horizontal"
+        android:columnCount="3"
+        android:rowCount="3"
+        android:scrollbars="horizontal|vertical" >
+
+        <Button
+            android:id="@+id/button_horaire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:contentDescription="@string/horaire"
+            android:drawableLeft="@drawable/horaire"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/horaire"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Button
+            android:id="@+id/button_bibliotheque"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:contentDescription="@string/bibliotheques"
+            android:drawableLeft="@drawable/bibliotheque"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/bibliotheques"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Button
+            android:id="@+id/button_auditoire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:contentDescription="@string/auditoires"
+            android:drawableLeft="@drawable/auditoire"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/auditoires"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+        <Button
+            android:id="@+id/button_loisirs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:contentDescription="@string/loisirs"
+            android:drawableLeft="@drawable/loisir"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/loisirs"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Button
+            android:id="@+id/button_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:contentDescription="@string/map"
+            android:drawableLeft="@drawable/map"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/map"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+         <Button
+            android:id="@+id/button_repertoire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:contentDescription="@string/repertoire"
+            android:drawableLeft="@drawable/about"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/repertoire"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+        <Button
+            android:id="@+id/button_icampus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:contentDescription="@string/icampus"
+            android:drawableLeft="@drawable/icampus"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="20dp"
+            android:text="@string/icampus"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Button
+            android:id="@+id/button_moodle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:contentDescription="@string/moodle"
+            android:drawableLeft="@drawable/moodle"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/moodle"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Button
+            android:id="@+id/button_bureau"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:contentDescription="@string/bureau"
+            android:drawableLeft="@drawable/bureau_ucl"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/bureau"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </GridLayout>
+
+</LinearLayout>

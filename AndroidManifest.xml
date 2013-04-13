@@ -1,83 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="be.ac.ucl.lfsab1509.llncampus"
-    android:versionCode="6"
-    android:versionName="0.3" >
+    android:versionCode="7"
+    android:versionName="0.4" >
 
     <uses-sdk
         android:minSdkVersion="17"
         android:targetSdkVersion="17" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> 
-    
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity 
+        <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.AuditoriumActivity"
-            android:label="@string/auditoires">
-        </activity> 
-        <activity 
-            android:name="be.ac.ucl.lfsab1509.llncampus.activity.LibraryActivity"
-            android:label="@string/bibliotheques">
-        </activity> 
-        <activity 
-            android:name="be.ac.ucl.lfsab1509.llncampus.activity.LoisirsActivity"
-            android:label="@string/loisirs">
-        </activity> 
-        <activity 
-            android:name="be.ac.ucl.lfsab1509.llncampus.activity.Cinema"
-            android:label="@string/loisirs">
-        </activity> 
-        <activity 
-            android:name="be.ac.ucl.lfsab1509.llncampus.activity.HoraireActivity"
-            android:label="@string/horaire">
-        </activity> 
-        <activity 
-            android:name="be.ac.ucl.lfsab1509.llncampus.activity.SettingsActivity"
-            android:label="@string/settings"
-            android:theme="@android:style/Theme.Holo.Dialog"
-            >
-        </activity>
-        <activity 
-            android:name="be.ac.ucl.lfsab1509.llncampus.activity.CoursListEditActivity"
-            android:label="@string/settings"
-            android:theme="@android:style/Theme.Holo.Dialog"
-            >
+            android:label="@string/auditoires" >
         </activity>
         <activity
-            android:name="be.ac.ucl.lfsab1509.llncampus.activity.LoisirsTitle"
+            android:name="be.ac.ucl.lfsab1509.llncampus.activity.BibliothequesActivity"
+            android:label="@string/bibliotheques" >
+        </activity>
+        <activity
+            android:name="be.ac.ucl.lfsab1509.llncampus.activity.LoisirsActivity"
             android:label="@string/loisirs" >
         </activity>
         <activity
-            android:name="be.ac.ucl.lfsab1509.llncampus.activity.StudyTitle"
-            android:label="@string/etudes" >
+            android:name="be.ac.ucl.lfsab1509.llncampus.activity.HoraireActivity"
+            android:label="@string/horaire" >
+        </activity>
+        <activity
+            android:name="be.ac.ucl.lfsab1509.llncampus.activity.SettingsActivity"
+            android:label="@string/settings"
+            android:theme="@android:style/Theme.Holo.Dialog" >
+        </activity>
+        <activity
+            android:name="be.ac.ucl.lfsab1509.llncampus.activity.CoursListEditActivity"
+            android:label="@string/settings"
+            android:theme="@android:style/Theme.Holo.Dialog" >
         </activity>
         <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.DetailsAuditorium"
             android:label="@string/auditoires" >
         </activity>
-        <activity 
-            android:name="be.ac.ucl.lfsab1509.llncampus.activity.DetailsLibrary"
-            android:label="@string/bibliotheques">
-        </activity>
-        <activity 
-            android:name="be.ac.ucl.lfsab1509.llncampus.activity.LoisirsDetails"
-            android:label="@string/loisirs">
-        </activity> 
         <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.AboutActivity"
-            android:label="@string/about" 
-            android:theme="@android:style/Theme.Holo.Dialog">
+            android:label="@string/about"
+            android:theme="@android:style/Theme.Holo.Dialog" >
         </activity>
         <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.MapActivity"
             android:label="@string/map" >
         </activity>
-        
         <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.SubAuditoriumActivity"
             android:label="@string/sub_auditorium" >
@@ -91,13 +68,24 @@
             android:label="@string/todo" >
         </activity>
         <activity
-            android:name="be.ac.ucl.lfsab1509.llncampus.activity.MainTitle"
+            android:name="be.ac.ucl.lfsab1509.llncampus.activity.Launcher"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="be.ac.ucl.lfsab1509.llncampus.activity.MainActivity"
+            android:label="@string/main_menu" >
+        </activity>
+        <activity android:name="be.ac.ucl.lfsab1509.llncampus.activity.WebviewActivity" >
+        </activity>
+        <activity
+            android:name="be.ac.ucl.lfsab1509.llncampus.activity.RepertoireActivity"
+            android:label="@string/repertoire"
+            android:theme="@android:style/Theme.Holo.Dialog" >
         </activity>
     </application>
 
