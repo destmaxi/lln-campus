@@ -9,5 +9,5 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="@string/about_text" 
-        android:layout_margin="20dp"/>
+        android:layout_margin="0dp"/>
 </RelativeLayout>
