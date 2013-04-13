@@ -84,7 +84,7 @@
 
     <!-- Strings utiles pour about_activity -->
     <string name="about">À propos</string>
-    <string name="about_text">"Cette application a été développée par Benjamin Baugnies, Quentin De Coninck, Pham Anh Tuan Le et Damien Mercier dans le cadre du cours LFSAB1509 donné à l'Université Catholique de Louvain-la-Neuve. Cette application est distribuée sous licence GPL3. Version 0.4.1. Tout don est le bienvenu =D"</string>
+    <string name="about_text">"Cette application a été développée par Benjamin Baugnies, Quentin De Coninck, Pham Anh Tuan Le et Damien Mercier dans le cadre du cours LFSAB1509 donné à l'Université Catholique de Louvain-la-Neuve. Cette application est distribuée sous licence GPL3. Version 0.4.2. Tout don est le bienvenu =D"</string>
 
     <!-- Strings utiles pour MapActivity -->
     <string name="map">Map</string>
