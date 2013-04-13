@@ -4,14 +4,11 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.database.DataSetObserver;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.Bibliotheque;
@@ -46,10 +43,10 @@ public class BibliothequesListAdapter extends BaseAdapter {
 		address.setText(bib.getAddress());
 		Resources r = LLNCampus.getContext().getResources();
 		if (bib.isOpen()) {
-			openclose.setImageDrawable(LLNCampus.getContext().getResources()
+			openclose.setImageDrawable(r
 					.getDrawable(android.R.drawable.presence_online));
 		} else {
-			openclose.setImageDrawable(LLNCampus.getContext().getResources()
+			openclose.setImageDrawable(r
 					.getDrawable(android.R.drawable.presence_busy));
 		}
 

@@ -22,7 +22,7 @@ public class LoisirsActivity extends LLNCampusActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.loisirs);
-		Resources r = this.getResources();
+		// Resources r = this.getResources();
 
 		setThisOnClickListener(R.id.button_cinema);
 		setThisOnClickListener(R.id.button_carpestudentem);

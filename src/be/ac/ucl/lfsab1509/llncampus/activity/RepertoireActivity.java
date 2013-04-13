@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
-import android.widget.TextView;
 import be.ac.ucl.lfsab1509.llncampus.R;
 
 public class RepertoireActivity extends LLNCampusActivity implements

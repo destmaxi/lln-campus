@@ -3,19 +3,12 @@ package be.ac.ucl.lfsab1509.llncampus.activity.adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.database.DataSetObserver;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
-import be.ac.ucl.lfsab1509.llncampus.Auditorium;
-import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
-import be.ac.ucl.lfsab1509.llncampus.Bibliotheque;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.interfaces.IAuditorium;
 
