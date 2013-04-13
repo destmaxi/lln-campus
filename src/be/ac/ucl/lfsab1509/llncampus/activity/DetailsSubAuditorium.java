@@ -6,6 +6,13 @@ import be.ac.ucl.lfsab1509.llncampus.SubAuditorium;
 import be.ac.ucl.lfsab1509.llncampus.fragment.SubAuditoriumDetailsFragment;
 import be.ac.ucl.lfsab1509.llncampus.interfaces.ISubAuditorium;
 
+/**
+ * This class is intended to shows information about an ISuubAuditorium
+ * Related with the xml file subauditorium_details_fragment.xml
+ * Caution: this class is called only if the device is NOT in landscape!
+ * 			Check in the xml file (landscape and normal) for details.
+ *
+ */
 public class DetailsSubAuditorium extends LLNCampusActivity{
 	private ISubAuditorium subauditorium;
 	
@@ -13,7 +20,8 @@ public class DetailsSubAuditorium extends LLNCampusActivity{
 	    protected void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.subauditorium_details_fragment);
-	        // Comment faire pour passer le parent? Fondammentalement, ce n'est pas utile
+	        
+	        // Fetch all given information useful for the layout
 	        int id_parent = getIntent().getIntExtra("ID_PARENT", 0);
 	        int id = getIntent().getIntExtra("ID", 0);
 	        String name = getIntent().getStringExtra("NAME");
@@ -28,9 +36,10 @@ public class DetailsSubAuditorium extends LLNCampusActivity{
 	        boolean network = getIntent().getBooleanExtra("NETWORK", false);
 	        boolean access = getIntent().getBooleanExtra("ACCESS", false);
 
-	        
+	        // Create a new instance of ISubAuditorium
 	        subauditorium = new SubAuditorium(id_parent, id, name, nbplaces, mobilier, cabine, ecran, sono, retro, dia, video, network, access);
 	        
+	        // Delegate the update operation to the fragment
 	        SubAuditoriumDetailsFragment viewer = (SubAuditoriumDetailsFragment) getFragmentManager().findFragmentById(R.id.subauditorium_details_fragment);
 	        viewer.updateSubAuditorium(subauditorium);
 	    }
