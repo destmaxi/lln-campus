@@ -12,6 +12,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ScaleDrawable;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -60,6 +61,14 @@ public class MainActivity extends LLNCampusActivity implements OnClickListener {
 				LLNCampus.copyAssets();
 			}
 		}).start();
+	}
+	
+	// Corrige (temporairement) le bug d'affichage)
+	@Override
+	public void onUserInteraction()
+	{
+		super.onUserInteraction();
+		onWindowFocusChanged(true);
 	}
 
 	/**

@@ -16,7 +16,7 @@ public class RepertoireActivity extends LLNCampusActivity implements
 		setContentView(R.layout.repertoire);
 		findViewById(R.id.repertoire_searchbtn).setOnClickListener(this);
 	}
-
+	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -39,4 +39,5 @@ public class RepertoireActivity extends LLNCampusActivity implements
 			break;
 		}
 	}
+	
 }
