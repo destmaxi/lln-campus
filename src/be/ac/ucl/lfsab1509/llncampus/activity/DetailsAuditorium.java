@@ -5,6 +5,7 @@ import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.fragment.AuditoriumDetailsFragment;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +26,12 @@ public class DetailsAuditorium extends LLNCampusActivity implements OnClickListe
 	// Also manage the update query to the fragment
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		// Finish the activity if the orientation is landscape
+		int orientation = this.getResources().getConfiguration().orientation;
+		if (orientation == Configuration.ORIENTATION_LANDSCAPE)
+		{
+			finish();
+		}
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.auditorium_details_fragment);
 
