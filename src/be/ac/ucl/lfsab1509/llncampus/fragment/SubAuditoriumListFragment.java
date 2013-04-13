@@ -96,7 +96,7 @@ public class SubAuditoriumListFragment extends LLNCampusListFragment {
 
 		String content = subAuditoriumsName.get(position);
 
-		if(content != null)
+		if(content == null)
 		{
 			// There is an error; return
 			return;

@@ -45,11 +45,7 @@
     android:layout_height="wrap_content" 
     android:stretchColumns="1">
     
-    <TableRow
-						android:orientation="horizontal"
-						android:layout_height="20dip"
-						android:layout_width="fill_parent" 
-						android:gravity="center_horizontal">
+   
 						
     
     <TextView android:id="@+id/nbplaces"
@@ -66,7 +62,7 @@
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
         android:textSize="20sp" />
-    </TableRow>
+   
     </TableLayout>
     
     
