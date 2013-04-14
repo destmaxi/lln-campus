@@ -5,7 +5,6 @@ import java.util.Calendar;
 
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.util.Log;
 
 public class BibliothequeHoraire {
 	private final int bibID;
