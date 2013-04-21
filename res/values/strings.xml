@@ -6,7 +6,7 @@
 
     <!-- Strings utiles a plusieurs endroits -->
     <string name="settings">Options</string>
-    <string name="reset_DB">Recharger la DB</string>
+    <string name="reset_DB">Réinitialiser</string>
     <string name="open">Ouvert</string>
     <string name="close">Fermé</string>
     <string name="lundi">Lundi</string>
@@ -36,7 +36,7 @@
     <string name="sports">Horaire des sports</string>
     <string name="restaurants">Restaurants</string>
     <string name="carpestudentem">Agenda de l\'animation</string>
-    <string name="todo">Travail en cours, aidez nous via vos dons :)</string>
+    <string name="todo">Travail en cours, sera probablement implémentée dans la prochaine version :)</string>
 
     <!-- Strings utiles pour study_title -->
     <string name="etudes">Études</string>
@@ -84,7 +84,7 @@
 
     <!-- Strings utiles pour about_activity -->
     <string name="about">À propos</string>
-    <string name="about_text">"Cette application a été développée par Benjamin Baugnies, Quentin De Coninck, Pham Anh Tuan Le et Damien Mercier dans le cadre du cours LFSAB1509 donné à l'Université Catholique de Louvain-la-Neuve. Cette application est distribuée sous licence GPL3. Version 0.4.2. Tout don est le bienvenu =D"</string>
+    <string name="about_text">"Cette application a été développée par Benjamin Baugnies, Quentin De Coninck, Pham Anh Tuan Le et Damien Mercier dans le cadre du cours LFSAB1509 donné à l'Université Catholique de Louvain-la-Neuve. Cette application est distribuée sous licence GPL3. Version 0.4.4."</string>
 
     <!-- Strings utiles pour MapActivity -->
     <string name="map">Map</string>
@@ -116,5 +116,5 @@
 	<string name="prenom">Prénom</string>
 	<string name="entite">Entité</string>
 	<string name="sigle_ou_acro">(sigle ou acronyme)</string>
-	<string name="repertoire">Répertoire (des profs)</string>
+	<string name="repertoire">Répertoire (personnel UCL)</string>
 </resources>

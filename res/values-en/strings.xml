@@ -6,7 +6,7 @@
     
     <!-- Strings utiles a plusieurs endroits -->
     <string name="settings">Settings</string>
-    <string name="reset_DB">Reload the DB</string>
+    <string name="reset_DB">Reset</string>
     <string name="open">Opened</string>
     <string name="close">Closed</string>
     <string name="lundi">Monday</string>
@@ -36,7 +36,7 @@
     <string name="sports">Sport schedule</string>
     <string name="restaurants">Restaurants</string>
     <string name="carpestudentem">Agenda of the animation</string>
-	<string name="todo">Work in progress, please support us in donating :)</string>
+	<string name="todo">Work in progress, will probably be implemented in the next version :)</string>
 	
 	<!-- Strings utiles pour study_title -->
 	<string name="etudes">Studies</string>
@@ -56,7 +56,7 @@
     <string name="sub_auditorium">Subauditoriums</string>
     <string name="library_schedule">The schedule of the library</string>
     <string name="building_picture_description">Overview of building entrance</string>
-    <string name="access_description">Show if the place is accessible for handicaped person</string>
+    <string name="access_description">Show if the place is accessible for disabled person</string>
     <string name="library_specialSchedule">Special schedule</string>
     
      <!-- Listage des strings utilises dans le XML subauditorium_details -->
@@ -84,7 +84,7 @@
     
     <!--  Strings utiles pour about_activity -->
 	<string name="about">About</string>
-    <string name="about_text">This application was developed by Benjamin Baugnies, Quentin De Coninck, Pham Anh Tuan Le and Damien Mercier for the course LFSAB1509 given at the Université Catholique de Louvain-la-Neuve. This application is distributed under the GPL3 license. Version 0.4.2. Any donation is welcomed =D</string>
+    <string name="about_text">This application was developed by Benjamin Baugnies, Quentin De Coninck, Pham Anh Tuan Le and Damien Mercier for the course LFSAB1509 given at the Université Catholique de Louvain-la-Neuve. This application is distributed under the GPL3 license. Version 0.4.4.</string>
 
 	<!--  Strings utiles pour MapActivity -->
     <string name="map">Map</string>
@@ -116,5 +116,5 @@
 	<string name="prenom">First name</string>
 	<string name="entite">Entity</string>
 	<string name="sigle_ou_acro">(sigle or acronym)</string>
-	<string name="repertoire">Répertory (of professors)</string>
+	<string name="repertoire">Répertory (UCL staff)</string>
 </resources>
