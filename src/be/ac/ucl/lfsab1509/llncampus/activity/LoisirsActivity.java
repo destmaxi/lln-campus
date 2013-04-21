@@ -17,7 +17,9 @@ public class LoisirsActivity extends LLNCampusActivity implements
 	private static final String URL_SPORT = "http://fmserver2.sipr.ucl.ac.be/Ucl_Sport/recordlist.php";
 	private static final String URL_CINE = "http://www.cinescope.be/fr/louvain-la-neuve/accueil/";
 	private static final String URL_CARPESTUDENTEM = "http://www.carpestudentem.org/pub/agenda.php";
-
+	private static final String URL_SABLON = "http://www.uclouvain.be/278074.html";
+	private static final String URL_GALILEE = "http://www.uclouvain.be/278075.html";
+	private static final String URL_DUN_PAIN_A_LAUTRE = "http://www.uclouvain.be/276940.html";	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,7 +29,9 @@ public class LoisirsActivity extends LLNCampusActivity implements
 		setThisOnClickListener(R.id.button_cinema);
 		setThisOnClickListener(R.id.button_carpestudentem);
 		setThisOnClickListener(R.id.button_sports);
-		setThisOnClickListener(R.id.button_restaurants);
+		setThisOnClickListener(R.id.button_sablon);
+		setThisOnClickListener(R.id.button_galilee);
+		setThisOnClickListener(R.id.button_dun_pain_a_lautre);
 	}
 
 	private void setThisOnClickListener(int btnId) {
@@ -109,6 +113,30 @@ public class LoisirsActivity extends LLNCampusActivity implements
 			intent.putExtra("URL", URL_CARPESTUDENTEM);
 			startActivity(intent);
 			break;
+		case R.id.button_sablon:
+			intent.putExtra("TITLE", r.getString(R.string.sablon));
+			intent.putExtra("URL", URL_SABLON);
+			intent.putExtra(
+					"CSS",
+					"#menu, #header{display:none;}");
+			startActivity(intent);
+			break;
+		case R.id.button_galilee:
+			intent.putExtra("TITLE", r.getString(R.string.galilee));
+			intent.putExtra("URL", URL_GALILEE);
+			intent.putExtra(
+					"CSS",
+					"#menu, #header{display:none;}");
+			startActivity(intent);
+			break;					
+		case R.id.button_dun_pain_a_lautre:
+				intent.putExtra("TITLE", r.getString(R.string.dun_pain_a_lautre));
+				intent.putExtra("URL", URL_DUN_PAIN_A_LAUTRE);
+				intent.putExtra(
+						"CSS",
+						"#menu, #header{display:none;}");
+				startActivity(intent);
+				break;			
 		default:
 			notify(r.getString(R.string.todo));
 		}
