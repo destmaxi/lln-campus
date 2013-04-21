@@ -16,6 +16,7 @@
     <string name="vendredi">Friday</string>
     <string name="samedi">Saturday</string>
     <string name="dimanche">Sunday</string>
+    <string name="reloaded_db">The application is reset.</string>
     
     <!-- Strings utile dans MainActivity -->
 	<string name="no_pdf_player">No PDF viewer installed: attempting to connect by the Internet#8230</string>
@@ -126,4 +127,8 @@
 	<string name="login_password">Password</string>
 	<string name="settings_notify">Course notifications</string>
 	<string name="summary_settings_notify">Enable alert of imminent courses</string>
+	
+	<!-- Strings dans le Launcher -->
+	<string name="first_use">"Initialization of the application for the first use. Please wait#8230"</string>
+	<string name="update_app">"Updating the application. Please wait#8230"</string>
 </resources>

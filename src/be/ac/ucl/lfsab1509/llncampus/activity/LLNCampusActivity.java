@@ -134,7 +134,7 @@ public abstract class LLNCampusActivity extends Activity {
 			db.close();
 			db.reset();
 			db.open();
-			notify("La base de donnée a été rechargée");
+			notify(getString(R.string.reloaded_db));
 			break;
 		case R.id.menu_about:
 			intent = new Intent(this, AboutActivity.class);
