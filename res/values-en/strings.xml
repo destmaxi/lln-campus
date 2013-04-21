@@ -84,7 +84,7 @@
     
     <!--  Strings utiles pour about_activity -->
 	<string name="about">About</string>
-    <string name="about_text">This application was developed by Benjamin Baugnies, Quentin De Coninck, Pham Anh Tuan Le and Damien Mercier for the course LFSAB1509 given at the Université Catholique de Louvain-la-Neuve. This application is distributed under the GPL3 license. Version 0.4.4.</string>
+    <string name="about_text">This application was developed by Benjamin Baugnies, Quentin De Coninck, Pham Anh Tuan Le and Damien Mercier for the course LFSAB1509 given at the Université Catholique de Louvain-la-Neuve. This application is distributed under the GPL3 license. Version 0.4.5.</string>
 
 	<!--  Strings utiles pour MapActivity -->
     <string name="map">Map</string>
