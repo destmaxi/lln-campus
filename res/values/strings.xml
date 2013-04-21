@@ -5,7 +5,7 @@
     <string name="main_menu">Menu principal</string>
 
     <!-- Strings utiles a plusieurs endroits -->
-    <string name="settings">Options</string>
+    <string name="settings">Paramètres</string>
     <string name="reset_DB">Réinitialiser</string>
     <string name="open">Ouvert</string>
     <string name="close">Fermé</string>
@@ -117,4 +117,14 @@
 	<string name="entite">Entité</string>
 	<string name="sigle_ou_acro">(sigle ou acronyme)</string>
 	<string name="repertoire">Répertoire (personnel UCL)</string>
+	
+	<!-- Strings pour les preferences -->
+	<string name="login_info">"Informations d'authentification"</string>
+	<string name="summary_login_username">Veuillez entrer votre identifiant UCL</string>
+	<string name="login_username">Identifiant UCL</string>
+	<string name="summary_login_password">Veuillez entrer votre mot de passe</string>
+	<string name="login_password">Mot de passe</string>
+	<string name="settings_notify">Notifications de cours</string>
+	<string name="summary_settings_notify">Autoriser les alertes de cours imminents</string>
+	
 </resources>
