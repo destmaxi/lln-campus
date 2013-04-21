@@ -117,4 +117,13 @@
 	<string name="entite">Entity</string>
 	<string name="sigle_ou_acro">(sigle or acronym)</string>
 	<string name="repertoire">Répertory (UCL staff)</string>
+	
+	<!-- Strings pour les preferences -->
+	<string name="login_info">Login information</string>
+	<string name="summary_login_username">"Please enter your login username"</string>
+	<string name="login_username">UCL username</string>
+	<string name="summary_login_password">Please enter your password</string>
+	<string name="login_password">Password</string>
+	<string name="settings_notify">Course notifications</string>
+	<string name="summary_settings_notify">Enable alert of imminent courses</string>
 </resources>
