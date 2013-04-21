@@ -78,6 +78,7 @@ public class MainActivity extends LLNCampusActivity implements OnClickListener {
 	@Override
 	public final void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
+
 		// get/set the size here.
 		/** Afin d'avoir une largeur ou une hauteur optimale **/
 
