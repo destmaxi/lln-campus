@@ -8,7 +8,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -134,11 +133,8 @@ public abstract class LLNCampusActivity extends Activity {
 		case R.id.menu_resetDB: // FIXME : Dispo en mode developpement
 								// uniquement
 			db.close();
-			Log.d("ICI1", "yo");
 			db.reset();
-			Log.d("ICI2", "yo");
 			db.open();
-			Log.d("ICI3", "yo");
 			notify(getString(R.string.reloaded_db));
 			break;
 		case R.id.menu_about:
