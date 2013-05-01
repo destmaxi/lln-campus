@@ -2,6 +2,7 @@ package be.ac.ucl.lfsab1509.llncampus.activity;
 
 import java.util.ArrayList;
 
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -154,15 +155,20 @@ public class BibliothequesActivity extends LLNCampusActivity implements
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.bibliotheque_details_button_navigation:
-			intent = new Intent(android.content.Intent.ACTION_VIEW,
-					Uri.parse("http://maps.google.com/maps?daddr="
-							+ getCurrentBibliotheque().getLatitude() + ","
-							+ getCurrentBibliotheque().getLongitude()
-							+ "&dirflg=w"));
-			intent.setComponent(new ComponentName(
-					"com.google.android.apps.maps",
-					"com.google.android.maps.MapsActivity"));
-			startActivity(intent);
+			try{
+				intent = new Intent(android.content.Intent.ACTION_VIEW,
+						Uri.parse("http://maps.google.com/maps?daddr="
+								+ getCurrentBibliotheque().getLatitude() + ","
+								+ getCurrentBibliotheque().getLongitude()
+								+ "&dirflg=w"));
+				intent.setComponent(new ComponentName(
+						"com.google.android.apps.maps",
+						"com.google.android.maps.MapsActivity"));
+				startActivity(intent);
+
+			} catch (ActivityNotFoundException e) { // If we don't have Google Maps
+				notify(R.string.no_google_maps);
+			}
 			break;
 		case R.id.bibliotheque_details_button_horaire:
 			ExternalAppUtility.openBrowser(this, getCurrentBibliotheque()

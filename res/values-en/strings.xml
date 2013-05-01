@@ -131,4 +131,7 @@
 	<!-- Strings dans le Launcher -->
 	<string name="first_use">"Initialization of the application for the first use. Please wait#8230"</string>
 	<string name="update_app">"Updating the application. Please wait#8230"</string>
+	
+	<!-- Strings pour maps -->
+	<string name="no_google_maps">Please install Google Maps in order to have this functionnality.</string>
 </resources>

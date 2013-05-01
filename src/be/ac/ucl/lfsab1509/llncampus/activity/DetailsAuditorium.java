@@ -3,6 +3,7 @@ package be.ac.ucl.lfsab1509.llncampus.activity;
 import be.ac.ucl.lfsab1509.llncampus.Auditorium;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.fragment.AuditoriumDetailsFragment;
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -10,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 /**
  * This class is intended to shows information about an IAuditorium
@@ -60,11 +62,16 @@ public class DetailsAuditorium extends LLNCampusActivity implements OnClickListe
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.button_auditorium_gps:
-			intent = new Intent(android.content.Intent.ACTION_VIEW, 
-					Uri.parse("http://maps.google.com/maps?daddr="+auditorium.getLatitude()+","+auditorium.getLongitude()+ "&dirflg=w"));
-			intent.setComponent(new ComponentName("com.google.android.apps.maps", 
-					"com.google.android.maps.MapsActivity"));          
-			startActivity(intent);
+			try{
+				intent = new Intent(android.content.Intent.ACTION_VIEW, 
+						Uri.parse("http://maps.google.com/maps?daddr="+auditorium.getLatitude()+","+auditorium.getLongitude()+ "&dirflg=w"));
+				intent.setComponent(new ComponentName("com.google.android.apps.maps", 
+						"com.google.android.maps.MapsActivity"));          
+				startActivity(intent);
+
+			} catch (ActivityNotFoundException e) { // If we don't have Google Maps
+				notify(R.string.no_google_maps);
+			}
 			break;
 		case R.id.button_subauditorium:
 			intent = new Intent(this, SubAuditoriumActivity.class);
