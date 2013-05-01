@@ -10,7 +10,8 @@
   <EditTextPreference
      android:key="password"
      android:summary="@string/summary_login_password"
-     android:title="@string/login_password" />
+     android:title="@string/login_password"
+     android:password="true" />
  </PreferenceCategory>
  
  <PreferenceCategory
