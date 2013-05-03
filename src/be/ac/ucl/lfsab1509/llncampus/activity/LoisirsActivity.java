@@ -111,6 +111,7 @@ public class LoisirsActivity extends LLNCampusActivity implements
 		case R.id.button_carpestudentem:
 			intent.putExtra("TITLE", r.getString(R.string.carpestudentem));
 			intent.putExtra("URL", URL_CARPESTUDENTEM);
+			intent.putExtra("CSS", "#account_bar, #header, #menu, #nav, #footer, #unique_column h4{ display:none; }");
 			startActivity(intent);
 			break;
 		case R.id.button_sablon:
