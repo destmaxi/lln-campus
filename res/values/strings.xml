@@ -19,7 +19,7 @@
     <string name="reloaded_db">"L'application a été réinitialisée."</string>
     
     <!-- Strings utile dans MainActivity -->
-	<string name="no_pdf_player">Pas de lecteur de PDF installe: tentative de connection par le net#8230</string>
+	<string name="no_pdf_player">Pas de lecteur de PDF installe: tentative de connection par le net #8230</string>
 
     <!-- Strings utiles pour main_title -->
     <string name="menu_settings">Options</string>
@@ -84,14 +84,14 @@
     <string name="moniteur_data">Moniteur data</string>
     <string name="tele">Télévision</string>
     <string name="subauditorium_picture_description">Photo du sous-auditoire</string>
-    <string name="subauditorium_picture_message">Attente de connexion internet#8230;</string>
+    <string name="subauditorium_picture_message">Attente de connexion internet #8230;</string>
 
     <!-- Strings utiles pour about_activity -->
     <string name="about">À propos</string>
     <string name="about_text">"Cette application a été développée par Benjamin Baugnies, Quentin De Coninck, Pham Anh Tuan Le et Damien Mercier dans le cadre du cours LFSAB1509 donné à l'Université Catholique de Louvain-la-Neuve. Cette application est distribuée sous licence GPL3. Version 0.4.5."</string>
 
     <!-- Strings utiles pour MapActivity -->
-    <string name="map">Map</string>
+    <string name="map">Plan</string>
 
     <!-- Strings utiles pour horaire -->
     <string name="button_ADE">Bouton</string>
@@ -132,12 +132,32 @@
 	<string name="summary_settings_notify">Autoriser les alertes de cours imminents</string>
 	
 	<!-- Strings dans le Launcher -->
-	<string name="first_use">"Initialisation de l'application pour la première utilisation. Veuillez patienter#8230"</string>
-	<string name="update_app">"Mise à jour de l'application. Veuillez patienter#8230"</string>
+	<string name="first_use">"Initialisation de l'application pour la première utilisation. Veuillez patienter #8230"</string>
+	<string name="update_app">"Mise à jour de l'application. Veuillez patienter #8230"</string>
 	
 	<!-- Strings pour maps -->
 	<string name="no_google_maps">Veuillez installer Google Maps pour accéder à cette fonctionnalité.</string>
 	<string name="notify_ringtone">Sonnerie de notification</string>
 	<string name="notify_minute">Nombre de minutes</string>
 	<string name="notify_minute_summary">La notification apparaitra le nombre de minute spécifié avant votre cours.</string>
+	
+	
+	<!-- Strings pour CoursListEditActivity -->
+	<string name="username_notify">"Pour utiliser cette fonctionnalité, vous devez avoir préalablement définit votre identifiant et votre mot de passe UCL dans les préférences de l'application"</string>
+	<string name="connection">Connexion #8230</string>
+	<string name="connection_UCL">"Connexion à UCLouvain.be"</string>
+	<string name="fetch_info">"Récupération des informations sur les études suivies"</string>
+	<string name="error_anac">"Impossible de récupérer vos études pour l'année académique"</string>
+	<string name="get_courses">"Récupération de la liste des cours pour "</string>
+	<string name="courses_empty">"Aucun cours n'a été trouvé."</string>
+	<string name="cleaning_db">"Nettoyage de la base de donnée  "</string>
+	<string name="add_courses_db">"Ajout des nouveaux cours dans la base de donnée"</string>
+	<string name="end">Fin</string>
+	<string name="courses_download_ok">"Liste des cours correctement téléchargée."</string>
+	<string name="add_course_ok">"Cours correctement ajouté"</string>
+	<string name="add_course_error">"Echec de l'ajout du cours"</string>
+	<string name="delete_course">"Suppression d'un cours"</string>
+	<string name="confirm_delete_course">"Etes-vous sûr de vouloir supprimer le cours "</string>
+	<string name="delete_course_ok">"Cours supprimé!"</string>
+	<string name="delete_course_error">"Echec de la suppression :/"</string>
 </resources>

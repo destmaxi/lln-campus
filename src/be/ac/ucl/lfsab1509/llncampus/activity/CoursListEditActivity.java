@@ -83,9 +83,7 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 		String password = preferences.getString("password", null);
 		
 		if (username == null || password == null) {
-			notify("Pour utiliser cette fonctionnalité, vous devez avoir " +
-					"préalablement définit votre identifiant et votre mot de passe UCL " +
-					"dans les préférences de l'application");
+			notify(getString(R.string.username_notify));
 			Intent intent = new Intent(this, SettingsActivity.class);
 			startActivity(intent);
 			return ;
@@ -130,7 +128,7 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 		mProgress.setCancelable(false);
 		mProgress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		mProgress.setMax(100);
-		mProgress.setMessage("Connexion...");
+		mProgress.setMessage(getString(R.string.connection));
 
 		mProgress.show();
 
@@ -159,15 +157,15 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 			}
 
 			public void run() {
-				progress(0, "Connexion à UCLouvain.be");
+				progress(0, getString(R.string.connection_UCL));
 				UCLouvain uclouvain = new UCLouvain(username, password);
 
 				progress(20,
-						"Récupération des informations sur les études suivies");
+						getString(R.string.fetch_info));
 				ArrayList<Offre> offres = uclouvain.getOffres(anac);
 
 				if (offres == null || offres.isEmpty()) {
-					sendError("Impossible de récupérer vos études pour l'année académique "
+					sendError(getString(R.string.error_anac)
 							+ anac);
 					return;
 				}
@@ -175,7 +173,7 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 				int i = 40;
 				ArrayList<Cours> cours = new ArrayList<Cours>();
 				for (Offre o : offres) {
-					progress(i, "Récupération de la liste des cours pour "
+					progress(i, getString(R.string.get_courses)
 							+ o.getOffreName());
 					ArrayList<Cours> c = uclouvain.getCourses(o);
 					if (c != null && !c.isEmpty()) {
@@ -189,12 +187,12 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 				}
 
 				if (cours.isEmpty()) {
-					sendError("Aucun cours n'a été trouvé.");
+					sendError(getString(R.string.courses_empty));
 					return;
 				}
 
 				// Suppression des anciens cours
-				progress(70, "Nettoyage de la base de donnée  ");
+				progress(70, getString(R.string.cleaning_db));
 				LLNCampus.getDatabase().delete("Courses", "", null);
 				LLNCampus.getDatabase().delete("Horaire", "", null);
 
@@ -202,7 +200,7 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 				i = 80;
 				for (Cours c : cours) {
 					progress(i,
-							"Ajout des nouveaux cours dans la base de donnée");
+							getString(R.string.add_courses_db));
 					ContentValues cv = new ContentValues();
 					cv.put("CODE", c.getCoursCode());
 					cv.put("NAME", c.getCoursName());
@@ -211,9 +209,9 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 					i += (int) (20. / cours.size());
 				}
 
-				progress(100, "Fin");
+				progress(100, getString(R.string.end));
 				mProgress.cancel();
-				notify("Liste des cours correctement téléchargée.");
+				notify(getString(R.string.courses_download_ok));
 				mHandler.post(new Runnable() {
 					public void run() {
 						context.loadCoursList();
@@ -251,9 +249,9 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 			EditText name = (EditText) findViewById(R.id.cours_name);
 
 			if (Cours.add(code.getText().toString(), name.getText().toString())) {
-				super.notify("Cours correctement ajouté");
+				super.notify(getString(R.string.add_course_ok));
 			} else {
-				super.notify("Echec de l'ajout du cours");
+				super.notify(getString(R.string.add_course_error));
 			}
 			loadCoursList();
 			break;
@@ -265,8 +263,8 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 			long arg3) {
 		final Cours c = coursList.get(position);
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Suppression d'un cours").setMessage(
-				"Etes-vous sûr de vouloir supprimer le cours " + c.getCoursCode()
+		builder.setTitle(getString(R.string.delete_course)).setMessage(
+				getString(R.string.confirm_delete_course) + c.getCoursCode()
 						+ " ?");
 		builder.setPositiveButton(android.R.string.ok,
 				new DialogInterface.OnClickListener() {
@@ -280,14 +278,14 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 
 					public void onClick(DialogInterface dialog, int id) {
 						if (Cours.remove(c)) {
-							notify("Cours supprimé!");
+							notify(getString(R.string.delete_course_ok));
 							mHandler.post(new Runnable() {
 								public void run() {
 									context.loadCoursList();
 								}
 							});
 						} else {
-							notify("Echec de la suppression :/");
+							notify(getString(R.string.delete_course_error));
 						}
 
 					}

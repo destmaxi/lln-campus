@@ -137,4 +137,23 @@
 	
 	<!-- Strings pour maps -->
 	<string name="no_google_maps">Please install Google Maps in order to have this functionnality.</string>
+	
+	<!-- Strings pour CoursListEditActivity -->
+	<string name="username_notify">"To use this fonctionnality, you must first define your UCL username and password in the application's settings"</string>
+	<string name="connection">Connection #8230</string>
+	<string name="connection_UCL">"Connection to UCLouvain.be"</string>
+	<string name="fetch_info">"Retrieving information about the course attended"</string>
+	<string name="error_anac">"Unable to retrieve your studies for the academic year"</string>
+	<string name="get_courses">"Retrieving the list of courses for "</string>
+	<string name="courses_empty">"Aucun cours n'a été trouvé."</string>
+	<string name="cleaning_db">"Cleaning the database  "</string>
+	<string name="add_courses_db">"Addition of new courses in the database"</string>
+	<string name="end">End</string>
+	<string name="courses_download_ok">"List of courses successfully downloaded."</string>
+	<string name="add_course_ok">"Course successfully added"</string>
+	<string name="add_course_error">"Failed to add the course"</string>
+	<string name="delete_course">"Deleting a course"</string>
+	<string name="confirm_delete_course">"Are you sure you want to delete the course "</string>
+	<string name="delete_course_ok">"Course deleted!"</string>
+	<string name="delete_course_error">"Failed to delete :/"</string>
 </resources>
