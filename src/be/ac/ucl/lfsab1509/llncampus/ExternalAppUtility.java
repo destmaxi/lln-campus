@@ -1,5 +1,7 @@
 package be.ac.ucl.lfsab1509.llncampus;
 
+import java.net.URI;
+
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -29,6 +31,11 @@ public class ExternalAppUtility {
 	 */
 	public static void openBrowser(Context context, String url) {
 		Uri uri = Uri.parse(url);
+		Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+		context.startActivity(intent);
+	}
+	
+	public static void openBrowser(Context context, Uri uri) {
 		Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 		context.startActivity(intent);
 	}

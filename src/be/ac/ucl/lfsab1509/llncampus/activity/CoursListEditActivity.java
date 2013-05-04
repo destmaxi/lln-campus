@@ -7,8 +7,10 @@ import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
@@ -76,17 +78,30 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 	}
 
 	private void startDownloadActivity() {
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+		String username = preferences.getString("username", null);
+		String password = preferences.getString("password", null);
+		
+		if (username == null || password == null) {
+			notify("Pour utiliser cette fonctionnalité, vous devez avoir " +
+					"préalablement définit votre identifiant et votre mot de passe UCL " +
+					"dans les préférences de l'application");
+			Intent intent = new Intent(this, SettingsActivity.class);
+			startActivity(intent);
+			return ;
+			// Proposer de modifier les options ou de revenir en arrière
+		}
 		onFirstPage = false;
-		setContentView(R.layout.download_from_uclouvain);
-		findViewById(R.id.update_from_internet).setOnClickListener(this);
-		EditText anac = (EditText) findViewById(R.id.anac);
+		
 		Time t = new Time();
 		t.setToNow();
-		int y = t.year;
+		int anac = t.year;
 		if (t.month < 9) {
-			y--;
+			anac--;
 		}
-		anac.setText(String.valueOf(y));
+		
+		runUpdateCourseList(username,password,anac);
+		loadCoursList();
 
 	}
 
