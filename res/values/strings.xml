@@ -62,6 +62,7 @@
     <string name="building_picture_description">Aperçu de l entree du bâtiment</string>
     <string name="access_description">Indique si l endroit est accessible pour les personnes à mobilité réduite</string>
     <string name="library_specialSchedule">Horaires spéciaux</string>
+    <string name="more_details">"+ de détails"</string>
 
     <!-- Listage des strings utilises dans le XML subauditorium_details -->
     <string name="yes">Oui</string>
@@ -130,6 +131,9 @@
 	<string name="login_password">Mot de passe</string>
 	<string name="settings_notify">Notifications de cours</string>
 	<string name="summary_settings_notify">Autoriser les alertes de cours imminents</string>
+	<string name="notify_ringtone">Sonnerie de notification</string>
+	<string name="notify_minute">Nombre de minutes</string>
+	<string name="notify_minute_summary">La notification apparaitra le nombre de minute spécifié avant votre cours.</string>
 	
 	<!-- Strings dans le Launcher -->
 	<string name="first_use">"Initialisation de l'application pour la première utilisation. Veuillez patienter #8230"</string>
@@ -137,9 +141,7 @@
 	
 	<!-- Strings pour maps -->
 	<string name="no_google_maps">Veuillez installer Google Maps pour accéder à cette fonctionnalité.</string>
-	<string name="notify_ringtone">Sonnerie de notification</string>
-	<string name="notify_minute">Nombre de minutes</string>
-	<string name="notify_minute_summary">La notification apparaitra le nombre de minute spécifié avant votre cours.</string>
+	
 	
 	
 	<!-- Strings pour CoursListEditActivity -->

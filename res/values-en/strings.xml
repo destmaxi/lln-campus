@@ -62,6 +62,7 @@
     <string name="building_picture_description">Overview of building entrance</string>
     <string name="access_description">Show if the place is accessible for disabled person</string>
     <string name="library_specialSchedule">Special schedule</string>
+    <string name="more_details">"more details"</string>
     
      <!-- Listage des strings utilises dans le XML subauditorium_details -->
     <string name="yes">Yes</string>
@@ -104,7 +105,7 @@
     <string name="cours_add">Add a course</string>
     <string name="cours_code">Course code</string>
     <string name="cours_name">Course name</string>
-    <string name="cours_list_explanation">"In order to have your schedule, you have to indicate the different course codes which you take (the code courses have to match with on ADE ones). In order to make the task easier, the application can download the course list from uclouvain.be. To do that, click on \"Download from UCLouvian\". To delete a course of the list, click on it. "</string>
+    <string name="cours_list_explanation">"In order to have your schedule, you have to indicate the different course codes which you take (the code courses have to match with on ADE ones). In order to make the task easier, the application can download the course list from uclouvain.be. To do that, click on \"Download from UCLouvain\". To delete a course of the list, click on it. "</string>
     <string name="emptyCoursListDialogTitle">First step with the schedule</string>
     <string name="emptyCoursListDialogText">There is still not any course downloaded for your schedule yet. In order to have your schedule, you have to indicate the different course codes which you take. To do that, it is possible to download automatically your course list from the UCL website. It is also possible to add manually if your course codes of your virtual office do not match with ADE ones.</string>
     <string name="telechargement_pour">Download for</string>
@@ -130,6 +131,9 @@
 	<string name="login_password">Password</string>
 	<string name="settings_notify">Course notifications</string>
 	<string name="summary_settings_notify">Enable alert of imminent courses</string>
+	<string name="notify_ringtone">Notification ringtone</string>
+	<string name="notify_minute">Number of minutes</string>
+	<string name="notify_minute_summary">The notification will appear the specified number of minutes before your course.</string>
 	
 	<!-- Strings dans le Launcher -->
 	<string name="first_use">"Initialization of the application for the first use. Please wait#8230"</string>
