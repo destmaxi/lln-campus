@@ -29,6 +29,7 @@ public abstract class LLNCampusActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		LLNCampus.setContext(this);
+		LLNCampus.startAlarmService();
 		this.db = LLNCampus.getDatabase();
 		super.onCreate(savedInstanceState);
 		db.open();

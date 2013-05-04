@@ -137,4 +137,7 @@
 	
 	<!-- Strings pour maps -->
 	<string name="no_google_maps">Veuillez installer Google Maps pour accéder à cette fonctionnalité.</string>
+	<string name="notify_ringtone">Sonnerie de notification</string>
+	<string name="notify_minute">Nombre de minutes</string>
+	<string name="notify_minute_summary">La notification apparaitra le nombre de minute spécifié avant votre cours.</string>
 </resources>

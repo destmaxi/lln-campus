@@ -6,7 +6,6 @@ import be.ac.ucl.lfsab1509.llncampus.R;
 
 /**
  * Edit settings
- * @author Damien
  */
 public class SettingsActivity extends PreferenceActivity {
 

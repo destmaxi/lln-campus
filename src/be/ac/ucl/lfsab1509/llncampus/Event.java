@@ -146,7 +146,9 @@ public class Event {
 		for (String key : details.keySet()) {
 			detailsTxt += key + " : " + details.get(key) + "\n";
 		}
-		return "Date : " + getTime() + "\n" + detailsTxt;
+		detailsTxt += "begin :" + begin.toMillis(false)  + " - end : " + end.toMillis(false) + "\n";
+		return "Date : " + begin.monthDay + "/" + begin.month + "/"
+				+ begin.year + " " + getTime() + "\n" + detailsTxt;
 	}
 
 	/**
@@ -159,8 +161,8 @@ public class Event {
 	}
 
 	/**
-	 * Fournit les clé-valeurs pour l'insertion dans 
-	 * la table Horaire de la base de donnée.
+	 * Fournit les clé-valeurs pour l'insertion dans la table Horaire de la base
+	 * de donnée.
 	 * 
 	 * @return ContentValues pour l'insertion dans la base de donnée
 	 */

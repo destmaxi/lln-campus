@@ -5,9 +5,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Calendar;
 
+import be.ac.ucl.lfsab1509.llncampus.services.AlarmService;
+
+import android.app.AlarmManager;
 import android.app.Application;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Environment;
 import android.util.Log;
@@ -33,6 +39,15 @@ public class LLNCampus extends Application {
 			DB.close();
 			DB = null;
 		}
+	}
+	
+	public static void startAlarmService(){
+		Intent intent = new Intent(APPLICATION_CONTEXT, AlarmService.class);
+		PendingIntent pintent = PendingIntent.getService(APPLICATION_CONTEXT, 0, intent, 0);
+
+		AlarmManager alarm = (AlarmManager) APPLICATION_CONTEXT.getSystemService(Context.ALARM_SERVICE);
+		// Toutes les minutes
+		alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis(), 60*1000, pintent); 
 	}
 	
 	/**
