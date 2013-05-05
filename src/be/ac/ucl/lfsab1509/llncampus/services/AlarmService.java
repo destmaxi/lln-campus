@@ -1,8 +1,10 @@
 package be.ac.ucl.lfsab1509.llncampus.services;
 
+import be.ac.ucl.lfsab1509.llncampus.Cours;
 import be.ac.ucl.lfsab1509.llncampus.Database;
 import be.ac.ucl.lfsab1509.llncampus.Event;
 import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
+import be.ac.ucl.lfsab1509.llncampus.activity.HoraireActivity;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
@@ -43,7 +45,7 @@ public class AlarmService extends Service {
 			return;
 		}
 
-		if (nextEvent == null) {
+		if (Cours.getList().size() != 0 && nextEvent == null) {
 			loadNextEvent();
 		}
 
@@ -58,7 +60,7 @@ public class AlarmService extends Service {
 		Time currentDate = new Time();
 		currentDate.setToNow();
 
-		if (nextEvent.getBeginTime().toMillis(false) - nbMin * 60L * 1000L
+		if (Cours.getList().size() != 0 && nextEvent.getBeginTime().toMillis(false) - nbMin * 60L * 1000L
 				- currentDate.toMillis(false) < 0L) {
 			sendAlert(nextEvent);
 			loadNextEvent();

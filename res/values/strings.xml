@@ -162,4 +162,14 @@
 	<string name="confirm_delete_course">"Etes-vous sûr de vouloir supprimer le cours "</string>
 	<string name="delete_course_ok">"Cours supprimé!"</string>
 	<string name="delete_course_error">"Echec de la suppression :/"</string>
+	
+	<!-- Strings pour HoraireActivity -->
+	<string name="information">"Informations"</string>
+	<string name="course">Cours</string>
+	<string name="trainees">Etudiants</string>
+	<string name="trainers">Enseignants</string>
+	<string name="room">Local</string>
+	<string name="activity_name">"Nom de l'activité"</string>
+	<string name="title">Titre</string>
+	
 </resources>

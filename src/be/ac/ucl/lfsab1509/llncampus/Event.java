@@ -11,6 +11,7 @@ public class Event {
 	private Time begin;
 	private Time end;
 	private HashMap<String, String> details;
+	private HashMap<String, String> keyName;
 
 	/**
 	 * Constructeur.
@@ -32,7 +33,9 @@ public class Event {
 		} catch (NumberFormatException e) {
 			e.printStackTrace(); // TODO
 		}
+		keyName = new HashMap<String, String>();
 		details = new HashMap<String, String>();
+		
 	}
 
 	/**
@@ -48,6 +51,7 @@ public class Event {
 		this.begin.set(begin);
 		this.end = new Time();
 		this.end.set(end);
+		keyName = new HashMap<String, String>();
 		details = new HashMap<String, String>();
 	}
 
@@ -61,6 +65,17 @@ public class Event {
 	 */
 	public final void addDetail(final String key, final String value) {
 		details.put(key, value);
+	}
+	
+	/**
+	 * Permet de définir un nom pour la cle
+	 * @param key
+	 *            Clé de la clé
+	 * @param value
+	 *            Nom de la clé
+	 */
+	public final void addNameKey(final String key, final String name) {
+		keyName.put(key, name);
 	}
 
 	/**
@@ -121,6 +136,17 @@ public class Event {
 	public final String getDetail(final String key) {
 		return details.get(key);
 	}
+	
+	/**
+	 * Fournit le nom demandé ou null si la clé n'existe pas .
+	 * 
+	 * @param key
+	 *            Clé de la clé
+	 * @return Nom de la cle demande ou null si la cle n'existe pas
+	 */
+	public final String getKeyName(final String key) {
+		return keyName.get(key);
+	}
 
 	/**
 	 * Fournit la date/heure de début.
@@ -144,7 +170,7 @@ public class Event {
 	public final String toString() {
 		String detailsTxt = "";
 		for (String key : details.keySet()) {
-			detailsTxt += key + " : " + details.get(key) + "\n";
+			detailsTxt += keyName.get(key) + " : " + details.get(key) + "\n";
 		}
 		detailsTxt += "begin :" + begin.toMillis(false)  + " - end : " + end.toMillis(false) + "\n";
 		return "Date : " + begin.monthDay + "/" + begin.month + "/"

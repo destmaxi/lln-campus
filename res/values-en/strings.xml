@@ -160,4 +160,13 @@
 	<string name="confirm_delete_course">"Are you sure you want to delete the course "</string>
 	<string name="delete_course_ok">"Course deleted!"</string>
 	<string name="delete_course_error">"Failed to delete :/"</string>
+	
+	<!-- Strings pour HoraireActivity -->
+	<string name="information">"Information"</string>
+	<string name="course">Course</string>
+	<string name="trainees">Students</string>
+	<string name="trainers">Teachers</string>
+	<string name="room">Room</string>
+	<string name="activity_name">Activity name</string>
+	<string name="title">Title</string>
 </resources>

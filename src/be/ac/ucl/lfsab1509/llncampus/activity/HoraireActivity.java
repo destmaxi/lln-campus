@@ -106,12 +106,18 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
 					"TIME_BEGIN ASC");
 		while (c.moveToNext()) {
 			Event e = new Event(c.getLong(1), c.getLong(2));
-			e.addDetail("course", c.getString(0));			
+			e.addDetail("course", c.getString(0));
+			e.addNameKey("course", getString(R.string.course));
 			e.addDetail("trainees", c.getString(3));
+			e.addNameKey("trainees", getString(R.string.trainees));
 			e.addDetail("trainers", c.getString(4));
+			e.addNameKey("trainers", getString(R.string.trainers));
 			e.addDetail("room", c.getString(5));
+			e.addNameKey("room", getString(R.string.room));
 			e.addDetail("activity_name", c.getString(6));
+			e.addNameKey("activity_name", getString(R.string.activity_name));
 			e.addDetail("title", c.getString(7));
+			e.addNameKey("title", getString(R.string.title));
 			this.events.add(e);
 		}
 		c.close();
@@ -201,7 +207,7 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 		final Event e = currentEvents.get(position);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Informations").setMessage(e.toString());
+        builder.setTitle(getString(R.string.information)).setMessage(e.toString());
 	    builder.setPositiveButton(android.R.string.ok, null);
 	    AlertDialog dialog = builder.create();
         dialog.show();	        
