@@ -35,7 +35,7 @@ public class Coordinates {
 		Cursor c = db
 				.sqlRawQuery("SELECT Poi.LATITUDE, Poi.LONGITUDE FROM Poi, Auditorium WHERE Poi.ID = Auditorium.BUILDING_ID AND Auditorium.AUDITORIUM_NAME LIKE '"
 						+ sigle + "%' LIMIT 1;");
-		if (c==null) {
+		if (c==null || c.getCount() == 0) {
 			return null;
 		}
 		c.moveToFirst();
