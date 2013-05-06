@@ -1,6 +1,7 @@
 package be.ac.ucl.lfsab1509.llncampus.activity;
 
 import be.ac.ucl.lfsab1509.llncampus.Auditorium;
+import be.ac.ucl.lfsab1509.llncampus.ExternalAppUtility;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.fragment.AuditoriumDetailsFragment;
 import android.content.ActivityNotFoundException;
@@ -61,16 +62,7 @@ public class DetailsAuditorium extends LLNCampusActivity implements OnClickListe
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.button_auditorium_gps:
-			try{
-				intent = new Intent(android.content.Intent.ACTION_VIEW, 
-						Uri.parse("http://maps.google.com/maps?daddr="+auditorium.getLatitude()+","+auditorium.getLongitude()+ "&dirflg=w"));
-				intent.setComponent(new ComponentName("com.google.android.apps.maps", 
-						"com.google.android.maps.MapsActivity"));          
-				startActivity(intent);
-
-			} catch (ActivityNotFoundException e) { // If we don't have Google Maps
-				notify(R.string.no_google_maps);
-			}
+			ExternalAppUtility.startGPS(auditorium.getLatitude(), auditorium.getLongitude(),this);
 			break;
 		case R.id.button_subauditorium:
 			intent = new Intent(this, SubAuditoriumActivity.class);

@@ -172,7 +172,6 @@ public class Event {
 		for (String key : details.keySet()) {
 			detailsTxt += keyName.get(key) + " : " + details.get(key) + "\n";
 		}
-		detailsTxt += "begin :" + begin.toMillis(false)  + " - end : " + end.toMillis(false) + "\n";
 		return "Date : " + begin.monthDay + "/" + begin.month + "/"
 				+ begin.year + " " + getTime() + "\n" + detailsTxt;
 	}

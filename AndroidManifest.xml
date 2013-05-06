@@ -44,6 +44,11 @@
             android:theme="@android:style/Theme.Holo.Dialog" >
         </activity>
         <activity
+            android:name="be.ac.ucl.lfsab1509.llncampus.activity.CourseDetailsActivity"
+            android:label="@string/information"
+            android:theme="@android:style/Theme.Holo.Dialog" >
+        </activity>
+        <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.DetailsAuditorium"
             android:label="@string/auditoires" >
         </activity>

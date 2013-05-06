@@ -7,9 +7,14 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpProtocolParams;
 
+import be.ac.ucl.lfsab1509.llncampus.activity.LLNCampusActivity;
+
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 
 /**
  * Utility class for invoking other Android applications
@@ -54,6 +59,23 @@ public class ExternalAppUtility {
 		}
 		HttpProtocolParams.setUserAgent(httpClient.getParams(), "Mozilla 5/0");
 		return httpClient;
+	}
+
+	public static void startGPS(float lat, float lon, Context c) {
+		try{
+			Intent intent = new Intent(android.content.Intent.ACTION_VIEW, 
+					Uri.parse("http://maps.google.com/maps?daddr="+lat+","+lon+ "&dirflg=w"));
+			intent.setComponent(new ComponentName("com.google.android.apps.maps", 
+					"com.google.android.maps.MapsActivity"));          
+			c.startActivity(intent);
+
+		} catch (ActivityNotFoundException e) { // If we don't have Google Maps
+			Log.e("ExternalAppUtility",c.getString(R.string.no_google_maps));
+			//FIXME : Afficher le message à l'utilisateur
+		}
+	}
+	public static void startGPS(double lat, double lon, Context c){
+		startGPS((float) lat, (float) lon, c);
 	}
 	
 }

@@ -3,6 +3,7 @@ package be.ac.ucl.lfsab1509.llncampus.activity;
 import java.util.ArrayList;
 
 import be.ac.ucl.lfsab1509.llncampus.ADE;
+import be.ac.ucl.lfsab1509.llncampus.Coordinates;
 import be.ac.ucl.lfsab1509.llncampus.Cours;
 import be.ac.ucl.lfsab1509.llncampus.Event;
 import be.ac.ucl.lfsab1509.llncampus.R;
@@ -206,11 +207,13 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 		final Event e = currentEvents.get(position);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getString(R.string.information)).setMessage(e.toString());
-	    builder.setPositiveButton(android.R.string.ok, null);
-	    AlertDialog dialog = builder.create();
-        dialog.show();	        
-		
+		Intent i = new Intent(this, CourseDetailsActivity.class);
+		i.putExtra("DETAILS", e.toString());
+		Coordinates c = Coordinates.getCoordinatesFromAuditorium(e.getDetail("room"));
+		if(c != null){
+			i.putExtra("LATITUDE", c.getLat());
+			i.putExtra("LONGITUDE", c.getLon());
+		}
+		startActivity(i);
 	}
 }
