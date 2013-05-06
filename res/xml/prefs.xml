@@ -50,7 +50,7 @@
         <EditTextPreference
             android:key="notify_max_distance"
             android:numeric="integer"
-           android:summary="@string/about" android:title="@string/notify_max_distance"/>
+           android:summary="@string/notify_max_distance_summary" android:title="@string/notify_max_distance"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

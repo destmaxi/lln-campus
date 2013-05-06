@@ -27,6 +27,7 @@ public class AlarmService extends Service {
 	private final static int DEFAULT_NOTIFY_MINUTE = 15;
 	private static final int DEFAULT_MAX_DISTANCE = 5000; // en m
 	private static final int DEFAULT_NOTIFY_VITESSE = 5; // en km/h
+	private static final double MIN_DISTANCE = 30; // en m
 	private static Event nextEvent = null;
 
 	public class LocalBinder extends Binder {
@@ -61,7 +62,7 @@ public class AlarmService extends Service {
 				GPS gps = LLNCampus.getGPS();
 				Coordinates currentCoord = gps.getPosition();
 				double dist = eventCoord.getDistance(currentCoord);
-				if (dist < LLNCampus.getIntPreference("notify_max_distance",
+				if (dist > MIN_DISTANCE && dist < LLNCampus.getIntPreference("notify_max_distance",
 						DEFAULT_MAX_DISTANCE)) {
 					int vitesseKmH = LLNCampus.getIntPreference("notify_vitesse_deplacement",DEFAULT_NOTIFY_VITESSE);
 					int vitesseMMin = vitesseKmH*1000/60;
