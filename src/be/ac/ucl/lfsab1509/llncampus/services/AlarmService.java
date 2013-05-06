@@ -61,14 +61,18 @@ public class AlarmService extends Service {
 			if (eventCoord != null) {
 				GPS gps = LLNCampus.getGPS();
 				Coordinates currentCoord = gps.getPosition();
-				double dist = eventCoord.getDistance(currentCoord);
-				if (dist > MIN_DISTANCE && dist < LLNCampus.getIntPreference("notify_max_distance",
-						DEFAULT_MAX_DISTANCE)) {
-					int vitesseKmH = LLNCampus.getIntPreference("notify_vitesse_deplacement",DEFAULT_NOTIFY_VITESSE);
-					int vitesseMMin = vitesseKmH*1000/60;
+				if (currentCoord != null)
+				{
 
-					nbMin = (int) (dist / vitesseMMin);
-				} 
+					double dist = eventCoord.getDistance(currentCoord);
+					if (dist > MIN_DISTANCE && dist < LLNCampus.getIntPreference("notify_max_distance",
+							DEFAULT_MAX_DISTANCE)) {
+						int vitesseKmH = LLNCampus.getIntPreference("notify_vitesse_deplacement",DEFAULT_NOTIFY_VITESSE);
+						int vitesseMMin = vitesseKmH*1000/60;
+
+						nbMin = (int) (dist / vitesseMMin);
+					} 
+				}
 			} 
 		}
 
