@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Binder;
@@ -53,37 +54,42 @@ public class AlarmService extends Service {
 			loadNextEvent();
 		}
 
-		int nbMin = LLNCampus.getIntPreference("notify_minute",
-				DEFAULT_NOTIFY_MINUTE);
+		if (nextEvent != null) // Sinon, peut planter!
+		{
 
-		if (preferences.getBoolean("notify_with_gps", false)) {
-			Coordinates eventCoord = nextEvent.getCoordinates();
-			if (eventCoord != null) {
-				GPS gps = LLNCampus.getGPS();
-				Coordinates currentCoord = gps.getPosition();
-				if (currentCoord != null)
-				{
+			int nbMin = LLNCampus.getIntPreference("notify_minute",
+					DEFAULT_NOTIFY_MINUTE);
 
-					double dist = eventCoord.getDistance(currentCoord);
-					if (dist > MIN_DISTANCE && dist < LLNCampus.getIntPreference("notify_max_distance",
-							DEFAULT_MAX_DISTANCE)) {
-						int vitesseKmH = LLNCampus.getIntPreference("notify_vitesse_deplacement",DEFAULT_NOTIFY_VITESSE);
-						int vitesseMMin = vitesseKmH*1000/60;
+			if (preferences.getBoolean("notify_with_gps", false)) {
+				Coordinates eventCoord = nextEvent.getCoordinates();
+				if (eventCoord != null) {
+					GPS gps = LLNCampus.getGPS();
+					Coordinates currentCoord = gps.getPosition();
+					if (currentCoord != null)
+					{
 
-						nbMin = (int) (dist / vitesseMMin);
-					} 
-				}
-			} 
-		}
+						double dist = eventCoord.getDistance(currentCoord);
+						if (dist > MIN_DISTANCE && dist < LLNCampus.getIntPreference("notify_max_distance",
+								DEFAULT_MAX_DISTANCE)) {
+							int vitesseKmH = LLNCampus.getIntPreference("notify_vitesse_deplacement",DEFAULT_NOTIFY_VITESSE);
+							int vitesseMMin = vitesseKmH*1000/60;
 
-		Time currentDate = new Time();
-		currentDate.setToNow();
+							nbMin = (int) (dist / vitesseMMin);
+						} 
+					}
+				} 
+			}
 
-		if (Cours.getList().size() != 0
-				&& nextEvent.getBeginTime().toMillis(false) - nbMin * 60L
-						* 1000L - currentDate.toMillis(false) < 0L) {
-			sendAlert(nextEvent);
-			loadNextEvent();
+
+			Time currentDate = new Time();
+			currentDate.setToNow();
+
+			if (Cours.getList().size() != 0
+					&& nextEvent.getBeginTime().toMillis(false) - nbMin * 60L
+					* 1000L - currentDate.toMillis(false) < 0L) {
+				sendAlert(nextEvent);
+				loadNextEvent();
+			}
 		}
 	}
 
@@ -110,10 +116,16 @@ public class AlarmService extends Service {
 						+ "WHERE h.COURSE = c.CODE AND TIME_BEGIN > "
 						+ precTime + " " + "ORDER BY TIME_BEGIN ASC LIMIT 1");
 		c.moveToFirst();
+		try{
 		nextEvent = new Event(c.getLong(0), c.getLong(1));
 		nextEvent.addDetail("course", c.getString(2));
 		nextEvent.addDetail("room", c.getString(3));
 		nextEvent.addDetail("course_name", c.getString(4));
+		} catch(CursorIndexOutOfBoundsException e) // No event yet
+		{
+			nextEvent = null;
+		}
+		
 	}
 
 	public void sendAlert(Event e) {

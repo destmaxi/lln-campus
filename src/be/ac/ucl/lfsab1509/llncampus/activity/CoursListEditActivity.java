@@ -51,6 +51,7 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 		context = this;
 		if (getIntent().getBooleanExtra("startUCLouvain", false)) {
 			startDownloadActivity();
+			finish();
 		} else {
 			loadCoursList();
 		}

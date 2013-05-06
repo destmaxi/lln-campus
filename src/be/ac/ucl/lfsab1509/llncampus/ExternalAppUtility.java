@@ -1,13 +1,9 @@
 package be.ac.ucl.lfsab1509.llncampus;
 
-import java.net.URI;
-
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpProtocolParams;
-
-import be.ac.ucl.lfsab1509.llncampus.activity.LLNCampusActivity;
 
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;

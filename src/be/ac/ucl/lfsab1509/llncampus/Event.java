@@ -1,9 +1,11 @@
 package be.ac.ucl.lfsab1509.llncampus;
 
 import java.util.HashMap;
+import java.util.Locale;
+
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.text.format.Time;
-import android.util.Log;
 
 /**
  * Decrit un evenement (de ADE par exemple).
@@ -200,7 +202,7 @@ public class Event {
 		cv.put("TIME_END", end.toMillis(false));
 
 		for (String key : this.details.keySet()) {
-			cv.put(key.toUpperCase(), this.details.get(key));
+			cv.put(key.toUpperCase(Locale.getDefault()), this.details.get(key));
 		}
 		return cv;
 	}
