@@ -97,7 +97,7 @@
                         android:layout_height="wrap_content"
                         android:drawableLeft="@android:drawable/ic_menu_agenda"
                         android:gravity="center_vertical|center_horizontal"
-                        android:text="+ de détails" />
+                        android:text="@string/more_details" />
                 </LinearLayout>
 
                 <TextView

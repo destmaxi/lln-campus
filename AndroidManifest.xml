@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="be.ac.ucl.lfsab1509.llncampus"
-    android:versionCode="12"
-    android:versionName="0.4.5" >
+    android:versionCode="13"
+    android:versionName="0.5.1" >
 
     <uses-sdk
-        android:minSdkVersion="17"
+        android:minSdkVersion="11"
         android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -40,6 +42,11 @@
         <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.CoursListEditActivity"
             android:label="@string/settings"
+            android:theme="@android:style/Theme.Holo.Dialog" >
+        </activity>
+        <activity
+            android:name="be.ac.ucl.lfsab1509.llncampus.activity.CourseDetailsActivity"
+            android:label="@string/information"
             android:theme="@android:style/Theme.Holo.Dialog" >
         </activity>
         <activity
@@ -87,6 +94,17 @@
             android:label="@string/repertoire"
             android:theme="@android:style/Theme.Holo.Dialog" >
         </activity>
+        
+        <receiver android:name="be.ac.ucl.lfsab1509.llncampus.onbootservice.OnBootReceiver" 
+            android:enabled="true" 
+               android:exported="false" 
+               android:label="OnBootReceiver"> 
+               <intent-filter> 
+                    <action android:name="android.intent.action.BOOT_COMPLETED" /> 
+               </intent-filter> 
+          </receiver> 
+          
+        <service android:name=".services.AlarmService"></service>
     </application>
 
 </manifest>

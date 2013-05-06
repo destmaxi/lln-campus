@@ -1,35 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
- <PreferenceCategory
-   android:summary="Username and password information"
-   android:title="@string/login_info">
-  <EditTextPreference
-     android:key="username"
-     android:summary="@string/summary_login_username"
-     android:title="@string/login_username" />
-  <EditTextPreference
-     android:key="password"
-     android:summary="@string/summary_login_password"
-     android:title="@string/login_password" />
- </PreferenceCategory>
- 
- <PreferenceCategory
-   android:summary="Other information"
-   android:title="@string/settings" >
-  <CheckBoxPreference
-     android:key="checkBox"
-     android:summary="@string/summary_settings_notify"
-     android:title="@string/settings_notify">
-      
-  </CheckBoxPreference>
- 
-  <!--  
-  <ListPreference
-     android:entries="@array/listOptions"
-     android:entryValues="@array/listValues"
-     android:key="listpref"
-     android:summary="List preference example"
-     android:title="List preference" />
-   -->
- </PreferenceCategory>
+
+    <PreferenceCategory
+        android:summary="Username and password information"
+        android:title="@string/login_info" >
+        <EditTextPreference
+            android:key="username"
+            android:summary="@string/summary_login_username"
+            android:title="@string/login_username" />
+        <EditTextPreference
+            android:key="password"
+            android:password="true"
+            android:summary="@string/summary_login_password"
+            android:title="@string/login_password" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:summary="Other information"
+        android:title="@string/settings" >
+        <CheckBoxPreference
+            android:key="courses_notify"
+            android:summary="@string/summary_settings_notify"
+            android:title="@string/settings_notify" >
+        </CheckBoxPreference>
+
+        <RingtonePreference
+            android:key="notify_ringtone"
+            android:ringtoneType="notification|alarm|all"
+            android:showDefault="true"
+            android:showSilent="true"
+            android:title="@string/notify_ringtone" />
+
+        <EditTextPreference
+            android:defaultValue="15"
+            android:key="notify_minute"
+            android:numeric="integer"
+            android:summary="@string/notify_minute_summary"
+            android:title="@string/notify_minute" />
+
+        <CheckBoxPreference
+            android:key="notify_with_gps"
+            android:summary="@string/settings_notify_gps_summary"
+            android:title="@string/settings_notify_gps" />
+
+        <EditTextPreference 
+            android:key="notify_vitesse_deplacement"
+            android:title="@string/notify_vitesse_deplacement"
+            android:summary="@string/notify_vitesse_deplacement_summary"
+            android:numeric="integer"/>
+        <EditTextPreference
+            android:key="notify_max_distance"
+            android:numeric="integer"
+           android:summary="@string/notify_max_distance_summary" android:title="@string/notify_max_distance"/>
+    </PreferenceCategory>
+
 </PreferenceScreen>

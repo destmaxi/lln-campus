@@ -17,17 +17,22 @@ import android.util.Log;
 public class Database {
 		private SQLiteDatabase db;
 		private DatabaseHelper dbh;
+		
+
+		
 		/**
 		 * Constructeur. 
 		 * @param context Contexte de l'application
 		 */
 		public Database(final Context context) {
+			
 			this.dbh = new DatabaseHelper(context);
 	        try {
 	        	dbh.createDatabase();
 	        } catch (IOException e) {
 	        	Log.e("Database.java", "Unable to create database. " + e.getMessage());
 	        }
+	       
 		}
 
 		/**

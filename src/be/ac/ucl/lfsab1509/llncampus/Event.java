@@ -1,6 +1,9 @@
 package be.ac.ucl.lfsab1509.llncampus;
 
 import java.util.HashMap;
+import java.util.Locale;
+
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.text.format.Time;
 
@@ -11,6 +14,9 @@ public class Event {
 	private Time begin;
 	private Time end;
 	private HashMap<String, String> details;
+	private HashMap<String, String> keyName;
+	private Coordinates coordinates;
+	private boolean coordinates_loaded = false;
 
 	/**
 	 * Constructeur.
@@ -32,7 +38,9 @@ public class Event {
 		} catch (NumberFormatException e) {
 			e.printStackTrace(); // TODO
 		}
+		keyName = new HashMap<String, String>();
 		details = new HashMap<String, String>();
+		
 	}
 
 	/**
@@ -48,6 +56,7 @@ public class Event {
 		this.begin.set(begin);
 		this.end = new Time();
 		this.end.set(end);
+		keyName = new HashMap<String, String>();
 		details = new HashMap<String, String>();
 	}
 
@@ -61,6 +70,17 @@ public class Event {
 	 */
 	public final void addDetail(final String key, final String value) {
 		details.put(key, value);
+	}
+	
+	/**
+	 * Permet de définir un nom pour la cle
+	 * @param key
+	 *            Clé de la clé
+	 * @param value
+	 *            Nom de la clé
+	 */
+	public final void addNameKey(final String key, final String name) {
+		keyName.put(key, name);
 	}
 
 	/**
@@ -121,6 +141,17 @@ public class Event {
 	public final String getDetail(final String key) {
 		return details.get(key);
 	}
+	
+	/**
+	 * Fournit le nom demandé ou null si la clé n'existe pas .
+	 * 
+	 * @param key
+	 *            Clé de la clé
+	 * @return Nom de la cle demande ou null si la cle n'existe pas
+	 */
+	public final String getKeyName(final String key) {
+		return keyName.get(key);
+	}
 
 	/**
 	 * Fournit la date/heure de début.
@@ -144,9 +175,10 @@ public class Event {
 	public final String toString() {
 		String detailsTxt = "";
 		for (String key : details.keySet()) {
-			detailsTxt += key + " : " + details.get(key) + "\n";
+			detailsTxt += keyName.get(key) + " : " + details.get(key) + "\n";
 		}
-		return "Date : " + getTime() + "\n" + detailsTxt;
+		return "Date : " + begin.monthDay + "/" + begin.month + "/"
+				+ begin.year + " " + getTime() + "\n" + detailsTxt;
 	}
 
 	/**
@@ -159,8 +191,8 @@ public class Event {
 	}
 
 	/**
-	 * Fournit les clé-valeurs pour l'insertion dans 
-	 * la table Horaire de la base de donnée.
+	 * Fournit les clé-valeurs pour l'insertion dans la table Horaire de la base
+	 * de donnée.
 	 * 
 	 * @return ContentValues pour l'insertion dans la base de donnée
 	 */
@@ -170,8 +202,16 @@ public class Event {
 		cv.put("TIME_END", end.toMillis(false));
 
 		for (String key : this.details.keySet()) {
-			cv.put(key.toUpperCase(), this.details.get(key));
+			cv.put(key.toUpperCase(Locale.getDefault()), this.details.get(key));
 		}
 		return cv;
+	}
+
+	public Coordinates getCoordinates() {
+		if(!this.coordinates_loaded){
+			this.coordinates = Coordinates.getCoordinatesFromAuditorium(getDetail("room"));
+			this.coordinates_loaded = true;
+		}
+		return this.coordinates;
 	}
 }

@@ -24,10 +24,12 @@ public abstract class LLNCampusActivity extends Activity {
 	 * Variable referencant la base de donnee de l'application
 	 */
 	protected Database db;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		LLNCampus.setContext(this);
+		LLNCampus.startAlarmService();
 		this.db = LLNCampus.getDatabase();
 		super.onCreate(savedInstanceState);
 		db.open();
@@ -134,7 +136,7 @@ public abstract class LLNCampusActivity extends Activity {
 			db.close();
 			db.reset();
 			db.open();
-			notify("La base de donnée a été rechargée");
+			notify(getString(R.string.reloaded_db));
 			break;
 		case R.id.menu_about:
 			intent = new Intent(this, AboutActivity.class);

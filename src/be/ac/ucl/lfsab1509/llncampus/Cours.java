@@ -70,6 +70,7 @@ public final class Cours {
 	 */
 	public static ArrayList<Cours> getList() {
 		ArrayList<Cours> courses = new ArrayList<Cours>();
+		try { // Si on va voir la table alors qu'elle n'existe pas encore, retourner liste vide
 		Cursor c = LLNCampus.getDatabase().select("Courses",
 				new String[] {"CODE", "NAME"}, null, null, null, null, null,
 				null);
@@ -77,6 +78,11 @@ public final class Cours {
 			courses.add(new Cours(c.getString(0), c.getString(1)));
 		}
 		c.close();
+		}
+		catch(RuntimeException e)
+		{
+			return new ArrayList<Cours>();
+		}
 		return courses;
 	}
 

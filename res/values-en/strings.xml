@@ -16,9 +16,10 @@
     <string name="vendredi">Friday</string>
     <string name="samedi">Saturday</string>
     <string name="dimanche">Sunday</string>
+    <string name="reloaded_db">The application is reset.</string>
     
     <!-- Strings utile dans MainActivity -->
-	<string name="no_pdf_player">No PDF viewer installed: attempting to connect by the Internet#8230</string>
+	<string name="no_pdf_player">No PDF viewer installed: attempting to connect by the Internet…</string>
     
     <!-- Strings utiles pour main_title -->
     <string name="menu_settings">Settings</string>
@@ -34,6 +35,9 @@
 	<string name="loisirs">Leisures</string>
 	<string name="cinema">Cinema schedule</string>
     <string name="sports">Sport schedule</string>
+    <string name="sablon">Le Sablon</string>
+    <string name="galilee">Le Galilée</string>
+    <string name="dun_pain_a_lautre">D\'un pain à l\'autre</string>
     <string name="restaurants">Restaurants</string>
     <string name="carpestudentem">Agenda of the animation</string>
 	<string name="todo">Work in progress, will probably be implemented in the next version :)</string>
@@ -58,6 +62,7 @@
     <string name="building_picture_description">Overview of building entrance</string>
     <string name="access_description">Show if the place is accessible for disabled person</string>
     <string name="library_specialSchedule">Special schedule</string>
+    <string name="more_details">"more details"</string>
     
      <!-- Listage des strings utilises dans le XML subauditorium_details -->
     <string name="yes">Yes</string>
@@ -84,7 +89,7 @@
     
     <!--  Strings utiles pour about_activity -->
 	<string name="about">About</string>
-    <string name="about_text">This application was developed by Benjamin Baugnies, Quentin De Coninck, Pham Anh Tuan Le and Damien Mercier for the course LFSAB1509 given at the Université Catholique de Louvain-la-Neuve. This application is distributed under the GPL3 license. Version 0.4.5.</string>
+    <string name="about_text">This application was developed by Benjamin Baugnies, Quentin De Coninck, Pham Anh Tuan Le and Damien Mercier for the course LFSAB1509 given at the Université Catholique de Louvain-la-Neuve. This application is distributed under the GPL3 license. Version </string>
 
 	<!--  Strings utiles pour MapActivity -->
     <string name="map">Map</string>
@@ -100,7 +105,7 @@
     <string name="cours_add">Add a course</string>
     <string name="cours_code">Course code</string>
     <string name="cours_name">Course name</string>
-    <string name="cours_list_explanation">"In order to have your schedule, you have to indicate the different course codes which you take (the code courses have to match with on ADE ones). In order to make the task easier, the application can download the course list from uclouvain.be. To do that, click on \"Download from UCLouvian\". To delete a course of the list, click on it. "</string>
+    <string name="cours_list_explanation">"In order to have your schedule, you have to indicate the different course codes which you take (the code courses have to match with on ADE ones). In order to make the task easier, the application can download the course list from uclouvain.be. To do that, click on \"Download from UCLouvain\". To delete a course of the list, click on it. "</string>
     <string name="emptyCoursListDialogTitle">First step with the schedule</string>
     <string name="emptyCoursListDialogText">There is still not any course downloaded for your schedule yet. In order to have your schedule, you have to indicate the different course codes which you take. To do that, it is possible to download automatically your course list from the UCL website. It is also possible to add manually if your course codes of your virtual office do not match with ADE ones.</string>
     <string name="telechargement_pour">Download for</string>
@@ -126,4 +131,42 @@
 	<string name="login_password">Password</string>
 	<string name="settings_notify">Course notifications</string>
 	<string name="summary_settings_notify">Enable alert of imminent courses</string>
+	<string name="notify_ringtone">Notification ringtone</string>
+	<string name="notify_minute">Number of minutes</string>
+	<string name="notify_minute_summary">The notification will appear the specified number of minutes before your course.</string>
+	
+	<!-- Strings dans le Launcher -->
+	<string name="first_use">"Initialization of the application for the first use. Please wait…"</string>
+	<string name="update_app">"Updating the application. Please wait…"</string>
+	
+	<!-- Strings pour maps -->
+	<string name="no_google_maps">Please install Google Maps in order to have this functionnality.</string>
+	
+	<!-- Strings pour CoursListEditActivity -->
+	<string name="username_notify">"To use this fonctionnality, you must first define your UCL username and password in the application's settings"</string>
+	<string name="connection">Connection #8230</string>
+	<string name="connection_UCL">"Connection to UCLouvain.be"</string>
+	<string name="fetch_info">"Retrieving information about the course attended"</string>
+	<string name="error_anac">"Unable to retrieve your studies for the academic year"</string>
+	<string name="get_courses">"Retrieving the list of courses for "</string>
+	<string name="courses_empty">"Aucun cours n'a été trouvé."</string>
+	<string name="cleaning_db">"Cleaning the database  "</string>
+	<string name="add_courses_db">"Addition of new courses in the database"</string>
+	<string name="end">End</string>
+	<string name="courses_download_ok">"List of courses successfully downloaded."</string>
+	<string name="add_course_ok">"Course successfully added"</string>
+	<string name="add_course_error">"Failed to add the course"</string>
+	<string name="delete_course">"Deleting a course"</string>
+	<string name="confirm_delete_course">"Are you sure you want to delete the course "</string>
+	<string name="delete_course_ok">"Course deleted!"</string>
+	<string name="delete_course_error">"Failed to delete :/"</string>
+	
+	<!-- Strings pour HoraireActivity -->
+	<string name="information">"Information"</string>
+	<string name="course">Course</string>
+	<string name="trainees">Students</string>
+	<string name="trainers">Teachers</string>
+	<string name="room">Room</string>
+	<string name="activity_name">Activity name</string>
+	<string name="title">Title</string>
 </resources>
