@@ -27,6 +27,7 @@ public class WebviewActivity extends LLNCampusActivity {
 		context = this;
 		setContentView(R.layout.webview);
 		webview = (WebView) findViewById(R.id.webview);
+		webview.getSettings().setBuiltInZoomControls(true);
 		webview.setWebViewClient(new myWebClient());
 		setTitle(getIntent().getStringExtra("TITLE"));
 		loadURL(getIntent().getStringExtra("URL"));
