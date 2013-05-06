@@ -14,13 +14,16 @@ import android.app.Application;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class LLNCampus extends Application {
 	private static Context APPLICATION_CONTEXT;
 	private static Database DB;
+	private static GPS gps = null;
 	public static String LLNREPOSITORY = "LLNCampus";
 
 	@Override
@@ -38,6 +41,20 @@ public class LLNCampus extends Application {
 		if (DB != null) {
 			DB.close();
 			DB = null;
+		}
+	}
+	
+	public static GPS getGPS() {
+		if (gps == null) {
+			gps = new GPS();
+		}
+		return gps;
+	}
+	
+	public static void stopGPS() {
+		if ( gps != null ) {
+			gps.destroy();
+			gps = null;
 		}
 	}
 	
@@ -66,6 +83,21 @@ public class LLNCampus extends Application {
 	
 	public static Context getContext() {
 		return APPLICATION_CONTEXT;
+	}
+	
+	public static int getIntPreference(String key, int defaultValue) {
+		try {
+			SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+			String str = preferences.getString(key, null);
+			if(str == null){
+				return defaultValue;
+			}
+			return Integer.parseInt(str);
+		} catch (NumberFormatException e) {
+			return defaultValue;
+		} catch (NullPointerException e){
+			return defaultValue;
+		}
 	}
 	
 	/**

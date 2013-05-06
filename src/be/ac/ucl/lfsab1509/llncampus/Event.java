@@ -3,6 +3,7 @@ package be.ac.ucl.lfsab1509.llncampus;
 import java.util.HashMap;
 import android.content.ContentValues;
 import android.text.format.Time;
+import android.util.Log;
 
 /**
  * Decrit un evenement (de ADE par exemple).
@@ -12,6 +13,8 @@ public class Event {
 	private Time end;
 	private HashMap<String, String> details;
 	private HashMap<String, String> keyName;
+	private Coordinates coordinates;
+	private boolean coordinates_loaded = false;
 
 	/**
 	 * Constructeur.
@@ -200,5 +203,13 @@ public class Event {
 			cv.put(key.toUpperCase(), this.details.get(key));
 		}
 		return cv;
+	}
+
+	public Coordinates getCoordinates() {
+		if(!this.coordinates_loaded){
+			this.coordinates = Coordinates.getCoordinatesFromAuditorium(getDetail("room"));
+			this.coordinates_loaded = true;
+		}
+		return this.coordinates;
 	}
 }

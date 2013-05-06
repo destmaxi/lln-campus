@@ -22,7 +22,7 @@ public class CourseDetailsActivity extends LLNCampusActivity implements
 		details.setText(getIntent().getStringExtra("DETAILS"));
 		Button gps = (Button) findViewById(R.id.button_course_details_gps);
 		gps.setOnClickListener(this);
-		if (getIntent().getFloatExtra("LATITUDE", -42f) == -42f) {
+		if (!getIntent().getBooleanExtra("COORDINATES", false)) {
 			gps.setVisibility(View.INVISIBLE);
 		}
 	}
@@ -37,8 +37,8 @@ public class CourseDetailsActivity extends LLNCampusActivity implements
 		switch (v.getId()) {
 		case R.id.button_course_details_gps:
 			ExternalAppUtility.startGPS(
-					getIntent().getFloatExtra("LATITUDE", 0f), getIntent()
-							.getFloatExtra("LONGITUDE", 0f), this);
+					getIntent().getDoubleExtra("LATITUDE", 0f), getIntent()
+							.getDoubleExtra("LONGITUDE", 0f), this);
 			break;
 		}
 	}

@@ -1,10 +1,11 @@
 package be.ac.ucl.lfsab1509.llncampus.services;
 
+import be.ac.ucl.lfsab1509.llncampus.Coordinates;
 import be.ac.ucl.lfsab1509.llncampus.Cours;
 import be.ac.ucl.lfsab1509.llncampus.Database;
 import be.ac.ucl.lfsab1509.llncampus.Event;
+import be.ac.ucl.lfsab1509.llncampus.GPS;
 import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
-import be.ac.ucl.lfsab1509.llncampus.activity.HoraireActivity;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
@@ -24,6 +25,8 @@ import android.widget.Toast;
 public class AlarmService extends Service {
 	private final IBinder mBinder = new LocalBinder();
 	private final static int DEFAULT_NOTIFY_MINUTE = 15;
+	private static final int DEFAULT_MAX_DISTANCE = 5000; // en m
+	private static final int DEFAULT_NOTIFY_VITESSE = 5; // en km/h
 	private static Event nextEvent = null;
 
 	public class LocalBinder extends Binder {
@@ -49,25 +52,37 @@ public class AlarmService extends Service {
 			loadNextEvent();
 		}
 
-		String nbMinStr = preferences.getString("notify_minute", null);
-		int nbMin = 0;
-		if (nbMinStr != null) {
-			nbMin = Integer.valueOf(nbMinStr);
+		int nbMin = LLNCampus.getIntPreference("notify_minute",
+				DEFAULT_NOTIFY_MINUTE);
+
+		if (preferences.getBoolean("notify_with_gps", false)) {
+			Coordinates eventCoord = nextEvent.getCoordinates();
+			if (eventCoord != null) {
+				GPS gps = LLNCampus.getGPS();
+				Coordinates currentCoord = gps.getPosition();
+				double dist = eventCoord.getDistance(currentCoord);
+				if (dist < LLNCampus.getIntPreference("notify_max_distance",
+						DEFAULT_MAX_DISTANCE)) {
+					int vitesseKmH = LLNCampus.getIntPreference("notify_vitesse_deplacement",DEFAULT_NOTIFY_VITESSE);
+					int vitesseMMin = vitesseKmH*1000/60;
+
+					nbMin = (int) (dist / vitesseMMin);
+				} 
+			} 
 		}
-		if (nbMin <= 0) {
-			nbMin = DEFAULT_NOTIFY_MINUTE;
-		}
+
 		Time currentDate = new Time();
 		currentDate.setToNow();
 
-		if (Cours.getList().size() != 0 && nextEvent.getBeginTime().toMillis(false) - nbMin * 60L * 1000L
-				- currentDate.toMillis(false) < 0L) {
+		if (Cours.getList().size() != 0
+				&& nextEvent.getBeginTime().toMillis(false) - nbMin * 60L
+						* 1000L - currentDate.toMillis(false) < 0L) {
 			sendAlert(nextEvent);
 			loadNextEvent();
 		}
 	}
-	
-	public static void resetNextEvent(){
+
+	public static void resetNextEvent() {
 		nextEvent = null;
 	}
 
@@ -78,16 +93,17 @@ public class AlarmService extends Service {
 		if (nextEvent == null) {
 			Time currentDate = new Time();
 			currentDate.setToNow();
-			Log.d("AlarmService","currentDate.toMilis= " + currentDate.toMillis(false));
+			Log.d("AlarmService",
+					"currentDate.toMilis= " + currentDate.toMillis(false));
 			precTime = currentDate.toMillis(false);
 		} else {
 			precTime = nextEvent.getBeginTime().toMillis(false);
 		}
-		Cursor c = db.sqlRawQuery("SELECT h.TIME_BEGIN, h.TIME_END, h.COURSE, h.ROOM, c.NAME "
+		Cursor c = db
+				.sqlRawQuery("SELECT h.TIME_BEGIN, h.TIME_END, h.COURSE, h.ROOM, c.NAME "
 						+ "FROM Horaire as h, Courses as c "
 						+ "WHERE h.COURSE = c.CODE AND TIME_BEGIN > "
 						+ precTime + " " + "ORDER BY TIME_BEGIN ASC LIMIT 1");
-		Log.d("AlarmService", "Prec time : " + precTime);
 		c.moveToFirst();
 		nextEvent = new Event(c.getLong(0), c.getLong(1));
 		nextEvent.addDetail("course", c.getString(2));

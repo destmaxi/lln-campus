@@ -1,27 +1,40 @@
 package be.ac.ucl.lfsab1509.llncampus;
 
 import android.database.Cursor;
+import android.location.Location;
 
 public class Coordinates {
-	private float lat;
-	private float lon;
+	private double lat;
+	private double lon;
 
-	public Coordinates(float lat, float lon) {
-		this.lat = lat;
-		this.lon = lon;
+	public Coordinates(double d, double e) {
+		this.lat = d;
+		this.lon = e;
 	}
 
-	public float getLat() {
+	public double getLat() {
 		return this.lat;
 	}
 
-	public float getLon() {
+	public double getLon() {
 		return this.lon;
 	}
 
 	public String toString(){
 		return this.lat+","+this.lon;
 	}
+	
+	/**
+	 * Retourne la distance en metres entre la coordonnee courante et la
+	 * coordonnees placee en argument.
+	 */
+	public double getDistance(Coordinates b){
+		
+		float[] results = new float[1];
+		Location.distanceBetween(lat, lon, b.getLat(), b.getLon(), results);
+		return results[0];
+	}
+
 	/**
 	 * Analyse une chaine de caractère contenant le nom de l'auditoire et
 	 * fournit les coordonnées gps associées.

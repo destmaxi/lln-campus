@@ -22,7 +22,8 @@
             android:summary="@string/summary_settings_notify"
             android:title="@string/settings_notify" >
         </CheckBoxPreference>
-        <RingtonePreference
+
+        <RingtonePreference
             android:key="notify_ringtone"
             android:ringtoneType="notification|alarm|all"
             android:showDefault="true"
@@ -32,7 +33,24 @@
         <EditTextPreference
             android:defaultValue="15"
             android:key="notify_minute"
-            android:numeric="integer" android:summary="@string/notify_minute_summary" android:title="@string/notify_minute"/>
+            android:numeric="integer"
+            android:summary="@string/notify_minute_summary"
+            android:title="@string/notify_minute" />
+
+        <CheckBoxPreference
+            android:key="notify_with_gps"
+            android:summary="@string/settings_notify_gps_summary"
+            android:title="@string/settings_notify_gps" />
+
+        <EditTextPreference 
+            android:key="notify_vitesse_deplacement"
+            android:title="@string/notify_vitesse_deplacement"
+            android:summary="@string/notify_vitesse_deplacement_summary"
+            android:numeric="integer"/>
+        <EditTextPreference
+            android:key="notify_max_distance"
+            android:numeric="integer"
+           android:summary="@string/about" android:title="@string/notify_max_distance"/>
     </PreferenceCategory>
 
 </PreferenceScreen>
