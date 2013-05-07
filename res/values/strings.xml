@@ -142,8 +142,6 @@
 	<!-- Strings pour maps -->
 	<string name="no_google_maps">Veuillez installer Google Maps pour accéder à cette fonctionnalité.</string>
 	
-	
-	
 	<!-- Strings pour CoursListEditActivity -->
 	<string name="username_notify">"Pour utiliser cette fonctionnalité, vous devez avoir préalablement définit votre identifiant et votre mot de passe UCL dans les préférences de l'application"</string>
 	<string name="connection">Connexion #8230</string>
