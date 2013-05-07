@@ -34,6 +34,9 @@ public abstract class LLNCampusActivity extends Activity {
 		LLNCampus.startAlarmService();
 		this.db = LLNCampus.getDatabase();
 		super.onCreate(savedInstanceState);
+		
+		// Si on a un device petit (ou normal) (ecran < 4.5 pouces)
+		// On bloque la rotation 
 		if ((getResources().getConfiguration().screenLayout & 
 			    Configuration.SCREENLAYOUT_SIZE_MASK) == 
 			        Configuration.SCREENLAYOUT_SIZE_NORMAL ||
