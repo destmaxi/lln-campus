@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:gravity="top"
     android:orientation="vertical"
-    android:padding="5dip" >
+    android:padding="20dip" >
     
     <TextView
         android:id="@+id/subauditorium_name"
@@ -13,7 +13,7 @@
         android:gravity="top|center_horizontal"
         android:textIsSelectable="true"
         android:text="@string/subauditorium_address"
-        android:textSize="20sp" />
+        android:textSize="42sp" />
         
     <TableLayout
     android:layout_width="fill_parent" 
@@ -31,29 +31,23 @@
         android:contentDescription="@string/access_description"
         android:visibility="invisible"
         android:layout_gravity="right"
-        android:textSize="12sp" />
+        android:textSize="19sp" />
     
    
     </TableLayout>
     
-     <LinearLayout
-        style="android:attr/buttonBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal" >
+    
     
     <TableLayout
     android:layout_marginTop="6dp"
     android:layout_width="wrap_content"
     android:layout_gravity="center_horizontal" 
     android:layout_height="wrap_content" 
-    android:layout_weight="1"
     android:stretchColumns="1">
     
         <TableRow
 						android:orientation="horizontal"
-						android:layout_height="10dip"
+						android:layout_height="20dip"
 						android:layout_width="wrap_content" 
 						android:gravity="center_horizontal">
 						
@@ -64,14 +58,14 @@
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
         android:text="@string/nbplaces"
-        android:textSize="10sp" />
+        android:textSize="20sp" />
     
      <TextView android:id="@+id/nbplaces_rep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
-        android:textSize="10sp" />
+        android:textSize="20sp" />
     </TableRow>
     
     <TableRow>
@@ -82,14 +76,14 @@
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
         android:text="@string/reseau"
-        android:textSize="10sp" />
+        android:textSize="20sp" />
         
         <TextView android:id="@+id/reseau_rep"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
-        android:textSize="10sp" />
+        android:textSize="20sp" />
           
     </TableRow>
     
@@ -101,14 +95,14 @@
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
         android:text="@string/ecran"
-        android:textSize="10sp" />
+        android:textSize="20sp" />
         
          <TextView android:id="@+id/ecran_rep"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
-        android:textSize="10sp" />
+        android:textSize="20sp" />
       
     </TableRow>
     
@@ -120,14 +114,14 @@
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
         android:text="@string/retro"
-        android:textSize="10sp" />
+        android:textSize="20sp" />
         
          <TextView android:id="@+id/retro_rep"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
-        android:textSize="10sp" />
+        android:textSize="20sp" />
       
     </TableRow>
     
@@ -140,14 +134,14 @@
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
         android:text="@string/dia"
-        android:textSize="10sp" />
+        android:textSize="20sp" />
         
          <TextView android:id="@+id/dia_rep"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
-        android:textSize="10sp" />
+        android:textSize="20sp" />
       
     </TableRow>
     
@@ -159,14 +153,14 @@
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
         android:text="@string/video"
-        android:textSize="10sp" />
+        android:textSize="20sp" />
         
          <TextView android:id="@+id/video_rep"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
-        android:textSize="10sp" />
+        android:textSize="20sp" />
       
     </TableRow>
     
@@ -178,14 +172,14 @@
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
         android:text="@string/sono"
-        android:textSize="10sp" />
+        android:textSize="20sp" />
         
          <TextView android:id="@+id/sono_rep"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
                 android:textIsSelectable="true"
-        android:textSize="10sp" />
+        android:textSize="20sp" />
       
     </TableRow>
     
@@ -197,14 +191,14 @@
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
         android:text="@string/cabine"
-        android:textSize="10sp" />
+        android:textSize="20sp" />
         
          <TextView android:id="@+id/cabine_rep"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
-        android:textSize="10sp" />
+        android:textSize="20sp" />
       
     </TableRow>
     
@@ -216,14 +210,14 @@
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
         android:text="@string/mobilier"
-        android:textSize="10sp" />
+        android:textSize="20sp" />
         
          <TextView android:id="@+id/mobilier_rep"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
-        android:textSize="10sp" />
+        android:textSize="20sp" />
       
     </TableRow>
     
@@ -235,14 +229,12 @@
         android:layout_width="fill_parent"
         android:layout_marginTop="3dp"
         android:layout_height="fill_parent"
-        android:layout_weight="1"
         android:contentDescription="@string/subauditorium_picture_description"
         android:visibility="visible"
         android:layout_gravity="right"
         android:text="@string/subauditorium_picture_message"
-        android:textSize="10sp" />
+        android:textSize="19sp" />
 
-    </LinearLayout>
   
     
      
