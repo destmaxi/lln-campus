@@ -7,6 +7,8 @@ import be.ac.ucl.lfsab1509.llncampus.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -32,6 +34,16 @@ public abstract class LLNCampusActivity extends Activity {
 		LLNCampus.startAlarmService();
 		this.db = LLNCampus.getDatabase();
 		super.onCreate(savedInstanceState);
+		if ((getResources().getConfiguration().screenLayout & 
+			    Configuration.SCREENLAYOUT_SIZE_MASK) == 
+			        Configuration.SCREENLAYOUT_SIZE_NORMAL ||
+			(getResources().getConfiguration().screenLayout & 
+				Configuration.SCREENLAYOUT_SIZE_MASK) == 
+					Configuration.SCREENLAYOUT_SIZE_SMALL)
+		{
+			this.setRequestedOrientation(
+					ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		}
 		db.open();
 		editActionBar();
 	}
