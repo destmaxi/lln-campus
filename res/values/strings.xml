@@ -161,6 +161,10 @@
 	<string name="delete_course_ok">"Cours supprimé!"</string>
 	<string name="delete_course_error">"Echec de la suppression :/"</string>
 	<string name="delete">Supprimer</string>
+	<string name="delete_course_dialog_title">"Suppression d'un évènement"</string>
+	<string name="delete_course_dialog_text">"Voulez-vous supprimez cet évènement uniquement (suppression ponctuelle) ou hebdomadairement? (Vous pouvez revenir sans supprimer l'évènement sur la touche retour)"</string>
+	<string name="delete_course_one">Celui-ci</string>
+	<string name="delete_course_weekly">Hebdomadairement</string>
 	
 	<!-- Strings pour HoraireActivity -->
 	<string name="information">"Informations"</string>
