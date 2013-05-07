@@ -209,6 +209,11 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 		final Event e = currentEvents.get(position);
 		Intent i = new Intent(this, CourseDetailsActivity.class);
+		// Put data if we want to erase
+		i.putExtra("ACTIVITY_NAME", e.getDetail("activity_name"));
+		i.putExtra("BEGIN_TIME", e.getBeginTime().toMillis(false));
+		i.putExtra("END_TIME", e.getEndTime().toMillis(false));
+		// Put data for GPS
 		i.putExtra("DETAILS", e.toString());
 		Coordinates c = e.getCoordinates();
 		Log.d("HoraireActivity", "Coordonnées : "+c);

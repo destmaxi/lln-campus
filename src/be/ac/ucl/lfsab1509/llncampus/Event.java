@@ -3,7 +3,6 @@ package be.ac.ucl.lfsab1509.llncampus;
 import java.util.HashMap;
 import java.util.Locale;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.text.format.Time;
 
