@@ -2,9 +2,9 @@
     android:id="@+id/event_list_item"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:columnCount="2"
+    android:columnCount="3"
     android:orientation="vertical"
-    android:rowCount="3" 
+    android:rowCount="2" 
     android:paddingTop="10dip"
                    android:paddingBottom="10dip"
                     android:paddingRight="5dip"
@@ -20,43 +20,50 @@
         android:layout_rowSpan="1"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#FFF"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/cours_code"
         android:layout_height="wrap_content"
         android:layout_column="1"
         android:layout_columnSpan="1"
-        android:layout_gravity="right|top"
+        android:layout_gravity="center|top"
         android:layout_row="0"
         android:layout_rowSpan="1"
+        android:layout_marginLeft="15sp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#FFF" />
+        android:textColor="#FFF"
+        android:textSize="15sp" />
     
     <TextView
         android:id="@+id/cours_room"
 		android:singleLine="false"
 		android:maxLines="3"
         android:layout_height="wrap_content"
-        android:layout_column="0"
+        android:layout_column="2"
         android:layout_columnSpan="1"
-        android:layout_gravity="left|bottom"
-        android:layout_row="1"
+        android:layout_gravity="right|top"
+        android:layout_row="0"
         android:layout_rowSpan="1"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#FFF" 
+        android:textColor="#FFF"
+        android:textSize="15sp" 
       />
 
     <TextView
         android:id="@+id/cours_title"
         android:layout_height="wrap_content"
-        android:layout_column="1"
-        android:layout_columnSpan="1"
-        android:layout_gravity="right|bottom"
+        android:singleLine="false"
+		android:maxLines="3"
+        android:layout_column="0"
+        android:layout_columnSpan="3"
+        android:layout_gravity="left|bottom"
         android:layout_row="1"
         android:layout_rowSpan="1"
         android:gravity="right"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#FFF" />
+        android:textColor="#FFF"
+        android:textSize="15sp" />
 
 </GridLayout>
