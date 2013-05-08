@@ -1,6 +1,5 @@
 package be.ac.ucl.lfsab1509.llncampus.activity;
 
-import be.ac.ucl.lfsab1509.llncampus.Cours;
 import be.ac.ucl.lfsab1509.llncampus.Database;
 import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.R;

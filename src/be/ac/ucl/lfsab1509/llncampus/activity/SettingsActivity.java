@@ -29,9 +29,11 @@ import be.ac.ucl.lfsab1509.llncampus.R;
  * Edit settings
  * Related with prefs.xml
  */
+@SuppressWarnings("deprecation")
 public class SettingsActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 
-    @Override
+    
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
