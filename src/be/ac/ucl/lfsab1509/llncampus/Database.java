@@ -27,11 +27,11 @@ public class Database {
 		public Database(final Context context) {
 			
 			this.dbh = new DatabaseHelper(context);
-	        try {
+			/*try {
 	        	dbh.createDatabase();
 	        } catch (IOException e) {
 	        	Log.e("Database.java", "Unable to create database. " + e.getMessage());
-	        }
+	        }*/
 	       
 		}
 
@@ -40,10 +40,17 @@ public class Database {
 		 * @return True in case of success, false otherwise.
 		 */
 		public final boolean open() {
+			Log.d("Database","OPEN : "+Thread.currentThread().getStackTrace().toString());
+			Thread.dumpStack();
 			if (isOpen()) { return true; }
 			try {
+				dbh.createDatabase();
 				db = dbh.open();
-			} catch (SQLiteException e) {
+			}
+			catch (IOException e) {
+				Log.e("Database.java - open", e.getMessage());
+			}
+			catch (SQLiteException e) {
 				Log.e("Database.java - open", e.getMessage());
 				return false;
 			}
@@ -191,6 +198,7 @@ public class Database {
 		 * Reset the database.
 		 */
 		public final void reset() {
+			close();
 			dbh.reset();
 		}
 

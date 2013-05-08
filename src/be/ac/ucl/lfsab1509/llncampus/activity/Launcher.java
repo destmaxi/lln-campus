@@ -113,10 +113,9 @@ public class Launcher extends LLNCampusActivity {
 			public void run() {
 				if (update) {
 					// From LLNCampusActivity
-					db.close();
 					db.reset();
-					db.open();
 				}
+				db.open();
 
 				// A la fin du traitement, on fait disparaitre notre message
 

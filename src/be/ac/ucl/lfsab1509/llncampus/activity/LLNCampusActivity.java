@@ -47,7 +47,7 @@ public abstract class LLNCampusActivity extends Activity {
 			this.setRequestedOrientation(
 					ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		}
-		db.open();
+		//db.open();
 		editActionBar();
 	}
 	protected void editActionBar() {
@@ -58,9 +58,9 @@ public abstract class LLNCampusActivity extends Activity {
 
 	@Override
 	public void onResume() {
-		if (!db.isOpen()) {
+		/*if (!db.isOpen()) {
 			db.open();
-		}
+		}*/
 		super.onResume();
 	}
 
