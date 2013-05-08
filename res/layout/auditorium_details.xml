@@ -53,7 +53,7 @@
             	android:id="@+id/button_subauditorium"
             	android:layout_width="fill_parent"
             	android:layout_height="wrap_content"
-            	android:gravity="center|left"
+            	android:gravity="center"
             	android:drawableTop="@android:drawable/ic_menu_add"
             	android:text="@string/sub_auditorium" />
 
@@ -61,7 +61,7 @@
             	android:id="@+id/button_auditorium_gps"
             	android:layout_width="fill_parent"
             	android:layout_height="wrap_content"
-            	android:gravity="center|right"
+            	android:gravity="center"
             	android:drawableTop="@android:drawable/ic_menu_directions"
             	android:text="@string/GPS" />
         

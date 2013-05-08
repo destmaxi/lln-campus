@@ -20,12 +20,11 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.AuditoriumActivity"
-            android:label="@string/auditoires" >
+            android:label="@string/auditoires">
         </activity>
         <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.BibliothequesActivity"
-            android:label="@string/bibliotheques"
-            android:screenOrientation="portrait" >
+            android:label="@string/bibliotheques">
         </activity>
         <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.LoisirsActivity"
