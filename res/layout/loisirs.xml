@@ -19,7 +19,8 @@
         android:gravity="center_vertical|center_horizontal"
         android:padding="10dp"
         android:text="@string/cinema"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="14sp" />
 
     <Button
         android:id="@+id/button_sports"
@@ -31,7 +32,8 @@
         android:gravity="center_vertical|center_horizontal"
         android:padding="10dp"
         android:text="@string/sports"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+        android:textSize="14sp"/>
 
     <Button
         android:id="@+id/button_carpestudentem"
@@ -43,7 +45,8 @@
         android:gravity="center_vertical|center_horizontal"
         android:padding="10dp"
         android:text="@string/carpestudentem"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+        android:textSize="14sp"/>
 
     <Button
         android:id="@+id/button_sablon"
@@ -55,7 +58,8 @@
         android:gravity="center_vertical|center_horizontal"
         android:padding="10dp"
         android:text="@string/sablon"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+        android:textSize="14sp"/>
 
     <Button
         android:id="@+id/button_galilee"
@@ -67,7 +71,8 @@
         android:gravity="center_vertical|center_horizontal"
         android:padding="10dp"
         android:text="@string/galilee"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+        android:textSize="14sp"/>
 
     <Button
         android:id="@+id/button_dun_pain_a_lautre"
@@ -79,6 +84,7 @@
         android:gravity="center_vertical|center_horizontal"
         android:padding="10dp"
         android:text="@string/dun_pain_a_lautre"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="14sp" />
 
 </GridLayout>
