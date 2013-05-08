@@ -5,6 +5,8 @@ import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +23,19 @@ public abstract class LLNCampusListActivity extends ListActivity {
         LLNCampus.setContext(this);
 		this.db = LLNCampus.getDatabase();
 		super.onCreate(savedInstanceState);
+		
+		// Si on a un device petit (ou normal) (ecran < 4.5 pouces)
+		// On bloque la rotation 
+		if ((getResources().getConfiguration().screenLayout & 
+				Configuration.SCREENLAYOUT_SIZE_MASK) == 
+				Configuration.SCREENLAYOUT_SIZE_NORMAL ||
+				(getResources().getConfiguration().screenLayout & 
+						Configuration.SCREENLAYOUT_SIZE_MASK) == 
+						Configuration.SCREENLAYOUT_SIZE_SMALL)
+		{
+			this.setRequestedOrientation(
+					ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		}
 		db.open();
 		
 	}

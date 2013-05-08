@@ -7,6 +7,8 @@ import be.ac.ucl.lfsab1509.llncampus.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -32,6 +34,19 @@ public abstract class LLNCampusActivity extends Activity {
 		LLNCampus.startAlarmService();
 		this.db = LLNCampus.getDatabase();
 		super.onCreate(savedInstanceState);
+		
+		// Si on a un device petit (ou normal) (ecran < 4.5 pouces)
+		// On bloque la rotation 
+		if ((getResources().getConfiguration().screenLayout & 
+			    Configuration.SCREENLAYOUT_SIZE_MASK) == 
+			        Configuration.SCREENLAYOUT_SIZE_NORMAL ||
+			(getResources().getConfiguration().screenLayout & 
+				Configuration.SCREENLAYOUT_SIZE_MASK) == 
+					Configuration.SCREENLAYOUT_SIZE_SMALL)
+		{
+			this.setRequestedOrientation(
+					ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		}
 		db.open();
 		editActionBar();
 	}
@@ -131,6 +146,7 @@ public abstract class LLNCampusActivity extends Activity {
 			intent = new Intent(this, SettingsActivity.class);
 			startActivity(intent);
 			break;
+			
 		case R.id.menu_resetDB: // FIXME : Dispo en mode developpement
 								// uniquement
 			db.close();
@@ -138,6 +154,7 @@ public abstract class LLNCampusActivity extends Activity {
 			db.open();
 			notify(getString(R.string.reloaded_db));
 			break;
+			
 		case R.id.menu_about:
 			intent = new Intent(this, AboutActivity.class);
 			startActivity(intent);

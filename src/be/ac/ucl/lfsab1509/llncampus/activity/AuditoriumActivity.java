@@ -9,6 +9,8 @@ import be.ac.ucl.lfsab1509.llncampus.fragment.AuditoriumDetailsFragment;
 import be.ac.ucl.lfsab1509.llncampus.fragment.AuditoriumListFragment;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +36,12 @@ public class AuditoriumActivity extends LLNCampusActivity implements AuditoriumL
 		// vue.setBackgroundColor(getResources().getColor(R.color.Blue));  // If we want to change color of background
 	}
 
+	// On remet en mode portrait pour les petits devices
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+	    super.onConfigurationChanged(newConfig);
+	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+	}
 
     /*
      * Adding an item click listener to the list

@@ -160,6 +160,11 @@
 	<string name="confirm_delete_course">"Are you sure you want to delete the course "</string>
 	<string name="delete_course_ok">"Course deleted!"</string>
 	<string name="delete_course_error">"Failed to delete :/"</string>
+	<string name="delete">Delete</string>
+	<string name="delete_course_dialog_title">Deleting an event</string>
+	<string name="delete_course_dialog_text">"Do you want to delete this event only (punctual deleting) or weekly? (You can come back without deleting in pressing the return button)"</string>
+	<string name="delete_course_one">This one</string>
+	<string name="delete_course_weekly">Weekly</string>
 	
 	<!-- Strings pour HoraireActivity -->
 	<string name="information">"Information"</string>
@@ -169,4 +174,13 @@
 	<string name="room">Room</string>
 	<string name="activity_name">Activity name</string>
 	<string name="title">Title</string>
+	<string name="settings_notify_gps_summary">Adjust the number of minutes depending onn your position</string>
+	<string name="settings_notify_gps">Adjust the number of minutes based on GPS</string>
+	<string name="notify_vitesse_deplacement">Travel speed (in km/h)</string>
+	<string name="notify_vitesse_deplacement_summary">Indicate your average travel speed (bird flight, in km/h)</string>
+	<string name="notify_max_distance">Maximum distance GPS (in m)</string>
+	<string name="notify_max_distance_summary">Indicate the distance (in m) beyond the calculation time has not to be performed based on GPS</string>
+	<string name="notify_more_time_summary">Indicate the time (in minutes) that you want in addition to which computed by the GPS</string>
+	<string name="notify_more_time">Additionnal time GPS (in minutes)</string>
+	
 </resources>

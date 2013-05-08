@@ -192,7 +192,9 @@ public class MainActivity extends LLNCampusActivity implements OnClickListener {
 			startActivity(intent);
 			break;
 		case R.id.button_icampus:
+
 			ExternalAppUtility.openBrowser(MainActivity.this, ICAMPUS_URL);
+
 			break;
 		case R.id.button_moodle:
 			ExternalAppUtility.openBrowser(MainActivity.this, MOODLE_URL);

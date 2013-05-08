@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="be.ac.ucl.lfsab1509.llncampus"
-    android:versionCode="14"
-    android:versionName="0.5.2" >
+    android:versionCode="15"
+    android:versionName="0.6" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="14"
         android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -20,11 +20,11 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.AuditoriumActivity"
-            android:label="@string/auditoires" >
+            android:label="@string/auditoires">
         </activity>
         <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.BibliothequesActivity"
-            android:label="@string/bibliotheques" >
+            android:label="@string/bibliotheques">
         </activity>
         <activity
             android:name="be.ac.ucl.lfsab1509.llncampus.activity.LoisirsActivity"

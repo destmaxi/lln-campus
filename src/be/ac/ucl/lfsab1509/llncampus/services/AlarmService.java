@@ -6,7 +6,9 @@ import be.ac.ucl.lfsab1509.llncampus.Database;
 import be.ac.ucl.lfsab1509.llncampus.Event;
 import be.ac.ucl.lfsab1509.llncampus.GPS;
 import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
+import android.app.AlarmManager;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -30,6 +32,8 @@ public class AlarmService extends Service {
 	private static final int DEFAULT_NOTIFY_VITESSE = 5; // en km/h
 	private static final double MIN_DISTANCE = 30; // en m
 	private static Event nextEvent = null;
+	private AlarmManager am;
+	private static final long TIME_TO_REPEAT = 60000; //en millisecondes
 
 	public class LocalBinder extends Binder {
 		AlarmService getService() {
@@ -40,6 +44,10 @@ public class AlarmService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		am =(AlarmManager)LLNCampus.getContext().getSystemService(Context.ALARM_SERVICE);
+		Intent i = new Intent(LLNCampus.getContext(), AlarmService.class);
+		PendingIntent pi = PendingIntent.getBroadcast(LLNCampus.getContext(), 0, i, 0);
+		am.set(AlarmManager.ELAPSED_REALTIME, TIME_TO_REPEAT, pi);
 	}
 
 	private void verifAlarm() {
@@ -74,7 +82,7 @@ public class AlarmService extends Service {
 							int vitesseKmH = LLNCampus.getIntPreference("notify_vitesse_deplacement",DEFAULT_NOTIFY_VITESSE);
 							int vitesseMMin = vitesseKmH*1000/60;
 
-							nbMin = (int) (dist / vitesseMMin);
+							nbMin = (int) (dist / vitesseMMin) + LLNCampus.getIntPreference("notify_more_time", 5);
 						} 
 					}
 				} 
@@ -167,7 +175,8 @@ public class AlarmService extends Service {
 		verifAlarm();
 		// We want this service to continue running until it is explicitly
 		// stopped, so return sticky.
-		return START_STICKY;
+		//return START_STICKY;
+		return START_REDELIVER_INTENT;
 	}
 
 	@Override
