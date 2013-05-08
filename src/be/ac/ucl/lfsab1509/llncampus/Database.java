@@ -40,8 +40,6 @@ public class Database {
 		 * @return True in case of success, false otherwise.
 		 */
 		public final boolean open() {
-			Log.d("Database","OPEN : "+Thread.currentThread().getStackTrace().toString());
-			Thread.dumpStack();
 			if (isOpen()) { return true; }
 			try {
 				dbh.createDatabase();

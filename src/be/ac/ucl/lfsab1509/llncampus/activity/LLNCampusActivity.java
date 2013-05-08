@@ -1,15 +1,18 @@
 package be.ac.ucl.lfsab1509.llncampus.activity;
 
+import be.ac.ucl.lfsab1509.llncampus.Cours;
 import be.ac.ucl.lfsab1509.llncampus.Database;
 import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +29,7 @@ public abstract class LLNCampusActivity extends Activity {
 	 * Variable referencant la base de donnee de l'application
 	 */
 	protected Database db;
+	protected Handler mHandler = new Handler();
 	
 
 	@Override
@@ -147,12 +151,23 @@ public abstract class LLNCampusActivity extends Activity {
 			startActivity(intent);
 			break;
 			
-		case R.id.menu_resetDB: // FIXME : Dispo en mode developpement
-								// uniquement
-			db.close();
-			db.reset();
-			db.open();
-			notify(getString(R.string.reloaded_db));
+		case R.id.menu_resetDB: 
+			final LLNCampusActivity context = this;
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle(getString(R.string.reset_DB)).setMessage(
+					getString(R.string.confirm_reset_DB));
+			builder.setPositiveButton(android.R.string.ok,
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							db.reset();
+							db.open();
+							context.notify(getString(R.string.reloaded_db));
+						}
+					});
+			builder.setNegativeButton(android.R.string.cancel, null);
+			AlertDialog dialog = builder.create();
+			dialog.show();
+			
 			break;
 			
 		case R.id.menu_about:
