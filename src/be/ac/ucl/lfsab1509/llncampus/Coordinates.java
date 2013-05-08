@@ -3,6 +3,9 @@ package be.ac.ucl.lfsab1509.llncampus;
 import android.database.Cursor;
 import android.location.Location;
 
+/**
+ * Représentation de coordonnées gps simple.
+ */
 public class Coordinates {
 	private double lat;
 	private double lon;

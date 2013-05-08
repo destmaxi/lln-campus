@@ -1,9 +1,11 @@
 package be.ac.ucl.lfsab1509.llncampus;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.text.format.Time;
 
 /**
@@ -201,7 +203,7 @@ public class Event {
 		cv.put("TIME_END", end.toMillis(false));
 
 		for (String key : this.details.keySet()) {
-			cv.put(key.toUpperCase(Locale.getDefault()), this.details.get(key));
+			cv.put(key.toUpperCase(Locale.FRENCH), this.details.get(key));
 		}
 		return cv;
 	}
@@ -212,5 +214,46 @@ public class Event {
 			this.coordinates_loaded = true;
 		}
 		return this.coordinates;
+	}
+	
+	/**
+	 * Fournit la liste des évènements présents dans la base de donnée.
+	 */
+	public static ArrayList<Event> getList() {
+		ArrayList<Event> events = new ArrayList<Event>();
+		Cursor c = LLNCampus.getDatabase().sqlRawQuery(
+				"SELECT " +
+						"h.COURSE, " +
+						"h.TIME_BEGIN, " +
+						"h.TIME_END, " +
+						"h.TRAINEES, " +
+						"h.TRAINERS, " +
+						"h.ROOM, " +
+						"h.ACTIVITY_NAME, " +
+						"c.NAME " +
+				"FROM " +
+					"Horaire as h, Courses as c " +
+				"WHERE " +
+					"h.COURSE = c.CODE " +
+				"ORDER BY " +
+					"TIME_BEGIN ASC");
+		while (c.moveToNext()) {
+			Event e = new Event(c.getLong(1), c.getLong(2));
+			e.addDetail("course", c.getString(0));
+			e.addNameKey("course", LLNCampus.getContext().getString(R.string.course));
+			e.addDetail("trainees", c.getString(3));
+			e.addNameKey("trainees", LLNCampus.getContext().getString(R.string.trainees));
+			e.addDetail("trainers", c.getString(4));
+			e.addNameKey("trainers", LLNCampus.getContext().getString(R.string.trainers));
+			e.addDetail("room", c.getString(5));
+			e.addNameKey("room", LLNCampus.getContext().getString(R.string.room));
+			e.addDetail("activity_name", c.getString(6));
+			e.addNameKey("activity_name", LLNCampus.getContext().getString(R.string.activity_name));
+			e.addDetail("title", c.getString(7));
+			e.addNameKey("title", LLNCampus.getContext().getString(R.string.title));
+			events.add(e);
+		}
+		c.close();
+		return events;
 	}
 }

@@ -22,8 +22,6 @@ import android.util.Log;
 
 /**
  * Gere la connexion a ADE et la recuperation des informations.
- * 
- * @author damien
  */
 public final class ADE {
 
@@ -56,7 +54,6 @@ public final class ADE {
 	 * @param weeks
 	 *            Numero des semaines.
 	 * @return true si la connexion a reussie, false sinon.
-	 * @author Damien
 	 */
 	private static boolean connectADE(final String code, final String weeks) {
 		HttpClient client = ExternalAppUtility.getHttpClient();
@@ -81,7 +78,6 @@ public final class ADE {
 	 * @param weeks
 	 *            Numéro des semaines
 	 * @return Une liste d'evenement ou null en cas d'echec.
-	 * @author Damien
 	 */
 	public static ArrayList<Event> getInfos(final String code,
 			final String weeks) {
@@ -139,7 +135,6 @@ public final class ADE {
 	 * 
 	 * @param ha
 	 *            Activite qui lance le thread de mise à jour
-	 * @author Damien
 	 * @param updateRunnable
 	 *            Runnable qui lance la mise à jour de l'affichage
 	 * @param handler
@@ -170,10 +165,8 @@ public final class ADE {
 				/*
 				 * Recuperation des codes des cours a charger
 				 */
-
 				ArrayList<Cours> courses = Cours.getList();
-				
-				
+							
 				if (courses == null || courses.isEmpty()) {
 					SharedPreferences preferences = PreferenceManager
 							.getDefaultSharedPreferences(ha);
@@ -200,7 +193,6 @@ public final class ADE {
 				 * Recuperation des donnees depuis ADE et mise a jour de la base
 				 * de donnee
 				 */
-
 				int nbError = 0;
 				int i = 0;
 				ArrayList<Event> events;

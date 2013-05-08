@@ -118,7 +118,7 @@ public final class Bibliotheque {
 		case 36:
 			return R.drawable.btec;
 		default:
-			Log.e("Library.java",
+			Log.e("Bibliotheque.java",
 					"Ne trouve pas l'image vers l'auditoire de getImg()");
 			return 0;
 		}

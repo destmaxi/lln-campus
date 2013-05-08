@@ -28,11 +28,9 @@ import android.widget.CalendarView.OnDateChangeListener;
 public class HoraireActivity extends LLNCampusActivity implements OnDateChangeListener, OnItemClickListener {
 	private CalendarView calendarView;
 	
-	//create an handler
 	private final Handler handler = new Handler();
 	final Runnable updateRunnable = new Runnable() {
 		public void run() {
-			//call the activity method that updates the UI
 			updateInfos();
 		}
 	};
@@ -53,6 +51,9 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
        	currentDate.setToNow();
        	coursList = Cours.getList();
        	
+       	/*
+       	 * Si la liste des cours est vide, affiche un message d'explication et propose de la completer.
+       	 */
        	if (coursList.isEmpty()) {
        		AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(getString(R.string.emptyCoursListDialogTitle)).setMessage(getString(R.string.emptyCoursListDialogText));
@@ -87,42 +88,12 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
 	}
 	
 
+	/**
+	 * Met à jour la liste des évènements depuis la base de données.
+	 */
 	private void updateInfos() {
 		coursList = Cours.getList();
-		this.events = new ArrayList<Event>();
-		Cursor c = db.sqlRawQuery(
-				"SELECT " +
-						"h.COURSE, " +
-						"h.TIME_BEGIN, " +
-						"h.TIME_END, " +
-						"h.TRAINEES, " +
-						"h.TRAINERS, " +
-						"h.ROOM, " +
-						"h.ACTIVITY_NAME, " +
-						"c.NAME " +
-				"FROM " +
-					"Horaire as h, Courses as c " +
-				"WHERE " +
-					"h.COURSE = c.CODE " +
-				"ORDER BY " +
-					"TIME_BEGIN ASC");
-		while (c.moveToNext()) {
-			Event e = new Event(c.getLong(1), c.getLong(2));
-			e.addDetail("course", c.getString(0));
-			e.addNameKey("course", getString(R.string.course));
-			e.addDetail("trainees", c.getString(3));
-			e.addNameKey("trainees", getString(R.string.trainees));
-			e.addDetail("trainers", c.getString(4));
-			e.addNameKey("trainers", getString(R.string.trainers));
-			e.addDetail("room", c.getString(5));
-			e.addNameKey("room", getString(R.string.room));
-			e.addDetail("activity_name", c.getString(6));
-			e.addNameKey("activity_name", getString(R.string.activity_name));
-			e.addDetail("title", c.getString(7));
-			e.addNameKey("title", getString(R.string.title));
-			this.events.add(e);
-		}
-		c.close();
+		this.events = Event.getList();
 		updateViewInfos();
 	}
 	

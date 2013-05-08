@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.util.Log;
 
 public class BibliothequeHoraire {
 	private final int bibID;
@@ -47,6 +48,7 @@ public class BibliothequeHoraire {
 		case 6:
 			return r.getString(R.string.dimanche);
 		default:
+			Log.e("BibliothequeHoraire.java", "Numero de jour inconnu : " + i);
 			return "Unknown day";
 		}
 	}

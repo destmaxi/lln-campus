@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+/**
+ * Représentation d'un cours (code et nom)
+ */
 public final class Cours {
 	private final String coursCode;
 	private final String coursName;

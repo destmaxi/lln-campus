@@ -67,17 +67,10 @@ public class LLNCampus extends Application {
 		alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis(), 60*1000, pintent); 
 	}
 	
-	/**
-	 * 
-	 */
-	private static void openDatabase() {
-		Log.d("DEBUG", "Application context = " + APPLICATION_CONTEXT);
-		DB = new Database(APPLICATION_CONTEXT);
-		DB.open();
-	}
-	
 	public static Database getDatabase() {
-		if(DB == null){ openDatabase();	}
+		if(DB == null) { 
+			DB = new Database(APPLICATION_CONTEXT);
+		}
 		return DB;
 	}
 	
@@ -109,7 +102,7 @@ public class LLNCampus extends Application {
 	    try {
 	        files = assetManager.list("");
 	    } catch (IOException e) {
-	        Log.e("tag", "Failed to get asset file list.", e);
+	        Log.e("LLNCampus.java", "Failed to get asset file list.", e);
 	    }
 	    File f = new File("/" + Environment.getExternalStorageDirectory().getPath() + "/" + LLNREPOSITORY);
 	    if (!f.exists()) {
@@ -129,7 +122,7 @@ public class LLNCampus extends Application {
 	          out.close();
 	          out = null;
 	        } catch(IOException e) {
-	            Log.e("tag", "Failed to copy asset file: " + filename, e);
+	            Log.e("LLNCampus.java", "Failed to copy asset file: " + filename, e);
 	        }       
 	    }
 	}
