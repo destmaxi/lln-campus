@@ -177,7 +177,7 @@ public final class ADE {
 							public void run() {
 								runUpdateADE(ha,handler,updateRunnable);
 							}
-						});
+						}, handler);
 					}
 					
 				}

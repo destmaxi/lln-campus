@@ -40,7 +40,6 @@ public class UCLouvain {
 
 	private String cookies = null;
 	private boolean connected = false;
-	protected static Handler mHandler = new Handler();
 
 	/**
 	 * Création d'une connexion avec UCLouvain.
@@ -308,7 +307,7 @@ public class UCLouvain {
 	 *            Année académique.
 	 */
 	public static void downloadCoursesFromUCLouvain(final LLNCampusActivity context,
-			final String username, final String password, final Runnable end) {
+			final String username, final String password, final Runnable end, final Handler mHandler) {
 		Time t = new Time();
 		t.setToNow();
 		int a = t.year;
@@ -317,42 +316,46 @@ public class UCLouvain {
 		}
 		final int anac = a;
 		
-		final ProgressDialog mProgress = new ProgressDialog(context);
-		mProgress.setCancelable(false);
-		mProgress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		mProgress.setMax(100);
-		mProgress.setMessage(context.getString(R.string.connection));
+		mHandler.post(new Runnable(){
+			
+			public void run(){
+			
+			final ProgressDialog mProgress = new ProgressDialog(context);
+			mProgress.setCancelable(false);
+			mProgress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			mProgress.setMax(100);
+			mProgress.setMessage(context.getString(R.string.connection));
 
-		mProgress.show();
+			mProgress.show();
 
-		new Thread(new Runnable() {
-			public void progress(final int n, final String nextStep) {
-				mHandler.post(new Runnable() {
-					public void run() {
-						mProgress.setProgress(n);
-						mProgress.setMessage(nextStep);
-					}
-				});
-				Log.d("CoursListEditActivity", nextStep);
-			}
-
-			public void sendError(String msg) {
-				notify("Erreur : " + msg);
-				mProgress.cancel();
-			}
-
-			public void notify(final String msg) {
-				mHandler.post(new Runnable() {
-					public void run() {
-						context.notify(msg);
-					}
-				});
-			}
-
-			public void run() {
-				progress(0, context.getString(R.string.connection_UCL));
-				UCLouvain uclouvain = new UCLouvain(username, password);
-
+			new Thread(new Runnable() {
+				public void progress(final int n, final String nextStep) {
+					mHandler.post(new Runnable() {
+						public void run() {
+							mProgress.setProgress(n);
+							mProgress.setMessage(nextStep);
+						}
+					});
+					Log.d("CoursListEditActivity", nextStep);
+				}
+				
+				public void sendError(String msg) {
+					notify("Erreur : " + msg);
+					mProgress.cancel();
+				}
+				
+				public void notify(final String msg) {
+					mHandler.post(new Runnable() {
+						public void run() {
+							context.notify(msg);
+						}
+					});
+				}
+				
+				public void run() {
+					progress(0, context.getString(R.string.connection_UCL));
+					UCLouvain uclouvain = new UCLouvain(username, password);
+					
 				progress(20, context.getString(R.string.fetch_info));
 				ArrayList<Offre> offres = uclouvain.getOffres(anac);
 
@@ -404,10 +407,13 @@ public class UCLouvain {
 
 				progress(100, context.getString(R.string.end));
 				mProgress.cancel();
-				context.notify(context.getString(R.string.courses_download_ok));
+				//context.notify(context.getString(R.string.courses_download_ok));
 				mHandler.post(end);
 			}
 		}).start();
+			
+		}
+	});
 	}
 
 }

@@ -90,9 +90,10 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 		UCLouvain.downloadCoursesFromUCLouvain(this, username, password,
 				new Runnable() {
 					public void run() {
+						CoursListEditActivity.this.notify(context.getString(R.string.courses_download_ok));
 						loadCoursList();
 					}
-				});
+				}, mHandler);
 
 	}
 
