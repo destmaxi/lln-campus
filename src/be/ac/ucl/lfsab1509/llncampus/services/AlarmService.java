@@ -82,7 +82,7 @@ public class AlarmService extends Service {
 							int vitesseKmH = LLNCampus.getIntPreference("notify_vitesse_deplacement",DEFAULT_NOTIFY_VITESSE);
 							int vitesseMMin = vitesseKmH*1000/60;
 
-							nbMin = (int) (dist / vitesseMMin);
+							nbMin = (int) (dist / vitesseMMin) + LLNCampus.getIntPreference("notify_more_time", 5);
 						} 
 					}
 				} 

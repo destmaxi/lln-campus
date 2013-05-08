@@ -176,9 +176,11 @@
 	<string name="title">Titre</string>
 	<string name="settings_notify_gps_summary">Adapte le nombre de minute en fonction de votre position</string>
 	<string name="settings_notify_gps">Adapter le nombre de minutes en fonction du GPS</string>
-	<string name="notify_vitesse_deplacement">Vitesse de déplacement</string>
+	<string name="notify_vitesse_deplacement">Vitesse de déplacement (en km/h)</string>
 	<string name="notify_vitesse_deplacement_summary">Indiquez votre vitesse de déplacement moyenne (à vol d\'oiseaux, en km/h)</string>
-	<string name="notify_max_distance">Distance maximum</string>
+	<string name="notify_max_distance">Distance maximum GPS (en m)</string>
 	<string name="notify_max_distance_summary">Indiquez la distance (en m) au-dela de laquelle le calcul du temps ne doit plus être effectué sur base GPS</string>
+	<string name="notify_more_time_summary">Indiquez le temps (en minutes) que vous voulez en plus de celui calculé par le GPS</string>
+	<string name="notify_more_time">Temps supplémentaire GPS (en minutes)</string>
 	
 </resources>

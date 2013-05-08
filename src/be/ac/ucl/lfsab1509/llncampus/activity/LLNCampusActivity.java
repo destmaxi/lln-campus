@@ -146,6 +146,7 @@ public abstract class LLNCampusActivity extends Activity {
 			intent = new Intent(this, SettingsActivity.class);
 			startActivity(intent);
 			break;
+			
 		case R.id.menu_resetDB: // FIXME : Dispo en mode developpement
 								// uniquement
 			db.close();
@@ -153,6 +154,7 @@ public abstract class LLNCampusActivity extends Activity {
 			db.open();
 			notify(getString(R.string.reloaded_db));
 			break;
+			
 		case R.id.menu_about:
 			intent = new Intent(this, AboutActivity.class);
 			startActivity(intent);

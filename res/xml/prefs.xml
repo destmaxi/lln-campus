@@ -16,7 +16,7 @@
     </PreferenceCategory>
     <PreferenceCategory
         android:summary="Other information"
-        android:title="@string/settings" >
+        android:title="@string/settings_notify" >
         <CheckBoxPreference
             android:key="courses_notify"
             android:summary="@string/summary_settings_notify"
@@ -28,6 +28,7 @@
             android:ringtoneType="notification|alarm|all"
             android:showDefault="true"
             android:showSilent="true"
+            android:dependency="courses_notify"
             android:title="@string/notify_ringtone" />
 
         <EditTextPreference
@@ -35,22 +36,35 @@
             android:key="notify_minute"
             android:numeric="integer"
             android:summary="@string/notify_minute_summary"
+            android:dependency="courses_notify"
             android:title="@string/notify_minute" />
 
         <CheckBoxPreference
             android:key="notify_with_gps"
             android:summary="@string/settings_notify_gps_summary"
+            android:dependency="courses_notify"
             android:title="@string/settings_notify_gps" />
 
         <EditTextPreference 
+            android:defaultValue="5"
             android:key="notify_vitesse_deplacement"
             android:title="@string/notify_vitesse_deplacement"
             android:summary="@string/notify_vitesse_deplacement_summary"
+            android:dependency="notify_with_gps"
             android:numeric="integer"/>
         <EditTextPreference
+            android:defaultValue="5000"
             android:key="notify_max_distance"
             android:numeric="integer"
+            android:dependency="notify_with_gps"
            android:summary="@string/notify_max_distance_summary" android:title="@string/notify_max_distance"/>
+        <EditTextPreference
+            android:defaultValue="5"
+            android:key="notify_more_time"
+            android:numeric="integer"
+            android:dependency="notify_with_gps"
+           android:summary="@string/notify_more_time_summary" android:title="@string/notify_more_time"/>
+        
     </PreferenceCategory>
 
 </PreferenceScreen>

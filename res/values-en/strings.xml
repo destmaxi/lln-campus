@@ -176,9 +176,11 @@
 	<string name="title">Title</string>
 	<string name="settings_notify_gps_summary">Adjust the number of minutes depending onn your position</string>
 	<string name="settings_notify_gps">Adjust the number of minutes based on GPS</string>
-	<string name="notify_vitesse_deplacement">Travel speed</string>
+	<string name="notify_vitesse_deplacement">Travel speed (in km/h)</string>
 	<string name="notify_vitesse_deplacement_summary">Indicate your average travel speed (bird flight, in km/h)</string>
-	<string name="notify_max_distance">Maximum distance</string>
+	<string name="notify_max_distance">Maximum distance GPS (in m)</string>
 	<string name="notify_max_distance_summary">Indicate the distance (in m) beyond the calculation time has not to be performed based on GPS</string>
+	<string name="notify_more_time_summary">Indicate the time (in minutes) that you want in addition to which computed by the GPS</string>
+	<string name="notify_more_time">Additionnal time GPS (in minutes)</string>
 	
 </resources>
