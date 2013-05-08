@@ -12,9 +12,11 @@ import be.ac.ucl.lfsab1509.llncampus.activity.HoraireActivity;
 import android.app.NotificationManager;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.media.RingtoneManager;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -170,6 +172,22 @@ public final class ADE {
 				 */
 
 				ArrayList<Cours> courses = Cours.getList();
+				
+				
+				if (courses == null || courses.isEmpty()) {
+					SharedPreferences preferences = PreferenceManager
+							.getDefaultSharedPreferences(ha);
+					String username = preferences.getString("username", null);
+					String password = preferences.getString("password", null);
+					if(username != null && password != null){
+						UCLouvain.downloadCoursesFromUCLouvain(ha, username, password, new Runnable(){
+							public void run() {
+								runUpdateADE(ha,handler,updateRunnable);
+							}
+						});
+					}
+					
+				}
 
 				/*
 				 * Numéro des semaines FIXME : Pour tout télécharger, les

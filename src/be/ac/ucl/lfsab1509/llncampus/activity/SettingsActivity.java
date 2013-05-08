@@ -7,7 +7,6 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.RingtonePreference;
-import android.util.Log;
 import be.ac.ucl.lfsab1509.llncampus.R;
 
 /**
