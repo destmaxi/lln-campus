@@ -1,31 +1,50 @@
 package be.ac.ucl.lfsab1509.llncampus.activity;
 
+import be.ac.ucl.lfsab1509.llncampus.Cours;
 import be.ac.ucl.lfsab1509.llncampus.Database;
 import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 /**
+ * LLNCampus. A application for students at the UCL (Belgium).
+    Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
  * Classe abstraite d'activite permettant d'avoir un menu commun et des methodes
  * utiles pour les differentes activites
  * 
- * @author Damien
  */
 public abstract class LLNCampusActivity extends Activity {
 	/**
 	 * Variable referencant la base de donnee de l'application
 	 */
 	protected Database db;
+	protected Handler mHandler = new Handler();
 	
 
 	@Override
@@ -47,7 +66,7 @@ public abstract class LLNCampusActivity extends Activity {
 			this.setRequestedOrientation(
 					ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		}
-		db.open();
+		//db.open();
 		editActionBar();
 	}
 	protected void editActionBar() {
@@ -58,9 +77,9 @@ public abstract class LLNCampusActivity extends Activity {
 
 	@Override
 	public void onResume() {
-		if (!db.isOpen()) {
+		/*if (!db.isOpen()) {
 			db.open();
-		}
+		}*/
 		super.onResume();
 	}
 
@@ -147,12 +166,23 @@ public abstract class LLNCampusActivity extends Activity {
 			startActivity(intent);
 			break;
 			
-		case R.id.menu_resetDB: // FIXME : Dispo en mode developpement
-								// uniquement
-			db.close();
-			db.reset();
-			db.open();
-			notify(getString(R.string.reloaded_db));
+		case R.id.menu_resetDB: 
+			final LLNCampusActivity context = this;
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle(getString(R.string.reset_DB)).setMessage(
+					getString(R.string.confirm_reset_DB));
+			builder.setPositiveButton(android.R.string.ok,
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							db.reset();
+							db.open();
+							context.notify(getString(R.string.reloaded_db));
+						}
+					});
+			builder.setNegativeButton(android.R.string.cancel, null);
+			AlertDialog dialog = builder.create();
+			dialog.show();
+			
 			break;
 			
 		case R.id.menu_about:

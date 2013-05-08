@@ -12,16 +12,33 @@ import be.ac.ucl.lfsab1509.llncampus.activity.HoraireActivity;
 import android.app.NotificationManager;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.media.RingtoneManager;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+
 /**
- * Gere la connexion a ADE et la recuperation des informations.
+ * LLNCampus. A application for students at the UCL (Belgium).
+    Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- * @author damien
+ * Gere la connexion a ADE et la recuperation des informations.
  */
 public final class ADE {
 
@@ -54,7 +71,6 @@ public final class ADE {
 	 * @param weeks
 	 *            Numero des semaines.
 	 * @return true si la connexion a reussie, false sinon.
-	 * @author Damien
 	 */
 	private static boolean connectADE(final String code, final String weeks) {
 		HttpClient client = ExternalAppUtility.getHttpClient();
@@ -79,7 +95,6 @@ public final class ADE {
 	 * @param weeks
 	 *            Numéro des semaines
 	 * @return Une liste d'evenement ou null en cas d'echec.
-	 * @author Damien
 	 */
 	public static ArrayList<Event> getInfos(final String code,
 			final String weeks) {
@@ -137,7 +152,6 @@ public final class ADE {
 	 * 
 	 * @param ha
 	 *            Activite qui lance le thread de mise à jour
-	 * @author Damien
 	 * @param updateRunnable
 	 *            Runnable qui lance la mise à jour de l'affichage
 	 * @param handler
@@ -168,8 +182,22 @@ public final class ADE {
 				/*
 				 * Recuperation des codes des cours a charger
 				 */
-
 				ArrayList<Cours> courses = Cours.getList();
+							
+				if (courses == null || courses.isEmpty()) {
+					SharedPreferences preferences = PreferenceManager
+							.getDefaultSharedPreferences(ha);
+					String username = preferences.getString("username", null);
+					String password = preferences.getString("password", null);
+					if(username != null && password != null){
+						UCLouvain.downloadCoursesFromUCLouvain(ha, username, password, new Runnable(){
+							public void run() {
+								runUpdateADE(ha,handler,updateRunnable);
+							}
+						}, handler);
+					}
+					
+				}
 
 				/*
 				 * Numéro des semaines FIXME : Pour tout télécharger, les
@@ -182,7 +210,6 @@ public final class ADE {
 				 * Recuperation des donnees depuis ADE et mise a jour de la base
 				 * de donnee
 				 */
-
 				int nbError = 0;
 				int i = 0;
 				ArrayList<Event> events;

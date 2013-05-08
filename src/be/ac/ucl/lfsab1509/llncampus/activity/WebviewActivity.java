@@ -1,6 +1,7 @@
 package be.ac.ucl.lfsab1509.llncampus.activity;
 
 import java.io.IOException;
+import java.util.Stack;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
@@ -16,10 +17,31 @@ import android.webkit.WebViewClient;
 import be.ac.ucl.lfsab1509.llncampus.ExternalAppUtility;
 import be.ac.ucl.lfsab1509.llncampus.R;
 
+/**
+ * LLNCampus. A application for students at the UCL (Belgium).
+    Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  Class that define a Webview and its behavior
+ *  Related with webview.xml
+ */
 public class WebviewActivity extends LLNCampusActivity {
 	private WebView webview;
+	private myWebClient webviewclient; 
 	private Handler mHandler = new Handler();
 	private WebviewActivity context;
+	private Stack<HistoryElement> history = new Stack<HistoryElement>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,18 +50,22 @@ public class WebviewActivity extends LLNCampusActivity {
 		setContentView(R.layout.webview);
 		webview = (WebView) findViewById(R.id.webview);
 		webview.getSettings().setBuiltInZoomControls(true);
-		webview.setWebViewClient(new myWebClient());
+		webviewclient = new myWebClient();
+		webview.setWebViewClient(webviewclient);
 		setTitle(getIntent().getStringExtra("TITLE"));
 		loadURL(getIntent().getStringExtra("URL"));
 	}
 
-
-	private void updateHTML(String BASE_URL, String html, String customCSS) {
+	private void updateHTML(String BASE_URL, String html, String customCSS, boolean pushInHistory) {
 		String encoding = "utf-8";
 		if(getIntent().getStringExtra("ENCODING") != ""){
 			encoding = getIntent().getStringExtra("ENCODING") ;
 		}
 		webview.loadDataWithBaseURL(BASE_URL, html + "<style>"+customCSS+"</style>", "text/html", encoding, null);
+		if(pushInHistory){
+			HistoryElement he = new HistoryElement(html, customCSS, BASE_URL);
+			history.push(he);
+		}
 	}
 	public void loadURL(final String URL) {
 		android.util.Log.d("WebviewActivity", "URL : "+URL);
@@ -48,12 +74,12 @@ public class WebviewActivity extends LLNCampusActivity {
 		final String footer = "</body></html>";
 		updateHTML("",header
 				+ "Chargement en cours... <br /><small>(Vous devez &ecirc;tre connect&eacute; &agrave; Internet)</small>"
-				+ footer, "body{ margin:40% auto; width:60%; font-size:25px; text-align:center;}");
+				+ footer, "body{ margin:40% auto; width:60%; font-size:25px; text-align:center;}", false);
 		new Thread(new Runnable() {
 			public void updateHTML(final String html) {
 				mHandler.post(new Runnable() {
 					public void run() {
-						context.updateHTML(URL, html, getIntent().getStringExtra("CSS"));
+						context.updateHTML(URL, html, getIntent().getStringExtra("CSS"), true);
 					}
 				});
 			}
@@ -77,26 +103,33 @@ public class WebviewActivity extends LLNCampusActivity {
 	}
 	@Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-		//TODO Damien
-		/*
-     if ((keyCode == KeyEvent.KEYCODE_BACK) && webview.canGoBack()) {
-         webview.goBack();
-         return true;
-     }
-  	*/
-     return super.onKeyDown(keyCode, event);
+		if ((keyCode == KeyEvent.KEYCODE_BACK) && history.size()>1) {
+			HistoryElement he = history.pop();//On supprime la page actuelle
+			he = history.pop(); // On récupère la page précédente;
+			updateHTML(he.baseURL, he.html, he.customCSS, true);
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
     }
 	
 	public class myWebClient extends WebViewClient{
-	  
-
-	    @Override
+		@Override
 	    public boolean shouldOverrideUrlLoading(WebView view, String url) {
-	    	// TODO Auto-generated method stub
-
 	    	loadURL(url);
 	    	return true;
 
 	    }
+	}
+	
+	public class HistoryElement {
+		public String html;
+		public String customCSS;
+		public String baseURL;
+		
+		public HistoryElement(String html, String customCSS, String baseURL) {
+			this.html = html;
+			this.customCSS = customCSS;
+			this.baseURL = baseURL;
+		}
 	}
 }

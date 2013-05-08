@@ -20,6 +20,26 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+/**
+ * LLNCampus. A application for students at the UCL (Belgium).
+    Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * Basis class of LLNCampus, provide some useful information for all other classes
+ */
+
 public class LLNCampus extends Application {
 	private static Context APPLICATION_CONTEXT;
 	private static Database DB;
@@ -67,17 +87,10 @@ public class LLNCampus extends Application {
 		alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis(), 60*1000, pintent); 
 	}
 	
-	/**
-	 * 
-	 */
-	private static void openDatabase() {
-		Log.d("DEBUG", "Application context = " + APPLICATION_CONTEXT);
-		DB = new Database(APPLICATION_CONTEXT);
-		DB.open();
-	}
-	
 	public static Database getDatabase() {
-		if(DB == null){ openDatabase();	}
+		if(DB == null) { 
+			DB = new Database(APPLICATION_CONTEXT);
+		}
 		return DB;
 	}
 	
@@ -109,7 +122,7 @@ public class LLNCampus extends Application {
 	    try {
 	        files = assetManager.list("");
 	    } catch (IOException e) {
-	        Log.e("tag", "Failed to get asset file list.", e);
+	        Log.e("LLNCampus.java", "Failed to get asset file list.", e);
 	    }
 	    File f = new File("/" + Environment.getExternalStorageDirectory().getPath() + "/" + LLNREPOSITORY);
 	    if (!f.exists()) {
@@ -129,7 +142,7 @@ public class LLNCampus extends Application {
 	          out.close();
 	          out = null;
 	        } catch(IOException e) {
-	            Log.e("tag", "Failed to copy asset file: " + filename, e);
+	            Log.e("LLNCampus.java", "Failed to copy asset file: " + filename, e);
 	        }       
 	    }
 	}

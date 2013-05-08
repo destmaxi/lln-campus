@@ -15,12 +15,33 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import be.ac.ucl.lfsab1509.llncampus.activity.LLNCampusActivity;
+
+import android.app.ProgressDialog;
+import android.content.ContentValues;
+import android.os.Handler;
+import android.text.format.Time;
 import android.util.Log;
 
 /**
+ * LLNCampus. A application for students at the UCL (Belgium).
+    Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
  * Classe permettant la connexion à UCLouvain.be.
  * 
- * @author Damien
  * 
  */
 public class UCLouvain {
@@ -288,4 +309,126 @@ public class UCLouvain {
 				+ ") : \n" + cours);
 		return cours;
 	}
+
+	/**
+	 * Lance le téléchargement de la liste des cours et la place dans la base de
+	 * donnée.
+	 * 
+	 * @param username
+	 *            Identifiant global UCL.
+	 * @param password
+	 *            Mot de passe global UCL.
+	 * @param anac
+	 *            Année académique.
+	 */
+	public static void downloadCoursesFromUCLouvain(final LLNCampusActivity context,
+			final String username, final String password, final Runnable end, final Handler mHandler) {
+		Time t = new Time();
+		t.setToNow();
+		int a = t.year;
+		if (t.month < 9) {
+			a--;
+		}
+		final int anac = a;
+		
+		mHandler.post(new Runnable(){
+			
+			public void run(){
+			
+			final ProgressDialog mProgress = new ProgressDialog(context);
+			mProgress.setCancelable(false);
+			mProgress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			mProgress.setMax(100);
+			mProgress.setMessage(context.getString(R.string.connection));
+
+			mProgress.show();
+
+			new Thread(new Runnable() {
+				public void progress(final int n, final String nextStep) {
+					mHandler.post(new Runnable() {
+						public void run() {
+							mProgress.setProgress(n);
+							mProgress.setMessage(nextStep);
+						}
+					});
+					Log.d("CoursListEditActivity", nextStep);
+				}
+				
+				public void sendError(String msg) {
+					notify("Erreur : " + msg);
+					mProgress.cancel();
+				}
+				
+				public void notify(final String msg) {
+					mHandler.post(new Runnable() {
+						public void run() {
+							context.notify(msg);
+						}
+					});
+				}
+				
+				public void run() {
+					progress(0, context.getString(R.string.connection_UCL));
+					UCLouvain uclouvain = new UCLouvain(username, password);
+					
+				progress(20, context.getString(R.string.fetch_info));
+				ArrayList<Offre> offres = uclouvain.getOffres(anac);
+
+				if (offres == null || offres.isEmpty()) {
+					sendError(context.getString(R.string.error_anac) + anac);
+					return;
+				}
+
+				int i = 40;
+				ArrayList<Cours> cours = new ArrayList<Cours>();
+				for (Offre o : offres) {
+					progress(
+							i,
+							context.getString(R.string.get_courses)
+									+ o.getOffreName());
+					ArrayList<Cours> c = uclouvain.getCourses(o);
+					if (c != null && !c.isEmpty()) {
+						cours.addAll(c);
+					} else {
+						Log.e("CoursListEditActivity",
+								"Erreur : Aucun cours pour l'offre ["
+										+ o.getOffreCode() + "] "
+										+ o.getOffreName());
+					}
+					i += (int) (30. / offres.size());
+				}
+
+				if (cours.isEmpty()) {
+					sendError(context.getString(R.string.courses_empty));
+					return;
+				}
+
+				// Suppression des anciens cours
+				progress(70, context.getString(R.string.cleaning_db));
+				LLNCampus.getDatabase().delete("Courses", "", null);
+				LLNCampus.getDatabase().delete("Horaire", "", null);
+
+				// Ajout des nouvelles donnees
+				i = 80;
+				for (Cours c : cours) {
+					progress(i, context.getString(R.string.add_courses_db));
+					ContentValues cv = new ContentValues();
+					cv.put("CODE", c.getCoursCode());
+					cv.put("NAME", c.getCoursName());
+
+					LLNCampus.getDatabase().insert("Courses", cv);
+					i += (int) (20. / cours.size());
+				}
+
+				progress(100, context.getString(R.string.end));
+				mProgress.cancel();
+				//context.notify(context.getString(R.string.courses_download_ok));
+				mHandler.post(end);
+			}
+		}).start();
+			
+		}
+	});
+	}
+
 }
