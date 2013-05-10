@@ -12,6 +12,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:src="@drawable/title"
+        android:contentDescription="@string/logo"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="40sp" />
 
