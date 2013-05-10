@@ -9,11 +9,12 @@
         android:id="@+id/maintitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:src="@drawable/title"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="52sp" />
+        android:contentDescription="@string/logo"
+        android:textSize="20sp" />
 
     <GridLayout
         android:id="@+id/maingridlayout"
