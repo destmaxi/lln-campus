@@ -33,9 +33,7 @@
             android:contentDescription="@string/horaire"
             android:drawableTop="@drawable/horaire"
             android:gravity="center_vertical|center_horizontal"
-            android:text="@string/horaire"
-            android:textAppearance="?android:attr/textAppearanceMedium" 
-            android:textSize="15sp"/>
+            />
 
         <Button
             android:id="@+id/button_bibliotheque"
@@ -45,9 +43,7 @@
             android:contentDescription="@string/bibliotheques"
             android:drawableTop="@drawable/bibliotheque"
             android:gravity="center_vertical|center_horizontal"
-            android:text="@string/bibliotheques"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="15sp" />
+             />
 
         <Button
             android:id="@+id/button_auditoire"
@@ -57,9 +53,7 @@
             android:contentDescription="@string/auditoires"
             android:drawableTop="@drawable/auditoire"
             android:gravity="center_vertical|center_horizontal"
-            android:text="@string/auditoires"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="15sp" />
+             />
 
 
         <Button
@@ -70,9 +64,7 @@
             android:contentDescription="@string/loisirs"
             android:drawableTop="@drawable/loisir"
             android:gravity="center_vertical|center_horizontal"
-            android:text="@string/loisirs"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="15sp" />
+            />
 
         <Button
             android:id="@+id/button_map"
@@ -82,9 +74,7 @@
             android:contentDescription="@string/map"
             android:drawableTop="@drawable/map"
             android:gravity="center_vertical|center_horizontal"
-            android:text="@string/map"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="15sp" />
+            />
 
          <Button
             android:id="@+id/button_repertoire"
@@ -94,9 +84,7 @@
             android:contentDescription="@string/repertoire"
             android:drawableTop="@drawable/about"
             android:gravity="center_vertical|center_horizontal"
-            android:text="@string/repertoire"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="15sp" />
+             />
 
         <Button
             android:id="@+id/button_icampus"
@@ -107,9 +95,7 @@
             android:drawableTop="@drawable/icampus"
             android:gravity="center_vertical|center_horizontal"
             android:padding="20dp"
-            android:text="@string/icampus"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="15sp" />
+             />
 
         <Button
             android:id="@+id/button_moodle"
@@ -119,9 +105,7 @@
             android:contentDescription="@string/moodle"
             android:drawableTop="@drawable/moodle"
             android:gravity="center_vertical|center_horizontal"
-            android:text="@string/moodle"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="15sp" />
+            />
 
         <Button
             android:id="@+id/button_bureau"
@@ -131,9 +115,7 @@
             android:contentDescription="@string/bureau"
             android:drawableTop="@drawable/bureau_ucl"
             android:gravity="center_vertical|center_horizontal"
-            android:text="@string/bureau"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="15sp" />
+             />
     </GridLayout>
 
 </LinearLayout>
