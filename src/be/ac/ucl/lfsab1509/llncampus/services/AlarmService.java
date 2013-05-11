@@ -63,6 +63,8 @@ public class AlarmService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		/* Define the Context here, otherwise no Context before lauching the app */
+		LLNCampus.setContext(getApplicationContext());
 		am =(AlarmManager)LLNCampus.getContext().getSystemService(Context.ALARM_SERVICE);
 		Intent i = new Intent(LLNCampus.getContext(), AlarmService.class);
 		PendingIntent pi = PendingIntent.getBroadcast(LLNCampus.getContext(), 0, i, 0);
