@@ -145,11 +145,13 @@ public class AlarmService extends Service {
 						+ "WHERE h.COURSE = c.CODE AND TIME_BEGIN > "
 						+ precTime + " " + "ORDER BY TIME_BEGIN ASC LIMIT 1");
 		c.moveToFirst();
+		
 		try{
 		nextEvent = new Event(c.getLong(0), c.getLong(1));
 		nextEvent.addDetail("course", c.getString(2));
 		nextEvent.addDetail("room", c.getString(3));
 		nextEvent.addDetail("course_name", c.getString(4));
+		c.close();
 		} catch(CursorIndexOutOfBoundsException e) // No event yet
 		{
 			nextEvent = null;

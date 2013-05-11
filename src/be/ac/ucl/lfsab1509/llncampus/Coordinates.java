@@ -63,7 +63,16 @@ public class Coordinates {
 	 * @return Les coordonnées gps si elles ont pu être déterminé, null sinon.
 	 */
 	public static Coordinates getCoordinatesFromAuditorium(String room) {
-		String sigle = (room.trim()).substring(0, 4);
+		String sigle;
+		String sigleGrand = room.trim();
+		if (sigleGrand.length() < 4)
+		{
+			sigle = sigleGrand.substring(0, sigleGrand.length());
+		}
+		else
+		{
+			sigle = sigleGrand.substring(0, 4);
+		}
 		Database db = LLNCampus.getDatabase();
 		Cursor c = db
 				.sqlRawQuery("SELECT Poi.LATITUDE, Poi.LONGITUDE FROM Poi, Auditorium WHERE Poi.ID = Auditorium.BUILDING_ID AND Auditorium.AUDITORIUM_NAME LIKE '"
