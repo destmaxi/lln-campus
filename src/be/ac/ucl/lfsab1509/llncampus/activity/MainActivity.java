@@ -140,6 +140,13 @@ public class MainActivity extends LLNCampusActivity implements OnClickListener {
 	}
 	
 	@Override
+	public void onStop()
+	{
+		db.close();
+		super.onStop();
+	}
+	
+	@Override
 	public final void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {
