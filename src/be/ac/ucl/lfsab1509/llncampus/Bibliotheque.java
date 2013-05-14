@@ -196,8 +196,8 @@ public final class Bibliotheque {
 						+ "Poi.NAME ASC");
 		Bibliotheque bib;
 		while (c.moveToNext()) {
-			bib = new Bibliotheque(c.getInt(0), c.getString(1), c.getLong(2),
-					c.getLong(3), c.getString(4), new BibliothequeHoraire(
+			bib = new Bibliotheque(c.getInt(0), c.getString(1), c.getDouble(2),
+					c.getDouble(3), c.getString(4), new BibliothequeHoraire(
 							c.getInt(0)), c.getString(5), c.getString(6));
 			bibliotheques.add(bib);
 		}

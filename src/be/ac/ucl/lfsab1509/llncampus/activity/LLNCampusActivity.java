@@ -76,9 +76,9 @@ public abstract class LLNCampusActivity extends Activity {
 
 	@Override
 	public void onResume() {
-		if (!db.isOpen()) {
+		/*if (!db.isOpen()) {
 			db.open();
-		}
+		} */
 		
 		super.onResume();
 	}
