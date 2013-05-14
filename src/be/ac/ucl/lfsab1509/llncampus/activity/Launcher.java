@@ -101,6 +101,13 @@ public class Launcher extends LLNCampusActivity {
 		super.onResume();
 		lauchApp();
 	}
+	
+	public void onStop() {
+		if (progressDialog != null)
+			progressDialog.dismiss();
+		super.onStop();
+		
+	}
 
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -128,15 +135,16 @@ public class Launcher extends LLNCampusActivity {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				db.open();
 				if (update) {
 					// From LLNCampusActivity
 					db.reset();
+					db.open();
 				}
-				db.open();
+				
 
-				// A la fin du traitement, on fait disparaitre notre message
+				// A la fin du traitement, on fait disparaitre notre message dans onStop()
 
-				progressDialog.dismiss();
 
 				handler.sendEmptyMessage(0);
 

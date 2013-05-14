@@ -10,6 +10,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 
 
@@ -111,7 +112,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			}
 		} catch (IOException e) {
 			throw new RuntimeException("Erreur lors de la copie de la base de donnee", e);
+		} catch (SQLException e) {
+			Log.e("DATABASE HELPER", e+"");
 		}
+		
     }
  
     /**
