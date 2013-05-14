@@ -66,7 +66,7 @@ public abstract class LLNCampusListActivity extends ListActivity {
 	@Override
     public void onPause() {
     	super.onPause();
-    	db.close(); 
+    	//db.close(); 
     }
 
 	@Override
