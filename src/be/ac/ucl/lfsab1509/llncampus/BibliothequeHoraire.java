@@ -144,12 +144,7 @@ public class BibliothequeHoraire {
 		/**
 		 * Constructeur.
 		 * 
-		 * @param day
-		 *            Jour de la semaine (0=lundi)
-		 * @param beginTime
-		 *            Heure d'ouverture sous la forme : Heure*60 + Minutes
-		 * @param endTime
-		 *            Heure de fermeture sous la forme Heure*60 + Minutes
+		 * d
 		 */
 		public PlageHoraire(int day, int beginTime, int endTime) {
 			this.day = day;
