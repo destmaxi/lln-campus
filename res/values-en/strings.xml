@@ -40,6 +40,8 @@
     <string name="sablon">Le Sablon</string>
     <string name="galilee">Le Galilée</string>
     <string name="dun_pain_a_lautre">D\'un pain à l\'autre</string>
+    <string name="solidaire">Solidaire card</string>
+    <string name="culture">Culture card</string>
     <string name="restaurants">Restaurants</string>
     <string name="carpestudentem">Agenda of the animation</string>
 	<string name="todo">Work in progress, will probably be implemented in the next version :)</string>
