@@ -53,6 +53,8 @@ public class LoisirsActivity extends LLNCampusActivity implements
 		setThisOnClickListener(R.id.button_sablon);
 		setThisOnClickListener(R.id.button_galilee);
 		setThisOnClickListener(R.id.button_dun_pain_a_lautre);
+		setThisOnClickListener(R.id.button_solidaire);
+		setThisOnClickListener(R.id.button_culture);
 	}
 
 	private void setThisOnClickListener(int btnId) {
@@ -158,7 +160,14 @@ public class LoisirsActivity extends LLNCampusActivity implements
 						"CSS",
 						"#menu, #header{display:none;}");
 				startActivity(intent);
-				break;			
+				break;	
+		case R.id.button_solidaire:
+			intent = new Intent(this, SolidaireActivity.class);
+			startActivity(intent);
+			break;
+		case R.id.button_culture:
+			intent = new Intent(this, CultureActivity.class);
+			startActivity(intent);
 		default:
 			notify(r.getString(R.string.todo));
 		}

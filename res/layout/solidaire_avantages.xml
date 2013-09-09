@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView
+       android:id="@+id/solidaire_avantages_title"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="top|center_horizontal"
+       android:textIsSelectable="false"
+       android:text="@string/button_solidaire_avantages"
+       android:textSize="20sp"/>
+    
+    <TextView
+       android:id="@+id/solidaire_avantages_text1"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="top|center_horizontal"
+       android:textIsSelectable="false"
+       android:text="@string/solidaire_avantages_text1"
+       android:textSize="16sp"
+       android:paddingTop="15dp"
+       android:paddingBottom="5dp"/>
+    <TextView
+       android:id="@+id/solidaire_avantages_text2"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="top|center_horizontal"
+       android:textIsSelectable="false"
+       android:text="@string/solidaire_avantages_text2"
+       android:textSize="14sp"/>
+    
+    <TextView
+       android:id="@+id/solidaire_avantages_text3"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="top|center_horizontal"
+       android:textIsSelectable="false"
+       android:text="@string/solidaire_avantages_text3"
+       android:textSize="16sp"
+       android:paddingTop="15dp"
+       android:paddingBottom="5dp"/>
+    <TextView
+       android:id="@+id/solidaire_avantages_text4"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="top|center_horizontal"
+       android:textIsSelectable="false"
+       android:text="@string/solidaire_avantages_text4"
+       android:textSize="14sp"/>
+    
+    <TextView
+       android:id="@+id/solidaire_avantages_text5"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="top|center_horizontal"
+       android:textIsSelectable="false"
+       android:text="@string/solidaire_avantages_text5"
+       android:textSize="16sp"
+       android:paddingTop="15dp"
+       android:paddingBottom="5dp"/>
+    <TextView
+       android:id="@+id/solidaire_avantages_text6"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="top|center_horizontal"
+       android:textIsSelectable="false"
+       android:text="@string/solidaire_avantages_text6"
+       android:textSize="14sp"/>
+    
+    <TextView
+       android:id="@+id/solidaire_avantages_text7"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="top|center_horizontal"
+       android:textIsSelectable="false"
+       android:text="@string/solidaire_avantages_text7"
+       android:textSize="16sp"
+       android:paddingTop="15dp"
+       android:paddingBottom="5dp"/>
+    <TextView
+       android:id="@+id/solidaire_avantages_text8"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="top|center_horizontal"
+       android:textIsSelectable="false"
+       android:text="@string/solidaire_avantages_text8"
+       android:textSize="14sp"/>
+   
+</LinearLayout>
