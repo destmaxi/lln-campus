@@ -168,6 +168,7 @@ public class LoisirsActivity extends LLNCampusActivity implements
 		case R.id.button_culture:
 			intent = new Intent(this, CultureActivity.class);
 			startActivity(intent);
+			break;
 		default:
 			notify(r.getString(R.string.todo));
 		}
