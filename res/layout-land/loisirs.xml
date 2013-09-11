@@ -80,5 +80,29 @@
         android:padding="10dp"
         android:text="@string/dun_pain_a_lautre"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <Button
+        android:id="@+id/button_solidaire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:contentDescription="@string/solidaire"
+        android:drawableLeft="@drawable/carte_solidaire_icon"
+        android:gravity="center_vertical|center_horizontal"
+        android:padding="10dp"
+        android:text="@string/solidaire"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+    
+     <Button
+        android:id="@+id/button_culture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:contentDescription="@string/culture"
+        android:drawableLeft="@drawable/carte_culture"
+        android:gravity="center_vertical|center_horizontal"
+        android:padding="10dp"
+        android:text="@string/culture"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </GridLayout>
