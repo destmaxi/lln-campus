@@ -326,7 +326,7 @@ public class UCLouvain {
 		Time t = new Time();
 		t.setToNow();
 		int a = t.year;
-		if (t.month < 9) {
+		if (t.month < 8) {
 			a--;
 		}
 		final int anac = a;
