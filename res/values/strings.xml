@@ -40,6 +40,8 @@
     <string name="sablon">Le Sablon</string>
     <string name="galilee">Le Galilée</string>
     <string name="dun_pain_a_lautre">D\'un pain à l\'autre</string>
+    <string name="solidaire">Carte Solidaire</string>
+    <string name="culture">Carte Culture</string>
     <string name="restaurants">Restaurants</string>
     <string name="carpestudentem">Agenda de l\'animation</string>
     <string name="todo">Travail en cours, sera probablement implémentée dans la prochaine version :)</string>
@@ -185,4 +187,26 @@
 	<string name="notify_more_time_summary">Indiquez le temps (en minutes) que vous voulez en plus de celui calculé par le GPS</string>
 	<string name="notify_more_time">Temps supplémentaire GPS (en minutes)</string>
 	
+	<!-- Strings pour Solidaire et culture-->
+	<string name="button_solidaire_avantages">Tes avantages</string>
+	<string name="button_solidaire_site">Rejoins-nous !</string>
+	<string name="solidaire_text1"> <b>La carte solidaire, c\'est quoi?</b> </string>
+	<string name="solidaire_text2">Avec la Carte Solidaire tu t\'engages pour le développement et pour l\'environnement.</string>
+	<string name="solidaire_text3">La moitié du prix de la Carte permet d\'aider une maman à nourrir ses enfants au Burundi</string>
+	<string name="solidaire_text4">L\'autre moitié te permet de financer tes propres projets solidaires grâce au Fonds Carte Solidaire.</string>
+	<string name="solidaire_text5">La Carte Solidaire c\'est aussi des <b>réductions</b> dans des magasins bios, naturels et fairtrade sur ton campus et <b>plein d’autres avantages!</b></string>
+	<string name="solidaire_text6">La Carte ne coûte que <b>10 euros</b> </string>
+	<string name="solidaire_text7">Alors qu’est-ce que tu attends ? Rejoins-nous sur www.cartesolidaire.be </string>
+	<string name="culture_text1">Open your mind!</string>		
+	<string name="culture_text2">La Carte culture, c\'est seulement 10 euros pour une tonne de cadeaux: places gratuites, réductions, invitations, le tout auprès d\'une centaine de partenaires culturels répartis dans toute la Wallonie et à Bruxelles.</string>
+	<string name="culture_text3">Tu aimes la musique, le théâtre, le cinéma, tu voudrais sortir pour un prix plus bas? La Carte culture est faite pour toi!</string>
+	<string name="button_culture_site">Plus d\'infos</string>
+	<string name="solidaire_avantages_text1">Des réductions exclusives</string>
+	<string name="solidaire_avantages_text2">Des réductions chez tous les commerçants partenaires de la Carte Solidaire. Retrouve la liste complète sur www.cartesolidaire.be </string>
+	<string name="solidaire_avantages_text3">Tes projets</string>
+	<string name="solidaire_avantages_text4">Tu es solidaire, tu veux t\'engager mais tu n\'as pas les moyens financiers? Le Fonds \"Carte Solidaire\" te permettra de financer TES propres projets au Nord comme au Sud !</string>
+	<string name="solidaire_avantages_text5">De l\'info !</string>
+	<string name="solidaire_avantages_text6">La Carte Solidaire c\'est aussi une newsletter qui t\'informe tous les mois sur l\'actualité solidaire de ton campus mais aussi plein de promos et des concours.</string>
+	<string name="solidaire_avantages_text7">Vis ta propre expérience</string>
+	<string name="solidaire_avantages_text8">Un accès privilégié pour tes stages, mémoires en Belgique et à l\'étranger, sur les projets de Louvain Coopération.</string>
 </resources>

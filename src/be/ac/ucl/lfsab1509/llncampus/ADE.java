@@ -47,7 +47,7 @@ public final class ADE {
 	/** Page pour les infos. */
 	private static final String INFO_PATH = "/ade/custom/modules/plannings/info.jsp?order=slot";
 	/** Numéro du projet (variable en fonction de l'année). */
-	private static final int PROJECT_ID = 9;
+	private static final int PROJECT_ID = 16;
 	/** Nom d'utilisateur ADE. */
 	private static final String USER = "etudiant";
 	/** Mot de passe ADE. */

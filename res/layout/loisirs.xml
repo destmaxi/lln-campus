@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical|fill_vertical|center_horizontal|fill_horizontal"
-    android:columnCount="2"
+    android:columnCount="3"
     android:rowCount="3"
     android:scrollbars="horizontal|vertical"
     tools:context=".Loisirs" >
@@ -86,5 +86,32 @@
         android:text="@string/dun_pain_a_lautre"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="12sp" />
+    
+    <Button
+        android:id="@+id/button_solidaire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:contentDescription="@string/solidaire"
+        android:drawableTop="@drawable/carte_solidaire_icon"
+        android:gravity="center_vertical|center_horizontal"
+        android:padding="5dp"
+        android:text="@string/solidaire"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="12sp" />
+    
+     <Button
+        android:id="@+id/button_culture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:contentDescription="@string/culture"
+        android:drawableTop="@drawable/carte_culture"
+        android:gravity="center_vertical|center_horizontal"
+        android:padding="5dp"
+        android:text="@string/culture"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="12sp" />
+    
 
 </GridLayout>
