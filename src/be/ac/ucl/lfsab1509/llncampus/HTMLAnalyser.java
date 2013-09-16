@@ -2,6 +2,8 @@ package be.ac.ucl.lfsab1509.llncampus;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
@@ -38,26 +40,33 @@ public final class HTMLAnalyser {
 	 *            Nom de la balise
 	 * @return Liste du contenu des balises
 	 */
+	
+	static int count = 0;
 	public static ArrayList<String> getBalisesContent(String html, String balise) {
 		ArrayList<String> toReturn = new ArrayList<String>();
 		int start, stop, endStart, i, nextStart;
-		if ((start = html.indexOf("<" + balise)) != -1
-				&& (endStart = html.indexOf('>', start)) != -1
-				&& (stop = html.indexOf("</" + balise + ">", endStart)) != -1) {
+		String theString = html;
+		while ((start = theString.indexOf("<" + balise)) != -1
+				&& (endStart = theString.indexOf('>', start)) != -1
+				&& (stop = theString.indexOf("</" + balise + ">", endStart)) != -1) {
 			i = endStart;
 
 			/* Pour gérer les balises du même type imbriquée */
-			while ((nextStart = html.indexOf("<" + balise, i)) < stop
+			while ((nextStart = theString.indexOf("<" + balise, i)) < stop
 					&& nextStart > 0) {
 				i = nextStart + balise.length() + 2;
-				stop = html.indexOf("</" + balise + ">", stop);
+				stop = theString.indexOf("</" + balise + ">", stop);
 			}
-			toReturn.add(html.substring(endStart + 1, stop));
+			toReturn.add(theString.substring(endStart + 1, stop));
 
 			// Appel recursif jusqu'à ce que la condition du if ne soit plus
 			// respectee..
-			toReturn.addAll(getBalisesContent(
-					html.substring(stop + 3 + balise.length()), balise));
+			Log.d("HTML", html);
+			Log.d("SUB", html.substring(stop + 3 + balise.length()));
+			Log.d("Balise", balise);
+			count++;
+			Log.d("Count", ""+count);
+			theString = theString.substring(stop + 3 + balise.length());
 		}
 		return toReturn;
 	}
