@@ -115,6 +115,7 @@ public class UCLouvain {
 	 */
 	public ArrayList<Offre> getOffres() {
 		if (!connected) {
+			Log.d("OFFRE", "Not connected");
 			return null;
 		}
 		String html = ""; // A long string containing all the HTML
@@ -131,6 +132,9 @@ public class UCLouvain {
 
 			ArrayList<String> tables = HTMLAnalyser.getBalisesContent(html,
 					"table");
+			
+			Log.d("TABLE", tables.toString());
+			
 			String table = tables.get(tables.size() - 1); // Dernier tableau de
 															// la page.
 			ArrayList<String> lignes = HTMLAnalyser.getBalisesContent(table,
@@ -139,7 +143,8 @@ public class UCLouvain {
 			int anac, numOffre;
 			String offreCode, offreName;
 			// On commence a 2 pour passer les 2 lignes d'en-tete.
-			for (int i = 2; i < lignes.size(); i++) {
+			for (int i = 1; i < lignes.size(); i++) {
+				Log.d("I", String.valueOf(i));
 				ArrayList<String> cellules = HTMLAnalyser.getBalisesContent(
 						lignes.get(i), "td");
 
@@ -175,11 +180,13 @@ public class UCLouvain {
 	 */
 	public final ArrayList<Offre> getOffres(final int anac) {
 		if (!connected) {
+			Log.d("OFFRE", "Not connected");
 			return null;
 		}
 
 		ArrayList<Offre> offres = new ArrayList<Offre>();
 		ArrayList<Offre> allOffres = getOffres();
+		Log.d("ALLOFFRES", allOffres.toString());
 		if (allOffres == null || allOffres.isEmpty()) {
 			Log.e("UCLouvain", "Aucune offres n'a pu être récupéré");
 			return null;
@@ -222,6 +229,7 @@ public class UCLouvain {
 	 */
 	public final ArrayList<Cours> getCourses(final ArrayList<Offre> offres) {
 		if (!connected) {
+			Log.d("OFFRE", "Not connected");
 			return null;
 		}
 
@@ -287,6 +295,8 @@ public class UCLouvain {
 		}
 		String notesTable = html.substring(
 				start + BEGIN_HTML_NOTES_TABLE.length(), stop);
+		
+		Log.d("NOTETABLE", notesTable);
 
 		ArrayList<String> lignes = HTMLAnalyser.getBalisesContent(notesTable,
 				"tr");
