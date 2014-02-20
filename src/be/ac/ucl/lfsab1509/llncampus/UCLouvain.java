@@ -186,7 +186,7 @@ public class UCLouvain {
 
 		ArrayList<Offre> offres = new ArrayList<Offre>();
 		ArrayList<Offre> allOffres = getOffres();
-		Log.d("ALLOFFRES", allOffres.toString());
+		//Log.d("ALLOFFRES", allOffres.toString());
 		if (allOffres == null || allOffres.isEmpty()) {
 			Log.e("UCLouvain", "Aucune offres n'a pu être récupéré");
 			return null;
