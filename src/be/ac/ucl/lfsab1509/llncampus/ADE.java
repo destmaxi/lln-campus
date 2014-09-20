@@ -43,11 +43,12 @@ import android.util.Log;
 public final class ADE {
 
 	/** Adresse du serveur ADE. */
-	private static final String SERVER_URL = "http://horaire.sgsi.ucl.ac.be:8080";
+	private static final String SERVER_URL = "http://horairev6.uclouvain.be";
 	/** Page pour les infos. */
-	private static final String INFO_PATH = "/ade/custom/modules/plannings/info.jsp?order=slot";
+	//private static final String INFO_PATH = "/direct/index.jsp?displayConfName=WEB";
+	private static final String INFO_PATH = "/jsp/custom/modules/plannings/info.jsp?displayConfName=WEB&order=slot";
 	/** Numéro du projet (variable en fonction de l'année). */
-	private static final int PROJECT_ID = 16;
+	private static final int PROJECT_ID = 6;
 	/** Nom d'utilisateur ADE. */
 	private static final String USER = "etudiant";
 	/** Mot de passe ADE. */
@@ -75,7 +76,7 @@ public final class ADE {
 	private static boolean connectADE(final String code, final String weeks) {
 		HttpClient client = ExternalAppUtility.getHttpClient();
 		HttpGet request = new HttpGet((SERVER_URL
-				+ "/ade/custom/modules/plannings/direct_planning.jsp?weeks="
+				+ "/jsp/custom/modules/plannings/direct_planning.jsp?weeks="
 				+ weeks + "&code=" + code + "&login=" + USER + "&password="
 				+ PASSWORD + "&projectId=" + PROJECT_ID + "").replace(' ', '+'));
 		try {
@@ -119,11 +120,16 @@ public final class ADE {
 				ArrayList<String> cellules = HTMLAnalyser.getBalisesContent(
 						lignes.get(i), "td");
 
-				String date = HTMLAnalyser.removeHTML(cellules.get(0));
-				String beginHour = HTMLAnalyser.removeHTML(cellules.get(4));
-				String duration = HTMLAnalyser.removeHTML(cellules.get(5));
-
-				Event event = new Event(date, beginHour, duration);
+				String date = HTMLAnalyser.removeHTML(cellules.get(1));
+				String beginHour = HTMLAnalyser.removeHTML(cellules.get(3));
+				String duration = HTMLAnalyser.removeHTML(cellules.get(4));
+				// TODO Hardcoded duration, must be improved in further version
+				if (duration.equals("")) {
+					duration = "2h00";
+				}
+				String dayName = HTMLAnalyser.removeHTML(cellules.get(2));
+				
+				Event event = new Event(date, beginHour, duration, dayName);
 				event.addDetail("trainees",
 						HTMLAnalyser.removeHTML(cellules.get(6)));
 				event.addDetail("trainers",
@@ -133,8 +139,7 @@ public final class ADE {
 				event.addDetail("course",
 						HTMLAnalyser.removeHTML(cellules.get(10)));
 				event.addDetail("activity_name",
-						HTMLAnalyser.removeHTML(cellules.get(1)));
-
+						HTMLAnalyser.removeHTML(cellules.get(0)));
 				events.add(event);
 			}
 		} catch (Exception e) {

@@ -1,7 +1,10 @@
 package be.ac.ucl.lfsab1509.llncampus;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Locale;
 
 import android.content.ContentValues;
@@ -35,6 +38,19 @@ public class Event {
 	private HashMap<String, String> keyName;
 	private Coordinates coordinates;
 	private boolean coordinates_loaded = false;
+	
+	static final Map<String, Integer> DAY_MAP;
+	static {
+	  Map<String, Integer> tmp = new LinkedHashMap<String, Integer>();
+	  tmp.put("Lundi", 0);
+	  tmp.put("Mardi", 1);
+	  tmp.put("Mercredi", 2);
+	  tmp.put("Jeudi", 3);
+	  tmp.put("Vendredi", 4);
+	  tmp.put("Samedi", 5);
+	  tmp.put("Dimanche", 6);
+	  DAY_MAP = Collections.unmodifiableMap(tmp);
+	}
 
 	/**
 	 * Constructeur.
@@ -45,13 +61,15 @@ public class Event {
 	 *            Hour of begin
 	 * @param duration
 	 *            Duration
+	 * @param dayName
+	 * 			  Lundi, Mardi,...
 	 */
 	public Event(final String date, final String beginTime,
-			final String duration) {
+			final String duration, final String dayName) {
 		this.begin = new Time();
 		this.end = new Time();
 		try {
-			setBegin(date, beginTime);
+			setBegin(date, beginTime, dayName);
 			setDuration(duration);
 		} catch (NumberFormatException e) {
 			e.printStackTrace(); // TODO
@@ -108,16 +126,20 @@ public class Event {
 	 *            Date de l'évènement
 	 * @param beginT
 	 *            Heure de l'évènement
+	 * @param dayName
+	 * 			  Lundi, Mardi,...
 	 */
-	private void setBegin(final String date, final String beginT) {
-		int day = Integer.valueOf(date.substring(3, 5));
-		int month = Integer.valueOf(date.substring(0, 2)) - 1;
-		int year = Integer.valueOf(date.substring(6, 10));
+	private void setBegin(final String date, final String beginT, final String dayName) {
+		int day = Integer.valueOf(date.substring(date.length() - 8, date.length() - 6));
+		int month = Integer.valueOf(date.substring(date.length() - 5, date.length() - 3)) - 1;
+		int year = Integer.valueOf(date.substring(date.length() - 2, date.length()));
 
 		int beginHour = Integer.valueOf(beginT.substring(0, 2));
 		int beginMin = Integer.valueOf(beginT.substring(3, 5));
 
-		begin.set(0, beginMin, beginHour, day, month, year);
+		begin.set(0, beginMin, beginHour, day + DAY_MAP.get(dayName), month, year + 2000);
+		// Avoid fuzzy behavior (ex. 32nd March should be 1st April)
+		begin.normalize(false);
 	}
 
 	/**
