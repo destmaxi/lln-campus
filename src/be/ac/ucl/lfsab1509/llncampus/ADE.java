@@ -1,7 +1,6 @@
 package be.ac.ucl.lfsab1509.llncampus;
 
 import java.util.ArrayList;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -78,7 +77,12 @@ public final class ADE {
 		HttpGet request = new HttpGet((SERVER_URL
 				+ "/jsp/custom/modules/plannings/direct_planning.jsp?weeks="
 				+ weeks + "&code=" + code + "&login=" + USER + "&password="
-				+ PASSWORD + "&projectId=" + PROJECT_ID + "").replace(' ', '+'));
+				+ PASSWORD + "&projectId=" + PROJECT_ID + "&showTabDuration=true"
+				+ "&showTabDate=true&showTab=true&showTabWeek=false&showTabDay=false" 
+				+ "&showTabStage=false&showTabResources=false"
+				+ "&showTabCategory6=false&showTabCategory7=false"
+				+ "&showTabCategory8=false").replace(' ', '+'));
+		
 		try {
 			client.execute(request);
 			return true;
@@ -120,16 +124,11 @@ public final class ADE {
 				ArrayList<String> cellules = HTMLAnalyser.getBalisesContent(
 						lignes.get(i), "td");
 
-				String date = HTMLAnalyser.removeHTML(cellules.get(1));
-				String beginHour = HTMLAnalyser.removeHTML(cellules.get(3));
-				String duration = HTMLAnalyser.removeHTML(cellules.get(4));
-				// TODO Hardcoded duration, must be improved in further version
-				if (duration.equals("")) {
-					duration = "2h00";
-				}
-				String dayName = HTMLAnalyser.removeHTML(cellules.get(2));
+				String date = HTMLAnalyser.removeHTML(cellules.get(0));
+				String beginHour = HTMLAnalyser.removeHTML(cellules.get(2));
+				String duration = HTMLAnalyser.removeHTML(cellules.get(3));
 				
-				Event event = new Event(date, beginHour, duration, dayName);
+				Event event = new Event(date, beginHour, duration);
 				event.addDetail("trainees",
 						HTMLAnalyser.removeHTML(cellules.get(6)));
 				event.addDetail("trainers",
@@ -137,9 +136,9 @@ public final class ADE {
 				event.addDetail("room",
 						HTMLAnalyser.removeHTML(cellules.get(8)));
 				event.addDetail("course",
-						HTMLAnalyser.removeHTML(cellules.get(10)));
+						HTMLAnalyser.removeHTML(cellules.get(9)));
 				event.addDetail("activity_name",
-						HTMLAnalyser.removeHTML(cellules.get(0)));
+						HTMLAnalyser.removeHTML(cellules.get(1)));
 				events.add(event);
 			}
 		} catch (Exception e) {
