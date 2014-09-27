@@ -300,9 +300,10 @@ public class UCLouvain {
 
 		ArrayList<String> lignes = HTMLAnalyser.getBalisesContent(notesTable,
 				"tr");
+		Log.d("LIGNES", lignes.toString());
 
 		// On commence a 3 pour passer les 3 lignes d'en-tete.
-		for (int i = 3; i < lignes.size(); i++) {
+		for (int i = 0; i < lignes.size(); i++) {
 			ArrayList<String> cellules = HTMLAnalyser.getBalisesContent(
 					lignes.get(i), "td");
 			Log.d("UCLouvain", "Cellules : " + cellules);
