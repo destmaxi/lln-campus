@@ -21,3 +21,4 @@ proguard/
 .classpath
 .project
 .settings
+project.properties
