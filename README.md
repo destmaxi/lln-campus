@@ -16,7 +16,7 @@ Contribution
 ------------
 You can contribute to this project in several ways:
 * As a user, you can report bugs in the **Issues** panel.
-* As a developer, you can improve the code (fixes, new features) in creating  **Pull Requests**.
+* As a developer, you can improve the code (fixes, new features) by forking the project and creating  **Pull Requests** (more details in the Wiki).
 
 Credentials
 -----------
