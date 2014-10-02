@@ -2,7 +2,7 @@ package be.ac.ucl.lfsab1509.llncampus.activity.adapter;
 
 import java.util.ArrayList;
 
-import be.ac.ucl.lfsab1509.llncampus.Cours;
+import be.ac.ucl.lfsab1509.llncampus.Course;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -32,9 +32,9 @@ import android.widget.TextView;
 public class CoursListAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
  
-    private ArrayList<Cours> list;
+    private ArrayList<Course> list;
  
-    public CoursListAdapter(Context context, ArrayList<Cours> list) {
+    public CoursListAdapter(Context context, ArrayList<Course> list) {
         mInflater = LayoutInflater.from(context);
         this.list = list;
     }
@@ -46,8 +46,8 @@ public class CoursListAdapter extends BaseAdapter {
         TextView title = (TextView) convertView.findViewById(android.R.id.text1);
         TextView sub = (TextView) convertView.findViewById(android.R.id.text2);
  
-        Cours info = list.get(position);
-        title.setText(info.getCoursCode());
+        Course info = list.get(position);
+        title.setText(info.getCourseCode());
         sub.setText(info.getCoursName());
         return convertView;
     }

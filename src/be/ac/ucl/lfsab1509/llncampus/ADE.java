@@ -1,13 +1,14 @@
 package be.ac.ucl.lfsab1509.llncampus;
 
 import java.util.ArrayList;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.util.EntityUtils;
 
-import be.ac.ucl.lfsab1509.llncampus.activity.HoraireActivity;
-
+import be.ac.ucl.lfsab1509.llncampus.activity.ScheduleActivity;
+import be.ac.ucl.lfsab1509.llncampus.external.SecurePreferences;
 import android.app.NotificationManager;
 import android.content.ContentValues;
 import android.content.Context;
@@ -15,7 +16,6 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.media.RingtoneManager;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -36,41 +36,43 @@ import android.util.Log;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Gere la connexion a ADE et la recuperation des informations.
+ */
+
+/**
+ * Manage the connection to and the fetching of information from ADE.
  */
 public final class ADE {
 
-	/** Adresse du serveur ADE. */
+	/** ADE server address */
 	private static final String SERVER_URL = "http://horairev6.uclouvain.be";
-	/** Page pour les infos. */
-	//private static final String INFO_PATH = "/direct/index.jsp?displayConfName=WEB";
-	private static final String INFO_PATH = "/jsp/custom/modules/plannings/info.jsp?displayConfName=WEB&order=slot";
-	/** Numéro du projet (variable en fonction de l'année). */
+	/** Page to get information */
+	private static final String INFO_PATH = "/jsp/custom/modules/plannings/info.jsp"
+			+ "?displayConfName=WEB&order=slot";
+	/** Project number (depends of the year, e.g. 2012-2013: 9, 2013-2014: 16, 2014-2015-6). */
 	private static final int PROJECT_ID = 6;
-	/** Nom d'utilisateur ADE. */
+	/** ADE username. */
 	private static final String USER = "etudiant";
-	/** Mot de passe ADE. */
+	/** ADE password. */
 	private static final String PASSWORD = "student";
-	/** ID pour les notifications. */
+	/** ID for notifications. */
 	private static final Integer NOTIFY_ID = 1;
 
 	/**
-	 * Constructeur.
+	 * Constructor (empty).
 	 */
 	private ADE() {
 
 	}
 
 	/**
-	 * Etablit la connexion a ADE en specifiant les codes des cours dont ont
-	 * veut les informations.
+	 * Establish the connection to ADE in specifying code of courses 
+	 * in which information is requested
 	 * 
 	 * @param code
-	 *            Code des cours a recuperer.
+	 *            Code of courses to fetch, separated by comma (e.g. "lelec1530,lfsab1509").
 	 * @param weeks
-	 *            Numero des semaines.
-	 * @return true si la connexion a reussie, false sinon.
+	 *            Week numbers, separated by comma (e.g. "0,1,2,3,42").
+	 * @return true if connection succeeded, else false.
 	 */
 	private static boolean connectADE(final String code, final String weeks) {
 		HttpClient client = ExternalAppUtility.getHttpClient();
@@ -82,7 +84,6 @@ public final class ADE {
 				+ "&showTabStage=false&showTabResources=false"
 				+ "&showTabCategory6=false&showTabCategory7=false"
 				+ "&showTabCategory8=false").replace(' ', '+'));
-		
 		try {
 			client.execute(request);
 			return true;
@@ -92,16 +93,15 @@ public final class ADE {
 	}
 
 	/**
-	 * Charge les informations a propos des cours dont le code est donne en
-	 * argument.
+	 * Fetch information about courses which codes are given as parameter
 	 * 
 	 * @param code
-	 *            Code du cours
+	 *            Code of courses to fetch, separated by comma (e.g. "lelec1530,lfsab1509").
 	 * @param weeks
-	 *            Numéro des semaines
-	 * @return Une liste d'evenement ou null en cas d'echec.
+	 *            Week numbers, separated by comma (e.g. "0,1,2,3,42").
+	 * @return An ArrayList of Events or null if failure.
 	 */
-	public static ArrayList<Event> getInfos(final String code,
+	public static ArrayList<Event> getInfo(final String code,
 			final String weeks) {
 		String html = ""; // A long string containing all the HTML
 		ArrayList<Event> events = new ArrayList<Event>();
@@ -116,35 +116,31 @@ public final class ADE {
 			html = EntityUtils.toString(response.getEntity());
 
 			String table = HTMLAnalyser.getBalisesContent(html, "table").get(0);
-			ArrayList<String> lignes = HTMLAnalyser.getBalisesContent(table,
-					"tr");
+			ArrayList<String> lines = HTMLAnalyser.getBalisesContent(table, "tr");
 
-			// On commence a 2 pour passer les 2 lignes d'en-tete.
-			for (int i = 2; i < lignes.size(); i++) {
-				ArrayList<String> cellules = HTMLAnalyser.getBalisesContent(
-						lignes.get(i), "td");
+			// Skip the 2 header lines.
+			for (int i = 2; i < lines.size(); i++) {
+				ArrayList<String> cells = HTMLAnalyser.getBalisesContent(lines.get(i), "td");
 
-				String date = HTMLAnalyser.removeHTML(cellules.get(0));
-				String beginHour = HTMLAnalyser.removeHTML(cellules.get(2));
-				String duration = HTMLAnalyser.removeHTML(cellules.get(3));
+				String date = HTMLAnalyser.removeHTML(cells.get(0));
+				String beginHour = HTMLAnalyser.removeHTML(cells.get(2));
+				String duration = HTMLAnalyser.removeHTML(cells.get(3));
 				
 				Event event = new Event(date, beginHour, duration);
 				event.addDetail("trainees",
-						HTMLAnalyser.removeHTML(cellules.get(6)));
+						HTMLAnalyser.removeHTML(cells.get(6)));
 				event.addDetail("trainers",
-						HTMLAnalyser.removeHTML(cellules.get(7)));
+						HTMLAnalyser.removeHTML(cells.get(7)));
 				event.addDetail("room",
-						HTMLAnalyser.removeHTML(cellules.get(8)));
+						HTMLAnalyser.removeHTML(cells.get(8)));
 				event.addDetail("course",
-						HTMLAnalyser.removeHTML(cellules.get(9)));
+						HTMLAnalyser.removeHTML(cells.get(9)));
 				event.addDetail("activity_name",
-						HTMLAnalyser.removeHTML(cellules.get(1)));
+						HTMLAnalyser.removeHTML(cells.get(1)));
 				events.add(event);
 			}
 		} catch (Exception e) {
-			Log.e("ADE.java",
-					"Erreur lors de la connexion ou de l'analyse du code HTML : "
-							+ e.getMessage());
+			Log.e("ADE.java", "Error with connection or analysis of HTML : " + e.getMessage());
 			e.printStackTrace();
 			return null;
 		}
@@ -152,24 +148,23 @@ public final class ADE {
 	}
 
 	/**
-	 * Lance la mise à jour des infos depuis ADE.
+	 * Start information update from ADE.
 	 * 
-	 * @param ha
-	 *            Activite qui lance le thread de mise à jour
+	 * @param sa
+	 *            Activity that launches the update thread.
 	 * @param updateRunnable
-	 *            Runnable qui lance la mise à jour de l'affichage
+	 *            Runnable that launches the display update.
 	 * @param handler
-	 *            Handler pour permettre la mise à jour de l'affichage à la fin
-	 *            de l'execution
+	 *            Handler to allow the display update at the end of the execution.
 	 */
-	public static void runUpdateADE(final HoraireActivity ha,
+	public static void runUpdateADE(final ScheduleActivity sa,
 			final Handler handler, final Runnable updateRunnable) {
-		final Resources r = ha.getResources();
+		final Resources r = sa.getResources();
 
-		final NotificationManager nm = (NotificationManager) ha
+		final NotificationManager nm = (NotificationManager) sa
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 
-		final NotificationCompat.Builder nb = new NotificationCompat.Builder(ha)
+		final NotificationCompat.Builder nb = new NotificationCompat.Builder(sa)
 				.setSmallIcon(android.R.drawable.stat_sys_download)
 				.setContentTitle(r.getString(R.string.download_from_ADE))
 				.setContentText(r.getString(R.string.download_progress))
@@ -184,19 +179,19 @@ public final class ADE {
 			public void run() {
 
 				/*
-				 * Recuperation des codes des cours a charger
+				 * Fetching of code of courses to load.
 				 */
-				ArrayList<Cours> courses = Cours.getList();
+				ArrayList<Course> courses = Course.getList();
 							
 				if (courses == null || courses.isEmpty()) {
-					SharedPreferences preferences = PreferenceManager
-							.getDefaultSharedPreferences(ha);
+					// Take the context of the ScheduleActivity
+					SharedPreferences preferences = new SecurePreferences(sa);
 					String username = preferences.getString("username", null);
 					String password = preferences.getString("password", null);
 					if(username != null && password != null){
-						UCLouvain.downloadCoursesFromUCLouvain(ha, username, password, new Runnable(){
+						UCLouvain.downloadCoursesFromUCLouvain(sa, username, password, new Runnable(){
 							public void run() {
-								runUpdateADE(ha,handler,updateRunnable);
+								runUpdateADE(sa, handler, updateRunnable);
 							}
 						}, handler);
 					}
@@ -204,43 +199,41 @@ public final class ADE {
 				}
 
 				/*
-				 * Numéro des semaines FIXME : Pour tout télécharger, les
-				 * numéros vont de 0 à 51 (0 = debut 1e quadri, 51 = fin 2e
-				 * session d'examen)
+				 * Number of weeks. To download all the schedule, the numbers go from 0 to 51
+				 * (0 = beginning of first semester, 51 = ending of the September exams session).
 				 */
 				String weeks = getWeeks();
 
 				/*
-				 * Recuperation des donnees depuis ADE et mise a jour de la base
-				 * de donnee
+				 * Fetching data from ADE and updating the database
 				 */
 				int nbError = 0;
 				int i = 0;
 				ArrayList<Event> events;
-				for (Cours course : courses) {
+				for (Course course : courses) {
 					i++;
 					nb.setProgress(courses.size(), i, false);
-					nb.setContentText(r.getString(R.string.telechargement_pour)
-							+ " " + course.getCoursCode() + "...");
+					nb.setContentText(r.getString(R.string.download_for)
+							+ " " + course.getCourseCode() + "...");
 					nm.notify(NOTIFY_ID, nb.build());
-					events = ADE.getInfos(course.getCoursCode(), weeks);
+					events = ADE.getInfo(course.getCourseCode(), weeks);
 					if (events == null) {
 						nbError++;
-						inboxStyle.addLine(course.getCoursCode() + " : "
+						inboxStyle.addLine(course.getCourseCode() + " : "
 								+ r.getString(R.string.download_error));
 					} else {
-						// Suppression des anciennes donnees
+						// Removing old data
 						LLNCampus.getDatabase().delete("Horaire", "COURSE = ?",
-								new String[] {course.getCoursCode()});
-						// Ajout des nouvelles donnees
+								new String[] {course.getCourseCode()});
+						// Adding new data
 						for (Event e : events) {
 							ContentValues cv = e.toContentValues();
-							cv.put("COURSE", course.getCoursCode());
+							cv.put("COURSE", course.getCourseCode());
 							if (LLNCampus.getDatabase().insert("Horaire", cv) < 0) {
 								nbError++;
 							}
 						}
-						inboxStyle.addLine(course.getCoursCode() + " : "
+						inboxStyle.addLine(course.getCourseCode() + " : "
 								+ events.size() + " "
 								+ r.getString(R.string.events));
 						nb.setStyle(inboxStyle);
@@ -278,9 +271,9 @@ public final class ADE {
 	}
 
 	/**
-	 * Génère la liste des numéros de semaines pour ADE.
+	 * Generate a full list of week numbers for ADE.
 	 * 
-	 * @return La liste des semaines
+	 * @return Week numbers separated by commas to fetch a full year for schelude (from 0 to 51).
 	 */
 	private static String getWeeks() {
 		String weeks = "";

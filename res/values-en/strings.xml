@@ -112,7 +112,7 @@
     <string name="cours_list_explanation">"In order to have your schedule, you have to indicate the different course codes which you take (the code courses have to match with on ADE ones). In order to make the task easier, the application can download the course list from uclouvain.be. To do that, click on \"Download from UCLouvain\". To delete a course of the list, click on it. "</string>
     <string name="emptyCoursListDialogTitle">First step with the schedule</string>
     <string name="emptyCoursListDialogText">There is still not any course downloaded for your schedule yet. In order to have your schedule, you have to indicate the different course codes which you take. To do that, it is possible to download automatically your course list from the UCL website. It is also possible to add manually if your course codes of your virtual office do not match with ADE ones.</string>
-    <string name="telechargement_pour">Download for</string>
+    <string name="download_for">Download for</string>
     <string name="download_error">Download Error</string>
 	<string name="events">Events</string>
 	<string name="download_done">Download finished</string>

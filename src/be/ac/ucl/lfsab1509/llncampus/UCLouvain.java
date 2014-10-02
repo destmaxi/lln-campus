@@ -207,7 +207,7 @@ public class UCLouvain {
 	 * @return Une liste de cours ou null en cas d'erreur
 	 * @see getCourses
 	 */
-	public final ArrayList<Cours> getCourses(final Offre o) {
+	public final ArrayList<Course> getCourses(final Offre o) {
 		try {
 			return getCourses(o.getAnac(), o.getNumOffre());
 		} catch (ParseException e) {
@@ -227,20 +227,20 @@ public class UCLouvain {
 	 *            Liste des offres pour lesquels il faut récupérer les cours.
 	 * @return La liste des cours ou null en cas d'erreur.
 	 */
-	public final ArrayList<Cours> getCourses(final ArrayList<Offre> offres) {
+	public final ArrayList<Course> getCourses(final ArrayList<Offre> offres) {
 		if (!connected) {
 			Log.d("OFFRE", "Not connected");
 			return null;
 		}
 
-		ArrayList<Cours> cours = new ArrayList<Cours>();
+		ArrayList<Course> course = new ArrayList<Course>();
 		if (offres == null) {
 			return null;
 		}
 		for (Offre o : offres) {
-			cours.addAll(getCourses(o));
+			course.addAll(getCourses(o));
 		}
-		return cours;
+		return course;
 	}
 
 	/**
@@ -258,7 +258,7 @@ public class UCLouvain {
 	 * @throws IOException
 	 *             Lorsqu'il y a une erreur de lecture de la page.
 	 */
-	private ArrayList<Cours> getCourses(int anac, int numOffre)
+	private ArrayList<Course> getCourses(int anac, int numOffre)
 			throws ParseException, IOException {
 		HttpClient client = ExternalAppUtility.getHttpClient();
 		HttpGet request = new HttpGet(SERVER_URL
@@ -279,7 +279,7 @@ public class UCLouvain {
 		 * 
 		 * String notesTable = tables.get(tables.size() - 2);
 		 */
-		ArrayList<Cours> cours = new ArrayList<Cours>();
+		ArrayList<Course> course = new ArrayList<Course>();
 
 		int start = html.indexOf(BEGIN_HTML_NOTES_TABLE);
 		if (start == -1) {
@@ -312,13 +312,13 @@ public class UCLouvain {
 			if (code.length() > 6) {
 				String name = HTMLAnalyser.removeHTML(cellules.get(1))
 						.replaceAll("[^A-Za-z0-9éùàèê ]", "");
-				Cours c = new Cours(code, name);
-				cours.add(c);
+				Course c = new Course(code, name);
+				course.add(c);
 			}
 		}
 		Log.d("UCLouvain", "Résultat de getCourses(" + anac + ", " + numOffre
-				+ ") : \n" + cours);
-		return cours;
+				+ ") : \n" + course);
+		return course;
 	}
 
 	/**
@@ -391,15 +391,15 @@ public class UCLouvain {
 				}
 
 				int i = 40;
-				ArrayList<Cours> cours = new ArrayList<Cours>();
+				ArrayList<Course> course = new ArrayList<Course>();
 				for (Offre o : offres) {
 					progress(
 							i,
 							context.getString(R.string.get_courses)
 									+ o.getOffreName());
-					ArrayList<Cours> c = uclouvain.getCourses(o);
+					ArrayList<Course> c = uclouvain.getCourses(o);
 					if (c != null && !c.isEmpty()) {
-						cours.addAll(c);
+						course.addAll(c);
 					} else {
 						Log.e("CoursListEditActivity",
 								"Erreur : Aucun cours pour l'offre ["
@@ -409,7 +409,7 @@ public class UCLouvain {
 					i += (int) (30. / offres.size());
 				}
 
-				if (cours.isEmpty()) {
+				if (course.isEmpty()) {
 					sendError(context.getString(R.string.courses_empty));
 					return;
 				}
@@ -421,14 +421,14 @@ public class UCLouvain {
 
 				// Ajout des nouvelles donnees
 				i = 80;
-				for (Cours c : cours) {
+				for (Course c : course) {
 					progress(i, context.getString(R.string.add_courses_db));
 					ContentValues cv = new ContentValues();
-					cv.put("CODE", c.getCoursCode());
+					cv.put("CODE", c.getCourseCode());
 					cv.put("NAME", c.getCoursName());
 
 					LLNCampus.getDatabase().insert("Courses", cv);
-					i += (int) (20. / cours.size());
+					i += (int) (20. / course.size());
 				}
 
 				progress(100, context.getString(R.string.end));

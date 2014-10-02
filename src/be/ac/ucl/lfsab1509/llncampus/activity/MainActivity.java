@@ -155,7 +155,7 @@ public class MainActivity extends LLNCampusActivity implements OnClickListener {
 			startActivity(intent);
 			break;
 		case R.id.button_horaire:
-			intent = new Intent(this, HoraireActivity.class);
+			intent = new Intent(this, ScheduleActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.button_auditoire:

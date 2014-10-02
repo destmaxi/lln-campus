@@ -14,7 +14,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
-import be.ac.ucl.lfsab1509.llncampus.Cours;
+import be.ac.ucl.lfsab1509.llncampus.Course;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.UCLouvain;
 import be.ac.ucl.lfsab1509.llncampus.activity.adapter.CoursListAdapter;
@@ -49,7 +49,7 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 	
 	private CoursListAdapter coursListAdapter;
 	private ListView coursListView;
-	private ArrayList<Cours> coursList;
+	private ArrayList<Course> coursList;
 
 	private boolean onFirstPage = true;
 
@@ -78,7 +78,7 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 		findViewById(R.id.cours_download).setOnClickListener(this);
 		findViewById(R.id.cours_add).setOnClickListener(this);
 
-		coursList = Cours.getList();
+		coursList = Course.getList();
 		coursListView = (ListView) findViewById(R.id.cours_list);
 		coursListAdapter = new CoursListAdapter(this, coursList);
 		coursListView.setAdapter(coursListAdapter);
@@ -135,7 +135,7 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 			EditText code = (EditText) findViewById(R.id.cours_code);
 			EditText name = (EditText) findViewById(R.id.cours_name);
 
-			if (Cours.add(code.getText().toString(), name.getText().toString())) {
+			if (Course.add(code.getText().toString(), name.getText().toString())) {
 				super.notify(getString(R.string.add_course_ok));
 			} else {
 				super.notify(getString(R.string.add_course_error));
@@ -148,10 +148,10 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 			long arg3) {
-		final Cours c = coursList.get(position);
+		final Course c = coursList.get(position);
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(getString(R.string.delete_course)).setMessage(
-				getString(R.string.confirm_delete_course) + c.getCoursCode()
+				getString(R.string.confirm_delete_course) + c.getCourseCode()
 						+ " ?");
 		builder.setPositiveButton(android.R.string.ok,
 				new DialogInterface.OnClickListener() {
@@ -164,7 +164,7 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 					}
 
 					public void onClick(DialogInterface dialog, int id) {
-						if (Cours.remove(c)) {
+						if (Course.remove(c)) {
 							notify(getString(R.string.delete_course_ok));
 							mHandler.post(new Runnable() {
 								public void run() {

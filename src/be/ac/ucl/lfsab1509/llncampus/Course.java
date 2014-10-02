@@ -25,7 +25,7 @@ import android.database.Cursor;
  * 
  * Représentation d'un cours (code et nom)
  */
-public final class Cours {
+public final class Course {
 	private final String coursCode;
 	private final String coursName;
 	private static boolean listChanged = false;
@@ -38,7 +38,7 @@ public final class Cours {
 	 * @param n
 	 *            Nom du cours.
 	 */
-	public Cours(String c, String n) {
+	public Course(String c, String n) {
 		coursCode = c;
 		coursName = n;
 	}
@@ -48,7 +48,7 @@ public final class Cours {
 	 * 
 	 * @return code du cours.
 	 */
-	public String getCoursCode() {
+	public String getCourseCode() {
 		return coursCode;
 	}
 
@@ -88,20 +88,20 @@ public final class Cours {
 	 * 
 	 * @return Liste des cours.
 	 */
-	public static ArrayList<Cours> getList() {
-		ArrayList<Cours> courses = new ArrayList<Cours>();
+	public static ArrayList<Course> getList() {
+		ArrayList<Course> courses = new ArrayList<Course>();
 		try { // Si on va voir la table alors qu'elle n'existe pas encore, retourner liste vide
 		Cursor c = LLNCampus.getDatabase().select("Courses",
 				new String[] {"CODE", "NAME"}, null, null, null, null, null,
 				null);
 		while (c.moveToNext()) {
-			courses.add(new Cours(c.getString(0), c.getString(1)));
+			courses.add(new Course(c.getString(0), c.getString(1)));
 		}
 		c.close();
 		}
 		catch(RuntimeException e)
 		{
-			return new ArrayList<Cours>();
+			return new ArrayList<Course>();
 		}
 		return courses;
 	}
@@ -130,14 +130,14 @@ public final class Cours {
 	/**
 	 * Supprime un cours (de la base de donnée).
 	 * 
-	 * @param cours
+	 * @param course
 	 *            Cours à supprimer.
 	 * @return true en cas de succès, false sinon.
 	 */
-	public static boolean remove(Cours cours) {
+	public static boolean remove(Course course) {
 		listChanged = true;
 		Database db = LLNCampus.getDatabase();
 		return db.delete("Courses", "CODE = ?",
-				new String[] {cours.coursCode}) > 0;
+				new String[] {course.coursCode}) > 0;
 	}
 }

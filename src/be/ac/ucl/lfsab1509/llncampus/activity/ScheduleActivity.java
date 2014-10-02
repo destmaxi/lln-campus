@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import be.ac.ucl.lfsab1509.llncampus.ADE;
 import be.ac.ucl.lfsab1509.llncampus.Coordinates;
-import be.ac.ucl.lfsab1509.llncampus.Cours;
+import be.ac.ucl.lfsab1509.llncampus.Course;
 import be.ac.ucl.lfsab1509.llncampus.Event;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.activity.adapter.EventListAdapter;
@@ -44,7 +44,7 @@ import android.widget.CalendarView.OnDateChangeListener;
  * Activity intended to show the schedule of a student
  * Related with horaire.xml
  */
-public class HoraireActivity extends LLNCampusActivity implements OnDateChangeListener, OnItemClickListener {
+public class ScheduleActivity extends LLNCampusActivity implements OnDateChangeListener, OnItemClickListener {
 	private CalendarView calendarView;
 	
 	private final Handler handler = new Handler();
@@ -54,7 +54,7 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
 		}
 	};
 
-	private ArrayList<Cours> coursList;
+	private ArrayList<Course> coursList;
 	private ArrayList<Event> events;
 	private ArrayList<Event> currentEvents;
 	private Time currentDate;
@@ -68,7 +68,7 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
         calendarView.setOnDateChangeListener(this);
        	this.currentDate = new Time();
        	currentDate.setToNow();
-       	coursList = Cours.getList();
+       	coursList = Course.getList();
        	
        	/*
        	 * Si la liste des cours est vide, affiche un message d'explication et propose de la completer.
@@ -111,7 +111,7 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
 	 * Met à jour la liste des évènements depuis la base de données.
 	 */
 	private void updateInfos() {
-		coursList = Cours.getList();
+		coursList = Course.getList();
 		this.events = Event.getList();
 		updateViewInfos();
 	}
@@ -186,8 +186,8 @@ public class HoraireActivity extends LLNCampusActivity implements OnDateChangeLi
 		 * Si la liste des cours a été mise à jour, on lance la mise a jour
 		 * depuis ADE de manière automatique. 
 		 */
-		if (Cours.listChanged()) {
-			Cours.setListChangeSeen();
+		if (Course.listChanged()) {
+			Course.setListChangeSeen();
 			ADE.runUpdateADE(this, handler, updateRunnable);
 		} else {
 			updateInfos();

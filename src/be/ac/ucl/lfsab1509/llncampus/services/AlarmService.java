@@ -1,7 +1,7 @@
 package be.ac.ucl.lfsab1509.llncampus.services;
 
 import be.ac.ucl.lfsab1509.llncampus.Coordinates;
-import be.ac.ucl.lfsab1509.llncampus.Cours;
+import be.ac.ucl.lfsab1509.llncampus.Course;
 import be.ac.ucl.lfsab1509.llncampus.Database;
 import be.ac.ucl.lfsab1509.llncampus.Event;
 import be.ac.ucl.lfsab1509.llncampus.GPS;
@@ -80,7 +80,7 @@ public class AlarmService extends Service {
 			return;
 		}
 
-		if (Cours.getList().size() != 0 && nextEvent == null) {
+		if (Course.getList().size() != 0 && nextEvent == null) {
 			loadNextEvent();
 		}
 
@@ -114,7 +114,7 @@ public class AlarmService extends Service {
 			Time currentDate = new Time();
 			currentDate.setToNow();
 
-			if (Cours.getList().size() != 0
+			if (Course.getList().size() != 0
 					&& nextEvent.getBeginTime().toMillis(false) - nbMin * 60L
 					* 1000L - currentDate.toMillis(false) < 0L) {
 				sendAlert(nextEvent);
