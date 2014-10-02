@@ -1,13 +1,19 @@
 package be.ac.ucl.lfsab1509.llncampus.activity;
 
+import java.util.Map.Entry;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
+import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.R;
+import be.ac.ucl.lfsab1509.llncampus.external.SecurePreferences;
+
 
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
@@ -32,22 +38,43 @@ import be.ac.ucl.lfsab1509.llncampus.R;
 @SuppressWarnings("deprecation")
 public class SettingsActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 
-    
+	private SharedPreferences mInsecurePrefs;
+	private SharedPreferences mSecurePrefs;
+	
+	private EditTextPreference username;
+	private EditTextPreference password;
+	
+	private CheckBoxPreference coursesNotify;
+	private EditTextPreference notifyMinute;
+	private CheckBoxPreference notifyWithGps;
+	private EditTextPreference notifySpeedMove;
+	private EditTextPreference notifyMaxDistance;
+	private EditTextPreference notifyMoreTime;
+	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        
         
-     // Load the preferences from an XML resource
+        // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.prefs);
         
         Preference pref = findPreference("username");
         EditTextPreference etp = (EditTextPreference) pref;
         pref.setSummary(etp.getText());
         
-        //super.onCreate(savedInstanceState);
+        mInsecurePrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mSecurePrefs = new SecurePreferences(this);
 
+        username = (EditTextPreference) findPreference("username");
+        password = (EditTextPreference) findPreference("password");
         
+        coursesNotify = (CheckBoxPreference) findPreference("courses_notify");
+        notifyMinute = (EditTextPreference) findPreference("notify_minute");
+        notifyWithGps = (CheckBoxPreference) findPreference("notify_with_gps");
+        notifySpeedMove = (EditTextPreference) findPreference("notify_speed_move");
+        notifyMaxDistance = (EditTextPreference) findPreference("notify_max_distance");
+        notifyMoreTime = (EditTextPreference) findPreference("notify_more_time");
         
     }
     
@@ -61,6 +88,43 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
         super.onPause();
         getPreferenceScreen().getSharedPreferences()
                 .unregisterOnSharedPreferenceChangeListener(this);
+    }
+    
+    @Override
+    public void onStart() {
+    	super.onStart();
+    	// Decrypt relevant key/value pairs, if they exist
+    	for (Entry<String, ?> entry : mSecurePrefs.getAll().entrySet()) {
+    		final String key = entry.getKey();
+    		if (key == null) {
+    			continue;
+    		} else if (key.equals("username")) {
+    			username.setText(mSecurePrefs.getString(key, null));
+    		} else if (key.equals("password")) {
+    			password.setText(mSecurePrefs.getString(key, null));
+    		} else if (key.equals("courses_notify")) {
+    			coursesNotify.setChecked(mSecurePrefs.getBoolean(key, false));
+    		} else if (key.equals("notify_ringtone")) {
+    			// Don't try to encrypt that
+    		} else if (key.equals("notify_minute")) {
+    			notifyMinute.setText(mSecurePrefs.getString(key, null));
+    		} else if (key.equals("notify_with_gps")) {
+    			notifyWithGps.setChecked(mSecurePrefs.getBoolean(key, false));
+    		} else if (key.equals("notify_speed_move")) {
+    			notifySpeedMove.setText(mSecurePrefs.getString(key, null));
+    		} else if (key.equals("notify_max_distance")) {
+    			notifyMaxDistance.setText(mSecurePrefs.getString(key, null));
+    		} else if (key.equals("notify_more_time")) {
+    			notifyMoreTime.setText(mSecurePrefs.getString(key, null));
+    		}
+    	}
+    }
+    
+	@Override
+    public void onStop() {
+    	super.onStop();
+    	// Replace unencrypted key/value pairs with encrypted ones
+    	LLNCampus.convertInsecureToSecurePreferences(mInsecurePrefs, mSecurePrefs);
     }
     
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
@@ -78,7 +142,4 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
         	ring.setSummary(ring.getSharedPreferences().getString("notify_ringtone", "Silent"));
         }
     }
-    
-    
-    
 }

@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -19,6 +18,7 @@ import be.ac.ucl.lfsab1509.llncampus.Cours;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.UCLouvain;
 import be.ac.ucl.lfsab1509.llncampus.activity.adapter.CoursListAdapter;
+import be.ac.ucl.lfsab1509.llncampus.external.SecurePreferences;
 
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
@@ -86,8 +86,7 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 	}
 
 	public void startDownloadActivity() {
-		SharedPreferences preferences = PreferenceManager
-				.getDefaultSharedPreferences(this);
+		SharedPreferences preferences = new SecurePreferences(this);
 		String username = preferences.getString("username", null);
 		String password = preferences.getString("password", null);
 

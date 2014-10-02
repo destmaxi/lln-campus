@@ -7,17 +7,17 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Calendar;
 
+import be.ac.ucl.lfsab1509.llncampus.external.SecurePreferences;
 import be.ac.ucl.lfsab1509.llncampus.services.AlarmService;
-
 import android.app.AlarmManager;
 import android.app.Application;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.AssetManager;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 /**
@@ -98,9 +98,9 @@ public class LLNCampus extends Application {
 		return APPLICATION_CONTEXT;
 	}
 	
-	public static int getIntPreference(String key, int defaultValue) {
+	public static int getIntPreference(String key, int defaultValue, Context context) {
 		try {
-			SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+			SharedPreferences preferences = new SecurePreferences(context);
 			String str = preferences.getString(key, null);
 			if(str == null){
 				return defaultValue;
@@ -112,6 +112,56 @@ public class LLNCampus extends Application {
 			return defaultValue;
 		}
 	}
+	
+    public static void convertInsecureToSecurePreferences(SharedPreferences mInsecurePrefs, 
+    		SharedPreferences mSecurePrefs) {
+    	Editor insecureEditor = mInsecurePrefs.edit();
+    	Editor secureEditor = mSecurePrefs.edit();
+    	
+    	String key = "username";
+    	if (mInsecurePrefs.contains(key)) {
+    		secureEditor.putString(key, mInsecurePrefs.getString(key, null));
+    		insecureEditor.remove(key);
+    	}
+    	key = "password";
+    	if (mInsecurePrefs.contains(key)) {
+    		secureEditor.putString(key, mInsecurePrefs.getString(key, null));
+    		insecureEditor.remove(key);
+    	}
+    	key = "courses_notify";
+    	if (mInsecurePrefs.contains(key)) {
+    		secureEditor.putBoolean(key, mInsecurePrefs.getBoolean(key, false));
+    		insecureEditor.remove(key);
+    	}
+    	key = "notify_minute";
+    	if (mInsecurePrefs.contains(key)) {
+    		secureEditor.putString(key, mInsecurePrefs.getString(key, null));
+    		insecureEditor.remove(key);
+    	}
+    	key = "notify_with_gps";
+    	if (mInsecurePrefs.contains(key)) {
+    		secureEditor.putBoolean(key, mInsecurePrefs.getBoolean(key, false));
+    		insecureEditor.remove(key);
+    	}
+    	key = "notify_speed_move";
+    	if (mInsecurePrefs.contains(key)) {
+    		secureEditor.putString(key, mInsecurePrefs.getString(key, null));
+    		insecureEditor.remove(key);
+    	}
+    	key = "notify_max_distance";
+    	if (mInsecurePrefs.contains(key)) {
+    		secureEditor.putString(key, mInsecurePrefs.getString(key, null));
+    		insecureEditor.remove(key);
+    	}
+    	key = "notify_more_time";
+    	if (mInsecurePrefs.contains(key)) {
+    		secureEditor.putString(key, mInsecurePrefs.getString(key, null));
+    		insecureEditor.remove(key);
+    	}
+    	
+    	insecureEditor.commit();
+    	secureEditor.commit();
+    }
 	
 	/**
 	 * Cree et copie les assets dans le dossier sdcard/LLNCampus

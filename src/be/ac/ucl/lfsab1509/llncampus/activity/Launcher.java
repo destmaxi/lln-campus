@@ -1,6 +1,8 @@
 package be.ac.ucl.lfsab1509.llncampus.activity;
 
+import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.R;
+import be.ac.ucl.lfsab1509.llncampus.external.SecurePreferences;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -11,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
@@ -131,12 +134,20 @@ public class Launcher extends LLNCampusActivity {
 		}
 
 		progressDialog.show();
-
+		
+		final Context thisContext = this;
+    	
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				db.open();
 				if (update) {
+					// Also encrypt unencrypted preferences
+					SharedPreferences mInsecurePrefs = PreferenceManager
+							.getDefaultSharedPreferences(thisContext);
+			        SharedPreferences mSecurePrefs = new SecurePreferences(thisContext);
+			    	
+			    	LLNCampus.convertInsecureToSecurePreferences(mInsecurePrefs, mSecurePrefs);
 					// From LLNCampusActivity
 					db.reset();
 					db.open();
