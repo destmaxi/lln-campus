@@ -9,6 +9,7 @@ import android.database.Cursor;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,82 +23,82 @@ import android.database.Cursor;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Représentation d'un cours (code et nom)
+ */
+
+/**
+ * Representation of a course (name, code).
  */
 public final class Course {
-	private final String coursCode;
-	private final String coursName;
+	private final String courseCode;
+	private final String courseName;
 	private static boolean listChanged = false;
 
 	/**
-	 * Constructeur.
+	 * Constructor.
 	 * 
-	 * @param c
-	 *            Code du cours.
-	 * @param n
-	 *            Nom du cours.
+	 * @param code
+	 *            Course code.
+	 * @param name
+	 *            Course name.
 	 */
-	public Course(String c, String n) {
-		coursCode = c;
-		coursName = n;
+	public Course(String code, String name) {
+		courseCode = code;
+		courseName = name;
 	}
 
 	/**
-	 * Fournit le code du cours.
+	 * Get the course code.
 	 * 
-	 * @return code du cours.
+	 * @return Course code.
 	 */
 	public String getCourseCode() {
-		return coursCode;
+		return courseCode;
 	}
 
 	/**
-	 * Fournit le nom du cours.
+	 * Get the course name.
 	 * 
-	 * @return nom du cours.
+	 * @return Course name.
 	 */
 	public String getCoursName() {
-		return coursName;
+		return courseName;
 	}
 
 	@Override
 	public String toString() {
-		return "Code : " + coursCode + " - Nom : " + coursName;
+		return "Code : " + courseCode + " - Name : " + courseName;
 	}
 
 	/**
-	 * Indique si la liste de cours a été changée.
+	 * Indicate if the course list changed.
 	 * 
-	 * @return True si la liste des cours a été modifiée, false sinon.
+	 * @return true if the course list was modified, else false.
 	 */
 	public static boolean listChanged() {
 		return listChanged;
 	}
 
 	/**
-	 * Indique qu'on a pris en compte le dernier changement de la liste des
-	 * cours.
+	 * Indicate that the last change in the course list was taken into account.
 	 */
 	public static void setListChangeSeen() {
 		listChanged = false;
 	}
 
 	/**
-	 * Retourne la liste des cours.
+	 * Get the course list.
 	 * 
-	 * @return Liste des cours.
+	 * @return Course list.
 	 */
 	public static ArrayList<Course> getList() {
 		ArrayList<Course> courses = new ArrayList<Course>();
-		try { // Si on va voir la table alors qu'elle n'existe pas encore, retourner liste vide
-		Cursor c = LLNCampus.getDatabase().select("Courses",
-				new String[] {"CODE", "NAME"}, null, null, null, null, null,
-				null);
-		while (c.moveToNext()) {
-			courses.add(new Course(c.getString(0), c.getString(1)));
-		}
-		c.close();
+		try { // If we fetch the table whereas it doesn't exist yet, return an empty list.
+			Cursor c = LLNCampus.getDatabase().select("Courses",
+					new String[] {"CODE", "NAME"}, null, null, null, null, null, null);
+			while (c.moveToNext()) {
+				courses.add(new Course(c.getString(0), c.getString(1)));
+			}
+			c.close();
 		}
 		catch(RuntimeException e)
 		{
@@ -107,13 +108,13 @@ public final class Course {
 	}
 
 	/**
-	 * Ajoute un cours (dans la base de donnée).
+	 * Add a new course in database.
 	 * 
 	 * @param code
-	 *            Code du cours
+	 *            Course code.
 	 * @param name
-	 *            Nom du cours
-	 * @return True en cas de succès, false sinon.
+	 *            Course name.
+	 * @return true if adding succeed, else false.
 	 */
 	public static boolean add(String code, String name) {
 		listChanged = true;
@@ -128,16 +129,16 @@ public final class Course {
 	}
 
 	/**
-	 * Supprime un cours (de la base de donnée).
+	 * Remove a course from database.
 	 * 
 	 * @param course
-	 *            Cours à supprimer.
-	 * @return true en cas de succès, false sinon.
+	 *            Course to remove.
+	 * @return true if removal succeed, else false.
 	 */
 	public static boolean remove(Course course) {
 		listChanged = true;
 		Database db = LLNCampus.getDatabase();
 		return db.delete("Courses", "CODE = ?",
-				new String[] {course.coursCode}) > 0;
+				new String[] {course.courseCode}) > 0;
 	}
 }

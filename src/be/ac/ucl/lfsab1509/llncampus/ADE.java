@@ -44,9 +44,9 @@ import android.util.Log;
  */
 public final class ADE {
 
-	/** ADE server address */
+	/** ADE server address. */
 	private static final String SERVER_URL = "http://horairev6.uclouvain.be";
-	/** Page to get information */
+	/** Page to get information. */
 	private static final String INFO_PATH = "/jsp/custom/modules/plannings/info.jsp"
 			+ "?displayConfName=WEB&order=slot";
 	/** Project number (depends of the year, e.g. 2012-2013: 9, 2013-2014: 16, 2014-2015-6). */
@@ -190,7 +190,8 @@ public final class ADE {
 					String username = preferences.getString("username", null);
 					String password = preferences.getString("password", null);
 					if(username != null && password != null){
-						UCLouvain.downloadCoursesFromUCLouvain(sa, username, password, new Runnable(){
+						UCLouvain.downloadCoursesFromUCLouvain(sa, username, password, 
+								new Runnable(){
 							public void run() {
 								runUpdateADE(sa, handler, updateRunnable);
 							}

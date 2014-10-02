@@ -209,8 +209,8 @@ public class ScheduleActivity extends LLNCampusActivity implements OnDateChangeL
 		Log.d("HoraireActivity", "Coordonnées : "+c);
 		if (c != null) {
 			i.putExtra("COORDINATES", true);
-			i.putExtra("LATITUDE", c.getLat());
-			i.putExtra("LONGITUDE", c.getLon());
+			i.putExtra("LATITUDE", c.getLatitude());
+			i.putExtra("LONGITUDE", c.getLongitude());
 		}
 		startActivity(i);
 	}
