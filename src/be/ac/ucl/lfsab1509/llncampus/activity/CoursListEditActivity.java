@@ -87,8 +87,8 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 
 	public void startDownloadActivity() {
 		SharedPreferences preferences = new SecurePreferences(this);
-		String username = preferences.getString("username", null);
-		String password = preferences.getString("password", null);
+		String username = preferences.getString(getString(R.string.pref_username), null);
+		String password = preferences.getString(getString(R.string.pref_password), null);
 
 		if (username == null || password == null) {
 			notify(getString(R.string.username_notify));

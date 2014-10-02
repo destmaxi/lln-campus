@@ -66,15 +66,15 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
         mInsecurePrefs = PreferenceManager.getDefaultSharedPreferences(this);
         mSecurePrefs = new SecurePreferences(this);
 
-        username = (EditTextPreference) findPreference("username");
-        password = (EditTextPreference) findPreference("password");
+        username = (EditTextPreference) findPreference(getString(R.string.pref_username));
+        password = (EditTextPreference) findPreference(getString(R.string.pref_password));
         
-        coursesNotify = (CheckBoxPreference) findPreference("courses_notify");
-        notifyMinute = (EditTextPreference) findPreference("notify_minute");
-        notifyWithGps = (CheckBoxPreference) findPreference("notify_with_gps");
-        notifySpeedMove = (EditTextPreference) findPreference("notify_speed_move");
-        notifyMaxDistance = (EditTextPreference) findPreference("notify_max_distance");
-        notifyMoreTime = (EditTextPreference) findPreference("notify_more_time");
+        coursesNotify = (CheckBoxPreference) findPreference(getString(R.string.pref_courses_notify));
+        notifyMinute = (EditTextPreference) findPreference(getString(R.string.pref_notify_minute));
+        notifyWithGps = (CheckBoxPreference) findPreference(getString(R.string.pref_notify_with_gps));
+        notifySpeedMove = (EditTextPreference) findPreference(getString(R.string.pref_notify_speed_move));
+        notifyMaxDistance = (EditTextPreference) findPreference(getString(R.string.pref_notify_max_distance));
+        notifyMoreTime = (EditTextPreference) findPreference(getString(R.string.pref_notify_more_time));
         
     }
     
@@ -104,8 +104,6 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
     			password.setText(mSecurePrefs.getString(key, null));
     		} else if (key.equals("courses_notify")) {
     			coursesNotify.setChecked(mSecurePrefs.getBoolean(key, false));
-    		} else if (key.equals("notify_ringtone")) {
-    			// Don't try to encrypt that
     		} else if (key.equals("notify_minute")) {
     			notifyMinute.setText(mSecurePrefs.getString(key, null));
     		} else if (key.equals("notify_with_gps")) {

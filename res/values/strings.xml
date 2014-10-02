@@ -3,6 +3,17 @@
 
     <string name="app_name">LLN Campus</string>
     <string name="main_menu">Menu principal</string>
+    
+    <!--  Ids used for preferences -->
+    <string name="pref_username">username</string>
+    <string name="pref_password">password</string>
+    <string name="pref_courses_notify">courses_notify</string>
+    <string name="pref_notify_minute">notify_minute</string>
+    <string name="pref_notify_with_gps">notify_with_gps</string>
+    <string name="pref_notify_max_distance">notify_max_distance</string>
+    <string name="pref_notify_speed_move">notify_speed_move</string>
+    <string name="pref_notify_more_time">notify_more_time</string>
+    <string name="pref_notify_ringtone">notify_ringtone</string>
 
     <!-- Strings utiles a plusieurs endroits -->
     <string name="settings">Paramètres</string>
