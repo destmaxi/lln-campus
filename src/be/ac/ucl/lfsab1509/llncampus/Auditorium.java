@@ -7,6 +7,7 @@ import be.ac.ucl.lfsab1509.llncampus.interfaces.IAuditorium;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,9 +21,10 @@ import be.ac.ucl.lfsab1509.llncampus.interfaces.IAuditorium;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ */
+
+/** 
  * Implementation of an Auditorium object.
- *
  */
 public class Auditorium implements IAuditorium {
 
@@ -43,12 +45,17 @@ public class Auditorium implements IAuditorium {
 	}
 
 	/**
-	 * Constructeur. 
-	 * @param id ID de l'auditoire
-	 * @param name Nom de l'auditoire
-	 * @param latitude Latitude
-	 * @param longitude Longitude
-	 * @param address Adresse
+	 * Constructor. 
+	 * @param id 
+	 * 		Auditorium ID. 
+	 * @param name 
+	 * 		Auditorium name.
+	 * @param latitude 
+	 * 		Auditorium latitude.
+	 * @param longitude 
+	 * 		Auditorium longitude.
+	 * @param address 
+	 * 		Auditorium address.
 	 */
 	public Auditorium(final int id, final String name, final double latitude, 
 			final double longitude, final String address) {
@@ -128,7 +135,7 @@ public class Auditorium implements IAuditorium {
 			case 20 : return R.drawable.thomasmore;
 			case 14 : return R.drawable.vanhelmont; 
 			default :
-				Log.e("Auditorium.java", "Ne trouve pas l'image vers l'auditoire de Takepicture");
+				Log.e("Auditorium.java", "Didn't found any image for the Auditorium");
 				return 0;
 		}
 	 }
@@ -157,9 +164,9 @@ public class Auditorium implements IAuditorium {
 		case 20 : return R.drawable.thomasmore_mini;
 		case 14 : return R.drawable.vanhelmont_mini; 
 		default :
-			Log.e("Auditorium.java", "Ne trouve pas l'image miniature vers l'auditoire de getImgMini()");
+			Log.e("Auditorium.java", "Didn't found any mini image for the Auditorium");
 			return 0;
-	}
+		}
 	}
 
 }

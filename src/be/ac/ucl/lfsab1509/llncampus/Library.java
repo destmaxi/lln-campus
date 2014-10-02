@@ -9,6 +9,7 @@ import android.util.Log;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,99 +23,101 @@ import android.util.Log;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Objet représentant une bibliothèque.
  */
-public final class Bibliotheque {
+
+ /** 
+  * Implementation of a library object.
+ */
+public final class Library {
 	private int id;
 	private String name;
 	private double latitude;
 	private double longitude;
 	private String address;
-	private BibliothequeHoraire horaire;
-	private String sigle;
+	private LibrarySchedule schedule;
+	private String acronym;
 	private String scheduleUrl;
-	private static ArrayList<Bibliotheque> bibliotheques = null;
+	private static ArrayList<Library> libraries = null;
 
 	/**
-	 * Constructeur (privé).
+	 * Constructor (private).
 	 * 
 	 * @param id
-	 *            ID de la bibliotheque
+	 *            Library ID.
 	 * @param name
-	 *            Nom de la bibilotheque
+	 *            Library name.
 	 * @param latitude
-	 *            Latitude
+	 *            Library latitude.
 	 * @param longitude
-	 *            Longitutude
+	 *            Library longitude.
 	 * @param address
-	 *            Adresse de la bibliotheque
-	 * @param horaire
-	 *            Horaires d'ouvertures
-	 * @param sigle
-	 *            Sigle de la bibliothèque
+	 *            Library address.
+	 * @param schedule
+	 *            Library opening schedule.
+	 * @param acronym
+	 *            Library acronym.
 	 * @param scheduleUrl
-	 *            Url vers les horaires détaillés (blocus, vacances,...)
+	 *            URL to detailed schedule for the library ("blocus", holidays,...).
 	 */
-	private Bibliotheque(int id, String name, double latitude,
-			double longitude, String address, BibliothequeHoraire horaire,
-			String sigle, String scheduleUrl) {
+	private Library(int id, String name, double latitude,
+			double longitude, String address, LibrarySchedule schedule,
+			String acronym, String scheduleUrl) {
 		this.id = id;
 		this.name = name;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.address = address;
-		this.horaire = horaire;
-		this.sigle = sigle;
+		this.schedule = schedule;
+		this.acronym = acronym;
 		this.scheduleUrl = scheduleUrl;
 	}
 
 	/**
-	 * Fournit l'ID de la bibliothèque.
-	 * @return ID de la bibliothèque.
+	 * Get the library ID.
+	 * @return Library ID.
 	 */
 	public int getID() {
 		return this.id;
 	}
 
 	/**
-	 * Fournit le nom de la bibliothèque.
-	 * @return Nom de la bibliothèque
+	 * Get the library name.
+	 * @return Library name.
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * Fournit la latitude de la bibliothèque.
-	 * @return Latitude
+	 * Get the library latitude.
+	 * @return Library latitude.
 	 */
 	public double getLatitude() {
 		return latitude;
 	}
 
 	/**
-	 * Fournit la longitude de la bibliothèque.
-	 * @return Longitude
+	 * Get the library longitude.
+	 * @return Longitude library.
 	 */
 	public double getLongitude() {
 		return longitude;
 	}
 
 	/**
-	 * Fournit l'adresse de la bibliothèque.
-	 * @return Adresse
+	 * Get the library address.
+	 * @return Library address.
 	 */
 	public String getAddress() {
 		return address;
 	}
 	
 	/**
-	 * Fournit l'image de la bibliothèque.
+	 * Get the library picture ID.
 	 * 
-	 * @return la ressource ID de l'image
+	 * @return Library picture ID.
 	 */
-	public int getImg() {
+	public int getPicture() {
 		switch (this.id) {
 		case 28:
 			return R.drawable.bst;
@@ -136,57 +139,57 @@ public final class Bibliotheque {
 			return R.drawable.btec;
 		default:
 			Log.e("Bibliotheque.java",
-					"Ne trouve pas l'image vers l'auditoire de getImg()");
+					"Didn't find the library picture");
 			return 0;
 		}
 	}
 
 	/**
-	 * Fournit l'horaire d'ouverture de la bibliothèque.
+	 * Get the library opening schedule.
 	 * 
-	 * @return Horaire d'ouverture
+	 * @return Library opening schedule.
 	 */
-	public BibliothequeHoraire getHoraire() {
-		return this.horaire;
+	public LibrarySchedule getSchedule() {
+		return this.schedule;
 	}
 
 	/**
-	 * Fournit le sigle de la bibliothèque.
+	 * Get the library acronym.
 	 * 
-	 * @return Sigle
+	 * @return Library acronym.
 	 */
 	public String getSigle() {
-		return this.sigle;
+		return this.acronym;
 	}
 
 	/**
-	 * Fournit l'URL de la page contenant les infos sur l'horaire.
+	 * Get the URL to fetch detailed information about the library opening schedule.
 	 * 
-	 * @return URL
+	 * @return URL to fetch detailed information about the library opening schedule.
 	 */
 	public String getScheduleUrl() {
 		return this.scheduleUrl;
 	}
 
 	/**
-	 * Indique si la bibliothèque est actuellement ouverte ou fermé.
+	 * Indicate if the library is currently open.
 	 * 
-	 * @return true si la bibliothèque est ouverte, false sinon.
+	 * @return true if the library is open, else false.
 	 */
 	public boolean isOpen() {
-		return getHoraire().isOpen();
+		return getSchedule().isOpen();
 	}
 
 	/**
-	 * Retourne la liste de toutes les biblièthèques.
+	 * Get the list of all libraries in the database.
 	 * 
-	 * @return Liste des bibliothèques.
+	 * @return List of all libraries in the database.
 	 */
-	public static ArrayList<Bibliotheque> getBibliothequesList() {
-		if (bibliotheques != null) {
-			return bibliotheques;
+	public static ArrayList<Library> getLibraryList() {
+		if (libraries != null) {
+			return libraries;
 		}
-		bibliotheques = new ArrayList<Bibliotheque>();
+		libraries = new ArrayList<Library>();
 		Cursor c = LLNCampus.getDatabase().sqlRawQuery(
 				"SELECT " + "Poi.ID, " + "Poi.NAME, " + "Poi.LATITUDE, "
 						+ "Poi.LONGITUDE, " + "Poi.ADDRESS, "
@@ -194,15 +197,15 @@ public final class Bibliotheque {
 						+ " FROM " + "Poi, Bibliotheque " + " WHERE "
 						+ "Poi.ID = Bibliotheque.BUILDING_ID " + "ORDER BY "
 						+ "Poi.NAME ASC");
-		Bibliotheque bib;
+		Library bib;
 		while (c.moveToNext()) {
-			bib = new Bibliotheque(c.getInt(0), c.getString(1), c.getDouble(2),
-					c.getDouble(3), c.getString(4), new BibliothequeHoraire(
+			bib = new Library(c.getInt(0), c.getString(1), c.getDouble(2),
+					c.getDouble(3), c.getString(4), new LibrarySchedule(
 							c.getInt(0)), c.getString(5), c.getString(6));
-			bibliotheques.add(bib);
+			libraries.add(bib);
 		}
 		c.close();
-		return bibliotheques;
+		return libraries;
 	}
 
 }

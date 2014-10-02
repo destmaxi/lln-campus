@@ -27,7 +27,7 @@ import android.util.Log;
  *
  * Représente un horaire de bibliothèque (Bibliotheque)
  */
-public class BibliothequeHoraire {
+public class LibrarySchedule {
 	private final int bibID;
 	private ArrayList<PlageHoraire> plagesHoraires = null;
 
@@ -37,7 +37,7 @@ public class BibliothequeHoraire {
 	 * @param bibID
 	 *            Id de la bibliothèque.
 	 */
-	public BibliothequeHoraire(int bibID) {
+	public LibrarySchedule(int bibID) {
 		this.bibID = bibID;
 	}
 

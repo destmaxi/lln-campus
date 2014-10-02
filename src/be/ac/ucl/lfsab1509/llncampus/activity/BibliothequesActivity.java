@@ -18,7 +18,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import be.ac.ucl.lfsab1509.llncampus.Bibliotheque;
+import be.ac.ucl.lfsab1509.llncampus.Library;
 import be.ac.ucl.lfsab1509.llncampus.ExternalAppUtility;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.activity.adapter.BibliothequesListAdapter;
@@ -46,7 +46,7 @@ public class BibliothequesActivity extends LLNCampusActivity implements
 		OnItemClickListener, OnClickListener {
 	private GridView bibliothequesListView;
 	private BibliothequesListAdapter bibliothequesListAdapter;
-	private ArrayList<Bibliotheque> bibliothequesList;
+	private ArrayList<Library> bibliothequesList;
 
 	private int currentBibliothequePos = -1;
 
@@ -55,7 +55,7 @@ public class BibliothequesActivity extends LLNCampusActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.bibliotheques);
 		if (bibliothequesList == null) {
-			bibliothequesList = Bibliotheque.getBibliothequesList();
+			bibliothequesList = Library.getLibraryList();
 		}
 		bibliothequesListView = (GridView) findViewById(R.id.bibliotheque_list_view);
 		bibliothequesListAdapter = new BibliothequesListAdapter(this,
@@ -79,7 +79,7 @@ public class BibliothequesActivity extends LLNCampusActivity implements
 	public final void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
 		if (bibliothequesList == null) {
-			bibliothequesList = Bibliotheque.getBibliothequesList();
+			bibliothequesList = Library.getLibraryList();
 		}
 		currentBibliothequePos = savedInstanceState.getInt("currentBibPos");
 	}
@@ -112,12 +112,12 @@ public class BibliothequesActivity extends LLNCampusActivity implements
 			bibName.setText(getCurrentBibliotheque().getName() + " ("
 					+ getCurrentBibliotheque().getSigle() + ")");
 			ImageView bibImg = (ImageView) findViewById(R.id.bibliotheque_details_img);
-			bibImg.setImageResource(getCurrentBibliotheque().getImg());
+			bibImg.setImageResource(getCurrentBibliotheque().getPicture());
 			TextView bibAddress = (TextView) findViewById(R.id.bibliotheque_details_address);
 			bibAddress.setText(getCurrentBibliotheque().getAddress());
 			TextView bibHoraire = (TextView) findViewById(R.id.bibliotheque_details_horaire);
 			bibHoraire
-					.setText(getCurrentBibliotheque().getHoraire().toString());
+					.setText(getCurrentBibliotheque().getSchedule().toString());
 
 			// Orientation de l'écran
 			int orientation = this.getResources().getConfiguration().orientation;
@@ -159,7 +159,7 @@ public class BibliothequesActivity extends LLNCampusActivity implements
 	 * 
 	 * @return Bibliothèque courante ou null si on est dans la liste.
 	 */
-	private Bibliotheque getCurrentBibliotheque() {
+	private Library getCurrentBibliotheque() {
 		if (currentBibliothequePos == -1) {
 			return null;
 		}

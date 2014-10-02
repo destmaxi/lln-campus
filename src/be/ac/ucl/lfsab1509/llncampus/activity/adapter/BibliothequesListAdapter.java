@@ -11,7 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
-import be.ac.ucl.lfsab1509.llncampus.Bibliotheque;
+import be.ac.ucl.lfsab1509.llncampus.Library;
 import be.ac.ucl.lfsab1509.llncampus.R;
 
 /**
@@ -36,10 +36,10 @@ import be.ac.ucl.lfsab1509.llncampus.R;
 public class BibliothequesListAdapter extends BaseAdapter {
 	private LayoutInflater mInflater;
 
-	private ArrayList<Bibliotheque> list;
+	private ArrayList<Library> list;
 
 	public BibliothequesListAdapter(Context context,
-			ArrayList<Bibliotheque> list) {
+			ArrayList<Library> list) {
 		mInflater = LayoutInflater.from(context);
 		this.list = list;
 	}
@@ -57,7 +57,7 @@ public class BibliothequesListAdapter extends BaseAdapter {
 		ImageView openclose = (ImageView) convertView
 				.findViewById(R.id.bibliotheque_item_openclose);
 
-		Bibliotheque bib = list.get(position);
+		Library bib = list.get(position);
 		name.setText(bib.getName());
 		address.setText(bib.getAddress());
 		Resources r = LLNCampus.getContext().getResources();
