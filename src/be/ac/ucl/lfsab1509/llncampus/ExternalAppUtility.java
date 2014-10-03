@@ -18,6 +18,7 @@ import android.widget.Toast;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -31,12 +32,14 @@ import android.widget.Toast;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ */
+
+/**
  * Utility class for invoking other Android applications
- * 
  */
 public class ExternalAppUtility {
 	private static CookieStore cookieStore = null;
+	
 	/**
 	 * Constructor
 	 */
@@ -45,25 +48,36 @@ public class ExternalAppUtility {
 	}
 
 	/** 
-	 * Open a browser on the URL specified.
-	 * @param context Contexte de l'application. 
-	 * @param url The url...
+	 * Open a browser with the URL specified.
+	 * 
+	 * @param context 
+	 * 			Application context. 
+	 * @param url 
+	 * 			The URL.
 	 */
 	public static void openBrowser(Context context, String url) {
 		Uri uri = Uri.parse(url);
-		Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-		context.startActivity(intent);
+		openBrowser(context, uri);
 	}
 	
+	/** 
+	 * Open a browser with the URI specified.
+	 * 
+	 * @param context 
+	 * 			Application context. 
+	 * @param uri 
+	 * 			The URI.
+	 */
 	public static void openBrowser(Context context, Uri uri) {
 		Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 		context.startActivity(intent);
 	}
 	
 	/**
-	 * Cree un nouveau client HTTP avec toujours la meme session de cookiees.
-	 * (Utile pour les connexions a ADE par exemple)
-	 * @return HttpClient 
+	 * Create a new HTTP client with always the same session of cookies.
+	 * This can be used for ADE connections for example.
+	 * 
+	 * @return An HttpClient. 
 	 */
 	public static synchronized HttpClient getHttpClient() {
 		final DefaultHttpClient httpClient = new DefaultHttpClient();
@@ -76,7 +90,17 @@ public class ExternalAppUtility {
 		return httpClient;
 	}
 
-	public static void startGPS(float lat, float lon, Context c) {
+	/**
+	 * Start the Google Maps application and navigate the user to the specified location.
+	 * 
+	 * @param lat
+	 * 			Destination latitude.
+	 * @param lon
+	 * 			Destination longitude.
+	 * @param c
+	 * 			Current context.
+	 */
+	public static void startNavigation(float lat, float lon, Context c) {
 		try{
 			Intent intent = new Intent(android.content.Intent.ACTION_VIEW, 
 					Uri.parse("http://maps.google.com/maps?daddr="+lat+","+lon+ "&dirflg=w"));
@@ -92,8 +116,19 @@ public class ExternalAppUtility {
 			t.show();
 		}
 	}
-	public static void startGPS(double lat, double lon, Context c){
-		startGPS((float) lat, (float) lon, c);
+	
+	/**
+	 * Start the Google Maps application and navigate the user to the specified location.
+	 * 
+	 * @param lat
+	 * 			Destination latitude.
+	 * @param lon
+	 * 			Destination longitude.
+	 * @param c
+	 * 			Current context.
+	 */
+	public static void startNavigation(double lat, double lon, Context c){
+		startNavigation((float) lat, (float) lon, c);
 	}
 	
 }

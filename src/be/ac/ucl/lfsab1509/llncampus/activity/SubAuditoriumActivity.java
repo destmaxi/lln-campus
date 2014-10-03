@@ -69,16 +69,16 @@ public class SubAuditoriumActivity extends LLNCampusActivity implements SubAudit
 	    if (viewer == null || !viewer.isInLayout()) {
 	    	Intent showContent = new Intent(getApplicationContext(),
 					DetailsSubAuditorium.class);
-	    	showContent.putExtra("ID_PARENT", subAuditorium.getIDParent());
-	    	showContent.putExtra("ID", subAuditorium.getID());
+	    	showContent.putExtra("ID_PARENT", subAuditorium.getParentId());
+	    	showContent.putExtra("ID", subAuditorium.getId());
 			showContent.putExtra("NAME",subAuditorium.getName());
-			showContent.putExtra("NBPLACES",  subAuditorium.getNbPlaces());
-			showContent.putExtra("MOBILIER", subAuditorium.getMobilier());
-			showContent.putExtra("CABINE", subAuditorium.hasCabine());
-			showContent.putExtra("ECRAN", subAuditorium.hasEcran());
+			showContent.putExtra("NBPLACES",  subAuditorium.getPlaces());
+			showContent.putExtra("MOBILIER", subAuditorium.getFurniture());
+			showContent.putExtra("CABINE", subAuditorium.hasCabin());
+			showContent.putExtra("ECRAN", subAuditorium.hasScreen());
 			showContent.putExtra("RETRO", subAuditorium.hasRetro());
-			showContent.putExtra("SONO", subAuditorium.hasSono());
-			showContent.putExtra("DIA", subAuditorium.hasDia());
+			showContent.putExtra("SONO", subAuditorium.hasSound());
+			showContent.putExtra("DIA", subAuditorium.hasSlide());
 			showContent.putExtra("VIDEO", subAuditorium.getVideo());
 			showContent.putExtra("NETWORK", subAuditorium.hasNetwork());
 			showContent.putExtra("ACCESS", subAuditorium.hasAccess());

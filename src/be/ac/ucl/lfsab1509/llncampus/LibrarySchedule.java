@@ -11,6 +11,7 @@ import android.util.Log;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,72 +25,73 @@ import android.util.Log;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Représente un horaire de bibliothèque (Bibliotheque)
+ */
+
+/**
+ * Represent a library schedule.
  */
 public class LibrarySchedule {
-	private final int bibID;
-	private ArrayList<PlageHoraire> plagesHoraires = null;
+	private final int libID;
+	private ArrayList<TimeSlot> timeSlots = null;
 
 	/**
-	 * Constructeur.
+	 * Constructor.
 	 * 
-	 * @param bibID
-	 *            Id de la bibliothèque.
+	 * @param libID
+	 *            Library ID.
 	 */
-	public LibrarySchedule(int bibID) {
-		this.bibID = bibID;
+	public LibrarySchedule(int libID) {
+		this.libID = libID;
 	}
 
 	/**
-	 * Fournit le jour de la semaine sous forme d'un string (lundi, mardi,...).
+	 * Get the day of the week as a String (Monday, Tuesday,...) from its id.
 	 * 
 	 * @param i
-	 *            Jour de la semaine sous forme numérique (0 = lundi, 1 = mardi,
-	 *            ...)
-	 * @return Jour de la semaine
+	 *            Day of week in numerical form (0 = Monday, 1 = Tuesday,...).
+	 * @return Day of the week.
 	 * @todo Mettre les string dans strings.xml
 	 */
-	private String getJour(int i) {
+	private String getDay(int i) {
 		Resources r = LLNCampus.getContext().getResources();
 		switch (i) {
 		case 0:
-			return r.getString(R.string.lundi);
+			return r.getString(R.string.monday);
 		case 1:
-			return r.getString(R.string.mardi);
+			return r.getString(R.string.tuesday);
 		case 2:
-			return r.getString(R.string.mercredi);
+			return r.getString(R.string.wednesday);
 		case 3:
-			return r.getString(R.string.jeudi);
+			return r.getString(R.string.thursday);
 		case 4:
-			return r.getString(R.string.vendredi);
+			return r.getString(R.string.friday);
 		case 5:
-			return r.getString(R.string.samedi);
+			return r.getString(R.string.saturday);
 		case 6:
-			return r.getString(R.string.dimanche);
+			return r.getString(R.string.sunday);
 		default:
-			Log.e("BibliothequeHoraire.java", "Numero de jour inconnu : " + i);
+			Log.e("BibliothequeHoraire.java", "Unknown day number : " + i);
 			return "Unknown day";
 		}
 	}
 
 	/**
-	 * Indique si on se trouve dans une plage horaire d'ouverture.
+	 * Check if we are currently in a opening hour.
 	 * 
-	 * @return true si la bibliotheque est ouverte, false sinon.
+	 * @return true if the library is open, else false.
 	 */
 	public final boolean isOpen() {
-		if (plagesHoraires == null) {
-			loadPlagesHoraires();
+		if (timeSlots == null) {
+			loadTimeSlots();
 		}
 
 		Calendar now = Calendar.getInstance();
 		int actualWeekday = (now.get(Calendar.DAY_OF_WEEK) - 1 + 6) % 7;
 		int actualHourMin = (now.get(Calendar.HOUR_OF_DAY) * 60 + now.get(Calendar.MINUTE));
-		for (PlageHoraire ph : plagesHoraires) {
-			if (ph.getDay() == actualWeekday
-					&& ph.getBeginTime() <= actualHourMin
-					&& ph.getEndTime() > actualHourMin) {
+		for (TimeSlot ts : timeSlots) {
+			if (ts.getDay() == actualWeekday
+					&& ts.getBeginTime() <= actualHourMin
+					&& ts.getEndTime() > actualHourMin) {
 				return true;
 			}
 		}
@@ -97,113 +99,118 @@ public class LibrarySchedule {
 	}
 
 	/**
-	 * Retourne l'horaire complet de la bibliotheque.
+	 * Get the full library schedule in textual form.
 	 * 
-	 * @return L'horaire complet.
+	 * @return Full library schedule.
 	 */
 	public final String toString() {
-		if (plagesHoraires == null) {
-			loadPlagesHoraires();
+		if (timeSlots == null) {
+			loadTimeSlots();
 		}
 		String str = "";
 		int precDay = -1;
-		for (PlageHoraire ph : plagesHoraires) {
-			if (ph.getDay() != precDay) {
-				str += getJour(ph.getDay()) + " : ";
+		for (TimeSlot ts : timeSlots) {
+			if (ts.getDay() != precDay) {
+				str += getDay(ts.getDay()) + " : ";
 			} else {
 				str += "\t\t";
 			}
-			str += ph.getBeginTimeStr() + " - " + ph.getEndTimeStr() + "\n";
-			precDay = ph.getDay();
+			str += ts.getBeginTimeStr() + " - " + ts.getEndTimeStr() + "\n";
+			precDay = ts.getDay();
 		}
 
 		return str;
 	}
 
 	/**
-	 * Charge les plages horaires de la bibliothèque considérée.
+	 * Load time slots of the related library.
 	 */
-	private void loadPlagesHoraires() {
-		plagesHoraires = new ArrayList<PlageHoraire>();
+	private void loadTimeSlots() {
+		timeSlots = new ArrayList<TimeSlot>();
 		Cursor c = LLNCampus.getDatabase().select("Bibliotheque_Horaire",
 				new String[] {"DAY", "BEGIN_TIME", "END_TIME"},
-				"BUILDING_ID = ?", new String[] {String.valueOf(bibID)},
+				"BUILDING_ID = ?", new String[] {String.valueOf(libID)},
 				null, null, "DAY ASC", null);
 		while (c.moveToNext()) {
-			plagesHoraires.add(new PlageHoraire(c.getInt(0), c.getInt(1), c
+			timeSlots.add(new TimeSlot(c.getInt(0), c.getInt(1), c
 					.getInt(2)));
 		}
 
 	}
 
-	private static class PlageHoraire {
+	private static class TimeSlot {
 		private int day;
 		private int beginTime;
 		private int endTime;
 
 		/**
-		 * Constructeur.
+		 * Constructor.
 		 * 
-		 * d
+		 * @param day
+		 * 			Day number.
+		 * @param beginTime
+		 * 			Begin time (in minutes, starting from midnight).
+		 * @param endTime
+		 * 			End time (in minutes, starting from midnight).
 		 */
-		public PlageHoraire(int day, int beginTime, int endTime) {
+		public TimeSlot(int day, int beginTime, int endTime) {
 			this.day = day;
 			this.beginTime = beginTime;
 			this.endTime = endTime;
 		}
 
 		/**
-		 * Fournit le jour de la semaine (0=lundi).
+		 * Get the day number of the week (0 = Monday,...).
 		 * 
-		 * @return Jour de la semaine.
+		 * @return Day number of the week.
 		 */
 		public int getDay() {
 			return day;
 		}
 
 		/**
-		 * Fournit l'heure d'ouverture.
+		 * Get the begin time.
 		 * 
-		 * @return Heure sous la forme : heure*60+minutes.
+		 * @return Begin time under the form (hour * 60) + minutes.
 		 */
 		public int getBeginTime() {
 			return beginTime;
 		}
 
 		/**
-		 * Fournit l'heure de fermeture.
+		 * Get the end time.
 		 * 
-		 * @return Heure sous la forme : heure*60+minutes.
+		 * @return End time under the form (hour * 60) + minutes.
 		 */
 		public int getEndTime() {
 			return endTime;
 		}
 
 		/**
-		 * Fournit l'heure d'ouverture.
+		 * Get the begin time in String form.
 		 * 
-		 * @return Heure sous la forme d'un string HHhMM ou HHh.
+		 * @return Begin time under the form HHhMM or HHh.
 		 */
 		public String getBeginTimeStr() {
 			return getStringTime(beginTime);
 		}
 
 		/**
-		 * Fournit l'heure de fermeture.
+		 * Get the end time in String form.
 		 * 
-		 * @return Heure sous la forme d'un string HHhMM ou HHh.
+		 * @return End time under the form HHhMM or HHh.
 		 */
 		public String getEndTimeStr() {
 			return getStringTime(endTime);
 		}
 
 		/**
-		 * Convertit une heure sous la forme (Heure*60+Minutes) en String sous
-		 * la forme HHhMM ou HHh.
+		 * Convert a time under the form (hour * 60) + minutes into String under
+		 * the form HHhMM or HHh.
 		 * 
 		 * @param time
-		 *            (Heure*60+minutes) à convertir
-		 * @return String sous la forme HHhMM ou HHh.
+		 *            Time under the form (hour * 60) + minutes
+		 * @return Time under the form HHhMM or HHh.
 		 */
 		private static String getStringTime(int time) {
 			int hour = (int) Math.floor(time / 60);

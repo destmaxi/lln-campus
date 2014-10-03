@@ -46,6 +46,7 @@ public class Auditorium implements IAuditorium {
 
 	/**
 	 * Constructor. 
+	 * 
 	 * @param id 
 	 * 		Auditorium ID. 
 	 * @param name 

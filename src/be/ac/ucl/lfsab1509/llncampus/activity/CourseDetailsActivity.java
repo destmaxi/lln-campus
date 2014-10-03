@@ -232,7 +232,7 @@ public class CourseDetailsActivity extends LLNCampusActivity implements
 		
 		case R.id.button_course_details_gps:
 			
-			ExternalAppUtility.startGPS(
+			ExternalAppUtility.startNavigation(
 					getIntent().getDoubleExtra("LATITUDE", 0f), getIntent()
 							.getDoubleExtra("LONGITUDE", 0f), this);
 			break;

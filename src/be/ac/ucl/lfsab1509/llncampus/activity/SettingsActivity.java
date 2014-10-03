@@ -37,7 +37,19 @@ import be.ac.ucl.lfsab1509.llncampus.external.SecurePreferences;
  */
 @SuppressWarnings("deprecation")
 public class SettingsActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
-
+	/** Name of the username key */
+	public final static String USERNAME = "username";
+	/** Name of the password key*/
+	public final static String PASSWORD = "password";
+	
+	public final static String COURSES_NOTIFY = "courses_notify";
+	public final static String NOTIFY_MINUTE = "notify_minute";
+	public final static String NOTIFY_WITH_GPS = "notify_with_gps";
+	public final static String NOTIFY_SPEED_MOVE = "notify_speed_move";
+	public final static String NOTIFY_MAX_DISTANCE = "notify_max_distance";
+	public final static String NOTIFY_MORE_TIME = "notify_more_time";
+	
+	
 	private SharedPreferences mInsecurePrefs;
 	private SharedPreferences mSecurePrefs;
 	
@@ -66,15 +78,15 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
         mInsecurePrefs = PreferenceManager.getDefaultSharedPreferences(this);
         mSecurePrefs = new SecurePreferences(this);
 
-        username = (EditTextPreference) findPreference(getString(R.string.pref_username));
-        password = (EditTextPreference) findPreference(getString(R.string.pref_password));
+        username = (EditTextPreference) findPreference(USERNAME);
+        password = (EditTextPreference) findPreference(PASSWORD);
         
-        coursesNotify = (CheckBoxPreference) findPreference(getString(R.string.pref_courses_notify));
-        notifyMinute = (EditTextPreference) findPreference(getString(R.string.pref_notify_minute));
-        notifyWithGps = (CheckBoxPreference) findPreference(getString(R.string.pref_notify_with_gps));
-        notifySpeedMove = (EditTextPreference) findPreference(getString(R.string.pref_notify_speed_move));
-        notifyMaxDistance = (EditTextPreference) findPreference(getString(R.string.pref_notify_max_distance));
-        notifyMoreTime = (EditTextPreference) findPreference(getString(R.string.pref_notify_more_time));
+        coursesNotify = (CheckBoxPreference) findPreference(COURSES_NOTIFY);
+        notifyMinute = (EditTextPreference) findPreference(NOTIFY_MINUTE);
+        notifyWithGps = (CheckBoxPreference) findPreference(NOTIFY_WITH_GPS);
+        notifySpeedMove = (EditTextPreference) findPreference(NOTIFY_SPEED_MOVE);
+        notifyMaxDistance = (EditTextPreference) findPreference(NOTIFY_MAX_DISTANCE);
+        notifyMoreTime = (EditTextPreference) findPreference(NOTIFY_MORE_TIME);
         
     }
     
@@ -98,21 +110,21 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
     		final String key = entry.getKey();
     		if (key == null) {
     			continue;
-    		} else if (key.equals("username")) {
+    		} else if (key.equals(USERNAME)) {
     			username.setText(mSecurePrefs.getString(key, null));
-    		} else if (key.equals("password")) {
+    		} else if (key.equals(PASSWORD)) {
     			password.setText(mSecurePrefs.getString(key, null));
-    		} else if (key.equals("courses_notify")) {
+    		} else if (key.equals(COURSES_NOTIFY)) {
     			coursesNotify.setChecked(mSecurePrefs.getBoolean(key, false));
-    		} else if (key.equals("notify_minute")) {
+    		} else if (key.equals(NOTIFY_MINUTE)) {
     			notifyMinute.setText(mSecurePrefs.getString(key, null));
-    		} else if (key.equals("notify_with_gps")) {
+    		} else if (key.equals(NOTIFY_WITH_GPS)) {
     			notifyWithGps.setChecked(mSecurePrefs.getBoolean(key, false));
-    		} else if (key.equals("notify_speed_move")) {
+    		} else if (key.equals(NOTIFY_SPEED_MOVE)) {
     			notifySpeedMove.setText(mSecurePrefs.getString(key, null));
-    		} else if (key.equals("notify_max_distance")) {
+    		} else if (key.equals(NOTIFY_MAX_DISTANCE)) {
     			notifyMaxDistance.setText(mSecurePrefs.getString(key, null));
-    		} else if (key.equals("notify_more_time")) {
+    		} else if (key.equals(NOTIFY_MORE_TIME)) {
     			notifyMoreTime.setText(mSecurePrefs.getString(key, null));
     		}
     	}

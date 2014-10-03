@@ -75,7 +75,7 @@ public class DetailsAuditorium extends LLNCampusActivity implements OnClickListe
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.button_auditorium_gps:
-			ExternalAppUtility.startGPS(auditorium.getLatitude(), auditorium.getLongitude(),this);
+			ExternalAppUtility.startNavigation(auditorium.getLatitude(), auditorium.getLongitude(),this);
 			break;
 		case R.id.button_subauditorium:
 			intent = new Intent(this, SubAuditoriumActivity.class);

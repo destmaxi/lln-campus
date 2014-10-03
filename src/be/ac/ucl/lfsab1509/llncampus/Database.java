@@ -39,6 +39,7 @@ public class Database {
 
 	/**
 	 * Constructor. 
+	 * 
 	 * @param context 
 	 * 			Application context.
 	 */
@@ -48,6 +49,7 @@ public class Database {
 
 	/**
 	 * Open the database.
+	 * 
 	 * @return true if opening succeed, else false.
 	 */
 	public final boolean open() {
@@ -69,6 +71,7 @@ public class Database {
 
 	/**
 	 * Check if the database is open.
+	 * 
 	 * @return true if the database is open, else false.
 	 */
 	public final boolean isOpen() {
@@ -103,6 +106,7 @@ public class Database {
 
 	/**
 	 * Update a row (or more) in a table.
+	 * 
 	 * @param table
 	 * 			Table name.
 	 * @param values
@@ -124,6 +128,7 @@ public class Database {
 
 	/**
 	 * Remove a row in a table.
+	 * 
 	 * @param table
 	 * 			Table name.
 	 * @param whereMask
@@ -151,6 +156,7 @@ public class Database {
 
 	/**
 	 * Execute a SQL raw query.
+	 * 
 	 * @param query 
 	 * 			SQL query.
 	 * @return A result set of type Cursor.
@@ -163,6 +169,7 @@ public class Database {
 
 	/**
 	 * Execute a raw query.
+	 * 
 	 * @param query 
 	 * 			The raw query.
 	 * @param values 
@@ -180,6 +187,7 @@ public class Database {
 
 	/**
 	 * Execute a select request.
+	 * 
 	 * @param table	
 	 * 			The table name to compile the query against.
 	 * @param columns

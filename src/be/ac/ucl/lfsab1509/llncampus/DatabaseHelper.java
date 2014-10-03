@@ -48,6 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * Constructor
      * Take and keep a reference of the passed context in order to access to 
      * the application assets and resources.
+     * 
      * @param context 
      * 			Application context.
      */
@@ -58,6 +59,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
  
     /**
      * Creates a empty database on the system and rewrites it with your own database.
+     * 
      * @throws IOException 
      * 			if an IOException occur
      */
@@ -71,6 +73,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Check if the database already exist to avoid re-copying 
      * the file each time you open the application.
+     * 
      * @return true if it exists, false if it doesn't
      */
     private boolean dbExist() {
@@ -95,6 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
  
     /**
      * Open the .sql file and create the database.
+     * 
      * @param db 
      * 			The database.
      * */
@@ -126,6 +130,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
  
     /**
      * Create and/or open a SQLiteDatabase
+     * 
      * @return The SQLiteDatabase
      * @throws SQLException 
      * 				If a SQL Exception occur

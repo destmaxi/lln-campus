@@ -27,56 +27,60 @@ import android.location.Location;
  * Representation of simple GPS coordinates.
  */
 public class Coordinates {
-	private double lat;
-	private double lon;
+	private double latitude;
+	private double longitude;
 
 	/**
 	 * Constructor.
+	 * 
 	 * @param lat
 	 * 			Latitude of the coordinate.
 	 * @param lon
 	 * 			Longitude of the coordinate.
 	 */
 	public Coordinates(double lat, double lon) {
-		this.lat = lat;
-		this.lon = lon;
+		this.latitude = lat;
+		this.longitude = lon;
 	}
 
 	/**
 	 * Get the latitude of the coordinate.
+	 * 
 	 * @return Coordinate latitude.
 	 */
 	public double getLatitude() {
-		return this.lat;
+		return this.latitude;
 	}
 
 	/** 
 	 * Get the longitude of the coordinate.
+	 * 
 	 * @return Coordinate longitude.
 	 */
 	public double getLongitude() {
-		return this.lon;
+		return this.longitude;
 	}
 
 	/**
 	 * Get a String representation of the coordinate in the form "latitude,longitude".
+	 * 
 	 * @return String representation of the coordinate.
 	 */
 	public String toString(){
-		return this.lat+","+this.lon;
+		return this.latitude + "," + this.longitude;
 	}
 	
 	/**
 	 * Get the distance (in meters) between the current coordinate and the coordinate passed
 	 * in argument.
+	 * 
 	 * @param away
 	 * 			Away coordinates.
 	 * @return Distance (in meters) between current position and away.
 	 */
 	public double getDistance(Coordinates away){
-		
 		float[] results = new float[1];
-		Location.distanceBetween(lat, lon, away.getLatitude(), away.getLongitude(), results);
+		Location.distanceBetween(latitude, longitude, away.getLatitude(), away.getLongitude(), results);
 		return results[0];
 	}
 

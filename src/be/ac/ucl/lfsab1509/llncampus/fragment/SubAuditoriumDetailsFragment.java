@@ -85,15 +85,15 @@ public class SubAuditoriumDetailsFragment extends LLNCampusFragment {
 	public void updateSubAuditorium(ISubAuditorium subAuditorium){
 		    String name = subAuditorium.getName();
 		    boolean access = subAuditorium.hasAccess();
-		    String places = String.valueOf(subAuditorium.getNbPlaces());
+		    String places = String.valueOf(subAuditorium.getPlaces());
 		    String network = ouiNon(subAuditorium.hasNetwork());
-		    String ecran = ouiNon(subAuditorium.hasEcran());
+		    String ecran = ouiNon(subAuditorium.hasScreen());
 		    String retro = ouiNon(subAuditorium.hasRetro());
-		    String dia = ouiNon(subAuditorium.hasDia());
+		    String dia = ouiNon(subAuditorium.hasSlide());
 		    String video = subAuditorium.getVideo();
-		    String sono = ouiNon(subAuditorium.hasSono());
-		    String cabine = ouiNon(subAuditorium.hasCabine());
-		    String mobilier = subAuditorium.getMobilier();
+		    String sono = ouiNon(subAuditorium.hasSound());
+		    String cabine = ouiNon(subAuditorium.hasCabin());
+		    String mobilier = subAuditorium.getFurniture();
 		    
 		    // If access is true, then shows the picture for disabled people, otherwise not
 		    picture = (ImageView) viewer.findViewById(R.id.subauditorium_picture);

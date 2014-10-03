@@ -9,13 +9,13 @@
     <string name="reset_DB">Reset</string>
     <string name="open">Opened</string>
     <string name="close">Closed</string>
-    <string name="lundi">Monday</string>
-    <string name="mardi">Tuesday</string>
-    <string name="mercredi">Wednesday</string>
-    <string name="jeudi">Thursday</string>
-    <string name="vendredi">Friday</string>
-    <string name="samedi">Saturday</string>
-    <string name="dimanche">Sunday</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
     <string name="reloaded_db">The application is reset.</string>
     <string name="confirm_reset_DB">Are you sure to reset the application </string>
     
@@ -151,7 +151,7 @@
 	<string name="connection">Connection #8230</string>
 	<string name="connection_UCL">"Connection to UCLouvain.be"</string>
 	<string name="fetch_info">"Retrieving information about the course attended"</string>
-	<string name="error_anac">"Unable to retrieve your studies for the academic year"</string>
+	<string name="error_academic_year">"Unable to retrieve your studies for the academic year"</string>
 	<string name="get_courses">"Retrieving the list of courses for "</string>
 	<string name="courses_empty">"Aucun cours n'a été trouvé."</string>
 	<string name="cleaning_db">"Cleaning the database  "</string>
@@ -169,6 +169,7 @@
 	<string name="delete_course_dialog_text">"Do you want to delete this event only (punctual deleting) or weekly? (You can come back without deleting in pressing the return button)"</string>
 	<string name="delete_course_one">This one</string>
 	<string name="delete_course_weekly">Weekly</string>
+	<string name="error">Error</string>
 	
 	<!-- Strings pour HoraireActivity -->
 	<string name="information">"Information"</string>

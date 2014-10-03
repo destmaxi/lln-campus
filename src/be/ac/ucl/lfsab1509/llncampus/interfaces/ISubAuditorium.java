@@ -26,25 +26,25 @@ public interface ISubAuditorium {
 	 * Return the id of the IAuditorium to which the current ISubAuditorium belongs
 	 * @return id of the IAuditorium to which the current ISubAuditorium belongs
 	 */
-	public int getIDParent();
+	public int getParentId();
 	
 	/**
 	 * Set the id of the IAuditorium to which the current ISubAuditorium belongs to aud
 	 * @param aud
 	 */
-	public void setIDParent(int id_parent);
+	public void setParentId(int id_parent);
 	
 	/**
 	 * Return the ID of the ISubAuditorium in the DB
 	 * @return ID of the ISubAuditorium in the DB
 	 */
-	public int getID();
+	public int getId();
 	
 	/**
 	 * Set the ID of the ISubAuditorium in the DB to id
 	 * @param id
 	 */
-	public void setID(int id);
+	public void setId(int id);
 	
 	/**
 	 * Get the name of the ISubAuditorium
@@ -62,13 +62,13 @@ public interface ISubAuditorium {
 	 * Get the number of places in a ISubAuditorium
 	 * @return number of places in a ISubAuditorium
 	 */
-	public int getNbPlaces();
+	public int getPlaces();
 	
 	/**
 	 * Set the number of places in a ISubAuditorium to nbPlaces
 	 * @param nbPlaces
 	 */
-	public void setNbPlaces(int nbPlaces);
+	public void setPlaces(int nbPlaces);
 	
 	/**
 	 * Get some information about furnitures
@@ -82,7 +82,7 @@ public interface ISubAuditorium {
 	 * If it's different, then it's considered as null
 	 * @return information about furnitures
 	 */
-	public String getMobilier();
+	public String getFurniture();
 	
 	/**
 	 * Set some information about furnitures to mob
@@ -96,26 +96,26 @@ public interface ISubAuditorium {
 	 * If it's different, then it's considered as null
 	 * @param mob
 	 */
-	public void setMobilier(String mob);
+	public void setFurniture(String mob);
 	
 	/**
 	 * Return true iff the current object has a cabine
 	 * @return true iff the current object has cabine, false otherwise
 	 */
-	public boolean hasCabine();
+	public boolean hasCabin();
 	
 	/**
 	 * Set if the current object has a cabine. If cab == "C", then it's supposed to set the instance variable to true.
 	 * Otherwise (including null), it's supposed to be set to false
 	 * @param cab
 	 */
-	public void setCabine(String cab);
+	public void setCabin(String cab);
 	
 	/**
 	 * Return true iff the current object has a screen
 	 * @return true iff the current object has a screen
 	 */
-	public boolean hasEcran();
+	public boolean hasScreen();
 	
 	/**
 	 * Set if the current object has a screen.
@@ -123,13 +123,13 @@ public interface ISubAuditorium {
 	 * Otherwise (including null), it's supposed to be set to false
 	 * @param ecr
 	 */
-	public void setEcran(String ecr);
+	public void setScreen(String ecr);
 	
 	/**
 	 * Return true iff the current object has a sono
 	 * @return true iff the current object has a sono
 	 */
-	public boolean hasSono();
+	public boolean hasSound();
 	
 	/**
 	 * Set if the current object has a sono.
@@ -137,7 +137,7 @@ public interface ISubAuditorium {
 	 * Otherwise (including null), it's supposed to be set to false
 	 * @param sono
 	 */
-	public void setSono(String sono);
+	public void setSound(String sono);
 	
 	/**
 	 * Return true iff the current object has a retroprojector
@@ -157,7 +157,7 @@ public interface ISubAuditorium {
 	 * Return true iff the current object has a dia
 	 * @return true iff the current object has a dia
 	 */
-	public boolean hasDia();
+	public boolean hasSlide();
 	
 	/**
 	 * Set if the current object has a  dia.
@@ -165,7 +165,7 @@ public interface ISubAuditorium {
 	 * Otherwise (including null), it's supposed to be set to false
 	 * @param dia
 	 */
-	public void setDia(String dia);
+	public void setSlide(String dia);
 	
 	/**
 	 * Get some information about video devices.

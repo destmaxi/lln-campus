@@ -13,6 +13,7 @@ import android.os.Bundle;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,9 +27,10 @@ import android.os.Bundle;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Class intended to manage the GPS of a device
- * 
+ */
+
+/**
+ * Class intended to manage the GPS of a device.
  */
 public class GPS implements LocationListener {
 	LocationManager locationManager;
@@ -36,6 +38,9 @@ public class GPS implements LocationListener {
 	Location lastLocation;
 	ArrayList<String> providers; //List of enabled providers.
 	
+	/**
+	 * Default constructor.
+	 */
 	public GPS(){
 		Context context = LLNCampus.getContext();
 		locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -46,18 +51,44 @@ public class GPS implements LocationListener {
 			locationManager.requestLocationUpdates(it.next(), 0, 0, this);
 		}
 	}
+	
+	/**
+	 * Get the current position of the device.
+	 * 
+	 * @return Current position of the device.
+	 */
 	public Coordinates getPosition(){
 		if(lastLocation == null){
 			lastLocation = locationManager.getLastKnownLocation(providers.get(0));
 		}
-		if(lastLocation == null){ return null;}
+		if(lastLocation == null){ 
+			return null;
+		}
 		return new Coordinates(lastLocation.getLatitude(),lastLocation.getLongitude());
 	}
 	
+	/**
+	 * Check if the GPS is on.
+	 * 
+	 * @return true if the position of the device is determined, else false.
+	 */
 	public boolean isOn(){
-		if(providers.isEmpty()){ return false; }
-		return (getPosition()!=null);
+		if(providers.isEmpty()){ 
+			return false; 
+		}
+		return (getPosition() != null);
 	}
+	
+	/**
+	 * Destroy the GPS object.
+	 */
+	public void destroy(){
+		locationManager.removeUpdates(this);
+		locationManager = null;
+	}
+	
+	// These following methods are specified by LocationListener
+	
 	public void onLocationChanged(Location location) {
 		lastLocation = location;
 	}
@@ -77,13 +108,9 @@ public class GPS implements LocationListener {
 			case LocationProvider.AVAILABLE:
 				onProviderEnabled(provider);
 				break;
-//			case LocationProvider.TEMPORARILY_UNAVAILABLE:
-//				Rien a faire ?
-//				break;
+			default:
+				// Nothing to do
+				break;
 		}		
-	}
-	public void destroy(){
-		locationManager.removeUpdates(this);
-		locationManager = null;
 	}
 }

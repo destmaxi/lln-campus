@@ -20,13 +20,13 @@
     <string name="reset_DB">Réinitialiser</string>
     <string name="open">Ouvert</string>
     <string name="close">Fermé</string>
-    <string name="lundi">Lundi</string>
-    <string name="mardi">Mardi</string>
-    <string name="mercredi">Mercredi</string>
-    <string name="jeudi">Jeudi</string>
-    <string name="vendredi">Vendredi</string>
-    <string name="samedi">Samedi</string>
-    <string name="dimanche">Dimanche</string>
+    <string name="monday">Lundi</string>
+    <string name="tuesday">Mardi</string>
+    <string name="wednesday">Mercredi</string>
+    <string name="thursday">Jeudi</string>
+    <string name="friday">Vendredi</string>
+    <string name="saturday">Samedi</string>
+    <string name="sunday">Dimanche</string>
     <string name="reloaded_db">"L'application a été réinitialisée."</string>
     <string name="confirm_reset_DB">Êtes-vous sûr de vouloir réinitialiser l\'application</string>
     
@@ -162,7 +162,7 @@
 	<string name="connection">Connexion #8230</string>
 	<string name="connection_UCL">"Connexion à UCLouvain.be"</string>
 	<string name="fetch_info">"Récupération des informations sur les études suivies"</string>
-	<string name="error_anac">"Impossible de récupérer vos études pour l'année académique"</string>
+	<string name="error_academic_year">"Impossible de récupérer vos études pour l'année académique"</string>
 	<string name="get_courses">"Récupération de la liste des cours pour "</string>
 	<string name="courses_empty">"Aucun cours n'a été trouvé."</string>
 	<string name="cleaning_db">"Nettoyage de la base de donnée  "</string>
@@ -180,6 +180,7 @@
 	<string name="delete_course_dialog_text">"Voulez-vous supprimez cet évènement uniquement (suppression ponctuelle) ou hebdomadairement? (Vous pouvez revenir sans supprimer l'évènement sur la touche retour)"</string>
 	<string name="delete_course_one">Celui-ci</string>
 	<string name="delete_course_weekly">Hebdomadairement</string>
+	<string name="error">Erreur</string>
 	
 	<!-- Strings pour HoraireActivity -->
 	<string name="information">"Informations"</string>

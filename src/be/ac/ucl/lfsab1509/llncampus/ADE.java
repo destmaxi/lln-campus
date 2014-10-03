@@ -67,7 +67,7 @@ public final class ADE {
 
 	/**
 	 * Establish the connection to ADE in specifying code of courses 
-	 * in which information is requested
+	 * in which information is requested.
 	 * 
 	 * @param code
 	 *            Code of courses to fetch, separated by comma (e.g. "lelec1530,lfsab1509").
@@ -94,7 +94,7 @@ public final class ADE {
 	}
 
 	/**
-	 * Fetch information about courses which codes are given as parameter
+	 * Fetch information about courses which codes are given as parameter.
 	 * 
 	 * @param code
 	 *            Code of courses to fetch, separated by comma (e.g. "lelec1530,lfsab1509").
@@ -116,28 +116,28 @@ public final class ADE {
 
 			html = EntityUtils.toString(response.getEntity());
 
-			String table = HTMLAnalyser.getBalisesContent(html, "table").get(0);
-			ArrayList<String> lines = HTMLAnalyser.getBalisesContent(table, "tr");
+			String table = HTMLAnalyser.getTagsContent(html, "table").get(0);
+			ArrayList<String> lines = HTMLAnalyser.getTagsContent(table, "tr");
 
 			// Skip the 2 header lines.
 			for (int i = 2; i < lines.size(); i++) {
-				ArrayList<String> cells = HTMLAnalyser.getBalisesContent(lines.get(i), "td");
+				ArrayList<String> cells = HTMLAnalyser.getTagsContent(lines.get(i), "td");
 
-				String date = HTMLAnalyser.removeHTML(cells.get(0));
-				String beginHour = HTMLAnalyser.removeHTML(cells.get(2));
-				String duration = HTMLAnalyser.removeHTML(cells.get(3));
+				String date = HTMLAnalyser.removeHTMLTag(cells.get(0));
+				String beginHour = HTMLAnalyser.removeHTMLTag(cells.get(2));
+				String duration = HTMLAnalyser.removeHTMLTag(cells.get(3));
 				
 				Event event = new Event(date, beginHour, duration);
 				event.addDetail("trainees",
-						HTMLAnalyser.removeHTML(cells.get(6)));
+						HTMLAnalyser.removeHTMLTag(cells.get(6)));
 				event.addDetail("trainers",
-						HTMLAnalyser.removeHTML(cells.get(7)));
+						HTMLAnalyser.removeHTMLTag(cells.get(7)));
 				event.addDetail("room",
-						HTMLAnalyser.removeHTML(cells.get(8)));
+						HTMLAnalyser.removeHTMLTag(cells.get(8)));
 				event.addDetail("course",
-						HTMLAnalyser.removeHTML(cells.get(9)));
+						HTMLAnalyser.removeHTMLTag(cells.get(9)));
 				event.addDetail("activity_name",
-						HTMLAnalyser.removeHTML(cells.get(1)));
+						HTMLAnalyser.removeHTMLTag(cells.get(1)));
 				events.add(event);
 			}
 		} catch (Exception e) {
@@ -275,7 +275,7 @@ public final class ADE {
 	/**
 	 * Generate a full list of week numbers for ADE.
 	 * 
-	 * @return Week numbers separated by commas to fetch a full year for schelude (from 0 to 51).
+	 * @return Week numbers separated by commas to fetch a full year for schedule (from 0 to 51).
 	 */
 	private static String getWeeks() {
 		String weeks = "";
