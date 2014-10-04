@@ -10,6 +10,7 @@ import android.widget.TextView;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,9 +24,11 @@ import android.widget.TextView;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * This activity just shows an about message
- * Related with about.xml
+ */
+
+/**
+ * Activity to show an about message.
+ * Related with about.xml.
  */
 public class AboutActivity extends LLNCampusActivity {
 	@Override
@@ -33,17 +36,17 @@ public class AboutActivity extends LLNCampusActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.about);
 		TextView text = (TextView) findViewById(R.id.about_text);
-		String nameCode = "0";
+		String codeName = "0";
 		try{
 			PackageManager manager = this.getPackageManager();
 			PackageInfo info = manager.getPackageInfo(this.getPackageName(), 0);
-			nameCode = info.versionName;
+			codeName = info.versionName;
 		}
 		catch(NameNotFoundException nnf)
 		{
 			nnf.printStackTrace();
 		}
-		text.setText(getString(R.string.about_text) + nameCode);
+		text.setText(getString(R.string.about_text) + codeName);
 	}
 
 	@Override

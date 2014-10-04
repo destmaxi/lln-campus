@@ -29,12 +29,12 @@ import android.widget.TextView;
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * Class intended to make a listview of Cours
  */
-public class CoursListAdapter extends BaseAdapter {
+public class CourseListAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
  
     private ArrayList<Course> list;
  
-    public CoursListAdapter(Context context, ArrayList<Course> list) {
+    public CourseListAdapter(Context context, ArrayList<Course> list) {
         mInflater = LayoutInflater.from(context);
         this.list = list;
     }

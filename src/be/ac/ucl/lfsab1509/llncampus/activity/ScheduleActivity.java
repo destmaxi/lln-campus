@@ -6,6 +6,7 @@ import be.ac.ucl.lfsab1509.llncampus.ADE;
 import be.ac.ucl.lfsab1509.llncampus.Coordinates;
 import be.ac.ucl.lfsab1509.llncampus.Course;
 import be.ac.ucl.lfsab1509.llncampus.Event;
+import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.activity.adapter.EventListAdapter;
 import android.app.AlertDialog;
@@ -45,6 +46,7 @@ import android.widget.CalendarView.OnDateChangeListener;
  * Related with horaire.xml
  */
 public class ScheduleActivity extends LLNCampusActivity implements OnDateChangeListener, OnItemClickListener {
+	
 	private CalendarView calendarView;
 	
 	private final Handler handler = new Handler();
@@ -172,12 +174,12 @@ public class ScheduleActivity extends LLNCampusActivity implements OnDateChangeL
 	}
 	
 	private void startCoursListEditActivity() {
-		Intent intent = new Intent(this, CoursListEditActivity.class);
+		Intent intent = new Intent(this, CourseListEditActivity.class);
 		startActivity(intent);
 	}
 	private void startUpdateFromUCLouvainActivity() {
-		Intent intent = new Intent(this, CoursListEditActivity.class);
-		intent.putExtra("startUCLouvain", true);
+		Intent intent = new Intent(this, CourseListEditActivity.class);
+		intent.putExtra(LLNCampus.EXTRA_START_UCLOUVAIN, true);
 		startActivity(intent);
 	}
 	@Override
@@ -198,19 +200,19 @@ public class ScheduleActivity extends LLNCampusActivity implements OnDateChangeL
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 		final Event e = currentEvents.get(position);
-		Intent i = new Intent(this, CourseDetailsActivity.class);
+		Intent i = new Intent(this, EventDetailsActivity.class);
 		// Put data if we want to erase
-		i.putExtra("ACTIVITY_NAME", e.getDetail("activity_name"));
-		i.putExtra("BEGIN_TIME", e.getBeginTime().toMillis(false));
-		i.putExtra("END_TIME", e.getEndTime().toMillis(false));
+		i.putExtra(LLNCampus.EXTRA_ACTIVITY_NAME, e.getDetail("activity_name"));
+		i.putExtra(LLNCampus.EXTRA_BEGIN_TIME, e.getBeginTime().toMillis(false));
+		i.putExtra(LLNCampus.EXTRA_END_TIME, e.getEndTime().toMillis(false));
 		// Put data for GPS
-		i.putExtra("DETAILS", e.toString());
+		i.putExtra(LLNCampus.EXTRA_DETAILS, e.toString());
 		Coordinates c = e.getCoordinates();
-		Log.d("HoraireActivity", "Coordonnées : "+c);
+		Log.d("HoraireActivity", "Coordonnées : " + c);
 		if (c != null) {
-			i.putExtra("COORDINATES", true);
-			i.putExtra("LATITUDE", c.getLatitude());
-			i.putExtra("LONGITUDE", c.getLongitude());
+			i.putExtra(LLNCampus.EXTRA_COORDINATES, true);
+			i.putExtra(LLNCampus.EXTRA_LATITUDE, c.getLatitude());
+			i.putExtra(LLNCampus.EXTRA_LONGITUDE, c.getLongitude());
 		}
 		startActivity(i);
 	}

@@ -5,16 +5,16 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/cours_code_txt"
+        android:id="@+id/course_code_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cours_code" />
+        android:text="@string/course_code" />
 
     <EditText
-        android:id="@+id/cours_code"
+        android:id="@+id/course_code_edit"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/cours_code"
+        android:hint="@string/course_code"
         android:singleLine="true" >
 
         <requestFocus android:layout_width="match_parent" />
@@ -22,24 +22,24 @@
     </EditText>
 
     <TextView
-        android:id="@+id/cours_name_txt"
+        android:id="@+id/course_name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cours_name" />
+        android:text="@string/course_name" />
 
     <EditText
-        android:id="@+id/cours_name"
+        android:id="@+id/course_name_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/cours_name"
+        android:hint="@string/course_name"
         android:inputType="text"
         android:singleLine="true" />
 
         <Button
-            android:id="@+id/cours_add_button"
+            android:id="@+id/course_add_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cours_add" />
+            android:text="@string/course_add" />
 
 
 </LinearLayout>

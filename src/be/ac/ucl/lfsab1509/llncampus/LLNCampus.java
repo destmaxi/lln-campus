@@ -45,10 +45,35 @@ import android.util.Log;
  */
 
 public class LLNCampus extends Application {
+	
+	/** Name of the activity name item stored in extras. */
+	public static final String EXTRA_ACTIVITY_NAME = "ACTIVITY_NAME";
+	/** Name of the begin time item stored in extras. */
+	public static final String EXTRA_BEGIN_TIME = "BEGIN_TIME";
+	/** Name of the coordinates item stored in extras. */
+	public static final String EXTRA_COORDINATES = "COORDINATES";
+	/** Name of the details item stored in extras. */
+	public static final String EXTRA_DETAILS = "DETAILS";
+	/** Name of the end time item stored in extras. */
+	public static final String EXTRA_END_TIME = "END_TIME";
+	/** Name of the latitude item stored in extras. */
+	public static final String EXTRA_LATITUDE = "LATITUDE";
+	/** Name of the longitude item stored in extras. */
+	public static final String EXTRA_LONGITUDE = "LONGITUDE";
+	/** Name of the start UCLouvain item stored in extras, used to automate the fetching of
+	 * courses from UCLouvain when updating the ADE schedule. */
+	public static final String EXTRA_START_UCLOUVAIN = "START_UCLOUVAIN";
+	
+	/** The context of the application. */
 	private static Context APPLICATION_CONTEXT;
+	/** The application database. */
 	private static Database DB;
+	/** The application GPS. */
 	private static GPS gps = null;
+	/** The name of the folder at the storage root where the application stores files. */
 	public static String LLNREPOSITORY = "LLNCampus";
+	
+	
 
 	@Override
 	public final void onCreate() {

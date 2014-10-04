@@ -33,12 +33,12 @@ import be.ac.ucl.lfsab1509.llncampus.R;
  * Class intended to create a listview of Bibliotheque
  * Related with bibliotheque_list_item.xml
  */
-public class BibliothequesListAdapter extends BaseAdapter {
+public class LibraryListAdapter extends BaseAdapter {
 	private LayoutInflater mInflater;
 
 	private ArrayList<Library> list;
 
-	public BibliothequesListAdapter(Context context,
+	public LibraryListAdapter(Context context,
 			ArrayList<Library> list) {
 		mInflater = LayoutInflater.from(context);
 		this.list = list;

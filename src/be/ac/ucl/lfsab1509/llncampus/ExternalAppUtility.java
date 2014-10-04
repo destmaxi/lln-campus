@@ -103,7 +103,8 @@ public class ExternalAppUtility {
 	public static void startNavigation(float lat, float lon, Context c) {
 		try{
 			Intent intent = new Intent(android.content.Intent.ACTION_VIEW, 
-					Uri.parse("http://maps.google.com/maps?daddr="+lat+","+lon+ "&dirflg=w"));
+					Uri.parse("http://maps.google.com/maps?daddr=" + lat + "," + lon 
+							+ "&dirflg=w"));
 			intent.setComponent(new ComponentName("com.google.android.apps.maps", 
 					"com.google.android.maps.MapsActivity"));          
 			c.startActivity(intent);

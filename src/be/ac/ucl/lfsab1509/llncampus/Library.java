@@ -158,7 +158,7 @@ public final class Library {
 	 * 
 	 * @return Library acronym.
 	 */
-	public String getSigle() {
+	public String getAcronym() {
 		return this.acronym;
 	}
 

@@ -15,14 +15,16 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import be.ac.ucl.lfsab1509.llncampus.Course;
+import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.UCLouvain;
-import be.ac.ucl.lfsab1509.llncampus.activity.adapter.CoursListAdapter;
+import be.ac.ucl.lfsab1509.llncampus.activity.adapter.CourseListAdapter;
 import be.ac.ucl.lfsab1509.llncampus.external.SecurePreferences;
 
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,29 +38,33 @@ import be.ac.ucl.lfsab1509.llncampus.external.SecurePreferences;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Activité pour la modification des cours.
- * Related with cours_list_edit.xml
+ */
+
+/**
+ * Activity to show and modify courses.
+ * Related with course_list_edit.xml
  * 
  */
-public class CoursListEditActivity extends LLNCampusActivity implements
+public class CourseListEditActivity extends LLNCampusActivity implements
 		OnClickListener, OnItemClickListener {
-	private static CoursListEditActivity context;
+	/** The current class, to keep access for threads. */
+	private static CourseListEditActivity context;
 
 	private Handler mHandler = new Handler();
 	
-	private CoursListAdapter coursListAdapter;
-	private ListView coursListView;
-	private ArrayList<Course> coursList;
+	private CourseListAdapter courseListAdapter;
+	private ListView courseListView;
+	private ArrayList<Course> courseList;
 
+	/** This indicates if the user is on the courses list view. */
 	private boolean onFirstPage = true;
 
 	@Override
 	protected final void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
-		if (getIntent().getBooleanExtra("startUCLouvain", false)) {
-			startDownloadActivity();
+		if (getIntent().getBooleanExtra(LLNCampus.EXTRA_START_UCLOUVAIN, false)) {
+			downloadCoursesFromUCLouvain();
 		} else {
 			loadCoursList();
 		}
@@ -67,54 +73,64 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 	@Override
 	public final void onPause() {
 		super.onPause();
+		// If adding a new course or after downloading courses from UCLouvain.
 		if (!onFirstPage) {
-			startActivity(new Intent(this, CoursListEditActivity.class));
+			// TODO must check if a call of this.onResume() is better
+			startActivity(new Intent(this, CourseListEditActivity.class));
 		}
 	}
 
+	/**
+	 * Prepare the view for the user to show the list of courses.
+	 */
 	private void loadCoursList() {
 		onFirstPage = true;
-		setContentView(R.layout.cours_list_edit);
-		findViewById(R.id.cours_download).setOnClickListener(this);
-		findViewById(R.id.cours_add).setOnClickListener(this);
+		setContentView(R.layout.course_list_edit);
+		findViewById(R.id.course_download).setOnClickListener(this);
+		findViewById(R.id.course_add).setOnClickListener(this);
 
-		coursList = Course.getList();
-		coursListView = (ListView) findViewById(R.id.cours_list);
-		coursListAdapter = new CoursListAdapter(this, coursList);
-		coursListView.setAdapter(coursListAdapter);
-		coursListView.setOnItemClickListener(this);
+		courseList = Course.getList();
+		courseListView = (ListView) findViewById(R.id.course_list);
+		courseListAdapter = new CourseListAdapter(this, courseList);
+		courseListView.setAdapter(courseListAdapter);
+		courseListView.setOnItemClickListener(this);
 	}
 
-	public void startDownloadActivity() {
+	/**
+	 * Start the downloading of courses from UCLouvain and then show the list of courses 
+	 * downloaded.
+	 */
+	public void downloadCoursesFromUCLouvain() {
 		SharedPreferences preferences = new SecurePreferences(this);
 		String username = preferences.getString(getString(R.string.pref_username), null);
 		String password = preferences.getString(getString(R.string.pref_password), null);
+		onFirstPage = false;
 
 		if (username == null || password == null) {
 			notify(getString(R.string.username_notify));
 			Intent intent = new Intent(this, SettingsActivity.class);
 			startActivity(intent);
 			return;
-			// Proposer de modifier les options ou de revenir en arrière
 		}
-		onFirstPage = false;
-
-	
 
 		UCLouvain.downloadCoursesFromUCLouvain(this, username, password,
 				new Runnable() {
 					public void run() {
-						CoursListEditActivity.this.notify(context.getString(R.string.courses_download_ok));
+						CourseListEditActivity.this.notify(context
+								.getString(R.string.courses_download_ok));
 						loadCoursList();
 					}
 				}, mHandler);
 
 	}
 
-	private void startAddCoursActivity() {
+	/** 
+	 * Change the content of the view to add manually new courses.
+	 */
+	private void changeViewToAddCourses() {
 		onFirstPage = false;
-		setContentView(R.layout.cours_add);
-		findViewById(R.id.cours_add_button).setOnClickListener(this);
+		setContentView(R.layout.course_add);
+		findViewById(R.id.course_add_button).setOnClickListener(this);
 	}
 
 	@Override
@@ -124,16 +140,15 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.cours_download:
-			startDownloadActivity();
+		case R.id.course_download:
+			downloadCoursesFromUCLouvain();
 			break;
-		
-		case R.id.cours_add:
-			startAddCoursActivity();
+		case R.id.course_add:
+			changeViewToAddCourses();
 			break;
-		case R.id.cours_add_button:
-			EditText code = (EditText) findViewById(R.id.cours_code);
-			EditText name = (EditText) findViewById(R.id.cours_name);
+		case R.id.course_add_button:
+			EditText code = (EditText) findViewById(R.id.course_code_edit);
+			EditText name = (EditText) findViewById(R.id.course_name_edit);
 
 			if (Course.add(code.getText().toString(), name.getText().toString())) {
 				super.notify(getString(R.string.add_course_ok));
@@ -146,25 +161,29 @@ public class CoursListEditActivity extends LLNCampusActivity implements
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-			long arg3) {
-		final Course c = coursList.get(position);
+	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+		final Course course = courseList.get(position);
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(getString(R.string.delete_course)).setMessage(
-				getString(R.string.confirm_delete_course) + c.getCourseCode()
+				getString(R.string.confirm_delete_course) + course.getCourseCode()
 						+ " ?");
 		builder.setPositiveButton(android.R.string.ok,
 				new DialogInterface.OnClickListener() {
-					public void notify(final String s) {
+					/**
+					 * Show a notification message to the user.
+					 * @param msg
+					 * 		The message to show.
+					 */
+					public void notify(final String msg) {
 						mHandler.post(new Runnable() {
 							public void run() {
-								context.notify(s);
+								context.notify(msg);
 							}
 						});
 					}
 
 					public void onClick(DialogInterface dialog, int id) {
-						if (Course.remove(c)) {
+						if (Course.remove(course)) {
 							notify(getString(R.string.delete_course_ok));
 							mHandler.post(new Runnable() {
 								public void run() {

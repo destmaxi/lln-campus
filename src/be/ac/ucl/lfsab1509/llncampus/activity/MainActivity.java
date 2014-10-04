@@ -163,7 +163,7 @@ public class MainActivity extends LLNCampusActivity implements OnClickListener {
 			startActivity(intent);
 			break;
 		case R.id.button_bibliotheque:
-			intent = new Intent(this, BibliothequesActivity.class);
+			intent = new Intent(this, LibraryActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.button_map:

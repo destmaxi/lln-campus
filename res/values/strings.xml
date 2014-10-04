@@ -59,7 +59,7 @@
 
     <!-- Strings utiles pour study_title -->
     <string name="etudes">Études</string>
-    <string name="horaire">Horaire</string>
+    <string name="schedule">Horaire</string>
     <string name="auditoires">Auditoires</string>
     <string name="bibliotheques">Bibliothèques</string>
 
@@ -117,10 +117,10 @@
     <string name="course_list_edit">Modifier la liste des cours</string>
     <string name="update_from_uclouvain">Télécharger depuis UCLouvain</string>
     <string name="annee_acad">Année académique</string>
-    <string name="cours_add">Ajouter un cours</string>
-    <string name="cours_code">Code du cours</string>
-    <string name="cours_name">Nom du cours</string>
-    <string name="cours_list_explanation">"Afin de récupérer votre horaire, vous devez indiquer les différents codes des cours que vous suivez (les codes des cours doivent correspondre avec ceux indiqués sur ADE). Afin de vous facilitez la tâche, l'application peut télécharger la liste des cours depuis uclouvain.be, pour ce faire cliquez sur \"Télécharger depuis UCLouvain\". Pour supprimer un cours de la liste cliquez simplement dessus. "</string>
+    <string name="course_add">Ajouter un cours</string>
+    <string name="course_code">Code du cours</string>
+    <string name="course_name">Nom du cours</string>
+    <string name="course_list_explanation">"Afin de récupérer votre horaire, vous devez indiquer les différents codes des cours que vous suivez (les codes des cours doivent correspondre avec ceux indiqués sur ADE). Afin de vous facilitez la tâche, l'application peut télécharger la liste des cours depuis uclouvain.be, pour ce faire cliquez sur \"Télécharger depuis UCLouvain\". Pour supprimer un cours de la liste cliquez simplement dessus. "</string>
     <string name="emptyCoursListDialogTitle">Premiers pas avec l\'horaire</string>
     <string name="emptyCoursListDialogText">Il n\'y a encore aucun cours enregistré pour votre horaire. Afin de pouvoir récupérer votre horaire, vous devez indiquez les différents cours que vous suivez. Pour ce faire, il est possible de télécharger automatiquement votre liste de cours depuis le site de l\'UCL. Il est également possible d\'ajouter des cours de manière manuelle si les codes des cours de votre bureau ne correspond pas avec le codes des cours dans ADE.</string>
     <string name="download_for">Téléchargement pour</string>
@@ -176,10 +176,10 @@
 	<string name="delete_course_ok">"Cours supprimé!"</string>
 	<string name="delete_course_error">"Echec de la suppression :/"</string>
 	<string name="delete">Supprimer</string>
-	<string name="delete_course_dialog_title">"Suppression d'un évènement"</string>
-	<string name="delete_course_dialog_text">"Voulez-vous supprimez cet évènement uniquement (suppression ponctuelle) ou hebdomadairement? (Vous pouvez revenir sans supprimer l'évènement sur la touche retour)"</string>
-	<string name="delete_course_one">Celui-ci</string>
-	<string name="delete_course_weekly">Hebdomadairement</string>
+	<string name="delete_event_dialog_title">"Suppression d'un évènement"</string>
+	<string name="delete_event_dialog_text">"Voulez-vous supprimez cet évènement uniquement (suppression ponctuelle) ou hebdomadairement? (Vous pouvez revenir sans supprimer l'évènement sur la touche retour)"</string>
+	<string name="delete_event_one">Celui-ci</string>
+	<string name="delete_event_weekly">Hebdomadairement</string>
 	<string name="error">Erreur</string>
 	
 	<!-- Strings pour HoraireActivity -->

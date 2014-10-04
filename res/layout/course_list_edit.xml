@@ -5,13 +5,14 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/course_list_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cours_list_explanation" />
+        android:text="@string/course_list_explanation" 
+        android:textSize="13sp"/>
 
     <ListView
-        android:id="@+id/cours_list"
+        android:id="@+id/course_list"
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1" >
@@ -24,16 +25,18 @@
         android:gravity="center_vertical|center_horizontal" >
 
         <Button
-            android:id="@+id/cours_add"
+            android:id="@+id/course_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cours_add" />
+            android:text="@string/course_add"
+            android:textSize="15sp" />
 
         <Button
-            android:id="@+id/cours_download"
+            android:id="@+id/course_download"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/update_from_uclouvain" />
+            android:text="@string/update_from_uclouvain" 
+            android:textSize="15sp" />
 
     </LinearLayout>
 

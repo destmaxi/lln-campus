@@ -30,10 +30,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:contentDescription="@string/horaire"
+            android:contentDescription="@string/schedule"
             android:drawableLeft="@drawable/horaire"
             android:gravity="center_vertical|center_horizontal"
-            android:text="@string/horaire"
+            android:text="@string/schedule"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Button

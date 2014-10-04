@@ -49,7 +49,7 @@ public class EventListAdapter extends BaseAdapter {
         }
         TextView time = (TextView) convertView.findViewById(R.id.cours_time);
         TextView room = (TextView) convertView.findViewById(R.id.cours_room);
-        TextView code = (TextView) convertView.findViewById(R.id.cours_code);
+        TextView code = (TextView) convertView.findViewById(R.id.course_code_edit);
         TextView title = (TextView) convertView.findViewById(R.id.cours_title);        
  
         Event info = list.get(position);

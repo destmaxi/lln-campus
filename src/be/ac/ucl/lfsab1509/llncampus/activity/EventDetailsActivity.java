@@ -16,6 +16,7 @@ import be.ac.ucl.lfsab1509.llncampus.R;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -29,58 +30,57 @@ import be.ac.ucl.lfsab1509.llncampus.R;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Class intended to show some details about a course activity and allows to
- * perform some actions with these details
- * Related with course_detail.xml
  */
-public class CourseDetailsActivity extends LLNCampusActivity implements
-		OnClickListener {
+
+/**
+ * Activity class intended to show some details about an event and allows to
+ * perform some actions with these details.
+ * Related with event_details.xml.
+ */
+public class EventDetailsActivity extends LLNCampusActivity implements OnClickListener {
 	
-	// millis * sec * min * hours * days
+	/** Number of milliseconds in one week. */
 	protected static long ONE_WEEK_MILLIS = 1000 * 60 * 60 * 24 * 7;
+	/** Number of milliseconds in one hour. */
 	protected static long ONE_HOUR_MILLIS = 1000 * 60 * 60 * 1;
-	
 	
 	// Create an handler for the dialog box
 	private final Handler handler = new Handler();
 	
-	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.course_details);
-		TextView details = (TextView) findViewById(R.id.course_details);
-		details.setText(getIntent().getStringExtra("DETAILS"));
-		Button gps = (Button) findViewById(R.id.button_course_details_gps);
-		gps.setOnClickListener(this);
-		if (!getIntent().getBooleanExtra("COORDINATES", false)) {
-			gps.setVisibility(View.INVISIBLE);
+		setContentView(R.layout.event_details);
+		TextView detailsText = (TextView) findViewById(R.id.event_details_text);
+		detailsText.setText(getIntent().getStringExtra(LLNCampus.EXTRA_DETAILS));
+		Button gpsButton = (Button) findViewById(R.id.button_event_details_gps);
+		gpsButton.setOnClickListener(this);
+		if (!getIntent().getBooleanExtra(LLNCampus.EXTRA_COORDINATES, false)) {
+			gpsButton.setVisibility(View.INVISIBLE);
 		}
-		Button delete = (Button) findViewById(R.id.button_course_delete);
-		delete.setOnClickListener(this);
+		Button deleteButton = (Button) findViewById(R.id.button_event_delete);
+		deleteButton.setOnClickListener(this);
 	}
 	
 	/**
-	 * Method that allow to suppress this of the DB
-	 * The DB delete the line where the activity name and the time match
-	 * The Activity finish at the end of this method (if it success)
+	 * Method that allow to suppress the current Event of the database.
+	 * The database delete the line where the activity name and the time match.
+	 * The Activity finishes at the end of this method (if it successes).
 	 */
 	protected void deleteOneEvent()
 	{
-		String activityName = getIntent().getStringExtra("ACTIVITY_NAME");
-		long beginTime = getIntent().getLongExtra("BEGIN_TIME", -1);
-		long endTime = getIntent().getLongExtra("END_TIME", -1);
+		String activityName = getIntent().getStringExtra(LLNCampus.EXTRA_ACTIVITY_NAME);
+		long beginTime = getIntent().getLongExtra(LLNCampus.EXTRA_BEGIN_TIME, -1);
+		long endTime = getIntent().getLongExtra(LLNCampus.EXTRA_END_TIME, -1);
 		
-		// Check if the data are coherent
+		// Check if the data are consistent.
 		if (activityName == null || beginTime == -1 || endTime == -1)
 			return;
 		
 		Database db = LLNCampus.getDatabase();
 		String[] values = {activityName, Long.toString(beginTime), Long.toString(endTime)};
 		int error = db.delete("Horaire", "ACTIVITY_NAME=? AND TIME_BEGIN=? AND TIME_END=?", values);
-		if (error == -1)
+		if (error < 0)
 			Log.e("DELETE_EVENT", "Error deleting" + values[0] + values[1] + values[2]);
 		else
 		{
@@ -89,20 +89,19 @@ public class CourseDetailsActivity extends LLNCampusActivity implements
 	}
 	
 	/**
-	 * Method that allow to suppress this of the DB and the others activities
-	 * that have the same activity_name and same time of beginning and ending
-	 * It can support up to 3 weeks with blanks (to support Easter Holidays)
-	 * The DB delete the lines where the activity name and the time match
-	 * (and the following weeks too)
-	 * The Activity finish at the end of this method (if it success)
+	 * Method that allow to suppress the current Event and the others ones with the same
+	 * ACTIVITY_NAME and same times of beginning and ending of the database.
+	 * It can cope with up to 4 weeks with blanks (to support Easter Holidays) and 1 hour change.
+	 * The database deletes the lines where the activity name and the times match.
+	 * The Activity finishes at the end of this method (if it successes).
 	 */
 	protected void deleteConsecutiveEvents()
 	{
-		String activityName = getIntent().getStringExtra("ACTIVITY_NAME");
-		long beginTime = getIntent().getLongExtra("BEGIN_TIME", -1);
-		long endTime = getIntent().getLongExtra("END_TIME", -1);
+		String activityName = getIntent().getStringExtra(LLNCampus.EXTRA_ACTIVITY_NAME);
+		long beginTime = getIntent().getLongExtra(LLNCampus.EXTRA_BEGIN_TIME, -1);
+		long endTime = getIntent().getLongExtra(LLNCampus.EXTRA_END_TIME, -1);
 		
-		// Check if the data are coherent
+		// Check if the data are consistent.
 		if (activityName == null || beginTime == -1 || endTime == -1)
 			return;
 		
@@ -185,7 +184,7 @@ public class CourseDetailsActivity extends LLNCampusActivity implements
 			{
 				blankWeeks = 0;
 			}
-			// For the next week...
+			// For the next weeks...
 			values[1] = Long.toString(Long.parseLong(values[1]) + ONE_WEEK_MILLIS);
 			values[2] = Long.toString(Long.parseLong(values[2]) + ONE_WEEK_MILLIS);
 		}
@@ -200,10 +199,11 @@ public class CourseDetailsActivity extends LLNCampusActivity implements
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.button_course_delete:
+		case R.id.button_event_delete:
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(getString(R.string.delete_course_dialog_title)).setMessage(getString(R.string.delete_course_dialog_text));
-            builder.setNeutralButton(getString(R.string.delete_course_one),
+            builder.setTitle(getString(R.string.delete_event_dialog_title))
+            	.setMessage(getString(R.string.delete_event_dialog_text));
+            builder.setNeutralButton(getString(R.string.delete_event_one),
             		new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
@@ -214,7 +214,7 @@ public class CourseDetailsActivity extends LLNCampusActivity implements
 							});
 						}
 					});
-            builder.setPositiveButton(getString(R.string.delete_course_weekly),
+            builder.setPositiveButton(getString(R.string.delete_event_weekly),
             		new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
@@ -229,9 +229,7 @@ public class CourseDetailsActivity extends LLNCampusActivity implements
             AlertDialog dialog = builder.create();
             dialog.show();
 			break;
-		
-		case R.id.button_course_details_gps:
-			
+		case R.id.button_event_details_gps:
 			ExternalAppUtility.startNavigation(
 					getIntent().getDoubleExtra("LATITUDE", 0f), getIntent()
 							.getDoubleExtra("LONGITUDE", 0f), this);
