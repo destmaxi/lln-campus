@@ -42,7 +42,7 @@ import android.widget.ListView;
  *
  */
 public class AuditoriumActivity extends LLNCampusActivity implements 
-	AuditoriumListFragment.OnAuditoriumSelectedListener, OnClickListener {
+	AuditoriumListFragment.OnIAuditoriumSelectedListener, OnClickListener {
 	ArrayList<String> values = null;
 	private IAuditorium selectedAuditorium;
 	

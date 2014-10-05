@@ -97,13 +97,13 @@
     <string name="video">Vidéo:</string>
     <string name="network">Réseau:</string>
     <string name="table">Table</string>
-    <string name="table_fixe">Table fixe</string>
-    <string name="gradin">Gradin</string>
+    <string name="fixed_table">Table fixe</string>
+    <string name="bench">Gradin</string>
     <string name="rien">Rien</string>
-    <string name="video_projecteur">Vidéo-projecteur</string>
-    <string name="video_projecteur_data">Vidéo-projecteur data</string>
-    <string name="moniteur_data">Moniteur data</string>
-    <string name="tele">Télévision</string>
+    <string name="video_projector">Vidéo-projecteur</string>
+    <string name="video_projector_data">Vidéo-projecteur data</string>
+    <string name="monitor_data">Moniteur data</string>
+    <string name="television">Télévision</string>
     <string name="subauditorium_picture_description">Photo du sous-auditoire</string>
     <string name="subauditorium_picture_message">Attente de connexion internet #8230;</string>
 

@@ -8,6 +8,7 @@ import android.os.Bundle;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,8 +22,10 @@ import android.os.Bundle;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Class that offers some useful functionnalities for ListFragment
+ */
+
+/**
+ * Class that offers some useful functionalities for ListFragment.
  */
 public class LLNCampusListFragment extends ListFragment{
 	protected Database db;
@@ -39,15 +42,10 @@ public class LLNCampusListFragment extends ListFragment{
 		db.open();
 		super.onResume();
 	}
+	
 	@Override
     public void onPause() {
     	super.onPause();
     	db.close(); 
     }
-
-	/*
-	 * Affiche une alerte à l'utilisateur.
-	 */
-
-
 }

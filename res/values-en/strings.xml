@@ -86,13 +86,13 @@
     <string name="video">Video:</string>
     <string name="network">Network:</string> 
     <string name="table">Table</string>
-    <string name="table_fixe">Fixed table</string>
-    <string name="gradin">Bench</string>
+    <string name="fixed_table">Fixed table</string>
+    <string name="bench">Bench</string>
     <string name="rien">Nothing</string>
-    <string name="video_projecteur">Video projector</string>
-    <string name="video_projecteur_data">Video projector data</string>
-    <string name="moniteur_data">Monitor data</string>
-    <string name="tele">Television</string>
+    <string name="video_projector">Video projector</string>
+    <string name="video_projector_data">Video projector data</string>
+    <string name="monitor_data">Monitor data</string>
+    <string name="television">Television</string>
     <string name="subauditorium_picture_description">Picture of the subauditorium</string>
     <string name="subauditorium_picture_message">Waiting for Internet connectivity#8230</string>
     
