@@ -72,6 +72,6 @@ public interface IBuilding {
 	  * Return the path integer of the building picture
 	  * 
 	  */
-	public int takePicture();
+	public int getPicture();
 
 }

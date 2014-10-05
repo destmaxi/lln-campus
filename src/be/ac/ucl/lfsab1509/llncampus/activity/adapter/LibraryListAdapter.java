@@ -17,6 +17,7 @@ import be.ac.ucl.lfsab1509.llncampus.R;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,14 +31,24 @@ import be.ac.ucl.lfsab1509.llncampus.R;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * Class intended to create a listview of Bibliotheque
- * Related with bibliotheque_list_item.xml
+ */
+
+/**
+ * Class intended to create a list view of Libraries.
+ * Related with library_list_item.xml.
  */
 public class LibraryListAdapter extends BaseAdapter {
 	private LayoutInflater mInflater;
 
 	private ArrayList<Library> list;
 
+	/**
+	 * Constructor.
+	 * @param context
+	 * 			Context to find the LayoutInflater.
+	 * @param list
+	 * 			The list of Events.
+	 */
 	public LibraryListAdapter(Context context,
 			ArrayList<Library> list) {
 		mInflater = LayoutInflater.from(context);
@@ -46,27 +57,21 @@ public class LibraryListAdapter extends BaseAdapter {
 
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.bibliotheque_list_item,
-					parent, false);
+			convertView = mInflater.inflate(R.layout.library_list_item, parent, false);
 		}
 
-		TextView name = (TextView) convertView
-				.findViewById(R.id.bibliotheque_item_name);
-		TextView address = (TextView) convertView
-				.findViewById(R.id.bibliotheque_item_address);
-		ImageView openclose = (ImageView) convertView
-				.findViewById(R.id.bibliotheque_item_openclose);
+		TextView name = (TextView) convertView.findViewById(R.id.library_item_name);
+		TextView address = (TextView) convertView.findViewById(R.id.library_item_address);
+		ImageView isOpen = (ImageView) convertView.findViewById(R.id.library_item_is_open);
 
 		Library bib = list.get(position);
 		name.setText(bib.getName());
 		address.setText(bib.getAddress());
-		Resources r = LLNCampus.getContext().getResources();
+		Resources res = LLNCampus.getContext().getResources();
 		if (bib.isOpen()) {
-			openclose.setImageDrawable(r
-					.getDrawable(android.R.drawable.presence_online));
+			isOpen.setImageDrawable(res.getDrawable(android.R.drawable.presence_online));
 		} else {
-			openclose.setImageDrawable(r
-					.getDrawable(android.R.drawable.presence_busy));
+			isOpen.setImageDrawable(res.getDrawable(android.R.drawable.presence_busy));
 		}
 
 		return convertView;

@@ -7,7 +7,7 @@
     android:padding="10dip" >
 
     <ImageView
-        android:id="@+id/bibliotheque_item_openclose"
+        android:id="@+id/library_item_is_open"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
@@ -20,7 +20,7 @@
     	android:layout_height="wrap_content"
     	android:orientation="vertical">
     <TextView
-        android:id="@+id/bibliotheque_item_name"
+        android:id="@+id/library_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="left"
@@ -28,7 +28,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textStyle="bold" />
     <TextView
-        android:id="@+id/bibliotheque_item_address"
+        android:id="@+id/library_item_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="left"

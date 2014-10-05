@@ -64,6 +64,7 @@
     <string name="auditorium_address">Please select an auditorium from the list</string>
     <string name="subauditorium_address">Please select an subauditorium from the list</string>
     <string name="library_address">Please select a library from the list</string>
+    <string name="library_name">Library name</string>
     <string name="GPS">Guidance GPS</string>
     <string name="sub_auditorium">Subauditoriums</string>
     <string name="library_schedule">The schedule of the library</string>

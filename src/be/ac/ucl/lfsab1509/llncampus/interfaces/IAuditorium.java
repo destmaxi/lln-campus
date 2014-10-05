@@ -25,7 +25,7 @@ public interface IAuditorium extends IBuilding{
 	 * Fournit l'image miniature de l auditoire.
 	 * @return la ressource ID de l'image miniature
 	 */
-	public int getImgMini();
+	public int getMiniPicture();
 	
 	
 }

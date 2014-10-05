@@ -15,6 +15,7 @@ import be.ac.ucl.lfsab1509.llncampus.interfaces.IAuditorium;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,39 +29,42 @@ import be.ac.ucl.lfsab1509.llncampus.interfaces.IAuditorium;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Class intended to create a listview of Auditoriums
- * Related with auditorium_list_item.xml
- *
+ */
+
+/**
+ * Class intended to create a list view of IAuditoriums.
+ * Related with auditorium_list_item.xml.
  */
 public class AuditoriumListAdapter extends BaseAdapter {
 	private LayoutInflater mInflater;
 
 	private ArrayList<IAuditorium> list;
 
-	public AuditoriumListAdapter(Context context,
-			ArrayList<IAuditorium> list) {
+	/**
+	 * Constructor.
+	 * @param context
+	 * 			Context to find the LayoutInflater.
+	 * @param list
+	 * 			The list of IAuditoriums.
+	 */
+	public AuditoriumListAdapter(Context context, ArrayList<IAuditorium> list) {
 		mInflater = LayoutInflater.from(context);
 		this.list = list;
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.auditorium_list_item,
-					parent, false);
+			convertView = mInflater.inflate(R.layout.auditorium_list_item, parent, false);
 		}
 
-		TextView name = (TextView) convertView
-				.findViewById(R.id.auditorium_item_name);
-		TextView address = (TextView) convertView
-				.findViewById(R.id.auditorium_item_address);
-		ImageView picture = (ImageView) convertView
-				.findViewById(R.id.auditorium_item_picture);
+		TextView name = (TextView) convertView.findViewById(R.id.auditorium_item_name);
+		TextView address = (TextView) convertView.findViewById(R.id.auditorium_item_address);
+		ImageView picture = (ImageView) convertView.findViewById(R.id.auditorium_item_picture);
 
 		IAuditorium aud = list.get(position);
 		name.setText(aud.getName());
 		address.setText(aud.getAddress());
-		picture.setImageResource(aud.getImgMini());
+		picture.setImageResource(aud.getMiniPicture());
 		
 		return convertView;
 	}

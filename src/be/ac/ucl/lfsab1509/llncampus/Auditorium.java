@@ -113,7 +113,7 @@ public class Auditorium implements IAuditorium {
 	}
 
 	@Override
-	public final int takePicture() {
+	public final int getPicture() {
 		switch (this.ID) {
 			case 3 : return R.drawable.agora;
 			case 7 : return R.drawable.coubertin;
@@ -142,7 +142,7 @@ public class Auditorium implements IAuditorium {
 	 }
 
 	@Override
-	public int getImgMini() {
+	public int getMiniPicture() {
 		switch (this.ID) {
 		case 3 : return R.drawable.agora_mini;
 		case 7 : return R.drawable.coubertin_mini;

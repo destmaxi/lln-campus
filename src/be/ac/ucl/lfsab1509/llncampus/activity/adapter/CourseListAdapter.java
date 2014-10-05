@@ -14,6 +14,7 @@ import android.widget.TextView;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,19 +28,30 @@ import android.widget.TextView;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * Class intended to make a listview of Cours
+ */
+
+/**
+ * Class intended to make a list view of Courses.
  */
 public class CourseListAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
  
     private ArrayList<Course> list;
  
+    /**
+	 * Constructor.
+	 * @param context
+	 * 			Context to find the LayoutInflater.
+	 * @param list
+	 * 			The list of Courses.
+	 */
     public CourseListAdapter(Context context, ArrayList<Course> list) {
         mInflater = LayoutInflater.from(context);
         this.list = list;
     }
  
     public View getView(int position, View convertView, ViewGroup parent) {
+    	// Use a default layout.
         if (convertView == null) {
             convertView = mInflater.inflate(android.R.layout.simple_list_item_2, parent, false);
         }

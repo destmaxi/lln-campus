@@ -75,6 +75,7 @@
     <string name="auditorium_address">Sélectionnez un auditoire dans la liste</string>
     <string name="subauditorium_address">Sélectionnez un sous-auditoire dans la liste</string>
     <string name="library_address">Sélectionnez une bibliothèque dans la liste</string>
+    <string name="library_name">Nom de la bibliothèque</string>
     <string name="GPS">Guidage GPS</string>
     <string name="sub_auditorium">Sous-auditoires</string>
     <string name="library_schedule">Horaires de la bibliothèque</string>

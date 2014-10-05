@@ -59,7 +59,7 @@ public class AuditoriumDetailsFragment extends LLNCampusFragment {
 	        
 	        
 	        ImageView image = (ImageView) viewer.findViewById(R.id.auditorium_picture);
-	        image.setImageResource(auditorium.takePicture());
+	        image.setImageResource(auditorium.getPicture());
 	        
 	        address.setText(this.getString(R.string.auditorium_address_selected) +" "+ address_t);
 	}
