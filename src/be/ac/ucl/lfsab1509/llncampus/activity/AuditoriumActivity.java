@@ -73,7 +73,7 @@ public class AuditoriumActivity extends LLNCampusActivity implements
      */
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		// The intent is used to start a new activity.
-    	Intent intent = new Intent(this, DetailsAuditorium.class);
+    	Intent intent = new Intent(this, AuditoriumDetailsActivity.class);
     	/*
 		 * Before starting the new activity, we serialize the selected Poi from the list and add it
 		 * as a parameter to the intent with the method 'putExtra'.
@@ -96,12 +96,12 @@ public class AuditoriumActivity extends LLNCampusActivity implements
 	    if (viewer == null || !viewer.isInLayout()) {
 	    	// Create a new intent and give all the useful data for it.
 	    	Intent showContent = new Intent(getApplicationContext(),
-					DetailsAuditorium.class);
-			showContent.putExtra("NAME", auditorium.getName());
-			showContent.putExtra("ADDRESS", auditorium.getAddress());
+					AuditoriumDetailsActivity.class);
+			showContent.putExtra(EXTRA_NAME, auditorium.getName());
+			showContent.putExtra(EXTRA_ADDRESS, auditorium.getAddress());
 			double[] coord = {auditorium.getLatitude(), auditorium.getLongitude() };
-			showContent.putExtra("COORD", coord);
-			showContent.putExtra("ID", auditorium.getID());
+			showContent.putExtra(EXTRA_COORDINATES_ARRAY, coord);
+			showContent.putExtra(EXTRA_ID, auditorium.getID());
 			startActivity(showContent);
 	    } else { // We are in landscape, so the activity manage directly information.
 	        viewer.updateAuditorium(auditorium);
@@ -134,7 +134,7 @@ public class AuditoriumActivity extends LLNCampusActivity implements
 			break;
 		case R.id.button_subauditorium:
 			intent = new Intent(this, SubAuditoriumActivity.class);
-			intent.putExtra("IDPARENT", selectedAuditorium.getID());
+			intent.putExtra(EXTRA_PARENT_ID, selectedAuditorium.getID());
 			startActivity(intent);
 			break;
 		}

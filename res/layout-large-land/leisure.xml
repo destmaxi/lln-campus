@@ -1,10 +1,10 @@
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/loisirs_list"
+    android:id="@+id/leisure_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical|fill_vertical|center_horizontal|fill_horizontal"
-    android:columnCount="3"
+    android:columnCount="2"
     android:rowCount="3"
     android:scrollbars="horizontal|vertical"
     tools:context=".Loisirs" >
@@ -15,12 +15,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:contentDescription="@string/cinema"
-        android:drawableTop="@drawable/cinema"
+        android:drawableLeft="@drawable/cinema"
         android:gravity="center_vertical|center_horizontal"
-        android:padding="5dp"
+        android:padding="10dp"
         android:text="@string/cinema"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="12sp" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
         android:id="@+id/button_sports"
@@ -28,12 +27,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:contentDescription="@string/sports"
-        android:drawableTop="@drawable/sport"
+        android:drawableLeft="@drawable/sport"
         android:gravity="center_vertical|center_horizontal"
-        android:padding="5dp"
+        android:padding="10dp"
         android:text="@string/sports"
-        android:textAppearance="?android:attr/textAppearanceMedium" 
-        android:textSize="12sp"/>
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
         android:id="@+id/button_carpestudentem"
@@ -41,12 +39,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:contentDescription="@string/carpestudentem"
-        android:drawableTop="@drawable/carpestudentem"
+        android:drawableLeft="@drawable/carpestudentem"
         android:gravity="center_vertical|center_horizontal"
-        android:padding="5dp"
+        android:padding="10dp"
         android:text="@string/carpestudentem"
-        android:textAppearance="?android:attr/textAppearanceMedium" 
-        android:textSize="12sp"/>
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
         android:id="@+id/button_sablon"
@@ -54,12 +51,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:contentDescription="@string/sablon"
-        android:drawableTop="@drawable/restaurant"
+        android:drawableLeft="@drawable/restaurant"
         android:gravity="center_vertical|center_horizontal"
-        android:padding="5dp"
+        android:padding="10dp"
         android:text="@string/sablon"
-        android:textAppearance="?android:attr/textAppearanceMedium" 
-        android:textSize="12sp"/>
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
         android:id="@+id/button_galilee"
@@ -67,12 +63,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:contentDescription="@string/galilee"
-        android:drawableTop="@drawable/restaurant"
+        android:drawableLeft="@drawable/restaurant"
         android:gravity="center_vertical|center_horizontal"
-        android:padding="5dp"
+        android:padding="10dp"
         android:text="@string/galilee"
-        android:textAppearance="?android:attr/textAppearanceMedium" 
-        android:textSize="12sp"/>
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
         android:id="@+id/button_dun_pain_a_lautre"
@@ -80,25 +75,23 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:contentDescription="@string/dun_pain_a_lautre"
-        android:drawableTop="@drawable/restaurant"
+        android:drawableLeft="@drawable/restaurant"
         android:gravity="center_vertical|center_horizontal"
-        android:padding="5dp"
+        android:padding="10dp"
         android:text="@string/dun_pain_a_lautre"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="12sp" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
     
     <Button
         android:id="@+id/button_solidaire"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:contentDescription="@string/solidaire"
-        android:drawableTop="@drawable/carte_solidaire_icon"
+        android:contentDescription="@string/solidarity"
+        android:drawableLeft="@drawable/carte_solidaire_icon"
         android:gravity="center_vertical|center_horizontal"
-        android:padding="5dp"
-        android:text="@string/solidaire"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="12sp" />
+        android:padding="10dp"
+        android:text="@string/solidarity"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
     
      <Button
         android:id="@+id/button_culture"
@@ -106,12 +99,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:contentDescription="@string/culture"
-        android:drawableTop="@drawable/carte_culture"
+        android:drawableLeft="@drawable/culture_card"
         android:gravity="center_vertical|center_horizontal"
         android:padding="5dp"
         android:text="@string/culture"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="12sp" />
-    
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
 </GridLayout>

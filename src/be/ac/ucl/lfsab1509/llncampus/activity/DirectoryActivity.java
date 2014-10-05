@@ -10,6 +10,7 @@ import be.ac.ucl.lfsab1509.llncampus.R;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,39 +24,43 @@ import be.ac.ucl.lfsab1509.llncampus.R;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Class that allows the user to make research about
- * the UCL staff
- * Related with repertoire.xml
  */
-public class RepertoireActivity extends LLNCampusActivity implements
-		OnClickListener {
+
+/**
+ * Class that allows the user to do a search on the UCL staff.
+ * Related with directory.xml.
+ */
+public class DirectoryActivity extends LLNCampusActivity implements OnClickListener {
+	
+	/** URL for the UCL directories. */
+	public static final String URL_UCL_DIRECTORIES = 
+			"http://www.uclouvain.be/repertoire-personnel.html";
+	
 	@Override
 	protected final void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.repertoire);
-		findViewById(R.id.repertoire_searchbtn).setOnClickListener(this);
+		setContentView(R.layout.directory);
+		findViewById(R.id.button_directory_search).setOnClickListener(this);
 	}
 	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.repertoire_searchbtn:
+		case R.id.button_directory_search:
 			Intent intent = new Intent(this, WebviewActivity.class);
-			String nom = (((EditText) findViewById(R.id.repertoire_nom))
+			String lastName = (((EditText) findViewById(R.id.directory_last_name))
 					.getText().toString().replace(' ', '+'));
-			String prenom = (((EditText) findViewById(R.id.repertoire_prenom))
+			String firstName = (((EditText) findViewById(R.id.directory_first_name))
 					.getText().toString().replace(' ', '+'));
-			String entite = (((EditText) findViewById(R.id.repertoire_entite))
+			String entity = (((EditText) findViewById(R.id.directory_entity))
 					.getText().toString().replace(' ', '+'));
-			intent.putExtra("URL",
-					"http://www.uclouvain.be/repertoire-personnel.html"
-							+ "?nom=" + nom + "&prenom=" + prenom
-							+ "&output=detail&sigle=" + entite
+			intent.putExtra(EXTRA_URL,
+					URL_UCL_DIRECTORIES + "?nom=" + lastName + "&prenom=" + firstName
+							+ "&output=detail&sigle=" + entity
 							+ "&Envoi=Effectuer+la+recherche");
-			intent.putExtra("TITLE", getTitle());
-			intent.putExtra("CSS", "#menu, #header{display:none;}");
+			intent.putExtra(EXTRA_TITLE, getTitle());
+			intent.putExtra(EXTRA_CSS, "#menu, #header{display:none;}");
 			startActivity(intent);
 			break;
 		}

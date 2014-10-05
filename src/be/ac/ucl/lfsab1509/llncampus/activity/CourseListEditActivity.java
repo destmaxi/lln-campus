@@ -15,7 +15,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import be.ac.ucl.lfsab1509.llncampus.Course;
-import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.UCLouvain;
 import be.ac.ucl.lfsab1509.llncampus.activity.adapter.CourseListAdapter;
@@ -63,7 +62,7 @@ public class CourseListEditActivity extends LLNCampusActivity implements
 	protected final void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
-		if (getIntent().getBooleanExtra(LLNCampus.EXTRA_START_UCLOUVAIN, false)) {
+		if (getIntent().getBooleanExtra(EXTRA_START_UCLOUVAIN, false)) {
 			downloadCoursesFromUCLouvain();
 		} else {
 			loadCoursList();
@@ -134,7 +133,7 @@ public class CourseListEditActivity extends LLNCampusActivity implements
 	}
 
 	@Override
-	protected void editActionBar() {
+	protected void enableActionBar() {
 		// Nothing to do !
 	}
 

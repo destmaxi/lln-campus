@@ -4,6 +4,10 @@
     <string name="app_name">LLN Campus</string>
     <string name="main_menu">Menu principal</string>
     
+    <!-- Webview activity -->
+    <string name="loading">Chargement en cours…</string>
+    <string name="connection_required">Vous devez être connecté à Internet</string>
+    
     <!--  Ids used for preferences -->
     <string name="pref_username">username</string>
     <string name="pref_password">password</string>
@@ -31,7 +35,7 @@
     <string name="confirm_reset_DB">Êtes-vous sûr de vouloir réinitialiser l\'application</string>
     
     <!-- Strings utile dans MainActivity -->
-	<string name="no_pdf_player">Pas de lecteur de PDF installe: tentative de connection par le net…</string>
+	<string name="no_pdf_reader">Pas de lecteur de PDF installe: tentative de connection par le net…</string>
 
     <!-- Strings utiles pour main_title -->
     <string name="menu_settings">Options</string>
@@ -41,17 +45,17 @@
     <string name="button_text_plan">Plan</string>
 	<string name="icampus">iCampus</string>
 	<string name="moodle">Moodle</string>
-	<string name="bureau">Bureau UCL</string>
+	<string name="office">Bureau UCL</string>
 	<string name="logo">Logo</string>
 
     <!-- Strings utiles pour loisirs_title -->
-    <string name="loisirs">Loisirs</string>
+    <string name="leisure">Loisirs</string>
     <string name="cinema">Programme du cinéma</string>
     <string name="sports">Horaire des sports</string>
     <string name="sablon">Le Sablon</string>
     <string name="galilee">Le Galilée</string>
     <string name="dun_pain_a_lautre">D\'un pain à l\'autre</string>
-    <string name="solidaire">Carte Solidaire</string>
+    <string name="solidarity">Carte Solidaire</string>
     <string name="culture">Carte Culture</string>
     <string name="restaurants">Restaurants</string>
     <string name="carpestudentem">Agenda de l\'animation</string>
@@ -60,8 +64,8 @@
     <!-- Strings utiles pour study_title -->
     <string name="etudes">Études</string>
     <string name="schedule">Horaire</string>
-    <string name="auditoires">Auditoires</string>
-    <string name="bibliotheques">Bibliothèques</string>
+    <string name="auditoriums">Auditoires</string>
+    <string name="libraries">Bibliothèques</string>
 
     <!-- Strings utiles pour auditorium  et library -->
     <string name="error_db">Erreur DB</string>
@@ -83,14 +87,14 @@
     <string name="yes">Oui</string>
     <string name="no">Non</string>
     <string name="nbplaces">Nombre de places:</string>
-    <string name="mobilier">Mobilier:</string>
-    <string name="cabine">Cabine:</string>
-    <string name="ecran">Ecran:</string>
-    <string name="sono">Sono:</string>
+    <string name="furniture">Mobilier:</string>
+    <string name="cabin">Cabine:</string>
+    <string name="screen">Ecran:</string>
+    <string name="sound">Sono:</string>
     <string name="retro">Rétroprojecteur:</string>
-    <string name="dia">Dia:</string>
+    <string name="slide">Dia:</string>
     <string name="video">Vidéo:</string>
-    <string name="reseau">Réseau:</string>
+    <string name="network">Réseau:</string>
     <string name="table">Table</string>
     <string name="table_fixe">Table fixe</string>
     <string name="gradin">Gradin</string>
@@ -121,8 +125,8 @@
     <string name="course_code">Code du cours</string>
     <string name="course_name">Nom du cours</string>
     <string name="course_list_explanation">"Afin de récupérer votre horaire, vous devez indiquer les différents codes des cours que vous suivez (les codes des cours doivent correspondre avec ceux indiqués sur ADE). Afin de vous facilitez la tâche, l'application peut télécharger la liste des cours depuis uclouvain.be, pour ce faire cliquez sur \"Télécharger depuis UCLouvain\". Pour supprimer un cours de la liste cliquez simplement dessus. "</string>
-    <string name="emptyCoursListDialogTitle">Premiers pas avec l\'horaire</string>
-    <string name="emptyCoursListDialogText">Il n\'y a encore aucun cours enregistré pour votre horaire. Afin de pouvoir récupérer votre horaire, vous devez indiquez les différents cours que vous suivez. Pour ce faire, il est possible de télécharger automatiquement votre liste de cours depuis le site de l\'UCL. Il est également possible d\'ajouter des cours de manière manuelle si les codes des cours de votre bureau ne correspond pas avec le codes des cours dans ADE.</string>
+    <string name="empty_course_list_dialog_title">Premiers pas avec l\'horaire</string>
+    <string name="empty_course_list_dialog_text">Il n\'y a encore aucun cours enregistré pour votre horaire. Afin de pouvoir récupérer votre horaire, vous devez indiquez les différents cours que vous suivez. Pour ce faire, il est possible de télécharger automatiquement votre liste de cours depuis le site de l\'UCL. Il est également possible d\'ajouter des cours de manière manuelle si les codes des cours de votre bureau ne correspond pas avec le codes des cours dans ADE.</string>
     <string name="download_for">Téléchargement pour</string>
     <string name="download_error">Erreur de téléchargement</string>
 	<string name="events">évènements</string>
@@ -132,11 +136,11 @@
 	<string name="download_progress">Téléchargement en cours…</string>
 	
 	<string name="site">Site web</string>
-	<string name="nom">Nom</string>
-	<string name="prenom">Prénom</string>
-	<string name="entite">Entité</string>
-	<string name="sigle_ou_acro">(sigle ou acronyme)</string>
-	<string name="repertoire">Répertoire (personnel UCL)</string>
+	<string name="last_name">Nom</string>
+	<string name="first_name">Prénom</string>
+	<string name="entity">Entité</string>
+	<string name="acronym">(sigle ou acronyme)</string>
+	<string name="directories">Répertoire (personnel UCL)</string>
 	
 	<!-- Strings pour les preferences -->
 	<string name="login_info">"Informations d'authentification"</string>
@@ -153,6 +157,7 @@
 	<!-- Strings dans le Launcher -->
 	<string name="first_use">"Initialisation de l'application pour la première utilisation. Veuillez patienter…"</string>
 	<string name="update_app">"Mise à jour de l'application. Veuillez patienter…"</string>
+	<string name="loading_app">"Chargement de l'application. Veuillez patienter…"</string>
 	
 	<!-- Strings pour maps -->
 	<string name="no_google_maps">Veuillez installer Google Maps pour accéder à cette fonctionnalité.</string>
@@ -200,25 +205,25 @@
 	<string name="notify_more_time">Temps supplémentaire GPS (en minutes)</string>
 	
 	<!-- Strings pour Solidaire et culture-->
-	<string name="button_solidaire_avantages">Tes avantages</string>
-	<string name="button_solidaire_site">Rejoins-nous !</string>
-	<string name="solidaire_text1"> <b>La carte solidaire, c\'est quoi?</b> </string>
-	<string name="solidaire_text2">Avec la Carte Solidaire tu t\'engages pour le développement et pour l\'environnement.</string>
-	<string name="solidaire_text3">La moitié du prix de la Carte permet d\'aider une maman à nourrir ses enfants au Burundi</string>
-	<string name="solidaire_text4">L\'autre moitié te permet de financer tes propres projets solidaires grâce au Fonds Carte Solidaire.</string>
-	<string name="solidaire_text5">La Carte Solidaire c\'est aussi des <b>réductions</b> dans des magasins bios, naturels et fairtrade sur ton campus et <b>plein d’autres avantages!</b></string>
-	<string name="solidaire_text6">La Carte ne coûte que <b>10 euros</b> </string>
-	<string name="solidaire_text7">Alors qu’est-ce que tu attends ? Rejoins-nous sur www.cartesolidaire.be </string>
-	<string name="culture_text1">Open your mind!</string>		
-	<string name="culture_text2">La Carte culture, c\'est seulement 10 euros pour une tonne de cadeaux: places gratuites, réductions, invitations, le tout auprès d\'une centaine de partenaires culturels répartis dans toute la Wallonie et à Bruxelles.</string>
-	<string name="culture_text3">Tu aimes la musique, le théâtre, le cinéma, tu voudrais sortir pour un prix plus bas? La Carte culture est faite pour toi!</string>
+	<string name="button_solidarity_advantages">Tes avantages</string>
+	<string name="button_solidarity_website">Rejoins-nous !</string>
+	<string name="solidarity_text_1"> <b>La carte solidaire, c\'est quoi?</b> </string>
+	<string name="solidarity_text_2">Avec la Carte Solidaire tu t\'engages pour le développement et pour l\'environnement.</string>
+	<string name="solidarity_text_3">La moitié du prix de la Carte permet d\'aider une maman à nourrir ses enfants au Burundi</string>
+	<string name="solidarity_text_4">L\'autre moitié te permet de financer tes propres projets solidaires grâce au Fonds Carte Solidaire.</string>
+	<string name="solidarity_text_5">La Carte Solidaire c\'est aussi des <b>réductions</b> dans des magasins bios, naturels et fairtrade sur ton campus et <b>plein d’autres avantages!</b></string>
+	<string name="solidarity_text_6">La Carte ne coûte que <b>10 euros</b> </string>
+	<string name="solidarity_text_7">Alors qu’est-ce que tu attends ? Rejoins-nous sur www.cartesolidaire.be </string>
+	<string name="culture_text_1">Open your mind!</string>		
+	<string name="culture_text_2">La Carte culture, c\'est seulement 10 euros pour une tonne de cadeaux: places gratuites, réductions, invitations, le tout auprès d\'une centaine de partenaires culturels répartis dans toute la Wallonie et à Bruxelles.</string>
+	<string name="culture_text_3">Tu aimes la musique, le théâtre, le cinéma, tu voudrais sortir pour un prix plus bas? La Carte culture est faite pour toi!</string>
 	<string name="button_culture_site">Plus d\'infos</string>
-	<string name="solidaire_avantages_text1">Des réductions exclusives</string>
-	<string name="solidaire_avantages_text2">Des réductions chez tous les commerçants partenaires de la Carte Solidaire. Retrouve la liste complète sur www.cartesolidaire.be </string>
-	<string name="solidaire_avantages_text3">Tes projets</string>
-	<string name="solidaire_avantages_text4">Tu es solidaire, tu veux t\'engager mais tu n\'as pas les moyens financiers? Le Fonds \"Carte Solidaire\" te permettra de financer TES propres projets au Nord comme au Sud !</string>
-	<string name="solidaire_avantages_text5">De l\'info !</string>
-	<string name="solidaire_avantages_text6">La Carte Solidaire c\'est aussi une newsletter qui t\'informe tous les mois sur l\'actualité solidaire de ton campus mais aussi plein de promos et des concours.</string>
-	<string name="solidaire_avantages_text7">Vis ta propre expérience</string>
-	<string name="solidaire_avantages_text8">Un accès privilégié pour tes stages, mémoires en Belgique et à l\'étranger, sur les projets de Louvain Coopération.</string>
+	<string name="solidarity_advantages_text_1">Des réductions exclusives</string>
+	<string name="solidarity_advantages_text_2">Des réductions chez tous les commerçants partenaires de la Carte Solidaire. Retrouve la liste complète sur www.cartesolidaire.be </string>
+	<string name="solidarity_advantages_text_3">Tes projets</string>
+	<string name="solidarity_advantages_text_4">Tu es solidaire, tu veux t\'engager mais tu n\'as pas les moyens financiers? Le Fonds \"Carte Solidaire\" te permettra de financer TES propres projets au Nord comme au Sud !</string>
+	<string name="solidarity_advantages_text_5">De l\'info !</string>
+	<string name="solidarity_advantages_text_6">La Carte Solidaire c\'est aussi une newsletter qui t\'informe tous les mois sur l\'actualité solidaire de ton campus mais aussi plein de promos et des concours.</string>
+	<string name="solidarity_advantages_text_7">Vis ta propre expérience</string>
+	<string name="solidarity_advantages_text_8">Un accès privilégié pour tes stages, mémoires en Belgique et à l\'étranger, sur les projets de Louvain Coopération.</string>
 </resources>

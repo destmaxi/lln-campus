@@ -5,12 +5,12 @@
     android:orientation="vertical" >
     
     <TextView
-        android:id="@+id/culture_text1"
+        android:id="@+id/culture_text_1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="top|center_horizontal"
         android:textIsSelectable="false"
-        android:text="@string/culture_text1"
+        android:text="@string/culture_text_1"
         android:textSize="20sp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
@@ -18,24 +18,24 @@
         android:paddingRight="5dp" />
     
     <TextView
-        android:id="@+id/culture_text2"
+        android:id="@+id/culture_text_2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="top|center_horizontal"
         android:textIsSelectable="false"
-        android:text="@string/culture_text2"
+        android:text="@string/culture_text_2"
         android:textSize="16sp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:paddingLeft="5dp"
         android:paddingRight="5dp" />
     <TextView
-        android:id="@+id/culture_text3"
+        android:id="@+id/culture_text_3"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="top|center_horizontal"
         android:textIsSelectable="false"
-        android:text="@string/culture_text3"
+        android:text="@string/culture_text_3"
         android:textSize="16sp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
@@ -67,6 +67,6 @@
         android:layout_marginTop="3dp"
         android:layout_weight="1"
         android:contentDescription="@string/culture"
-        android:src="@drawable/carte_culture"/>
+        android:src="@drawable/culture_card"/>
 
 </LinearLayout>

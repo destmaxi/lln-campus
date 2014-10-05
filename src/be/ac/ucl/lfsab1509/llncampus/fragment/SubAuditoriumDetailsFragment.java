@@ -111,22 +111,22 @@ public class SubAuditoriumDetailsFragment extends LLNCampusFragment {
 		    TextView textName = (TextView) viewer.findViewById(R.id.subauditorium_name);
 		    textName.setText(name);
 		    
-	        TextView textPlaces = (TextView) viewer.findViewById(R.id.nbplaces_rep);
+	        TextView textPlaces = (TextView) viewer.findViewById(R.id.nbplaces_value);
 	        textPlaces.setText(places);
 	        
-	        TextView textReseau = (TextView) viewer.findViewById(R.id.reseau_rep);
+	        TextView textReseau = (TextView) viewer.findViewById(R.id.network_value);
 	        textReseau.setText(network);
 	        
-	        TextView textEcran = (TextView) viewer.findViewById(R.id.ecran_rep);
+	        TextView textEcran = (TextView) viewer.findViewById(R.id.screen_value);
 	        textEcran.setText(ecran);
 	        
-	        TextView textRetro = (TextView) viewer.findViewById(R.id.retro_rep);
+	        TextView textRetro = (TextView) viewer.findViewById(R.id.retro_value);
 	        textRetro.setText(retro);
 	        
-	        TextView textDia = (TextView) viewer.findViewById(R.id.dia_rep);
+	        TextView textDia = (TextView) viewer.findViewById(R.id.slide_value);
 	        textDia.setText(dia);
 	        
-	        TextView textVideo = (TextView) viewer.findViewById(R.id.video_rep);
+	        TextView textVideo = (TextView) viewer.findViewById(R.id.video_value);
 	        if (video == null)
 	        	textVideo.setText(getString(R.string.rien));
 	        else {
@@ -155,13 +155,13 @@ public class SubAuditoriumDetailsFragment extends LLNCampusFragment {
 	        		textVideo.setText(getString(R.string.rien));
 	        	}
 	        }
-	        TextView textSono = (TextView) viewer.findViewById(R.id.sono_rep);
+	        TextView textSono = (TextView) viewer.findViewById(R.id.sound_value);
 	        textSono.setText(sono);
 	        
-	        TextView textCabine = (TextView) viewer.findViewById(R.id.cabine_rep);
+	        TextView textCabine = (TextView) viewer.findViewById(R.id.cabin_value);
 	        textCabine.setText(cabine);
 	        
-	        TextView textMobilier = (TextView) viewer.findViewById(R.id.mobilier_rep);
+	        TextView textMobilier = (TextView) viewer.findViewById(R.id.furniture_value);
 	      
 	        if (mobilier == null)
 	        	textMobilier.setText(getString(R.string.rien));

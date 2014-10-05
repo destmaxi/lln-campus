@@ -6,7 +6,6 @@ import be.ac.ucl.lfsab1509.llncampus.ADE;
 import be.ac.ucl.lfsab1509.llncampus.Coordinates;
 import be.ac.ucl.lfsab1509.llncampus.Course;
 import be.ac.ucl.lfsab1509.llncampus.Event;
-import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.activity.adapter.EventListAdapter;
 import android.app.AlertDialog;
@@ -15,7 +14,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.format.Time;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +26,7 @@ import android.widget.CalendarView.OnDateChangeListener;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -41,50 +40,52 @@ import android.widget.CalendarView.OnDateChangeListener;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Activity intended to show the schedule of a student
- * Related with horaire.xml
  */
-public class ScheduleActivity extends LLNCampusActivity implements OnDateChangeListener, OnItemClickListener {
+
+/**
+ * Activity intended to show the schedule of the user.
+ * Related with schedule.xml.
+ */
+public class ScheduleActivity extends LLNCampusActivity implements OnDateChangeListener, 
+	OnItemClickListener {
 	
 	private CalendarView calendarView;
 	
 	private final Handler handler = new Handler();
 	final Runnable updateRunnable = new Runnable() {
 		public void run() {
-			updateInfos();
+			updateEventsAndCourses();
 		}
 	};
 
-	private ArrayList<Course> coursList;
-	private ArrayList<Event> events;
-	private ArrayList<Event> currentEvents;
+	private ArrayList<Course> coursesList;
+	private ArrayList<Event> allEvents;
+	private ArrayList<Event> selectedDateEvents;
 	private Time currentDate;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.horaire);
+		setContentView(R.layout.schedule);
 		     
         calendarView = (CalendarView) findViewById(R.id.calendar_view);
         calendarView.setOnDateChangeListener(this);
        	this.currentDate = new Time();
        	currentDate.setToNow();
-       	coursList = Course.getList();
+       	coursesList = Course.getList();
        	
-       	/*
-       	 * Si la liste des cours est vide, affiche un message d'explication et propose de la completer.
-       	 */
-       	if (coursList.isEmpty()) {
+       	// If the courses list is empty, show a explanation message and propose to fill it.
+       	if (coursesList.isEmpty()) {
        		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(getString(R.string.emptyCoursListDialogTitle)).setMessage(getString(R.string.emptyCoursListDialogText));
+            builder.setTitle(getString(R.string.empty_course_list_dialog_title))
+            	.setMessage(getString(R.string.empty_course_list_dialog_text));
             builder.setNeutralButton(getString(R.string.course_list_edit),
             		new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							handler.post(new Runnable(){
 								public void run(){
-									startCoursListEditActivity();
+									startCourseListEditActivity();
 								}
 							});
 						}
@@ -104,18 +105,17 @@ public class ScheduleActivity extends LLNCampusActivity implements OnDateChangeL
             AlertDialog dialog = builder.create();
             dialog.show();
        	}
-
-       	updateInfos();
+       	updateEventsAndCourses();
 	}
 	
 
 	/**
-	 * Met à jour la liste des évènements depuis la base de données.
+	 * Update the events and the courses lists from the database.
 	 */
-	private void updateInfos() {
-		coursList = Course.getList();
-		this.events = Event.getList();
-		updateViewInfos();
+	private void updateEventsAndCourses() {
+		coursesList = Course.getList();
+		this.allEvents = Event.getList();
+		updateViewInfo();
 	}
 	
 	@Override
@@ -124,12 +124,10 @@ public class ScheduleActivity extends LLNCampusActivity implements OnDateChangeL
 	}
 
 	@Override
-	public void onSelectedDayChange(CalendarView cv, int y, int m,
-			int d) {
-		this.currentDate.set(d,m,y);
-		
+	public void onSelectedDayChange(CalendarView cv, int y, int m, int d) {
+		this.currentDate.set(d, m, y);
 		calendarView = cv;
-		updateViewInfos();
+		updateViewInfo();
 	}
 	
 	@Override
@@ -141,18 +139,20 @@ public class ScheduleActivity extends LLNCampusActivity implements OnDateChangeL
 	}
 	
 
-	private void updateViewInfos() {
-		//eventList = Cours.getList();
+	/**
+	 * Update view information, and more especially the events of the selected date. 
+	 */
+	private void updateViewInfo() {
 		ListView eventListView = (ListView) findViewById(R.id.event_list);
-		this.currentEvents = new ArrayList<Event>();
-		for (Event e : events) {
+		this.selectedDateEvents = new ArrayList<Event>();
+		for (Event e : allEvents) {
 			if (e.getBeginTime().monthDay == this.currentDate.monthDay 
 					&& e.getBeginTime().month == this.currentDate.month
 					&& e.getBeginTime().year == this.currentDate.year) {
-				currentEvents.add(e);
+				selectedDateEvents.add(e);
 			}
 		}
-		EventListAdapter eventListAdapter = new EventListAdapter(this, currentEvents);
+		EventListAdapter eventListAdapter = new EventListAdapter(this, selectedDateEvents);
 		eventListView.setAdapter(eventListAdapter);
 		eventListView.setOnItemClickListener(this);
 
@@ -167,53 +167,58 @@ public class ScheduleActivity extends LLNCampusActivity implements OnDateChangeL
 				ADE.runUpdateADE(this, handler, updateRunnable);
 				break;
 			case R.id.course_list_edit:
-				startCoursListEditActivity();
+				startCourseListEditActivity();
 				break;
 		}
 		return true;
 	}
 	
-	private void startCoursListEditActivity() {
+	/**
+	 * Start the course list edit activity.
+	 */
+	private void startCourseListEditActivity() {
 		Intent intent = new Intent(this, CourseListEditActivity.class);
 		startActivity(intent);
 	}
+	
+	/**
+	 * Start the course list edit activity and automatically update the user courses list
+	 * from UCLouvain.
+	 */
 	private void startUpdateFromUCLouvainActivity() {
 		Intent intent = new Intent(this, CourseListEditActivity.class);
-		intent.putExtra(LLNCampus.EXTRA_START_UCLOUVAIN, true);
+		intent.putExtra(EXTRA_START_UCLOUVAIN, true);
 		startActivity(intent);
 	}
+	
 	@Override
 	public void onResume() {
-		/** 
-		 * Si la liste des cours a été mise à jour, on lance la mise a jour
-		 * depuis ADE de manière automatique. 
-		 */
+		// If the courses list was updated, the ADE update will be launched automatically.
 		if (Course.listChanged()) {
 			Course.setListChangeSeen();
 			ADE.runUpdateADE(this, handler, updateRunnable);
 		} else {
-			updateInfos();
+			updateEventsAndCourses();
 		}
 		super.onResume();
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-		final Event e = currentEvents.get(position);
-		Intent i = new Intent(this, EventDetailsActivity.class);
-		// Put data if we want to erase
-		i.putExtra(LLNCampus.EXTRA_ACTIVITY_NAME, e.getDetail("activity_name"));
-		i.putExtra(LLNCampus.EXTRA_BEGIN_TIME, e.getBeginTime().toMillis(false));
-		i.putExtra(LLNCampus.EXTRA_END_TIME, e.getEndTime().toMillis(false));
-		// Put data for GPS
-		i.putExtra(LLNCampus.EXTRA_DETAILS, e.toString());
-		Coordinates c = e.getCoordinates();
-		Log.d("HoraireActivity", "Coordonnées : " + c);
-		if (c != null) {
-			i.putExtra(LLNCampus.EXTRA_COORDINATES, true);
-			i.putExtra(LLNCampus.EXTRA_LATITUDE, c.getLatitude());
-			i.putExtra(LLNCampus.EXTRA_LONGITUDE, c.getLongitude());
+		final Event event = selectedDateEvents.get(position);
+		Intent intent = new Intent(this, EventDetailsActivity.class);
+		// Put data if we want to erase.
+		intent.putExtra(EXTRA_ACTIVITY_NAME, event.getDetail(Event.ACTIVITY_NAME));
+		intent.putExtra(EXTRA_BEGIN_TIME, event.getBeginTime().toMillis(false));
+		intent.putExtra(EXTRA_END_TIME, event.getEndTime().toMillis(false));
+		// Put data for GPS.
+		intent.putExtra(EXTRA_DETAILS, event.toString());
+		Coordinates coordinates = event.getCoordinates();
+		if (coordinates != null) {
+			intent.putExtra(EXTRA_COORDINATES, true);
+			intent.putExtra(EXTRA_LATITUDE, coordinates.getLatitude());
+			intent.putExtra(EXTRA_LONGITUDE, coordinates.getLongitude());
 		}
-		startActivity(i);
+		startActivity(intent);
 	}
 }

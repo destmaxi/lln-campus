@@ -234,7 +234,7 @@ public class Database {
 	}
 	
 	/**
-	 * Reset the database.
+	 * Reset the database. The database must first be opened.
 	 */
 	public final void reset() {
 		close();

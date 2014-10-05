@@ -32,6 +32,20 @@ import android.text.format.Time;
  * Represent an Event (e.g. from ADE).
  */
 public class Event {
+	// Key values for the HashMaps
+	/** The course key value. */
+	public static final String COURSE = "course";
+	/** The trainees key value. */
+	public static final String TRAINEES = "trainees";
+	/** The trainers key value. */
+	public static final String TRAINERS = "trainers";
+	/** The room key value. */
+	public static final String ROOM = "room";
+	/** The activity name key value. */
+	public static final String ACTIVITY_NAME = "activity_name";
+	/** The title key value. */
+	public static final String TITLE = "title";
+	
 	private Time begin;
 	private Time end;
 	private HashMap<String, String> details;
@@ -268,18 +282,18 @@ public class Event {
 					"TIME_BEGIN ASC");
 		while (c.moveToNext()) {
 			Event e = new Event(c.getLong(1), c.getLong(2));
-			e.addDetail("course", c.getString(0));
-			e.addNameKey("course", LLNCampus.getContext().getString(R.string.course));
-			e.addDetail("trainees", c.getString(3));
-			e.addNameKey("trainees", LLNCampus.getContext().getString(R.string.trainees));
-			e.addDetail("trainers", c.getString(4));
-			e.addNameKey("trainers", LLNCampus.getContext().getString(R.string.trainers));
-			e.addDetail("room", c.getString(5));
-			e.addNameKey("room", LLNCampus.getContext().getString(R.string.room));
-			e.addDetail("activity_name", c.getString(6));
-			e.addNameKey("activity_name", LLNCampus.getContext().getString(R.string.activity_name));
-			e.addDetail("title", c.getString(7));
-			e.addNameKey("title", LLNCampus.getContext().getString(R.string.title));
+			e.addDetail(COURSE, c.getString(0));
+			e.addNameKey(COURSE, LLNCampus.getContext().getString(R.string.course));
+			e.addDetail(TRAINEES, c.getString(3));
+			e.addNameKey(TRAINEES, LLNCampus.getContext().getString(R.string.trainees));
+			e.addDetail(TRAINERS, c.getString(4));
+			e.addNameKey(TRAINERS, LLNCampus.getContext().getString(R.string.trainers));
+			e.addDetail(ROOM, c.getString(5));
+			e.addNameKey(ROOM, LLNCampus.getContext().getString(R.string.room));
+			e.addDetail(ACTIVITY_NAME, c.getString(6));
+			e.addNameKey(ACTIVITY_NAME, LLNCampus.getContext().getString(R.string.activity_name));
+			e.addDetail(TITLE, c.getString(7));
+			e.addNameKey(TITLE, LLNCampus.getContext().getString(R.string.title));
 			events.add(e);
 		}
 		c.close();

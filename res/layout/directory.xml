@@ -13,15 +13,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/nom" />
+            android:text="@string/last_name" />
 
         <EditText
-            android:id="@+id/repertoire_nom"
+            android:id="@+id/directory_last_name"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="@string/nom" >
+            android:hint="@string/last_name" >
             <requestFocus />
         </EditText>
     </LinearLayout>
@@ -33,15 +33,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/prenom" />
+            android:text="@string/first_name" />
 
         <EditText
-            android:id="@+id/repertoire_prenom"
+            android:id="@+id/directory_first_name"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="@string/prenom" />
+            android:hint="@string/first_name" />
     </LinearLayout>
 
     <LinearLayout
@@ -51,25 +51,25 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/entite" />
+            android:text="@string/entity" />
 
         <EditText
-            android:id="@+id/repertoire_entite"
+            android:id="@+id/directory_entity"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="@string/entite" />
+            android:hint="@string/entity" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/acronym"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sigle_ou_acro" />
+            android:text="@string/acronym" />
     </LinearLayout>
 
     <Button
-        android:id="@+id/repertoire_searchbtn"
+        android:id="@+id/button_directory_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableLeft="@android:drawable/ic_menu_search"

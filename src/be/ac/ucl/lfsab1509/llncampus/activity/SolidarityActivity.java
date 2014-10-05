@@ -11,6 +11,7 @@ import android.widget.Button;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,23 +25,32 @@ import android.widget.Button;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * Class intended to show some buttons to redirect to
- * solidaire activity
- * Related with solidaire.xml
+ */
+
+/**
+ * Activity to introduce the solidarity card.
+ * Related with solidarity.xml.
  * */
-public class SolidaireActivity extends LLNCampusActivity implements OnClickListener {
-	private static final String SOLIDAIRE = "http://www.cartesolidaire.be";
+public class SolidarityActivity extends LLNCampusActivity implements OnClickListener {
+	/** URL for the solidarity card website. */
+	private static final String URL_SOLIDARITY = "http://www.cartesolidaire.be";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.solidaire);
-		setThisOnClickListener(R.id.button_solidaire_avantages);
-		setThisOnClickListener(R.id.button_solidaire_site);
+		setContentView(R.layout.solidarity);
+		setThisOnClickListener(R.id.button_solidarity_advantages);
+		setThisOnClickListener(R.id.button_solidarity_website);
 	}
 
-	private void setThisOnClickListener(int btnId) {
-		Button tmp = (Button) findViewById(btnId);
-		tmp.setOnClickListener(this);
+	/**
+	 * Set this activity as the listener of on click events to the button with id buttonId.
+	 * 
+	 * @param buttonId
+	 * 			The ID of the button to listen.
+	 */
+	private void setThisOnClickListener(int buttonId) {
+		Button button = (Button) findViewById(buttonId);
+		button.setOnClickListener(this);
 	}
 
 	@Override
@@ -48,14 +58,13 @@ public class SolidaireActivity extends LLNCampusActivity implements OnClickListe
 		Resources r = getResources();
 		Intent intent = new Intent(this, WebviewActivity.class);
 		switch (v.getId()) {
-		case R.id.button_solidaire_site:
-				intent.putExtra("TITLE", r.getString(R.string.solidaire));
-				intent.putExtra("URL", SOLIDAIRE);
-				//intent.putExtra("CSS", "#menu, #header{display:none;}");
+		case R.id.button_solidarity_website:
+				intent.putExtra(EXTRA_TITLE, r.getString(R.string.solidarity));
+				intent.putExtra(EXTRA_URL, URL_SOLIDARITY);
 				startActivity(intent);
 				break;
-		case R.id.button_solidaire_avantages:
-			intent = new Intent(this, SolidaireAvantagesActivity.class);
+		case R.id.button_solidarity_advantages:
+			intent = new Intent(this, SolidarityAdvantagesActivity.class);
 			startActivity(intent);
 			break;
 		default:

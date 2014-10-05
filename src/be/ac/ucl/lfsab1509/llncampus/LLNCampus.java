@@ -10,6 +10,7 @@ import java.util.Calendar;
 import be.ac.ucl.lfsab1509.llncampus.activity.SettingsActivity;
 import be.ac.ucl.lfsab1509.llncampus.external.SecurePreferences;
 import be.ac.ucl.lfsab1509.llncampus.services.AlarmService;
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Application;
 import android.app.PendingIntent;
@@ -17,7 +18,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.ActivityInfo;
 import android.content.res.AssetManager;
+import android.content.res.Configuration;
 import android.os.Environment;
 import android.util.Log;
 
@@ -45,24 +48,6 @@ import android.util.Log;
  */
 
 public class LLNCampus extends Application {
-	
-	/** Name of the activity name item stored in extras. */
-	public static final String EXTRA_ACTIVITY_NAME = "ACTIVITY_NAME";
-	/** Name of the begin time item stored in extras. */
-	public static final String EXTRA_BEGIN_TIME = "BEGIN_TIME";
-	/** Name of the coordinates item stored in extras. */
-	public static final String EXTRA_COORDINATES = "COORDINATES";
-	/** Name of the details item stored in extras. */
-	public static final String EXTRA_DETAILS = "DETAILS";
-	/** Name of the end time item stored in extras. */
-	public static final String EXTRA_END_TIME = "END_TIME";
-	/** Name of the latitude item stored in extras. */
-	public static final String EXTRA_LATITUDE = "LATITUDE";
-	/** Name of the longitude item stored in extras. */
-	public static final String EXTRA_LONGITUDE = "LONGITUDE";
-	/** Name of the start UCLouvain item stored in extras, used to automate the fetching of
-	 * courses from UCLouvain when updating the ADE schedule. */
-	public static final String EXTRA_START_UCLOUVAIN = "START_UCLOUVAIN";
 	
 	/** The context of the application. */
 	private static Context APPLICATION_CONTEXT;
@@ -288,5 +273,23 @@ public class LLNCampus extends Application {
 	    while((read = in.read(buffer)) != -1){
 	      out.write(buffer, 0, read);
 	    }
+	}
+	
+	/**
+	 * Prevent screen rotation of small devices.
+	 * 
+	 * @param activity
+	 * 			The activity on which rotation must be blocked on small devices.
+	 */
+	public static void blockRotationOnSmallDevices(Activity activity) {
+		if ((activity.getResources().getConfiguration().screenLayout & 
+				Configuration.SCREENLAYOUT_SIZE_MASK) == 
+				Configuration.SCREENLAYOUT_SIZE_NORMAL ||
+				(activity.getResources().getConfiguration().screenLayout & 
+						Configuration.SCREENLAYOUT_SIZE_MASK) == 
+						Configuration.SCREENLAYOUT_SIZE_SMALL)
+		{
+			activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		}
 	}
 }

@@ -6,7 +6,7 @@
     tools:context=".MainActivity" >
 
     <ImageView
-        android:id="@+id/maintitle"
+        android:id="@+id/main_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -17,7 +17,7 @@
         android:textSize="52sp" />
 
     <GridLayout
-        android:id="@+id/maingridlayout"
+        android:id="@+id/main_grid_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical|fill_vertical|center_horizontal|fill_horizontal"
@@ -26,48 +26,48 @@
         android:scrollbars="horizontal|vertical" >
 
         <Button
-            android:id="@+id/button_horaire"
+            android:id="@+id/button_schedule"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
             android:contentDescription="@string/schedule"
-            android:drawableTop="@drawable/horaire"
+            android:drawableTop="@drawable/schedule"
             android:gravity="center_vertical|center_horizontal"
             android:text="@string/schedule"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Button
-            android:id="@+id/button_bibliotheque"
+            android:id="@+id/button_library"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:contentDescription="@string/bibliotheques"
-            android:drawableTop="@drawable/bibliotheque"
+            android:contentDescription="@string/libraries"
+            android:drawableTop="@drawable/library"
             android:gravity="center_vertical|center_horizontal"
-            android:text="@string/bibliotheques"
+            android:text="@string/libraries"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Button
-            android:id="@+id/button_auditoire"
+            android:id="@+id/button_auditorium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:contentDescription="@string/auditoires"
-            android:drawableTop="@drawable/auditoire"
+            android:contentDescription="@string/auditoriums"
+            android:drawableTop="@drawable/auditorium"
             android:gravity="center_vertical|center_horizontal"
-            android:text="@string/auditoires"
+            android:text="@string/auditoriums"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
         <Button
-            android:id="@+id/button_loisirs"
+            android:id="@+id/button_leisure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:contentDescription="@string/loisirs"
-            android:drawableTop="@drawable/loisir"
+            android:contentDescription="@string/leisure"
+            android:drawableTop="@drawable/leisure"
             android:gravity="center_vertical|center_horizontal"
-            android:text="@string/loisirs"
+            android:text="@string/leisure"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Button
@@ -82,14 +82,14 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
          <Button
-            android:id="@+id/button_repertoire"
+            android:id="@+id/button_directory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:contentDescription="@string/repertoire"
-            android:drawableTop="@drawable/about"
+            android:contentDescription="@string/directories"
+            android:drawableTop="@drawable/directory"
             android:gravity="center_vertical|center_horizontal"
-            android:text="@string/repertoire"
+            android:text="@string/directories"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Button
@@ -116,14 +116,14 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Button
-            android:id="@+id/button_bureau"
+            android:id="@+id/button_office"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:contentDescription="@string/bureau"
-            android:drawableTop="@drawable/bureau_ucl"
+            android:contentDescription="@string/office"
+            android:drawableTop="@drawable/ucl_office"
             android:gravity="center_vertical|center_horizontal"
-            android:text="@string/bureau"
+            android:text="@string/office"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </GridLayout>
 

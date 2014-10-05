@@ -18,6 +18,7 @@ import be.ac.ucl.lfsab1509.llncampus.external.SecurePreferences;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -31,22 +32,30 @@ import be.ac.ucl.lfsab1509.llncampus.external.SecurePreferences;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Edit settings
- * Related with prefs.xml
+ */
+
+/**
+ * Activity to edit settings. Their values are encrypted.
+ * Related with prefs.xml.
  */
 @SuppressWarnings("deprecation")
-public class SettingsActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
+public class SettingsActivity extends PreferenceActivity implements 
+	OnSharedPreferenceChangeListener {
 	/** Name of the username key */
 	public final static String USERNAME = "username";
 	/** Name of the password key*/
 	public final static String PASSWORD = "password";
-	
+	/** Name of the courses notify key */
 	public final static String COURSES_NOTIFY = "courses_notify";
+	/** Name of the notify minute key */
 	public final static String NOTIFY_MINUTE = "notify_minute";
+	/** Name of the notify with gps key */
 	public final static String NOTIFY_WITH_GPS = "notify_with_gps";
+	/** Name of the notify speed move key */
 	public final static String NOTIFY_SPEED_MOVE = "notify_speed_move";
+	/** Name of the notify max distance key */
 	public final static String NOTIFY_MAX_DISTANCE = "notify_max_distance";
+	/** Name of the notify more time key */
 	public final static String NOTIFY_MORE_TIME = "notify_more_time";
 	
 	
@@ -67,8 +76,7 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        
-        
-        // Load the preferences from an XML resource
+        // Load the preferences from an XML resource.
         addPreferencesFromResource(R.xml.prefs);
         
         Preference pref = findPreference("username");
@@ -87,7 +95,6 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
         notifySpeedMove = (EditTextPreference) findPreference(NOTIFY_SPEED_MOVE);
         notifyMaxDistance = (EditTextPreference) findPreference(NOTIFY_MAX_DISTANCE);
         notifyMoreTime = (EditTextPreference) findPreference(NOTIFY_MORE_TIME);
-        
     }
     
     protected void onResume() {
@@ -105,7 +112,7 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
     @Override
     public void onStart() {
     	super.onStart();
-    	// Decrypt relevant key/value pairs, if they exist
+    	// Decrypt relevant key/value pairs, if they exist.
     	for (Entry<String, ?> entry : mSecurePrefs.getAll().entrySet()) {
     		final String key = entry.getKey();
     		if (key == null) {
@@ -132,13 +139,12 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
     
 	@Override
     public void onStop() {
-    	super.onStop();
-    	// Replace unencrypted key/value pairs with encrypted ones
+		// Replace unencrypted key/value pairs with encrypted ones.
     	LLNCampus.convertInsecureToSecurePreferences(mInsecurePrefs, mSecurePrefs);
+    	super.onStop();
     }
     
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
-            String key) {
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         Preference pref = findPreference(key);
         if (key.compareTo("password") == 0) // Don't show the password!!!
         	return;

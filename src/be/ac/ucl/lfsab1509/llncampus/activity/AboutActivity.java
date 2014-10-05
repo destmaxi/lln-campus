@@ -50,7 +50,7 @@ public class AboutActivity extends LLNCampusActivity {
 	}
 
 	@Override
-	protected void editActionBar() {
+	protected void enableActionBar() {
 		// Nothing to do because it's a dialog!
 	}
 }

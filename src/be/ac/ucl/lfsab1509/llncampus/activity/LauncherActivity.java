@@ -3,7 +3,6 @@ package be.ac.ucl.lfsab1509.llncampus.activity;
 import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import be.ac.ucl.lfsab1509.llncampus.external.SecurePreferences;
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +17,7 @@ import android.preference.PreferenceManager;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -31,69 +31,71 @@ import android.preference.PreferenceManager;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Class that will be executed when starting the application. Related with the
- * XML main_title.xml Useful for the name of the main screen
- * 
- * Related with launcher.xml
  */
-@SuppressLint("HandlerLeak")
-public class Launcher extends LLNCampusActivity {
+
+/**
+ * First activity class that will be executed when starting the application.
+ * It will manage starting operations like application updates.
+ * Related with launcher.xml.
+ */
+
+public class LauncherActivity extends LLNCampusActivity {
 
 	protected boolean update = false;
-
+	protected boolean firstUse = false;
 	private ProgressDialog progressDialog;
 
-	Intent intent;
+	/** Static variable for the static Handler. */
+	private static Intent intent;
+	/** Static variable for the static Handler. */
+	private static LLNCampusActivity activity;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		activity = this;
+		
 		setContentView(R.layout.launcher);
-
 		update = false;
-
+		firstUse = false;
 		progressDialog = new ProgressDialog(this);
 
-		// Compare the version number of the new version with this one; if
-		// different, then reload DB
+		/* Compare the version number of the new version with this one; 
+		 * if different, then reload the database. 
+		 */
 		try {
 			PackageManager manager = this.getPackageManager();
 			PackageInfo info = manager.getPackageInfo(this.getPackageName(), 0);
 			int newCode = info.versionCode;
 			String newName = info.versionName;
 
-			// Compare with values on the server to see if there is a new
-			// version
+			// Compare with stored values on the device to see if there is a new version.
 			SharedPreferences prefs = this.getSharedPreferences(
 					this.getPackageName(), Context.MODE_PRIVATE);
 
 			String codeKey = this.getPackageName() + ".code";
 			String nameKey = this.getPackageName() + ".name";
 
-			// use a default value using new Date()
+			// Get current code and name.
 			int oldCode = prefs.getInt(codeKey, -1);
 			String oldName = prefs.getString(nameKey, null);
 
-			// First use, no update
+			// First use, no update.
 			if (oldCode == -1 && oldName == null) {
-				// No need to reload the DB, just store the values
+				firstUse = true;
+				// No need to reload the database, just store the values.
 				prefs.edit().putInt(codeKey, newCode).commit();
 				prefs.edit().putString(nameKey, newName).commit();
 			}
-
-			// If there is update, then reload the DB and store the values
 			else {
+				// If there is update, then reload the database and store the values.
 				if (oldCode != newCode || oldName.compareTo(newName) != 0) {
-					// text.setText(getString(R.string.update_app));
 					update = true;
 					prefs.edit().putInt(codeKey, newCode).commit();
 					prefs.edit().putString(nameKey, newName).commit();
 				}
 			}
-			// If this version is equal to the other, then no need to reload the
-			// DB
+			// If this version is equal to the other, then no need to reload the database.
 		} catch (NameNotFoundException nnf) {
 			nnf.printStackTrace();
 		}
@@ -112,59 +114,60 @@ public class Launcher extends LLNCampusActivity {
 		
 	}
 
-	private Handler handler = new Handler() {
+	/** This handler actually starts the main activity */
+	private static Handler handler = new Handler() {
+		/** 
+		 * Catch messages sent to the handler.
+		 * @param msg
+		 * 			The message sent to the Handler.
+		 */
 		public void handleMessage(android.os.Message msg) {
 			if (msg.what == 0) {
+				// Start the main activity.
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
-				finish();
+				activity.startActivity(intent);
+				activity.finish();
 			}
 		};
 	};
 
+	/**
+	 * Launch the application. More specifically, it first process the application update
+	 * (if there is) and prepare the intent to the main activity.
+	 */
 	private void lauchApp() {
-
-		// On ajoute un message à notre progress dialog
-
+		// Add a message to the process dialog.
 		if (update) {
 			progressDialog.setMessage(getString(R.string.update_app));
 		}
-		else {
+		else if (firstUse) {
 			progressDialog.setMessage(getString(R.string.first_use));
+		}
+		else {
+			progressDialog.setMessage(getString(R.string.loading_app));
 		}
 
 		progressDialog.show();
-		
 		final Context thisContext = this;
-    	
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				db.open();
 				if (update) {
-					// Also encrypt unencrypted preferences
+					// Encrypt unencrypted preferences.
 					SharedPreferences mInsecurePrefs = PreferenceManager
 							.getDefaultSharedPreferences(thisContext);
 			        SharedPreferences mSecurePrefs = new SecurePreferences(thisContext);
-			    	
 			    	LLNCampus.convertInsecureToSecurePreferences(mInsecurePrefs, mSecurePrefs);
-					// From LLNCampusActivity
+					// Reset the database.
 					db.reset();
 					db.open();
 				}
-				
-
-				// A la fin du traitement, on fait disparaitre notre message dans onStop()
-
-
+				// Now start the application!
 				handler.sendEmptyMessage(0);
-
+				// When the process ends, the message is removed by the onStop() method.
 			}
-
 		}).start();
-
 		intent = new Intent(this, MainActivity.class);
-
 	}
-
 }

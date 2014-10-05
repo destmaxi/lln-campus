@@ -14,6 +14,7 @@ import be.ac.ucl.lfsab1509.llncampus.R;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+	Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,25 +28,31 @@ import be.ac.ucl.lfsab1509.llncampus.R;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Class intended to show some buttons to redirect to
- * leisures activities
- * Related with loisirs.xml
- * */
-public class LoisirsActivity extends LLNCampusActivity implements
-		OnClickListener {
+ */
 
+/**
+ * Class intended to show some buttons to redirect to leisure activities.
+ * Related with leisure.xml.
+ * */
+public class LeisureActivity extends LLNCampusActivity implements OnClickListener {
+
+	/** URL for the sport schedule. */
 	private static final String URL_SPORT = "http://fmserver2.sipr.ucl.ac.be/Ucl_Sport/recordlist.php";
+	/** URL for the cinema schedule. */
 	private static final String URL_CINE = "http://www.cinescope.be/fr/louvain-la-neuve/accueil/";
+	/** URL for the Carpe Studentem agenda. */
 	private static final String URL_CARPESTUDENTEM = "http://www.carpestudentem.org/pub/agenda.php";
+	/** URL for the Sablon web page. */
 	private static final String URL_SABLON = "http://www.uclouvain.be/278074.html";
+	/** URL for the Galilee web page. */
 	private static final String URL_GALILEE = "http://www.uclouvain.be/278075.html";
+	/** URL for the D'un pain a l'autre web page. */
 	private static final String URL_DUN_PAIN_A_LAUTRE = "http://www.uclouvain.be/276940.html";	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.loisirs);
-		// Resources r = this.getResources();
+		setContentView(R.layout.leisure);
 
 		setThisOnClickListener(R.id.button_cinema);
 		setThisOnClickListener(R.id.button_carpestudentem);
@@ -57,57 +64,59 @@ public class LoisirsActivity extends LLNCampusActivity implements
 		setThisOnClickListener(R.id.button_culture);
 	}
 
-	private void setThisOnClickListener(int btnId) {
-		Button tmp = (Button) findViewById(btnId);
-		tmp.setOnClickListener(this);
+	/**
+	 * Set this activity as the listener of the button with id buttonId.
+	 * 
+	 * @param buttonId
+	 * 			The id of the button to listen.
+	 */
+	private void setThisOnClickListener(int buttonId) {
+		Button button = (Button) findViewById(buttonId);
+		button.setOnClickListener(this);
 	}
 
 	/**
-	 * Au chargement du layout et au changement d'orientation : Redéfinit les
-	 * dimensions des boutons et des images pour occuper toute la place de
-	 * manière constante.
+	 * When the layout is loading or when the orientation changes, redefine the dimensions of
+	 * buttons and pictures to take the whole available space in a constant way.
+	 * 
+	 * @param hasFocus
+	 * 			Whether the window of this activity has focus.
 	 */
 	@Override
 	public final void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
-		/** Afin d'avoir une largeur ou une hauteur optimale **/
-		GridLayout gl = (GridLayout) findViewById(R.id.loisirs_list);
-		Button buttontmp;
+		// In order to get an optimal height and width.
+		GridLayout gl = (GridLayout) findViewById(R.id.leisure_list);
+		Button resizedButton;
 
-		// Stretch buttons
+		// Stretch buttons.
 		int idealChildWidth = (int) (gl.getWidth() / gl.getColumnCount());
 		int idealChildHeight = (int) ((gl.getHeight()) / gl.getRowCount());
 		for (int i = 0; i < gl.getChildCount(); i++) {
-			buttontmp = (Button) gl.getChildAt(i);
-			buttontmp.setWidth(idealChildWidth);
-			buttontmp.setHeight(idealChildHeight);
-			Drawable[] drawables = buttontmp.getCompoundDrawables();
+			resizedButton = (Button) gl.getChildAt(i);
+			resizedButton.setWidth(idealChildWidth);
+			resizedButton.setHeight(idealChildHeight);
+			Drawable[] drawables = resizedButton.getCompoundDrawables();
 			Drawable d;
 			for (int j = 0; j < drawables.length; j++) {
 				if ((d = drawables[j]) != null) {
 					d.setBounds(0, 0, (int) (d.getIntrinsicWidth() * 0.9),
 							(int) (d.getIntrinsicHeight() * 0.9));
-					ScaleDrawable sd = new ScaleDrawable(d, 0, (float) 1,
-							(float) 1);
+					ScaleDrawable sd = new ScaleDrawable(d, 0, (float) 1, (float) 1);
 					switch (j) {
 					case 0:
-						buttontmp.setCompoundDrawables(sd.getDrawable(), null,
-								null, null);
+						resizedButton.setCompoundDrawables(sd.getDrawable(), null, null, null);
 						break;
 					case 1:
-						buttontmp.setCompoundDrawables(null, sd.getDrawable(),
-								null, null);
+						resizedButton.setCompoundDrawables(null, sd.getDrawable(), null, null);
 						break;
 					case 2:
-						buttontmp.setCompoundDrawables(null, null,
-								sd.getDrawable(), null);
+						resizedButton.setCompoundDrawables(null, null, sd.getDrawable(), null);
 						break;
 					case 3:
-						buttontmp.setCompoundDrawables(null, null, null,
-								sd.getDrawable());
+						resizedButton.setCompoundDrawables(null, null, null, sd.getDrawable());
 						break;
 					}
-
 				}
 			}
 		}
@@ -119,50 +128,47 @@ public class LoisirsActivity extends LLNCampusActivity implements
 		Intent intent = new Intent(this, WebviewActivity.class);
 		switch (v.getId()) {
 		case R.id.button_cinema:
-			intent.putExtra("TITLE", r.getString(R.string.cinema));
-			intent.putExtra("URL", URL_CINE);
-			intent.putExtra(
-					"CSS",
-					"#NewsLetter, #BandTitel, #StaticSocials, #HeaderWrapper, #HeaderLogo, #ContainerFooter, #ContentTeaserAndPubWrapper, #MovieScroller, #ContentTeaserAndPubBg {display:none;} body{background:#FFF;} #fullVisualBg{ background:transparent; padding:0;}");
+			intent.putExtra(EXTRA_TITLE, r.getString(R.string.cinema));
+			intent.putExtra(EXTRA_URL, URL_CINE);
+			intent.putExtra(EXTRA_CSS,
+					"#NewsLetter, #BandTitel, #StaticSocials, #HeaderWrapper, #HeaderLogo, "
+					+ "#ContainerFooter, #ContentTeaserAndPubWrapper, #MovieScroller, "
+					+ "#ContentTeaserAndPubBg {display:none;} body{background:#FFF;} "
+					+ "#fullVisualBg{ background:transparent; padding:0;}");
 			startActivity(intent);
 			break;
 		case R.id.button_sports:
-			intent.putExtra("TITLE", r.getString(R.string.sports));
-			intent.putExtra("URL", URL_SPORT);
+			intent.putExtra(EXTRA_TITLE, r.getString(R.string.sports));
+			intent.putExtra(EXTRA_URL, URL_SPORT);
 			startActivity(intent);
 			break;
 		case R.id.button_carpestudentem:
-			intent.putExtra("TITLE", r.getString(R.string.carpestudentem));
-			intent.putExtra("URL", URL_CARPESTUDENTEM);
-			intent.putExtra("CSS", "#account_bar, #header, #menu, #nav, #footer, #unique_column h4{ display:none; }");
+			intent.putExtra(EXTRA_TITLE, r.getString(R.string.carpestudentem));
+			intent.putExtra(EXTRA_URL, URL_CARPESTUDENTEM);
+			intent.putExtra(EXTRA_CSS, "#account_bar, #header, #menu, #nav, #footer, "
+					+ "#unique_column h4{ display:none; }");
 			startActivity(intent);
 			break;
 		case R.id.button_sablon:
-			intent.putExtra("TITLE", r.getString(R.string.sablon));
-			intent.putExtra("URL", URL_SABLON);
-			intent.putExtra(
-					"CSS",
-					"#menu, #header{display:none;}");
+			intent.putExtra(EXTRA_TITLE, r.getString(R.string.sablon));
+			intent.putExtra(EXTRA_URL, URL_SABLON);
+			intent.putExtra(EXTRA_CSS, "#menu, #header{display:none;}");
 			startActivity(intent);
 			break;
 		case R.id.button_galilee:
-			intent.putExtra("TITLE", r.getString(R.string.galilee));
-			intent.putExtra("URL", URL_GALILEE);
-			intent.putExtra(
-					"CSS",
-					"#menu, #header{display:none;}");
+			intent.putExtra(EXTRA_TITLE, r.getString(R.string.galilee));
+			intent.putExtra(EXTRA_URL, URL_GALILEE);
+			intent.putExtra(EXTRA_CSS, "#menu, #header{display:none;}");
 			startActivity(intent);
 			break;					
 		case R.id.button_dun_pain_a_lautre:
-				intent.putExtra("TITLE", r.getString(R.string.dun_pain_a_lautre));
-				intent.putExtra("URL", URL_DUN_PAIN_A_LAUTRE);
-				intent.putExtra(
-						"CSS",
-						"#menu, #header{display:none;}");
+				intent.putExtra(EXTRA_TITLE, r.getString(R.string.dun_pain_a_lautre));
+				intent.putExtra(EXTRA_URL, URL_DUN_PAIN_A_LAUTRE);
+				intent.putExtra(EXTRA_CSS, "#menu, #header{display:none;}");
 				startActivity(intent);
 				break;	
 		case R.id.button_solidaire:
-			intent = new Intent(this, SolidaireActivity.class);
+			intent = new Intent(this, SolidarityActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.button_culture:

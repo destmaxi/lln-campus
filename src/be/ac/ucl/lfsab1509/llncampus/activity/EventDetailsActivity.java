@@ -52,10 +52,10 @@ public class EventDetailsActivity extends LLNCampusActivity implements OnClickLi
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.event_details);
 		TextView detailsText = (TextView) findViewById(R.id.event_details_text);
-		detailsText.setText(getIntent().getStringExtra(LLNCampus.EXTRA_DETAILS));
+		detailsText.setText(getIntent().getStringExtra(EXTRA_DETAILS));
 		Button gpsButton = (Button) findViewById(R.id.button_event_details_gps);
 		gpsButton.setOnClickListener(this);
-		if (!getIntent().getBooleanExtra(LLNCampus.EXTRA_COORDINATES, false)) {
+		if (!getIntent().getBooleanExtra(EXTRA_COORDINATES, false)) {
 			gpsButton.setVisibility(View.INVISIBLE);
 		}
 		Button deleteButton = (Button) findViewById(R.id.button_event_delete);
@@ -69,9 +69,9 @@ public class EventDetailsActivity extends LLNCampusActivity implements OnClickLi
 	 */
 	protected void deleteOneEvent()
 	{
-		String activityName = getIntent().getStringExtra(LLNCampus.EXTRA_ACTIVITY_NAME);
-		long beginTime = getIntent().getLongExtra(LLNCampus.EXTRA_BEGIN_TIME, -1);
-		long endTime = getIntent().getLongExtra(LLNCampus.EXTRA_END_TIME, -1);
+		String activityName = getIntent().getStringExtra(EXTRA_ACTIVITY_NAME);
+		long beginTime = getIntent().getLongExtra(EXTRA_BEGIN_TIME, -1);
+		long endTime = getIntent().getLongExtra(EXTRA_END_TIME, -1);
 		
 		// Check if the data are consistent.
 		if (activityName == null || beginTime == -1 || endTime == -1)
@@ -97,9 +97,9 @@ public class EventDetailsActivity extends LLNCampusActivity implements OnClickLi
 	 */
 	protected void deleteConsecutiveEvents()
 	{
-		String activityName = getIntent().getStringExtra(LLNCampus.EXTRA_ACTIVITY_NAME);
-		long beginTime = getIntent().getLongExtra(LLNCampus.EXTRA_BEGIN_TIME, -1);
-		long endTime = getIntent().getLongExtra(LLNCampus.EXTRA_END_TIME, -1);
+		String activityName = getIntent().getStringExtra(EXTRA_ACTIVITY_NAME);
+		long beginTime = getIntent().getLongExtra(EXTRA_BEGIN_TIME, -1);
+		long endTime = getIntent().getLongExtra(EXTRA_END_TIME, -1);
 		
 		// Check if the data are consistent.
 		if (activityName == null || beginTime == -1 || endTime == -1)
@@ -192,7 +192,7 @@ public class EventDetailsActivity extends LLNCampusActivity implements OnClickLi
 	}
 
 	@Override
-	protected void editActionBar() {
+	protected void enableActionBar() {
 		// Nothing to do because it's a dialog!
 	}
 
