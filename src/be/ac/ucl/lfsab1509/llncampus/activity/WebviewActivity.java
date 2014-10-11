@@ -1,8 +1,6 @@
 package be.ac.ucl.lfsab1509.llncampus.activity;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.Stack;
 
 import org.apache.http.HttpResponse;
@@ -43,12 +41,12 @@ import be.ac.ucl.lfsab1509.llncampus.R;
  *  Related with webview.xml.
  */
 public class WebviewActivity extends LLNCampusActivity {
-	
+
 	/** The header of HTML pages. */
 	public static final String HEADER = "<html><head></head><body>";
 	/** The footer of HTML pages. */
 	public static final String FOOTER = "</body></html>";
-	
+
 	private WebView webview;
 	private MyWebClient webviewclient; 
 	private Handler mHandler = new Handler();
@@ -65,9 +63,10 @@ public class WebviewActivity extends LLNCampusActivity {
 		webview.getSettings().setBuiltInZoomControls(true);
 		webviewclient = new MyWebClient();
 		webview.setWebViewClient(webviewclient);
-		encoding = "utf-8";
-		if(getIntent().getStringExtra(EXTRA_ENCODING) != ""){
-			encoding = getIntent().getStringExtra(EXTRA_ENCODING) ;
+		encoding = "UTF-8";
+		if(getIntent().getStringExtra(EXTRA_ENCODING) != null){
+			encoding = getIntent().getStringExtra(EXTRA_ENCODING).toUpperCase(getResources()
+					.getConfiguration().locale);
 		}
 		setTitle(getIntent().getStringExtra(EXTRA_TITLE));
 		loadURL(getIntent().getStringExtra(EXTRA_URL));
@@ -94,7 +93,7 @@ public class WebviewActivity extends LLNCampusActivity {
 			history.push(he);
 		}
 	}
-	
+
 	/** 
 	 * Load the URL given as parameter in the web view.
 	 * @param url
@@ -106,20 +105,13 @@ public class WebviewActivity extends LLNCampusActivity {
 			// Nothing to load.
 			return; 
 		}
-		
-		
-		try {
-			updateHTML("", HEADER
-					+ URLEncoder.encode(getString(R.string.loading), encoding) + "<br /><small>(" 
-					+ URLEncoder.encode(getString(R.string.connection_required), encoding)
-					+ ")</small>" + FOOTER, 
-					"body{ margin:40% auto; width:60%; font-size:25px; text-align:center;}", 
-					false);
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
-			notify(getString(R.string.error));
-			return;
-		}
+
+
+		updateHTML("", HEADER
+				+ getString(R.string.loading) + "<br /><small>(" 
+				+ getString(R.string.connection_required) + ")</small>" + FOOTER, 
+				"body{ margin:40% auto; width:60%; font-size:25px; text-align:center;}", 
+				false);
 		new Thread(new Runnable() {
 			/** @see WebviewActivity#updateHTML */
 			public void updateHTML(final String html) {
@@ -146,9 +138,9 @@ public class WebviewActivity extends LLNCampusActivity {
 			}
 		}).start();
 	}
-	
+
 	@Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if ((keyCode == KeyEvent.KEYCODE_BACK) && history.size()>1) {
 			history.pop(); // Remove the current page.
 			HistoryElement he = history.peek(); // Get the previous page.
@@ -156,19 +148,19 @@ public class WebviewActivity extends LLNCampusActivity {
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);
-    }
-	
+	}
+
 	/**
 	 * Class to represent a web client.
 	 */
 	public class MyWebClient extends WebViewClient{
 		@Override
-	    public boolean shouldOverrideUrlLoading(WebView view, String url) {
-	    	loadURL(url);
-	    	return true;
-	    }
+		public boolean shouldOverrideUrlLoading(WebView view, String url) {
+			loadURL(url);
+			return true;
+		}
 	}
-	
+
 	/**
 	 * A node for the history.
 	 */
@@ -176,7 +168,7 @@ public class WebviewActivity extends LLNCampusActivity {
 		public String html;
 		public String customCSS;
 		public String baseURL;
-		
+
 		/**
 		 * Constructor.
 		 * 
