@@ -194,7 +194,7 @@ public class ScheduleActivity extends LLNCampusActivity implements OnDateChangeL
 	@Override
 	public void onResume() {
 		// If the courses list was updated, the ADE update will be launched automatically.
-		if (Course.listChanged()) {
+		if (Course.listChanged() && Course.getList().size() > 0) {
 			Course.setListChangeSeen();
 			ADE.runUpdateADE(this, handler, updateRunnable);
 		} else {

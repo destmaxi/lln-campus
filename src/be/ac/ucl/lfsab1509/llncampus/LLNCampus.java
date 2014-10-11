@@ -116,7 +116,8 @@ public class LLNCampus extends Application {
 		Intent intent = new Intent(APPLICATION_CONTEXT, AlarmService.class);
 		PendingIntent pintent = PendingIntent.getService(APPLICATION_CONTEXT, 0, intent, 0);
 
-		AlarmManager alarm = (AlarmManager) APPLICATION_CONTEXT.getSystemService(Context.ALARM_SERVICE);
+		AlarmManager alarm = (AlarmManager) APPLICATION_CONTEXT
+				.getSystemService(Context.ALARM_SERVICE);
 		// Every minute
 		alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis(), 60*1000, pintent); 
 	}
@@ -235,7 +236,8 @@ public class LLNCampus extends Application {
 	    } catch (IOException e) {
 	        Log.e("LLNCampus.java", "Failed to get asset file list.", e);
 	    }
-	    File f = new File("/" + Environment.getExternalStorageDirectory().getPath() + "/" + LLNREPOSITORY);
+	    File f = new File("/" + Environment.getExternalStorageDirectory().getPath() + "/" 
+	    		+ LLNREPOSITORY);
 	    if (!f.exists()) {
 	      f.mkdir();
 	    }
@@ -245,7 +247,8 @@ public class LLNCampus extends Application {
 	        OutputStream out = null;
 	        try {
 	          in = assetManager.open(filename);
-	          out = new FileOutputStream("/" + Environment.getExternalStorageDirectory().getPath() + "/" + LLNREPOSITORY + "/" + filename);
+	          out = new FileOutputStream("/" + Environment.getExternalStorageDirectory().getPath() 
+	        		  + "/" + LLNREPOSITORY + "/" + filename);
 	          copyFile(in, out);
 	          in.close();
 	          in = null;

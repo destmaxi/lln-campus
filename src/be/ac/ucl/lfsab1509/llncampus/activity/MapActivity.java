@@ -33,7 +33,8 @@ import android.webkit.WebView;
 public class MapActivity extends LLNCampusActivity {
 	
 		/** URL where the PDF file is stored. */
-		public static final String URL_MAP_PDF = "https://docs.google.com/file/d/0B2KSzm3Kdk4LSHZRMWNyTkJnbTA/edit?usp=sharing";
+		public static final String URL_MAP_PDF = 
+				"https://docs.google.com/file/d/0B2KSzm3Kdk4LSHZRMWNyTkJnbTA/edit?usp=sharing";
 		
 		@Override
 		protected void onCreate(Bundle savedInstanceState){

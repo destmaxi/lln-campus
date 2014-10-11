@@ -3,7 +3,7 @@
     <item
         android:id="@+id/ade_update"
         android:orderInCategory="100"
-        android:showAsAction="always"
+        android:showAsAction="ifRoom"
         android:title="@string/ade_update"
         android:visible="false"/>
      <item

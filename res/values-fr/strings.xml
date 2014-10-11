@@ -16,8 +16,6 @@
     <!-- Used in different places -->
     <string name="settings">Paramètres</string>
     <string name="reset_DB">Réinitialiser</string>
-    <string name="open">Ouvert</string>
-    <string name="closed">Fermé</string>
     <string name="monday">Lundi</string>
     <string name="tuesday">Mardi</string>
     <string name="wednesday">Mercredi</string>
@@ -33,10 +31,6 @@
     <!-- Used in MainActivity  -->
 	<string name="no_pdf_reader">Pas de lecteur de PDF installe: tentative de connection par le net…</string>
     <string name="menu_settings">Options</string>
-    <string name="button_text_etudes">Études</string>
-    <string name="button_text_loisirs">Loisirs</string>
-    <string name="button_text_options">Options</string>
-    <string name="button_text_plan">Plan</string>
 	<string name="icampus">iCampus</string>
 	<string name="moodle">Moodle</string>
 	<string name="office">Bureau UCL</string>
@@ -51,11 +45,9 @@
     <string name="dun_pain_a_lautre">D\'un pain à l\'autre</string>
     <string name="solidarity">Carte Solidaire</string>
     <string name="culture">Carte Culture</string>
-    <string name="restaurants">Restaurants</string>
     <string name="carpestudentem">Agenda de l\'animation</string>
 
     <!-- Used for study_title -->
-    <string name="etudes">Études</string>
     <string name="schedule">Horaire</string>
     <string name="auditoriums">Auditoires</string>
     <string name="libraries">Bibliothèques</string>
@@ -68,10 +60,12 @@
     <string name="library_name">Nom de la bibliothèque</string>
     <string name="gps">Guidage GPS</string>
     <string name="sub_auditorium">Sous-auditoires</string>
-    <string name="library_schedule">Horaires de la bibliothèque</string>
     <string name="building_picture_description">Aperçu de l entree du bâtiment</string>
     <string name="access_description">Indique si l endroit est accessible pour les personnes à mobilité réduite</string>
     <string name="more_details">"+ de détails"</string>
+    <string name="auditorium_name_description">Nom de l\'auditoire</string>
+    <string name="auditorium_address_description">Adresse de l\'auditoire</string>
+    <string name="opening_status_description">Status ouverture</string>
 
     <!-- Used for SubAudtitorium details -->
     <string name="yes">Oui</string>
@@ -104,7 +98,6 @@
     <string name="map">Plan</string>
 
     <!-- Used for schedule -->
-    <string name="button_ADE">Bouton</string>
     <string name="ade_update">Mettre à jour depuis ADE</string>
     <string name="login_ucl">Identifiant global UCL</string>
     <string name="password">Mot de passe</string>
@@ -126,7 +119,6 @@
 	<string name="download_progress">Téléchargement en cours…</string>
 	
 	<!-- Used for directories search -->
-	<string name="site">Site web</string>
 	<string name="last_name">Nom</string>
 	<string name="first_name">Prénom</string>
 	<string name="entity">Entité</string>

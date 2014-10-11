@@ -124,7 +124,7 @@ public class LibraryActivity extends LLNCampusActivity implements
 			display.getSize(size);
 			int width = size.x;
 
-			if (orientation != Configuration.ORIENTATION_LANDSCAPE) {
+			if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
 				// If landscape orientation, show the list on 35% of the width of the screen.
 				libraryListView.getLayoutParams().width = (int) (0.35 * width);
 				detailsView.getLayoutParams().width = (int) (0.65 * width);
@@ -178,8 +178,7 @@ public class LibraryActivity extends LLNCampusActivity implements
 
 	@Override
 	public final void onBackPressed() {
-		if ((currentLibraryPosition < 0 || currentLibraryPosition >= libraryList.size())
-				&& this.getResources().getConfiguration()
+		if (currentLibraryPosition != -1 && this.getResources().getConfiguration()
 				.orientation != Configuration.ORIENTATION_LANDSCAPE) {
 			currentLibraryPosition = -1;
 			updateDisplay();

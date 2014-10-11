@@ -13,6 +13,7 @@
         android:gravity="center"
         android:src="@drawable/title"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:contentDescription="@string/logo"
         android:textSize="52sp" />
 
     <GridLayout

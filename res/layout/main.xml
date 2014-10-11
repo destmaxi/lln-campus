@@ -31,7 +31,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
             android:contentDescription="@string/schedule"
+            android:scaleType="fitXY"
             android:drawableTop="@drawable/schedule"
+            android:text="@string/schedule"
             android:gravity="center_vertical|center_horizontal"
             />
 
@@ -41,7 +43,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
             android:contentDescription="@string/libraries"
+            android:scaleType="fitXY"
             android:drawableTop="@drawable/library"
+            android:text="@string/libraries"
             android:gravity="center_vertical|center_horizontal"
              />
 
@@ -51,7 +55,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
             android:contentDescription="@string/auditoriums"
+            android:scaleType="fitXY"
             android:drawableTop="@drawable/auditorium"
+            android:text="@string/auditoriums"
             android:gravity="center_vertical|center_horizontal"
              />
 
@@ -62,7 +68,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
             android:contentDescription="@string/leisure"
+            android:scaleType="fitXY"
             android:drawableTop="@drawable/leisure"
+            android:text="@string/leisure"
             android:gravity="center_vertical|center_horizontal"
             />
 
@@ -72,7 +80,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
             android:contentDescription="@string/map"
+            android:scaleType="fitXY"
             android:drawableTop="@drawable/map"
+            android:text="@string/map"
             android:gravity="center_vertical|center_horizontal"
             />
 
@@ -82,7 +92,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
             android:contentDescription="@string/directories"
+            android:scaleType="fitXY"
             android:drawableTop="@drawable/directory"
+            android:text="@string/directories"
             android:gravity="center_vertical|center_horizontal"
              />
 
@@ -92,7 +104,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
             android:contentDescription="@string/icampus"
+            android:scaleType="fitXY"
             android:drawableTop="@drawable/icampus"
+            android:text="@string/icampus"
             android:gravity="center_vertical|center_horizontal"
             android:padding="20dp"
              />
@@ -103,7 +117,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
             android:contentDescription="@string/moodle"
+            android:scaleType="fitXY"
             android:drawableTop="@drawable/moodle"
+            android:text="@string/moodle"
             android:gravity="center_vertical|center_horizontal"
             />
 
@@ -113,7 +129,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
             android:contentDescription="@string/office"
+            android:scaleType="fitXY"
             android:drawableTop="@drawable/ucl_office"
+            android:text="@string/office"
             android:gravity="center_vertical|center_horizontal"
              />
     </GridLayout>

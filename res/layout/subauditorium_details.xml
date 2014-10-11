@@ -36,16 +36,16 @@
    
     </TableLayout>
     
-     <LinearLayout
-        style="android:attr/buttonBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal" >
+	<LinearLayout
+		style="android:attr/buttonBarStyle"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:orientation="horizontal" >
     
     <TableLayout
     android:layout_marginTop="6dp"
-    android:layout_width="wrap_content"
+    android:layout_width="0dp"
     android:layout_gravity="center_horizontal" 
     android:layout_height="wrap_content" 
     android:layout_weight="1"
@@ -230,8 +230,7 @@
     
     </TableLayout>
   
-
-    </LinearLayout>
+	</LinearLayout>
  	
     <ImageView
         android:id="@+id/subauditorium_picture"
@@ -244,6 +243,7 @@
         android:layout_gravity="right"
         android:text="@string/subauditorium_picture_message"
         android:textSize="12sp" />
+    
     
      
 </LinearLayout>

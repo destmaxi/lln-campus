@@ -55,9 +55,6 @@ public class CourseListEditActivity extends LLNCampusActivity implements
 	private ListView courseListView;
 	private ArrayList<Course> courseList;
 
-	/** This indicates if the user is on the courses list view. */
-	private boolean onFirstPage = true;
-
 	@Override
 	protected final void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -72,18 +69,12 @@ public class CourseListEditActivity extends LLNCampusActivity implements
 	@Override
 	public final void onPause() {
 		super.onPause();
-		// If adding a new course or after downloading courses from UCLouvain.
-		if (!onFirstPage) {
-			// TODO must check if a call of this.onResume() is better
-			startActivity(new Intent(this, CourseListEditActivity.class));
-		}
 	}
 
 	/**
 	 * Prepare the view for the user to show the list of courses.
 	 */
 	private void loadCoursList() {
-		onFirstPage = true;
 		setContentView(R.layout.course_list_edit);
 		findViewById(R.id.course_download).setOnClickListener(this);
 		findViewById(R.id.course_add).setOnClickListener(this);
@@ -103,12 +94,12 @@ public class CourseListEditActivity extends LLNCampusActivity implements
 		SharedPreferences preferences = new SecurePreferences(this);
 		String username = preferences.getString(SettingsActivity.USERNAME, null);
 		String password = preferences.getString(SettingsActivity.PASSWORD, null);
-		onFirstPage = false;
 
 		if (username == null || password == null) {
 			notify(getString(R.string.username_notify));
 			Intent intent = new Intent(this, SettingsActivity.class);
 			startActivity(intent);
+			finish();
 			return;
 		}
 
@@ -127,7 +118,6 @@ public class CourseListEditActivity extends LLNCampusActivity implements
 	 * Change the content of the view to add manually new courses.
 	 */
 	private void changeViewToAddCourses() {
-		onFirstPage = false;
 		setContentView(R.layout.course_add);
 		findViewById(R.id.course_add_button).setOnClickListener(this);
 	}

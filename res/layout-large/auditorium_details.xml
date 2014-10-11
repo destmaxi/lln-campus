@@ -26,7 +26,7 @@
     <ImageView
         android:id="@+id/auditorium_picture"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_marginTop="17dp"
         android:layout_weight="1"
         android:contentDescription="@string/building_picture_description"
@@ -37,14 +37,14 @@
 
     <LinearLayout
         style="android:attr/buttonBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_gravity="center"
         android:layout_marginLeft="0dp" >
 
         <Button
             android:id="@+id/button_subauditorium"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center|left"
@@ -53,10 +53,10 @@
 
         <Button
             android:id="@+id/button_auditorium_gps"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center|right"
+            android:gravity="center|end"
             android:drawableLeft="@android:drawable/ic_menu_directions"
             android:text="@string/gps" />
     </LinearLayout>
