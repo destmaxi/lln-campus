@@ -93,7 +93,8 @@
     <!-- Used for AboutActivity -->
     <string name="about">À propos</string>
     <string name="about_text">"Cette application a été développée par Benjamin Baugnies, Quentin De Coninck, Pham Anh Tuan Le et Damien Mercier dans le cadre du cours LFSAB1509 Projet informatique 2012&#8211;2013 donné à l'Université Catholique de Louvain&#8211;la&#8211;Neuve par Professeur Yves Deville. Cette application est distribuée sous licence GPL3. Version "</string>
-
+	<string name="source_code">Le code source est disponible sur https://github.com/qdeconinck/lln-campus</string>
+    
     <!-- Used for MapActivity -->
     <string name="map">Plan</string>
 

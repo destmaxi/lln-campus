@@ -46,7 +46,8 @@ public class AboutActivity extends LLNCampusActivity {
 		{
 			nnf.printStackTrace();
 		}
-		text.setText(getString(R.string.about_text) + codeName);
+		text.setText(getString(R.string.about_text) + codeName + ".\n" 
+				+ getString(R.string.source_code));
 	}
 
 	@Override
