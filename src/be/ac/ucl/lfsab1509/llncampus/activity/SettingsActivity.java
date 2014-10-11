@@ -57,6 +57,8 @@ public class SettingsActivity extends PreferenceActivity implements
 	public final static String NOTIFY_MAX_DISTANCE = "notify_max_distance";
 	/** Name of the notify more time key */
 	public final static String NOTIFY_MORE_TIME = "notify_more_time";
+	/** Name of the notify ringtone key. */
+	public final static String NOTIFY_RINGTONE = "notify_ringtone";
 	
 	
 	private SharedPreferences mInsecurePrefs;
@@ -155,7 +157,7 @@ public class SettingsActivity extends PreferenceActivity implements
         if (pref instanceof RingtonePreference)
         {
         	RingtonePreference ring = (RingtonePreference) pref;
-        	ring.setSummary(ring.getSharedPreferences().getString("notify_ringtone", "Silent"));
+        	ring.setSummary(ring.getSharedPreferences().getString(NOTIFY_RINGTONE, "Silent"));
         }
     }
 }

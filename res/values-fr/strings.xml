@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LLN Campus</string>
+    <string name="main_menu">Menu principal</string>
+    
+    <!-- Webview activity -->
+    <string name="loading">Chargement en cours…</string>
+    <string name="connection_required">Vous devez être connecté à Internet</string>
+    
+    <!-- For notifications -->
+    <string name="begins_in">commence dans</string>
+    <string name="minutes">minutes</string>
+    <string name="notification_stop">Le service de notification de cours imminent a été arreté</string>
+
+    <!-- Used in different places -->
+    <string name="settings">Paramètres</string>
+    <string name="reset_DB">Réinitialiser</string>
+    <string name="open">Ouvert</string>
+    <string name="closed">Fermé</string>
+    <string name="monday">Lundi</string>
+    <string name="tuesday">Mardi</string>
+    <string name="wednesday">Mercredi</string>
+    <string name="thursday">Jeudi</string>
+    <string name="friday">Vendredi</string>
+    <string name="saturday">Samedi</string>
+    <string name="sunday">Dimanche</string>
+    <string name="reloaded_db">"L'application a été réinitialisée."</string>
+    <string name="confirm_reset_DB">Êtes-vous sûr de vouloir réinitialiser l\'application</string>
+    <string name="todo">Travail en cours, sera probablement implémentée dans la prochaine version :)</string>
+    <string name="error_db">Erreur DB</string>
+    
+    <!-- Used in MainActivity  -->
+	<string name="no_pdf_reader">Pas de lecteur de PDF installe: tentative de connection par le net…</string>
+    <string name="menu_settings">Options</string>
+    <string name="button_text_etudes">Études</string>
+    <string name="button_text_loisirs">Loisirs</string>
+    <string name="button_text_options">Options</string>
+    <string name="button_text_plan">Plan</string>
+	<string name="icampus">iCampus</string>
+	<string name="moodle">Moodle</string>
+	<string name="office">Bureau UCL</string>
+	<string name="logo">Logo</string>
+
+    <!-- Used for LeisureActivity -->
+    <string name="leisure">Loisirs</string>
+    <string name="cinema">Programme du cinéma</string>
+    <string name="sports">Horaire des sports</string>
+    <string name="sablon">Le Sablon</string>
+    <string name="galilee">Le Galilée</string>
+    <string name="dun_pain_a_lautre">D\'un pain à l\'autre</string>
+    <string name="solidarity">Carte Solidaire</string>
+    <string name="culture">Carte Culture</string>
+    <string name="restaurants">Restaurants</string>
+    <string name="carpestudentem">Agenda de l\'animation</string>
+
+    <!-- Used for study_title -->
+    <string name="etudes">Études</string>
+    <string name="schedule">Horaire</string>
+    <string name="auditoriums">Auditoires</string>
+    <string name="libraries">Bibliothèques</string>
+
+    <!-- Used for building details -->
+    <string name="auditorium_address_selected">Adresse :</string>
+    <string name="auditorium_address">Sélectionnez un auditoire dans la liste</string>
+    <string name="subauditorium_address">Sélectionnez un sous-auditoire dans la liste</string>
+    <string name="library_address">Sélectionnez une bibliothèque dans la liste</string>
+    <string name="library_name">Nom de la bibliothèque</string>
+    <string name="gps">Guidage GPS</string>
+    <string name="sub_auditorium">Sous-auditoires</string>
+    <string name="library_schedule">Horaires de la bibliothèque</string>
+    <string name="building_picture_description">Aperçu de l entree du bâtiment</string>
+    <string name="access_description">Indique si l endroit est accessible pour les personnes à mobilité réduite</string>
+    <string name="more_details">"+ de détails"</string>
+
+    <!-- Used for SubAudtitorium details -->
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="nbplaces">Nombre de places:</string>
+    <string name="furniture">Mobilier:</string>
+    <string name="cabin">Cabine:</string>
+    <string name="screen">Ecran:</string>
+    <string name="sound">Sono:</string>
+    <string name="retro">Rétroprojecteur:</string>
+    <string name="slide">Dia:</string>
+    <string name="video">Vidéo:</string>
+    <string name="network">Réseau:</string>
+    <string name="table">Table</string>
+    <string name="fixed_table">Table fixe</string>
+    <string name="bench">Gradin</string>
+    <string name="nothing">Rien</string>
+    <string name="video_projector">Vidéo-projecteur</string>
+    <string name="video_projector_data">Vidéo-projecteur data</string>
+    <string name="monitor_data">Moniteur data</string>
+    <string name="television">Télévision</string>
+    <string name="subauditorium_picture_description">Photo du sous-auditoire</string>
+    <string name="subauditorium_picture_message">Attente de connexion internet #8230;</string>
+
+    <!-- Used for AboutActivity -->
+    <string name="about">À propos</string>
+    <string name="about_text">"Cette application a été développée par Benjamin Baugnies, Quentin De Coninck, Pham Anh Tuan Le et Damien Mercier dans le cadre du cours LFSAB1509 Projet informatique 2012&#8211;2013 donné à l'Université Catholique de Louvain&#8211;la&#8211;Neuve par Professeur Yves Deville. Cette application est distribuée sous licence GPL3. Version "</string>
+
+    <!-- Used for MapActivity -->
+    <string name="map">Plan</string>
+
+    <!-- Used for schedule -->
+    <string name="button_ADE">Bouton</string>
+    <string name="ade_update">Mettre à jour depuis ADE</string>
+    <string name="login_ucl">Identifiant global UCL</string>
+    <string name="password">Mot de passe</string>
+    <string name="course_list_edit">Modifier la liste des cours</string>
+    <string name="update_from_uclouvain">Télécharger depuis UCLouvain</string>
+    <string name="annee_acad">Année académique</string>
+    <string name="course_add">Ajouter un cours</string>
+    <string name="course_code">Code du cours</string>
+    <string name="course_name">Nom du cours</string>
+    <string name="course_list_explanation">"Afin de récupérer votre horaire, vous devez indiquer les différents codes des cours que vous suivez (les codes des cours doivent correspondre avec ceux indiqués sur ADE). Afin de vous facilitez la tâche, l'application peut télécharger la liste des cours depuis uclouvain.be, pour ce faire cliquez sur \"Télécharger depuis UCLouvain\". Pour supprimer un cours de la liste cliquez simplement dessus. "</string>
+    <string name="empty_course_list_dialog_title">Premiers pas avec l\'horaire</string>
+    <string name="empty_course_list_dialog_text">Il n\'y a encore aucun cours enregistré pour votre horaire. Afin de pouvoir récupérer votre horaire, vous devez indiquez les différents cours que vous suivez. Pour ce faire, il est possible de télécharger automatiquement votre liste de cours depuis le site de l\'UCL. Il est également possible d\'ajouter des cours de manière manuelle si les codes des cours de votre bureau ne correspond pas avec le codes des cours dans ADE.</string>
+    <string name="download_for">Téléchargement pour</string>
+    <string name="download_error">Erreur de téléchargement</string>
+	<string name="events">évènements</string>
+	<string name="download_done">Téléchargement terminé</string>
+	<string name="nb_error">Nombre d\'erreurs</string>
+	<string name="download_from_ADE">Téléchargement de l\'horaire depuis ADE</string>
+	<string name="download_progress">Téléchargement en cours…</string>
+	
+	<!-- Used for directories search -->
+	<string name="site">Site web</string>
+	<string name="last_name">Nom</string>
+	<string name="first_name">Prénom</string>
+	<string name="entity">Entité</string>
+	<string name="acronym">(sigle ou acronyme)</string>
+	<string name="directories">Répertoire (personnel UCL)</string>
+	
+	<!-- Used for settings -->
+	<string name="login_info">"Informations d'authentification"</string>
+	<string name="summary_login_username">Veuillez entrer votre identifiant UCL</string>
+	<string name="login_username">Identifiant UCL</string>
+	<string name="summary_login_password">Veuillez entrer votre mot de passe</string>
+	<string name="login_password">Mot de passe</string>
+	<string name="settings_notify">Notifications de cours</string>
+	<string name="summary_settings_notify">Autoriser les alertes de cours imminents</string>
+	<string name="notify_ringtone">Sonnerie de notification</string>
+	<string name="notify_minute">Nombre de minutes</string>
+	<string name="notify_minute_summary">La notification apparaitra le nombre de minute spécifié avant votre cours.</string>
+	
+	<!-- Used for Launcher -->
+	<string name="first_use">"Initialisation de l'application pour la première utilisation. Veuillez patienter…"</string>
+	<string name="update_app">"Mise à jour de l'application. Veuillez patienter…"</string>
+	<string name="loading_app">"Chargement de l'application. Veuillez patienter…"</string>
+	
+	<!-- Used for maps -->
+	<string name="no_google_maps">Veuillez installer Google Maps pour accéder à cette fonctionnalité.</string>
+	
+	<!-- Used for CoursListEditActivity -->
+	<string name="username_notify">"Pour utiliser cette fonctionnalité, vous devez avoir préalablement définit votre identifiant et votre mot de passe UCL dans les préférences de l'application"</string>
+	<string name="connection">Connexion #8230</string>
+	<string name="connection_ucl">"Connexion à UCLouvain.be"</string>
+	<string name="fetch_info">"Récupération des informations sur les études suivies"</string>
+	<string name="error_academic_year">"Impossible de récupérer vos études pour l'année académique"</string>
+	<string name="get_courses">"Récupération de la liste des cours pour "</string>
+	<string name="courses_empty">"Aucun cours n'a été trouvé."</string>
+	<string name="cleaning_db">"Nettoyage de la base de donnée  "</string>
+	<string name="add_courses_db">"Ajout des nouveaux cours dans la base de donnée"</string>
+	<string name="end">Fin</string>
+	<string name="courses_download_ok">"Liste des cours correctement téléchargée."</string>
+	<string name="add_course_ok">"Cours correctement ajouté"</string>
+	<string name="add_course_error">"Echec de l'ajout du cours"</string>
+	<string name="delete_course">"Suppression d'un cours"</string>
+	<string name="confirm_delete_course">"Etes-vous sûr de vouloir supprimer le cours "</string>
+	<string name="delete_course_ok">"Cours supprimé!"</string>
+	<string name="delete_course_error">"Echec de la suppression :/"</string>
+	<string name="delete">Supprimer</string>
+	<string name="delete_event_dialog_title">"Suppression d'un évènement"</string>
+	<string name="delete_event_dialog_text">"Voulez-vous supprimez cet évènement uniquement (suppression ponctuelle) ou hebdomadairement? (Vous pouvez revenir sans supprimer l'évènement sur la touche retour)"</string>
+	<string name="delete_event_one">Celui-ci</string>
+	<string name="delete_event_weekly">Hebdomadairement</string>
+	<string name="error">Erreur</string>
+	
+	<!-- Used for ScheduleActivity -->
+	<string name="information">"Informations"</string>
+	<string name="course">Cours</string>
+	<string name="trainees">Etudiants</string>
+	<string name="trainers">Enseignants</string>
+	<string name="room">Local</string>
+	<string name="activity_name">"Nom de l'activité"</string>
+	<string name="title">Titre</string>
+	<string name="settings_notify_gps_summary">Adapte le nombre de minute en fonction de votre position</string>
+	<string name="settings_notify_gps">Adapter le nombre de minutes en fonction du GPS</string>
+	<string name="notify_vitesse_deplacement">Vitesse de déplacement (en km/h)</string>
+	<string name="notify_vitesse_deplacement_summary">Indiquez votre vitesse de déplacement moyenne (à vol d\'oiseaux, en km/h)</string>
+	<string name="notify_max_distance">Distance maximum GPS (en m)</string>
+	<string name="notify_max_distance_summary">Indiquez la distance (en m) au-dela de laquelle le calcul du temps ne doit plus être effectué sur base GPS</string>
+	<string name="notify_more_time_summary">Indiquez le temps (en minutes) que vous voulez en plus de celui calculé par le GPS</string>
+	<string name="notify_more_time">Temps supplémentaire GPS (en minutes)</string>
+	
+	<!-- Used for Solidarity and Culture cards -->
+	<string name="button_solidarity_advantages">Tes avantages</string>
+	<string name="button_solidarity_website">Rejoins-nous !</string>
+	<string name="solidarity_text_1"> <b>La carte solidaire, c\'est quoi?</b> </string>
+	<string name="solidarity_text_2">Avec la Carte Solidaire tu t\'engages pour le développement et pour l\'environnement.</string>
+	<string name="solidarity_text_3">La moitié du prix de la Carte permet d\'aider une maman à nourrir ses enfants au Burundi</string>
+	<string name="solidarity_text_4">L\'autre moitié te permet de financer tes propres projets solidaires grâce au Fonds Carte Solidaire.</string>
+	<string name="solidarity_text_5">La Carte Solidaire c\'est aussi des <b>réductions</b> dans des magasins bios, naturels et fairtrade sur ton campus et <b>plein d’autres avantages!</b></string>
+	<string name="solidarity_text_6">La Carte ne coûte que <b>10 euros</b> </string>
+	<string name="solidarity_text_7">Alors qu’est-ce que tu attends ? Rejoins-nous sur www.cartesolidaire.be </string>
+	<string name="culture_text_1">Open your mind!</string>		
+	<string name="culture_text_2">La Carte culture, c\'est seulement 10 euros pour une tonne de cadeaux: places gratuites, réductions, invitations, le tout auprès d\'une centaine de partenaires culturels répartis dans toute la Wallonie et à Bruxelles.</string>
+	<string name="culture_text_3">Tu aimes la musique, le théâtre, le cinéma, tu voudrais sortir pour un prix plus bas? La Carte culture est faite pour toi!</string>
+	<string name="button_culture_site">Plus d\'infos</string>
+	<string name="solidarity_advantages_text_1">Des réductions exclusives</string>
+	<string name="solidarity_advantages_text_2">Des réductions chez tous les commerçants partenaires de la Carte Solidaire. Retrouve la liste complète sur www.cartesolidaire.be </string>
+	<string name="solidarity_advantages_text_3">Tes projets</string>
+	<string name="solidarity_advantages_text_4">Tu es solidaire, tu veux t\'engager mais tu n\'as pas les moyens financiers? Le Fonds \"Carte Solidaire\" te permettra de financer TES propres projets au Nord comme au Sud !</string>
+	<string name="solidarity_advantages_text_5">De l\'info !</string>
+	<string name="solidarity_advantages_text_6">La Carte Solidaire c\'est aussi une newsletter qui t\'informe tous les mois sur l\'actualité solidaire de ton campus mais aussi plein de promos et des concours.</string>
+	<string name="solidarity_advantages_text_7">Vis ta propre expérience</string>
+	<string name="solidarity_advantages_text_8">Un accès privilégié pour tes stages, mémoires en Belgique et à l\'étranger, sur les projets de Louvain Coopération.</string>
+</resources>

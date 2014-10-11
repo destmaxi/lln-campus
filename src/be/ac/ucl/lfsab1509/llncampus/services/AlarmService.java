@@ -5,6 +5,7 @@ import be.ac.ucl.lfsab1509.llncampus.Course;
 import be.ac.ucl.lfsab1509.llncampus.Event;
 import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.R;
+import be.ac.ucl.lfsab1509.llncampus.activity.SettingsActivity;
 import be.ac.ucl.lfsab1509.llncampus.external.SecurePreferences;
 import android.app.AlarmManager;
 import android.app.NotificationManager;
@@ -84,7 +85,7 @@ public class AlarmService extends Service {
 	 */
 	private void checkAlarm() {
 		SharedPreferences preferences = new SecurePreferences(this);
-		if (!preferences.getBoolean(getString(R.string.pref_courses_notify), false)) {
+		if (!preferences.getBoolean(SettingsActivity.COURSES_NOTIFY, false)) {
 			Log.d("AlarmService", "Course notifications are disabled.");
 			return;
 		}
@@ -96,11 +97,11 @@ public class AlarmService extends Service {
 		if (nextEvent != null) // If there is a next event, check if an alert should be sent.
 		{
 
-			int nbMin = LLNCampus.getIntPreference(getString(R.string.pref_notify_minute),
+			int nbMin = LLNCampus.getIntPreference(SettingsActivity.NOTIFY_MINUTE,
 					DEFAULT_NOTIFY_MINUTE, this);
 
 			// Added computations if notifications depend on the position of the user.
-			if (preferences.getBoolean(getString(R.string.pref_notify_with_gps), false)) {
+			if (preferences.getBoolean(SettingsActivity.NOTIFY_WITH_GPS, false)) {
 				Coordinates eventCoord = nextEvent.getCoordinates();
 				if (eventCoord != null) {
 					Coordinates currentCoord = LLNCampus.getGPS().getPosition();
@@ -108,16 +109,16 @@ public class AlarmService extends Service {
 					{
 						double dist = eventCoord.getDistance(currentCoord);
 						if (dist > MIN_DISTANCE && dist < LLNCampus
-								.getIntPreference(getString(R.string.pref_notify_max_distance),
+								.getIntPreference(SettingsActivity.NOTIFY_MAX_DISTANCE,
 										DEFAULT_MAX_DISTANCE, this)) {
 							int speedInKmPerHour = LLNCampus.getIntPreference(
-									getString(R.string.pref_notify_speed_move), 
-										DEFAULT_NOTIFY_SPEED, this);
+									SettingsActivity.NOTIFY_SPEED_MOVE, DEFAULT_NOTIFY_SPEED, 
+									this);
 							int speedMetersPerMinute = speedInKmPerHour * 1000 / 60;
 							nbMin = (int) (dist / speedMetersPerMinute) 
 									+ LLNCampus.getIntPreference(
-											getString(R.string.pref_notify_more_time), 
-											DEFAULT_MORE_TIME, this);
+											SettingsActivity.NOTIFY_MORE_TIME, DEFAULT_MORE_TIME, 
+											this);
 						} 
 					}
 				} 
@@ -198,7 +199,7 @@ public class AlarmService extends Service {
 						e.getDetail(Event.ROOM) + " - " + e.getDetail(Event.TITLE))
 				.setAutoCancel(true);
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-		String ringtone = preferences.getString(getString(R.string.pref_notify_ringtone), null);
+		String ringtone = preferences.getString(SettingsActivity.NOTIFY_RINGTONE, null);
 		if (ringtone == null) {
 			notificationBuilder.setSound(RingtoneManager
 					.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));

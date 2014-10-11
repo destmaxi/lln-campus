@@ -101,8 +101,8 @@ public class CourseListEditActivity extends LLNCampusActivity implements
 	 */
 	public void downloadCoursesFromUCLouvain() {
 		SharedPreferences preferences = new SecurePreferences(this);
-		String username = preferences.getString(getString(R.string.pref_username), null);
-		String password = preferences.getString(getString(R.string.pref_password), null);
+		String username = preferences.getString(SettingsActivity.USERNAME, null);
+		String password = preferences.getString(SettingsActivity.PASSWORD, null);
 		onFirstPage = false;
 
 		if (username == null || password == null) {

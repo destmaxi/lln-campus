@@ -368,7 +368,7 @@ public class UCLouvain {
 					}
 
 					public void run() {
-						progress(0, context.getString(R.string.connection_UCL));
+						progress(0, context.getString(R.string.connection_ucl));
 						UCLouvain uclouvain = new UCLouvain(username, password);
 
 						progress(20, context.getString(R.string.fetch_info));
