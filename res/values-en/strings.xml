@@ -8,11 +8,16 @@
     <string name="loading">Loading…</string>
     <string name="connection_required">You must be connected to the Internet</string>
     
+    <!-- For notifications -->
+    <string name="begins_in">begins in</string>
+    <string name="minutes">minutes</string>
+    <string name="notification_stop">The course notification service has been stopped</string>
+    
     <!-- Strings utiles a plusieurs endroits -->
     <string name="settings">Settings</string>
     <string name="reset_DB">Reset</string>
     <string name="open">Opened</string>
-    <string name="close">Closed</string>
+    <string name="closed">Closed</string>
     <string name="monday">Monday</string>
     <string name="tuesday">Tuesday</string>
     <string name="wednesday">Wednesday</string>
@@ -65,7 +70,7 @@
     <string name="subauditorium_address">Please select an subauditorium from the list</string>
     <string name="library_address">Please select a library from the list</string>
     <string name="library_name">Library name</string>
-    <string name="GPS">Guidance GPS</string>
+    <string name="gps">Guidance GPS</string>
     <string name="sub_auditorium">Subauditoriums</string>
     <string name="library_schedule">The schedule of the library</string>
     <string name="building_picture_description">Overview of building entrance</string>
@@ -88,7 +93,7 @@
     <string name="table">Table</string>
     <string name="fixed_table">Fixed table</string>
     <string name="bench">Bench</string>
-    <string name="rien">Nothing</string>
+    <string name="nothing">Nothing</string>
     <string name="video_projector">Video projector</string>
     <string name="video_projector_data">Video projector data</string>
     <string name="monitor_data">Monitor data</string>
@@ -106,7 +111,7 @@
       <!-- Strings utiles pour horaire -->
     <string name="button_ADE">Button</string>
     <string name="ade_update">Update from ADE</string>
-    <string name="identifiantUCL">Global identifier UCL</string>
+    <string name="login_ucl">Global identifier UCL</string>
     <string name="password">Password</string>
     <string name="course_list_edit">Edit the course list</string>
     <string name="update_from_uclouvain">Download from UCLouvain</string>

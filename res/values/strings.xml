@@ -8,6 +8,11 @@
     <string name="loading">Chargement en cours…</string>
     <string name="connection_required">Vous devez être connecté à Internet</string>
     
+    <!-- For notifications -->
+    <string name="begins_in">commence dans</string>
+    <string name="minutes">minutes</string>
+    <string name="notification_stop">Le service de notification de cours imminent a été arreté</string>
+    
     <!--  Ids used for preferences -->
     <string name="pref_username">username</string>
     <string name="pref_password">password</string>
@@ -23,7 +28,7 @@
     <string name="settings">Paramètres</string>
     <string name="reset_DB">Réinitialiser</string>
     <string name="open">Ouvert</string>
-    <string name="close">Fermé</string>
+    <string name="closed">Fermé</string>
     <string name="monday">Lundi</string>
     <string name="tuesday">Mardi</string>
     <string name="wednesday">Mercredi</string>
@@ -76,7 +81,7 @@
     <string name="subauditorium_address">Sélectionnez un sous-auditoire dans la liste</string>
     <string name="library_address">Sélectionnez une bibliothèque dans la liste</string>
     <string name="library_name">Nom de la bibliothèque</string>
-    <string name="GPS">Guidage GPS</string>
+    <string name="gps">Guidage GPS</string>
     <string name="sub_auditorium">Sous-auditoires</string>
     <string name="library_schedule">Horaires de la bibliothèque</string>
     <string name="building_picture_description">Aperçu de l entree du bâtiment</string>
@@ -99,7 +104,7 @@
     <string name="table">Table</string>
     <string name="fixed_table">Table fixe</string>
     <string name="bench">Gradin</string>
-    <string name="rien">Rien</string>
+    <string name="nothing">Rien</string>
     <string name="video_projector">Vidéo-projecteur</string>
     <string name="video_projector_data">Vidéo-projecteur data</string>
     <string name="monitor_data">Moniteur data</string>
@@ -117,7 +122,7 @@
     <!-- Strings utiles pour horaire -->
     <string name="button_ADE">Bouton</string>
     <string name="ade_update">Mettre à jour depuis ADE</string>
-    <string name="identifiantUCL">Identifiant global UCL</string>
+    <string name="login_ucl">Identifiant global UCL</string>
     <string name="password">Mot de passe</string>
     <string name="course_list_edit">Modifier la liste des cours</string>
     <string name="update_from_uclouvain">Télécharger depuis UCLouvain</string>

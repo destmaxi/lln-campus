@@ -114,11 +114,11 @@ public class SubAuditoriumDetailsFragment extends LLNCampusFragment {
 	        TextView textSlide = (TextView) viewer.findViewById(R.id.slide_value);
 	        textSlide.setText(slide);
 	        TextView textVideo = (TextView) viewer.findViewById(R.id.video_value);
-	        textVideo.setText(getString(video == null ? R.string.rien :
+	        textVideo.setText(getString(video == null ? R.string.nothing :
 	        	video.compareTo("VF") == 0 ? R.string.video_projector :
 	        		video.compareTo("VD") == 0 ? R.string.video_projector_data :
 	        			video.compareTo("MD") == 0 ? R.string.monitor_data :
-	        				video.compareTo("TV") == 0 ? R.string.television : R.string.rien));
+	        				video.compareTo("TV") == 0 ? R.string.television : R.string.nothing));
 
 	        TextView textSound = (TextView) viewer.findViewById(R.id.sound_value);
 	        textSound.setText(sound);
@@ -126,10 +126,10 @@ public class SubAuditoriumDetailsFragment extends LLNCampusFragment {
 	        textCabin.setText(cabin);
 	        
 	        TextView textFurniture = (TextView) viewer.findViewById(R.id.furniture_value);
-	        textFurniture.setText(getString(furniture == null ? R.string.rien :
+	        textFurniture.setText(getString(furniture == null ? R.string.nothing :
 	        	furniture.compareTo("T") == 0 ? R.string.table :
 	        		furniture.compareTo("Tf") == 0 ? R.string.fixed_table :
-	        			furniture.compareTo("G") == 0 ? R.string.bench : R.string.rien));
+	        			furniture.compareTo("G") == 0 ? R.string.bench : R.string.nothing));
 	        
 	        // Fetch the picture of the subauditorium on the device or on the Internet
 	        picture.setImageResource(R.drawable.sandglass);

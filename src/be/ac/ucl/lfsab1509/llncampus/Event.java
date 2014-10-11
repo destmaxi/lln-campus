@@ -43,7 +43,7 @@ public class Event {
 	public static final String ROOM = "room";
 	/** The activity name key value. */
 	public static final String ACTIVITY_NAME = "activity_name";
-	/** The title key value. */
+	/** The title (course name) key value. */
 	public static final String TITLE = "title";
 	
 	private Time begin;

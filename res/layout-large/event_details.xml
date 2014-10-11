@@ -26,6 +26,6 @@
         android:layout_height="wrap_content"
         android:drawableLeft="@android:drawable/ic_menu_directions"
         android:gravity="center|center"
-        android:text="@string/GPS" />
+        android:text="@string/gps" />
 
 </LinearLayout>
