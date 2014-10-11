@@ -14,6 +14,7 @@ import be.ac.ucl.lfsab1509.llncampus.interfaces.ISubAuditorium;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,37 +28,48 @@ import be.ac.ucl.lfsab1509.llncampus.interfaces.ISubAuditorium;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ */
+
+/**
  * This class is intended to create a list of subauditoriums in order to make a
  * clickable list for the user.
  * Related with the xml file subauditorium_list_fragment.xml
- * (This file is different if we are in landscape or not)
+ * (This file is different if we are in landscape or not).
  *
  */
-public class SubAuditoriumActivity extends LLNCampusActivity implements SubAuditoriumListFragment.OnSubAuditoriumSelectedListener {
+public class SubAuditoriumActivity extends LLNCampusActivity implements 
+	SubAuditoriumListFragment.OnSubAuditoriumSelectedListener {
 	ArrayList<String> values = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.subauditorium_list_fragment);
-				 
-		//View vue = findViewById(R.id.subauditorium_list_fragment);
-		//vue.setBackgroundColor(getResources().getColor(R.color.Blue)); 
 	}
-	
 
-    /*
-     * Adding an item click listener to the list
+	/**
+     * This method will be called when an item in the list is selected.
+     * 
+     * @param l
+     * 		The ListView where the click happened.
+     * @param v
+     * 		The view that was clicked within the ListView.
+     * @param position
+     * 		The position of the view in the list.
+     * @param id
+     * 		The row id of the item that was clicked. 
      */
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-    	Intent intent = new Intent(this, DetailsSubAuditorium.class); //the intent is used to start a new activity
+    	Intent intent = new Intent(this, SubAuditoriumDetailsActivity.class);
     	/*
-		 * before starting the new activity, we serialize the selected Poi from the list and add it as a parameter to the intent with the method 'putExtra'
-		 * Note that non-serializable fields of the Poi (marked as 'transient') will not be included in the serialized object.
-		 * This is the case for the data source of the Poi. Then, when de-serialized, the Poi should get another data source
+		 * Before starting the new activity, we serialize the selected Poi from the list and add
+		 * it as a parameter to the intent with the method 'putExtra'.
+		 * Note that non-serializable fields of the Poi (marked as 'transient') will not be 
+		 * included in the serialized object.
+		 * This is the case for the data source of the Poi. 
+		 * Then, when de-serialized, the Poi should get another data source.
 		 */    	
-    	intent.putExtra("NAME", values.get(position));
-		startActivity(intent); //starts the activity denoted by this intent. 
+    	intent.putExtra(EXTRA_NAME, values.get(position));
+		startActivity(intent); 
     }
 	
 	
@@ -65,30 +77,27 @@ public class SubAuditoriumActivity extends LLNCampusActivity implements SubAudit
 		
 		SubAuditoriumDetailsFragment viewer = (SubAuditoriumDetailsFragment) getFragmentManager()
 	            .findFragmentById(R.id.subauditorium_details_fragment);
-		// If we are not in landscape, then create an activitty and give it all useful information
+		// If we are not in landscape, then create an activity and give it all useful information.
 	    if (viewer == null || !viewer.isInLayout()) {
 	    	Intent showContent = new Intent(getApplicationContext(),
-					DetailsSubAuditorium.class);
-	    	showContent.putExtra("ID_PARENT", subAuditorium.getIDParent());
-	    	showContent.putExtra("ID", subAuditorium.getID());
-			showContent.putExtra("NAME",subAuditorium.getName());
-			showContent.putExtra("NBPLACES",  subAuditorium.getNbPlaces());
-			showContent.putExtra("MOBILIER", subAuditorium.getMobilier());
-			showContent.putExtra("CABINE", subAuditorium.hasCabine());
-			showContent.putExtra("ECRAN", subAuditorium.hasEcran());
-			showContent.putExtra("RETRO", subAuditorium.hasRetro());
-			showContent.putExtra("SONO", subAuditorium.hasSono());
-			showContent.putExtra("DIA", subAuditorium.hasDia());
-			showContent.putExtra("VIDEO", subAuditorium.getVideo());
-			showContent.putExtra("NETWORK", subAuditorium.hasNetwork());
-			showContent.putExtra("ACCESS", subAuditorium.hasAccess());
+					SubAuditoriumDetailsActivity.class);
+	    	showContent.putExtra(EXTRA_PARENT_ID, subAuditorium.getParentId());
+	    	showContent.putExtra(EXTRA_ID, subAuditorium.getId());
+			showContent.putExtra(EXTRA_NAME,subAuditorium.getName());
+			showContent.putExtra(EXTRA_PLACES,  subAuditorium.getPlaces());
+			showContent.putExtra(EXTRA_FURNITURE, subAuditorium.getFurniture());
+			showContent.putExtra(EXTRA_CABIN, subAuditorium.hasCabin());
+			showContent.putExtra(EXTRA_SCREEN, subAuditorium.hasScreen());
+			showContent.putExtra(EXTRA_RETRO, subAuditorium.hasRetro());
+			showContent.putExtra(EXTRA_SOUND, subAuditorium.hasSound());
+			showContent.putExtra(EXTRA_SLIDE, subAuditorium.hasSlide());
+			showContent.putExtra(EXTRA_VIDEO, subAuditorium.getVideo());
+			showContent.putExtra(EXTRA_NETWORK, subAuditorium.hasNetwork());
+			showContent.putExtra(EXTRA_ACCESS, subAuditorium.hasAccess());
 			
 			startActivity(showContent);
-	    } else { // Don't have to create an activity, query the fragment to update the layout
+	    } else { // Don't have to create an activity, query the fragment to update the layout.
 	        viewer.updateSubAuditorium(subAuditorium);
-	       
 	    }
 	}
-
-	
 }

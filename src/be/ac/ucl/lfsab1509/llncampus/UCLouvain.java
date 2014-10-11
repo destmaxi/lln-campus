@@ -26,6 +26,7 @@ import android.util.Log;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+	Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -39,45 +40,50 @@ import android.util.Log;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Classe permettant la connexion à UCLouvain.be.
- * 
- * 
+ */
+
+/**
+ * Class that enables connection to UCLouvain.be.
  */
 public class UCLouvain {
-	/** Adresse du serveur ADE. */
+	/** UCLouvain web address. */
 	private static final String SERVER_URL = "https://www.uclouvain.be";
-	/** Page pour les infos. */
+	/** Login path for UCLouvain. */
 	private static final String LOGIN_PATH = "/page_login.html";
-
-	private static final String BEGIN_HTML_NOTES_TABLE = "<td class=\"composant-titre-inter\">Crédit</td>\n</tr>";
-	private static final String END_HTML_NOTES_TABLE = "</table>\n<p>\n</p>\n<table align=\"center\" border=\"0\" cellpadding=\"2\" cellspacing=\"2\">";
+	/** Path for notes table for UCLouvain. */
+	private static final String FORMATION_PATH = "/cmp_formations.html";
+	/** Beginning of the notes table in the HTML. */
+	private static final String BEGIN_HTML_NOTES_TABLE = "<td class=\"composant-titre-inter\">"
+			+ "Crédit</td>\n</tr>";
+	/** Ending of the notes table in the HTML. */
+	private static final String END_HTML_NOTES_TABLE = "</table>\n<p>\n</p>\n"
+			+ "<table align=\"center\" border=\"0\" cellpadding=\"2\" cellspacing=\"2\">";
 
 	private String cookies = null;
 	private boolean connected = false;
 
 	/**
-	 * Création d'une connexion avec UCLouvain.
+	 * Constructor. Create a connection with UCLouvain.
 	 * 
 	 * @param user
-	 *            Identifiant global UCL
+	 *            UCL global user identifier.
 	 * @param password
-	 *            Mot de passe UCL
+	 *            UCL password.
 	 */
 	public UCLouvain(final String user, final String password) {
-		connectUCLouvain(user, password);
+		connectToUCLouvain(user, password);
 	}
 
 	/**
-	 * Établit la connexion avec UCLouvain.
+	 * Establish a connection with UCLouvain.
 	 * 
 	 * @param user
-	 *            Identifiant global UCL
+	 *            UCL global user identifier.
 	 * @param password
-	 *            Mot de passe.
-	 * @return true si la connexion a reussie, false sinon.
+	 *            UCL password.
+	 * @return true if connection succeeded, else false.
 	 */
-	private boolean connectUCLouvain(final String user, final String password) {
+	private boolean connectToUCLouvain(final String user, final String password) {
 		HttpClient client = ExternalAppUtility.getHttpClient();
 
 		HttpPost request = new HttpPost(SERVER_URL + LOGIN_PATH);
@@ -88,10 +94,10 @@ public class UCLouvain {
 		try {
 			request.setEntity(new UrlEncodedFormEntity(postParameters));
 
-			// On établi la connexion.
+			// Establishment of the connection.
 			HttpResponse response = client.execute(request);
 
-			// On enregistre les cookies reçu.
+			// Record received cookies.
 			this.cookies = "";
 			for (Header hc : response.getHeaders("Set-Cookie")) {
 				this.cookies += hc.getValue().substring(0,
@@ -109,337 +115,314 @@ public class UCLouvain {
 	}
 
 	/**
-	 * Obtention de la liste des "offres"/"études" suivient par l'utilisateur.
+	 * Get the list of "Offers"/"Studies" followed by the user.
 	 * 
-	 * @return Liste des offres
+	 * @return The offers list if connection succeeded, else null.
 	 */
-	public ArrayList<Offre> getOffres() {
+	public ArrayList<Offer> getOffers() {
 		if (!connected) {
-			Log.d("OFFRE", "Not connected");
+			Log.d("OFFER", "Not connected");
 			return null;
 		}
 		String html = ""; // A long string containing all the HTML
-		ArrayList<Offre> offres = new ArrayList<Offre>();
+		ArrayList<Offer> offers = new ArrayList<Offer>();
 		try {
 			HttpClient client = ExternalAppUtility.getHttpClient();
-			HttpGet request = new HttpGet(SERVER_URL + "/cmp_formations.html");
-
+			HttpGet request = new HttpGet(SERVER_URL + FORMATION_PATH);
 			request.addHeader("Cookie", cookies);
-
 			HttpResponse response = client.execute(request);
 
 			html = EntityUtils.toString(response.getEntity());
+			ArrayList<String> tables = HTMLAnalyser.getTagsContent(html, "table");
 
-			ArrayList<String> tables = HTMLAnalyser.getBalisesContent(html,
-					"table");
-			
-			Log.d("TABLE", tables.toString());
-			
-			String table = tables.get(tables.size() - 1); // Dernier tableau de
-															// la page.
-			ArrayList<String> lignes = HTMLAnalyser.getBalisesContent(table,
-					"tr");
+			// Get the last table of the page.
+			String table = tables.get(tables.size() - 1);
+			ArrayList<String> lines = HTMLAnalyser.getTagsContent(table, "tr");
 
-			int anac, numOffre;
-			String offreCode, offreName;
-			// On commence a 2 pour passer les 2 lignes d'en-tete.
-			for (int i = 1; i < lignes.size(); i++) {
-				Log.d("I", String.valueOf(i));
-				ArrayList<String> cellules = HTMLAnalyser.getBalisesContent(
-						lignes.get(i), "td");
+			int academicYear, offerNumber;
+			String offerCode, offerName;
+			// Skip the header lines.
+			for (int i = 1; i < lines.size(); i++) {
+				ArrayList<String> cellules = HTMLAnalyser.getTagsContent(lines.get(i), "td");
 
-				String anneeAnac = HTMLAnalyser.removeHTML(cellules.get(0));
-				anac = Integer.parseInt(anneeAnac.substring(0, 4));
+				String academicYearStr = HTMLAnalyser.removeHTMLTag(cellules.get(0));
+				academicYear = Integer.parseInt(academicYearStr.substring(0, 4));
 				String code = cellules.get(1);
-				int j = code.indexOf("numOffre=");
-				numOffre = Integer.parseInt(code.substring(j + 9,
-						code.indexOf("&", j)));
+				int indexOffer = code.indexOf("numOffre=");
+				offerNumber = Integer.parseInt(code.substring(indexOffer + 9, 
+						code.indexOf("&", indexOffer)));
 
-				offreCode = HTMLAnalyser.removeHTML(code);
-
-				offreName = HTMLAnalyser.removeHTML(cellules.get(2));
-
-				offres.add(new Offre(anac, numOffre, offreCode, offreName));
+				offerCode = HTMLAnalyser.removeHTMLTag(code);
+				offerName = HTMLAnalyser.removeHTMLTag(cellules.get(2));
+				offers.add(new Offer(academicYear, offerNumber, offerCode, offerName));
 			}
 		} catch (Exception e) {
-			Log.e("UCLouvain.java",
-					"Erreur lors de la connexion ou de l'analyse du code HTML : "
-							+ e.getMessage());
+			Log.e("UCLouvain.java", "Error when connecting or analyzing HTML : " + e.getMessage());
 			return null;
 		}
-		return offres;
+		return offers;
 	}
 
 	/**
-	 * Fournit la liste des offres de l'annee académique passé en argument.
+	 * Get the offers list for the academic year given as argument.
 	 * 
-	 * @param anac
-	 *            année académique.
-	 * @return La liste des offres pour l'année académique passé en argument ou
-	 *         null en cas d'erreur.
+	 * @param academicYear
+	 *            Academic year.
+	 * @return The offers list for the academic year academicYear or null in case of failure.
 	 */
-	public final ArrayList<Offre> getOffres(final int anac) {
+	public final ArrayList<Offer> getOffers(final int academicYear) {
 		if (!connected) {
-			Log.d("OFFRE", "Not connected");
+			Log.d("OFFER", "Not connected");
 			return null;
 		}
 
-		ArrayList<Offre> offres = new ArrayList<Offre>();
-		ArrayList<Offre> allOffres = getOffres();
-		//Log.d("ALLOFFRES", allOffres.toString());
-		if (allOffres == null || allOffres.isEmpty()) {
-			Log.e("UCLouvain", "Aucune offres n'a pu être récupéré");
+		ArrayList<Offer> offers = new ArrayList<Offer>();
+		ArrayList<Offer> allOffers = getOffers();
+		if (allOffers == null || allOffers.isEmpty()) {
+			Log.e("UCLouvain", "No offer fetched");
 			return null;
 		}
-		for (Offre o : allOffres) {
-			if (o.getAnac() == anac) {
-				offres.add(o);
+		for (Offer o : allOffers) {
+			if (o.getAcademicYear() == academicYear) {
+				offers.add(o);
 			}
 		}
-		return offres;
+		return offers;
 	}
 
 	/**
-	 * Retourne la liste des cours pour une offre passé en argument.
+	 * Get the courses list for an offer given as argument.
 	 * 
-	 * @param o
-	 *            L'offre a considerer
-	 * @return Une liste de cours ou null en cas d'erreur
-	 * @see getCourses
+	 * @param offer
+	 *            The offer.
+	 * @return Courses list of the offer or null in case of failure.
+	 * @see UCLouvain#getCourses(int, int)
 	 */
-	public final ArrayList<Cours> getCourses(final Offre o) {
+	public final ArrayList<Course> getCourses(final Offer offer) {
 		try {
-			return getCourses(o.getAnac(), o.getNumOffre());
+			return getCourses(offer.getAcademicYear(), offer.getOfferNumber());
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
 
 	/**
-	 * Retourne la liste des cours pour les offres passées en arguments.
+	 * Get the courses list for offers given as arguments.
 	 * 
-	 * @param offres
-	 *            Liste des offres pour lesquels il faut récupérer les cours.
-	 * @return La liste des cours ou null en cas d'erreur.
+	 * @param offers
+	 *            Offers list for which courses are requested.
+	 * @return Courses list of offers or null in case of failure.
+	 * @see UCLouvain#getCourses(int, int)
 	 */
-	public final ArrayList<Cours> getCourses(final ArrayList<Offre> offres) {
+	public final ArrayList<Course> getCourses(final ArrayList<Offer> offers) {
 		if (!connected) {
-			Log.d("OFFRE", "Not connected");
+			Log.d("OFFER", "Not connected");
 			return null;
 		}
 
-		ArrayList<Cours> cours = new ArrayList<Cours>();
-		if (offres == null) {
+		ArrayList<Course> course = new ArrayList<Course>();
+		if (offers == null) {
 			return null;
 		}
-		for (Offre o : offres) {
-			cours.addAll(getCourses(o));
+		for (Offer o : offers) {
+			course.addAll(getCourses(o));
 		}
-		return cours;
+		return course;
 	}
 
 	/**
-	 * Retourne la liste des cours pour un numéro d'offre et une année
-	 * académique.
+	 * Get the courses list for a given offer number and an academic year.
 	 * 
-	 * @param anac
-	 *            Année académique
-	 * @param numOffre
-	 *            Numéro de l'offre
-	 * @return Liste de cours pour l'année académique et le numéro de l'offre
-	 *         indiqué
+	 * @param academicYear
+	 *            Academic year.
+	 * @param offerNumber
+	 *            Offer number.
+	 * @return Courses list for given academic year and offer number or null in case of failure.
 	 * @throws ParseException
-	 *             Lorsqu'il y a une erreur d'analyse de la page.
+	 *             When there is an analysis error of the page.
 	 * @throws IOException
-	 *             Lorsqu'il y a une erreur de lecture de la page.
+	 *             When there is a read error of the page.
 	 */
-	private ArrayList<Cours> getCourses(int anac, int numOffre)
+	private ArrayList<Course> getCourses(int academicYear, int offerNumber)
 			throws ParseException, IOException {
 		HttpClient client = ExternalAppUtility.getHttpClient();
-		HttpGet request = new HttpGet(SERVER_URL
-				+ "/cmp_formations.html?fct=notes&numOffre=" + numOffre
-				+ "&anac=" + anac);
+		HttpGet request = new HttpGet(SERVER_URL + FORMATION_PATH + "?fct=notes&numOffre="
+				+ offerNumber + "&anac=" + academicYear);
 		request.addHeader("Cookie", cookies);
 		HttpResponse response = client.execute(request);
 		String html = EntityUtils.toString(response.getEntity());
 
-		/*
-		 * ArrayList<String> tables = HTMLAnalyser.getBalisesContent(html,
-		 * "table");
-		 * 
-		 * if (tables.size() < 3) { Log.e("UCLouvain",
-		 * "Impossible de trouver la table des points. Liste des tables trouvées : "
-		 * + tables.toString()); return null; }
-		 * 
-		 * 
-		 * String notesTable = tables.get(tables.size() - 2);
-		 */
-		ArrayList<Cours> cours = new ArrayList<Cours>();
-
+		ArrayList<Course> course = new ArrayList<Course>();
 		int start = html.indexOf(BEGIN_HTML_NOTES_TABLE);
 		if (start == -1) {
 			Log.e("UCLouvain",
-					"Impossible de trouver le début de la table des notes");
+					"Failed to find the beginning of the notes table");
 			return null;
 		}
 		int stop = html.indexOf(END_HTML_NOTES_TABLE, start);
 		if (stop == -1) {
 			Log.e("UCLouvain",
-					"Impossible de trouver la fin de la table des notes");
+					"Failed to find the ending of the notes table");
 			return null;
 		}
-		String notesTable = html.substring(
-				start + BEGIN_HTML_NOTES_TABLE.length(), stop);
-		
-		Log.d("NOTETABLE", notesTable);
+		String notesTable = html.substring(start + BEGIN_HTML_NOTES_TABLE.length(), stop);
+		ArrayList<String> lines = HTMLAnalyser.getTagsContent(notesTable, "tr");
 
-		ArrayList<String> lignes = HTMLAnalyser.getBalisesContent(notesTable,
-				"tr");
-		Log.d("LIGNES", lignes.toString());
-
-		// On commence a 3 pour passer les 3 lignes d'en-tete.
-		for (int i = 0; i < lignes.size(); i++) {
-			ArrayList<String> cellules = HTMLAnalyser.getBalisesContent(
-					lignes.get(i), "td");
-			Log.d("UCLouvain", "Cellules : " + cellules);
-			String code = HTMLAnalyser.removeHTML(cellules.get(0)).replaceAll(
+		for (int i = 0; i < lines.size(); i++) {
+			ArrayList<String> cells = HTMLAnalyser.getTagsContent(lines.get(i), "td");
+			String code = HTMLAnalyser.removeHTMLTag(cells.get(0)).replaceAll(
 					"[^A-Za-z0-9éùàèê ]", "");
+			// A course code has always a length superior to 6 (usually 7 or 8)
 			if (code.length() > 6) {
-				String name = HTMLAnalyser.removeHTML(cellules.get(1))
+				String name = HTMLAnalyser.removeHTMLTag(cells.get(1))
 						.replaceAll("[^A-Za-z0-9éùàèê ]", "");
-				Cours c = new Cours(code, name);
-				cours.add(c);
+				Course c = new Course(code, name);
+				course.add(c);
 			}
 		}
-		Log.d("UCLouvain", "Résultat de getCourses(" + anac + ", " + numOffre
-				+ ") : \n" + cours);
-		return cours;
+		return course;
 	}
 
 	/**
-	 * Lance le téléchargement de la liste des cours et la place dans la base de
-	 * donnée.
+	 * Launch the download of the courses list and store them in the database.
 	 * 
+	 * @param context
+	 * 			Application context.
 	 * @param username
-	 *            Identifiant global UCL.
+	 *          UCL global user identifier.
 	 * @param password
-	 *            Mot de passe global UCL.
-	 * @param anac
-	 *            Année académique.
+	 *          UCL password.
+	 * @param end
+	 *          Runnable to be executed at the end of the download.
+	 * @param mHandler
+	 * 			Handler to manage messages and threads.
+	 *          
 	 */
-	public static void downloadCoursesFromUCLouvain(final LLNCampusActivity context,
-			final String username, final String password, final Runnable end, final Handler mHandler) {
+	public static void downloadCoursesFromUCLouvain(final LLNCampusActivity context, 
+			final String username, final String password,
+			final Runnable end, final Handler mHandler) {
 		Time t = new Time();
 		t.setToNow();
-		int a = t.year;
+		int year = t.year;
+		// A new academic year begin in September (8th month on 0-based count).
 		if (t.month < 8) {
-			a--;
+			year--;
 		}
-		final int anac = a;
-		
+		final int academicYear = year;
+
 		mHandler.post(new Runnable(){
-			
+
 			public void run(){
-			
-			final ProgressDialog mProgress = new ProgressDialog(context);
-			mProgress.setCancelable(false);
-			mProgress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-			mProgress.setMax(100);
-			mProgress.setMessage(context.getString(R.string.connection));
 
-			mProgress.show();
+				final ProgressDialog mProgress = new ProgressDialog(context);
+				mProgress.setCancelable(false);
+				mProgress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+				mProgress.setMax(100);
+				mProgress.setMessage(context.getString(R.string.connection));
+				mProgress.show();
 
-			new Thread(new Runnable() {
-				public void progress(final int n, final String nextStep) {
-					mHandler.post(new Runnable() {
-						public void run() {
-							mProgress.setProgress(n);
-							mProgress.setMessage(nextStep);
-						}
-					});
-					Log.d("CoursListEditActivity", nextStep);
-				}
-				
-				public void sendError(String msg) {
-					notify("Erreur : " + msg);
-					mProgress.cancel();
-				}
-				
-				public void notify(final String msg) {
-					mHandler.post(new Runnable() {
-						public void run() {
-							context.notify(msg);
-						}
-					});
-				}
-				
-				public void run() {
-					progress(0, context.getString(R.string.connection_UCL));
-					UCLouvain uclouvain = new UCLouvain(username, password);
-					
-				progress(20, context.getString(R.string.fetch_info));
-				ArrayList<Offre> offres = uclouvain.getOffres(anac);
-
-				if (offres == null || offres.isEmpty()) {
-					sendError(context.getString(R.string.error_anac) + anac);
-					return;
-				}
-
-				int i = 40;
-				ArrayList<Cours> cours = new ArrayList<Cours>();
-				for (Offre o : offres) {
-					progress(
-							i,
-							context.getString(R.string.get_courses)
-									+ o.getOffreName());
-					ArrayList<Cours> c = uclouvain.getCourses(o);
-					if (c != null && !c.isEmpty()) {
-						cours.addAll(c);
-					} else {
-						Log.e("CoursListEditActivity",
-								"Erreur : Aucun cours pour l'offre ["
-										+ o.getOffreCode() + "] "
-										+ o.getOffreName());
+				new Thread(new Runnable() {
+					/**
+					 * Set the progress to the value n and show the message nextStep
+					 * @param n
+					 * 			The progress value.
+					 * @param nextStep
+					 * 			The message to show (indicate the next step to be processed).
+					 */
+					public void progress(final int n, final String nextStep) {
+						mHandler.post(new Runnable() {
+							public void run() {
+								mProgress.setProgress(n);
+								mProgress.setMessage(nextStep);
+							}
+						});
+						Log.d("UCLouvain", nextStep);
 					}
-					i += (int) (30. / offres.size());
-				}
 
-				if (cours.isEmpty()) {
-					sendError(context.getString(R.string.courses_empty));
-					return;
-				}
+					/**
+					 * Notify to the user an error.
+					 * 
+					 * @param msg
+					 * 			The message to show to the user.
+					 */
+					public void sendError(String msg) {
+						notify(context.getString(R.string.error) + " : " + msg);
+						mProgress.cancel();
+					}
 
-				// Suppression des anciens cours
-				progress(70, context.getString(R.string.cleaning_db));
-				LLNCampus.getDatabase().delete("Courses", "", null);
-				LLNCampus.getDatabase().delete("Horaire", "", null);
+					/**
+					 * Notify to the user a message.
+					 * 
+					 * @param msg
+					 * 			The message to show to the user.
+					 */
+					public void notify(final String msg) {
+						mHandler.post(new Runnable() {
+							public void run() {
+								context.notify(msg);
+							}
+						});
+					}
 
-				// Ajout des nouvelles donnees
-				i = 80;
-				for (Cours c : cours) {
-					progress(i, context.getString(R.string.add_courses_db));
-					ContentValues cv = new ContentValues();
-					cv.put("CODE", c.getCoursCode());
-					cv.put("NAME", c.getCoursName());
+					public void run() {
+						progress(0, context.getString(R.string.connection_ucl));
+						UCLouvain uclouvain = new UCLouvain(username, password);
 
-					LLNCampus.getDatabase().insert("Courses", cv);
-					i += (int) (20. / cours.size());
-				}
+						progress(20, context.getString(R.string.fetch_info));
+						ArrayList<Offer> offers = uclouvain.getOffers(academicYear);
 
-				progress(100, context.getString(R.string.end));
-				mProgress.cancel();
-				//context.notify(context.getString(R.string.courses_download_ok));
-				mHandler.post(end);
+						if (offers == null || offers.isEmpty()) {
+							sendError(context.getString(R.string.error_academic_year)
+									+ academicYear);
+							return;
+						}
+
+						int i = 40;
+						ArrayList<Course> courses = new ArrayList<Course>();
+						for (Offer o : offers) {
+							progress(i, context.getString(R.string.get_courses)+ o.getOfferName());
+							ArrayList<Course> offerCourses = uclouvain.getCourses(o);
+							if (offerCourses != null && !offerCourses.isEmpty()) {
+								courses.addAll(offerCourses);
+							} else {
+								Log.e("CoursListEditActivity",
+										"Error : No course for offer [" + o.getOfferCode() + "] "
+												+ o.getOfferName());
+							}
+							i += (int) (30. / offers.size());
+						}
+
+						if (courses.isEmpty()) {
+							sendError(context.getString(R.string.courses_empty));
+							return;
+						}
+
+						// Remove old courses.
+						progress(70, context.getString(R.string.cleaning_db));
+						LLNCampus.getDatabase().delete("Courses", "", null);
+						LLNCampus.getDatabase().delete("Horaire", "", null);
+
+						// Add new data.
+						i = 80;
+						for (Course c : courses) {
+							progress(i, context.getString(R.string.add_courses_db));
+							ContentValues cv = new ContentValues();
+							cv.put("CODE", c.getCourseCode());
+							cv.put("NAME", c.getCoursName());
+
+							LLNCampus.getDatabase().insert("Courses", cv);
+							i += (int) (20. / courses.size());
+						}
+
+						progress(100, context.getString(R.string.end));
+						mProgress.cancel();
+						mHandler.post(end);
+					}
+				}).start();
 			}
-		}).start();
-			
-		}
-	});
+		});
 	}
-
 }

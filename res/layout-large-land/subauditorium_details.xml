@@ -60,7 +60,7 @@
         android:text="@string/nbplaces"
         android:textSize="20sp" />
     
-     <TextView android:id="@+id/nbplaces_rep"
+     <TextView android:id="@+id/nbplaces_value"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
@@ -70,30 +70,30 @@
     
     <TableRow>
 	
-        <TextView android:id="@+id/reseau"
+        <TextView android:id="@+id/network"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
-        android:text="@string/reseau"
+        android:text="@string/network"
         android:textSize="20sp" />
         
-        <TextView android:id="@+id/reseau_rep"
+        <TextView android:id="@+id/network_value"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
         android:textSize="20sp" />
         
-        <TextView android:id="@+id/ecran"
+        <TextView android:id="@+id/screen"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
-        android:text="@string/ecran"
+        android:text="@string/screen"
         android:textSize="20sp" />
         
-         <TextView android:id="@+id/ecran_rep"
+         <TextView android:id="@+id/screen_value"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
@@ -113,22 +113,22 @@
         android:text="@string/retro"
         android:textSize="20sp" />
         
-         <TextView android:id="@+id/retro_rep"
+         <TextView android:id="@+id/retro_value"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
         android:textSize="20sp" />
          
-        <TextView android:id="@+id/dia"
+        <TextView android:id="@+id/slide"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
-        android:text="@string/dia"
+        android:text="@string/slide"
         android:textSize="20sp" />
         
-         <TextView android:id="@+id/dia_rep"
+         <TextView android:id="@+id/slide_value"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
@@ -142,30 +142,30 @@
         
       
          
-         <TextView android:id="@+id/cabine"
+         <TextView android:id="@+id/cabin"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
-        android:text="@string/cabine"
+        android:text="@string/cabin"
         android:textSize="20sp" />
         
-         <TextView android:id="@+id/cabine_rep"
+         <TextView android:id="@+id/cabin_value"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
         android:textSize="20sp" />
          
-         <TextView android:id="@+id/sono"
+         <TextView android:id="@+id/sound"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
-        android:text="@string/sono"
+        android:text="@string/sound"
         android:textSize="20sp" />
         
-         <TextView android:id="@+id/sono_rep"
+         <TextView android:id="@+id/sound_value"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
@@ -184,7 +184,7 @@
         android:text="@string/video"
         android:textSize="20sp" />
         
-         <TextView android:id="@+id/video_rep"
+         <TextView android:id="@+id/video_value"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
@@ -198,15 +198,15 @@
         
     
          
-          <TextView android:id="@+id/mobilier"
+          <TextView android:id="@+id/furniture"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:textIsSelectable="true"
-        android:text="@string/mobilier"
+        android:text="@string/furniture"
         android:textSize="20sp" />
         
-         <TextView android:id="@+id/mobilier_rep"
+         <TextView android:id="@+id/furniture_value"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"

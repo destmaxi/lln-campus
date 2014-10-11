@@ -5,6 +5,7 @@ import be.ac.ucl.lfsab1509.llncampus.interfaces.ISubAuditorium;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+	Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,37 +19,39 @@ import be.ac.ucl.lfsab1509.llncampus.interfaces.ISubAuditorium;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Represents a sub-auditorium in LLN (a room in a set of auditoriums)
+ */
+
+/**
+ * Represents a sub-auditorium (a room in a set of auditoriums).
  */
 public class SubAuditorium implements ISubAuditorium {
 
-	private int id_parent;
+	private int parentId;
 	private int id;
 	private String name;
-	private int nbplaces;
-	private String mobilier;
-	private boolean cabine;
-	private boolean ecran;
-	private boolean sono;
+	private int places;
+	private String furniture;
+	private boolean cabin;
+	private boolean screen;
+	private boolean sound;
 	private boolean retro;
-	private boolean dia;
+	private boolean slide;
 	private String video;
 	private boolean network;
 	private boolean access;
 	
 	// Empty constructor
 	public SubAuditorium() {
-		id_parent = 0;
+		parentId = 0;
 		id = 0;
 		name = null;
-		nbplaces = 0;
-		mobilier = null;
-		cabine = false;
-		ecran = false;
+		places = 0;
+		furniture = null;
+		cabin = false;
+		screen = false;
 		retro = false;
-		sono = false;
-		dia = false;
+		sound = false;
+		slide = false;
 		video = null;
 		network = false;
 		access = false;
@@ -56,69 +59,116 @@ public class SubAuditorium implements ISubAuditorium {
 	
 	/**
 	 * Constructor for a SubAuditorium. This one is intended to take directly data from the DB.
-	 * @param parent
+	 * 
+	 * @param parentId
+	 * 			ID of the Auditorium.
 	 * @param id
+	 * 			ID of the SubAudotorium.
 	 * @param name
+	 * 			Name of the SubAuditorium.
 	 * @param nbplaces
-	 * @param mobilier
-	 * @param cabine
-	 * @param ecran
-	 * @param sono
+	 * 			Number of places in the SubAuditorium.
+	 * @param furniture
+	 * 			Furniture of the SubAuditorium.
+	 * @param cabin
+	 * 			If the SubAuditorium has a cabin.
+	 * @param screen
+	 * 			If the SubAuditorium has a screen
+	 * @param sound
+	 * 			If the SubAuditorium has sound devices.
 	 * @param retro
-	 * @param dia
+	 * 			If the SubAuditorium has a projector.
+	 * @param slide
+	 * 			If the SubAuditorium can project slides.
 	 * @param video
+	 * 			If the SubAuditorium has a video projector.
 	 * @param network
+	 * 			If the SubAuditorium provides WiFi access.
 	 * @param access
+	 * 			If the SubAuditorium is accessible to disabled persons.
 	 */
-	public SubAuditorium(int id_parent, int id, String name, int nbplaces, String mobilier, String cabine, String ecran, String sono, String retro, String dia, String video, String network, String access) {
-		setIDParent(id_parent);
-		setID(id);
+	public SubAuditorium(int parentId, int id, String name, int nbplaces, String furniture,
+			String cabin, String screen, String sound, String retro, String slide,
+			String video, String network, String access) {
+		setParentId(parentId);
+		setId(id);
 		setName(name);
-		setNbPlaces(nbplaces);
-		setMobilier(mobilier);
-		setCabine(cabine);
-		setEcran(ecran);
-		setSono(sono);
+		setPlaces(nbplaces);
+		setFurniture(furniture);
+		setCabin(cabin);
+		setScreen(screen);
+		setSound(sound);
 		setRetro(retro);
-		setDia(dia);
+		setSlide(slide);
 		setVideo(video);
 		setNetwork(network);
 		setAccess(access);
 	}
 	
-	public SubAuditorium(int id_parent, int id, String name, int nbplaces, String mobilier, boolean cabine, boolean ecran, boolean sono, boolean retro, boolean dia, String video, boolean network, boolean access) {
-		this.id_parent = id_parent;
+	/**
+	 * Constructor for a SubAuditorium (in its direct form).
+	 * @param parentId
+	 * 			ID of the Auditorium.
+	 * @param id
+	 * 			ID of the SubAudotorium.
+	 * @param name
+	 * 			Name of the SubAuditorium.
+	 * @param nbplaces
+	 * 			Number of places in the SubAuditorium.
+	 * @param furniture
+	 * 			Furniture of the SubAuditorium.
+	 * @param cabin
+	 * 			If the SubAuditorium has a cabin.
+	 * @param screen
+	 * 			If the SubAuditorium has a screen
+	 * @param sound
+	 * 			If the SubAuditorium has sound devices.
+	 * @param retro
+	 * 			If the SubAuditorium has a projector.
+	 * @param slide
+	 * 			If the SubAuditorium can project slides.
+	 * @param video
+	 * 			If the SubAuditorium has a video projector.
+	 * @param network
+	 * 			If the SubAuditorium provides WiFi access.
+	 * @param access
+	 * 			If the SubAuditorium is accessible to disabled persons.
+	 */
+	public SubAuditorium(int parentId, int id, String name, int places, String furniture,
+			boolean cabin, boolean screen, boolean sound, boolean retro, boolean slide,
+			String video, boolean network, boolean access) {
+		this.parentId = parentId;
 		this.id = id;
 		this.name = name;
-		this.nbplaces = nbplaces;
-		this.mobilier = mobilier;
-		this.cabine = cabine;
-		this.ecran = ecran;
-		this.sono = sono;
+		this.places = places;
+		this.furniture = furniture;
+		this.cabin = cabin;
+		this.screen = screen;
+		this.sound = sound;
 		this.retro = retro;
-		this.dia = dia;
+		this.slide = slide;
 		this.video = video;
 		this.network = network;
 		this.access = access;
 	}
 
 	@Override
-	public int getIDParent() {
-		return id_parent;
+	public int getParentId() {
+		return parentId;
 	}
 
 	@Override
-	public void setIDParent(int id_parent) {
-		this.id_parent = id_parent;
+	public void setParentId(int id_parent) {
+		this.parentId = id_parent;
 	}
 
 	@Override
-	public int getID() {
+	public int getId() {
 		return id;
 	}
 
 	@Override
-	public void setID(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -133,53 +183,53 @@ public class SubAuditorium implements ISubAuditorium {
 	}
 
 	@Override
-	public int getNbPlaces() {
-		return nbplaces;
+	public int getPlaces() {
+		return places;
 	}
 
 	@Override
-	public void setNbPlaces(int nbPlaces) {
-		nbplaces = nbPlaces;
+	public void setPlaces(int nbPlaces) {
+		places = nbPlaces;
 	}
 
 	@Override
-	public String getMobilier() {
-		return mobilier;
+	public String getFurniture() {
+		return furniture;
 	}
 
 	@Override
-	public void setMobilier(String mob) {
-		mobilier = mob;
+	public void setFurniture(String mob) {
+		furniture = mob;
 	}
 
 	@Override
-	public boolean hasCabine() {
-		return cabine;
+	public boolean hasCabin() {
+		return cabin;
 	}
 
 	@Override
-	public void setCabine(String cab) {
-		cabine = (cab != null && cab.compareTo("C") == 0);
+	public void setCabin(String cab) {
+		cabin = (cab != null && cab.compareTo("C") == 0);
 	}
 
 	@Override
-	public boolean hasEcran() {
-		return ecran;
+	public boolean hasScreen() {
+		return screen;
 	}
 
 	@Override
-	public void setEcran(String ecr) {
-		ecran = (ecr != null && ecr.compareTo("E") == 0);
+	public void setScreen(String ecr) {
+		screen = (ecr != null && ecr.compareTo("E") == 0);
 	}
 
 	@Override
-	public boolean hasSono() {
-		return sono;
+	public boolean hasSound() {
+		return sound;
 	}
 
 	@Override
-	public void setSono(String sono) {
-		this.sono = (sono != null && sono.compareTo("S") == 0);
+	public void setSound(String sono) {
+		this.sound = (sono != null && sono.compareTo("S") == 0);
 	}
 
 	@Override
@@ -193,13 +243,13 @@ public class SubAuditorium implements ISubAuditorium {
 	}
 
 	@Override
-	public boolean hasDia() {
-		return dia;
+	public boolean hasSlide() {
+		return slide;
 	}
 
 	@Override
-	public void setDia(String dia) {
-		this.dia = (dia != null && dia.compareTo("D") == 0);
+	public void setSlide(String dia) {
+		this.slide = (dia != null && dia.compareTo("D") == 0);
 	}
 
 	@Override

@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,6 +16,7 @@ import android.util.Log;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,22 +30,27 @@ import android.util.Log;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ */
+
+/**
  * Class that allow some operation on a database using a context
- * */
+ */
 public class DatabaseHelper extends SQLiteOpenHelper {
-	/** Nom du fichier de la db. */
+	/** Database file name. */
     private static final String DB_NAME = "database.sql";
-    /** Nom d'une table requise (pour tester si la db est deja copiee). */ 
+    /** Name of one of required tables (to test if the database is already copied). */ 
     private static final String REQUIRED_TABLE_NAME = "Poi"; 
+    
     private SQLiteDatabase db; 
     private final Context context;
  
     /**
      * Constructor
-     * Takes and keeps a reference of the passed context in order to access to 
+     * Take and keep a reference of the passed context in order to access to 
      * the application assets and resources.
-     * @param context Contexte de l'application.
+     * 
+     * @param context 
+     * 			Application context.
      */
     public DatabaseHelper(final Context context) {
     	super(context, DB_NAME, null, 1);
@@ -54,18 +59,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
  
     /**
      * Creates a empty database on the system and rewrites it with your own database.
-     * @throws IOException If a IOException occur
+     * 
+     * @throws IOException 
+     * 			if an IOException occur
      */
     public final void createDatabase() throws IOException { 
     	if (!dbExist()) {
-        	db = this.getWritableDatabase(); // Pr creer la db sur l'appareil
-   			copyDB(db); // Pour copier le .sql dans la db.
+        	db = this.getWritableDatabase(); // To create the database on the device
+   			copyDB(db); // To copy the .sql file in the database.
     	}
     }
  
     /**
      * Check if the database already exist to avoid re-copying 
      * the file each time you open the application.
+     * 
      * @return true if it exists, false if it doesn't
      */
     private boolean dbExist() {
@@ -89,8 +97,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      }
  
     /**
-     * Ouvre le fichier .sql et créer la base de donnée. 
-     * @param db The database.
+     * Open the .sql file and create the database.
+     * 
+     * @param db 
+     * 			The database.
      * */
     private void copyDB(SQLiteDatabase db) {
     	BufferedReader in;
@@ -111,17 +121,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				db.execSQL(instruction);
 			}
 		} catch (IOException e) {
-			throw new RuntimeException("Erreur lors de la copie de la base de donnee", e);
+			throw new RuntimeException("Error when copying the database", e);
 		} catch (SQLException e) {
-			Log.e("DATABASE HELPER", e+"");
+			Log.e("DATABASE HELPER", e + "");
 		}
 		
     }
  
     /**
+     * Create and/or open a SQLiteDatabase
      * 
-     * @return the SQLiteDatabase
-     * @throws SQLException If a SQL Exception occur
+     * @return The SQLiteDatabase
+     * @throws SQLException 
+     * 				If a SQL Exception occur
+     * @see SQLiteOpenHelper#getWritableDatabase()
      */
     public final SQLiteDatabase open() throws SQLException {
     	return db = this.getWritableDatabase();
@@ -137,7 +150,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
  
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		//
+		// Do nothing
 	}
  
 	@Override
@@ -149,12 +162,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	 * Reset the database. 
 	 */
 	public final void reset() {
-		//FIXME : A tester
 		context.deleteDatabase(DB_NAME);
 		try {
 			this.createDatabase();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -7,6 +7,7 @@ import android.location.Location;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,63 +21,91 @@ import android.location.Location;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Représentation de coordonnées gps simple.
+ */
+
+/**
+ * Representation of simple GPS coordinates.
  */
 public class Coordinates {
-	private double lat;
-	private double lon;
+	private double latitude;
+	private double longitude;
 
-	public Coordinates(double d, double e) {
-		this.lat = d;
-		this.lon = e;
+	/**
+	 * Constructor.
+	 * 
+	 * @param lat
+	 * 			Latitude of the coordinate.
+	 * @param lon
+	 * 			Longitude of the coordinate.
+	 */
+	public Coordinates(double lat, double lon) {
+		this.latitude = lat;
+		this.longitude = lon;
 	}
 
-	public double getLat() {
-		return this.lat;
+	/**
+	 * Get the latitude of the coordinate.
+	 * 
+	 * @return Coordinate latitude.
+	 */
+	public double getLatitude() {
+		return this.latitude;
 	}
 
-	public double getLon() {
-		return this.lon;
+	/** 
+	 * Get the longitude of the coordinate.
+	 * 
+	 * @return Coordinate longitude.
+	 */
+	public double getLongitude() {
+		return this.longitude;
 	}
 
+	/**
+	 * Get a String representation of the coordinate in the form "latitude,longitude".
+	 * 
+	 * @return String representation of the coordinate.
+	 */
 	public String toString(){
-		return this.lat+","+this.lon;
+		return this.latitude + "," + this.longitude;
 	}
 	
 	/**
-	 * Retourne la distance en metres entre la coordonnee courante et la
-	 * coordonnees placee en argument.
+	 * Get the distance (in meters) between the current coordinate and the coordinate passed
+	 * in argument.
+	 * 
+	 * @param away
+	 * 			Away coordinates.
+	 * @return Distance (in meters) between current position and away.
 	 */
-	public double getDistance(Coordinates b){
-		
+	public double getDistance(Coordinates away){
 		float[] results = new float[1];
-		Location.distanceBetween(lat, lon, b.getLat(), b.getLon(), results);
+		Location.distanceBetween(latitude, longitude, away.getLatitude(), away.getLongitude(), results);
 		return results[0];
 	}
 
 	/**
-	 * Analyse une chaine de caractère contenant le nom de l'auditoire et
-	 * fournit les coordonnées gps associées.
+	 * Analyze a string containing the auditorium name and give its associated coordinates.
 	 * 
 	 * @param room
-	 * @return Les coordonnées gps si elles ont pu être déterminé, null sinon.
+	 * 				Auditorium name
+	 * @return GPS coordinates if determined, else null.
 	 */
 	public static Coordinates getCoordinatesFromAuditorium(String room) {
-		String sigle;
-		String sigleGrand = room.trim();
-		if (sigleGrand.length() < 4)
+		String acronym;
+		String acronymBig = room.trim();
+		if (acronymBig.length() < 4)
 		{
-			sigle = sigleGrand.substring(0, sigleGrand.length());
+			acronym = acronymBig.substring(0, acronymBig.length());
 		}
 		else
 		{
-			sigle = sigleGrand.substring(0, 4);
+			acronym = acronymBig.substring(0, 4);
 		}
 		Database db = LLNCampus.getDatabase();
 		Cursor c = db
 				.sqlRawQuery("SELECT Poi.LATITUDE, Poi.LONGITUDE FROM Poi, Auditorium WHERE Poi.ID = Auditorium.BUILDING_ID AND Auditorium.AUDITORIUM_NAME LIKE '"
-						+ sigle + "%' LIMIT 1;");
+						+ acronym + "%' LIMIT 1;");
 		if (c==null || c.getCount() == 0) {
 			return null;
 		}

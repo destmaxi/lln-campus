@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/event_details_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|left"
+        android:textIsSelectable="true"
+        android:textSize="17sp" />
+
+    <Button
+        android:id="@+id/button_event_delete"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@android:drawable/ic_delete"
+        android:gravity="center|center"
+        android:text="@string/delete" />
+    
+    <Button
+        android:id="@+id/button_event_details_gps"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@android:drawable/ic_menu_directions"
+        android:gravity="center|center"
+        android:text="@string/gps" />
+
+</LinearLayout>

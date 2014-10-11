@@ -12,6 +12,7 @@ import android.text.format.Time;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,10 +26,26 @@ import android.text.format.Time;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Decrit un evenement (de ADE par exemple).
+ */
+
+/**
+ * Represent an Event (e.g. from ADE).
  */
 public class Event {
+	// Key values for the HashMaps
+	/** The course key value. */
+	public static final String COURSE = "course";
+	/** The trainees key value. */
+	public static final String TRAINEES = "trainees";
+	/** The trainers key value. */
+	public static final String TRAINERS = "trainers";
+	/** The room key value. */
+	public static final String ROOM = "room";
+	/** The activity name key value. */
+	public static final String ACTIVITY_NAME = "activity_name";
+	/** The title (course name) key value. */
+	public static final String TITLE = "title";
+	
 	private Time begin;
 	private Time end;
 	private HashMap<String, String> details;
@@ -37,16 +54,14 @@ public class Event {
 	private boolean coordinates_loaded = false;
 	
 	/**
-	 * Constructeur.
+	 * Constructor.
 	 * 
 	 * @param date
-	 *            Date of begin
+	 *            Begin date.
 	 * @param beginTime
-	 *            Hour of begin
+	 *            Begin hour.
 	 * @param duration
-	 *            Duration
-	 * @param dayName
-	 * 			  Lundi, Mardi,...
+	 *            Event duration.
 	 */
 	public Event(final String date, final String beginTime,
 			final String duration) {
@@ -56,20 +71,19 @@ public class Event {
 			setBegin(date, beginTime);
 			setDuration(duration);
 		} catch (NumberFormatException e) {
-			e.printStackTrace(); // TODO
+			e.printStackTrace();
 		}
 		keyName = new HashMap<String, String>();
-		details = new HashMap<String, String>();
-		
+		details = new HashMap<String, String>();	
 	}
 
 	/**
-	 * Constructeur.
+	 * Constructor.
 	 * 
 	 * @param begin
-	 *            Datetime de début (en miliseconde depuis epoch [1 jan 1970])
+	 *            Begin date time (in millis from epoch [1st January, 1970]).
 	 * @param end
-	 *            Datetime de fin (en miliseconde depuis epoch [1 jan 1970])
+	 *            End date time (in millis from epoch [1st January, 1970]).
 	 */
 	public Event(final long begin, final long end) {
 		this.begin = new Time();
@@ -81,54 +95,53 @@ public class Event {
 	}
 
 	/**
-	 * Ajouter des details a l'evenement.
+	 * Add details to Event.
 	 * 
 	 * @param key
-	 *            Clé du détail
+	 *            Detail key.
 	 * @param value
-	 *            Valeur du détail
+	 *            Detail value.
 	 */
 	public final void addDetail(final String key, final String value) {
 		details.put(key, value);
 	}
 	
 	/**
-	 * Permet de définir un nom pour la cle
+	 * Add a name for the key (of an Event) given as argument.
+	 * 
 	 * @param key
-	 *            Clé de la clé
-	 * @param value
-	 *            Nom de la clé
+	 *            Event Key key.
+	 * @param name
+	 *            Event key name.
 	 */
 	public final void addNameKey(final String key, final String name) {
 		keyName.put(key, name);
 	}
 
 	/**
-	 * Indique le début de l'évenement.
+	 * Set the beginning of an Event.
 	 * 
 	 * @param date
-	 *            Date de l'évènement
-	 * @param beginT
-	 *            Heure de l'évènement
-	 * @param dayName
-	 * 			  Lundi, Mardi,...
+	 *            Event date.
+	 * @param beginTime
+	 *            Event time.
 	 */
-	private void setBegin(final String date, final String beginT) {
+	private void setBegin(final String date, final String beginTime) {
 		int day = Integer.valueOf(date.substring(0, 2));
 		int month = Integer.valueOf(date.substring(3, 5)) - 1;
 		int year = Integer.valueOf(date.substring(6, 10));
 
-		int beginHour = Integer.valueOf(beginT.substring(0, 2));
-		int beginMin = Integer.valueOf(beginT.substring(3, 5));
+		int beginHour = Integer.valueOf(beginTime.substring(0, 2));
+		int beginMin = Integer.valueOf(beginTime.substring(3, 5));
 
 		begin.set(0, beginMin, beginHour, day, month, year);
 	}
 
 	/**
-	 * Indique la durée de l'évènement.
+	 * Set the duration of the Event.
 	 * 
 	 * @param duration
-	 *            Durée de l'évènement
+	 *            Event duration.
 	 */
 	private void setDuration(final String duration) {
 		int i;
@@ -154,40 +167,40 @@ public class Event {
 	}
 
 	/**
-	 * Fournit le detail demandé ou null si le detail n'existe pas .
+	 * Get the detail with the key given as argument.
 	 * 
 	 * @param key
-	 *            Clé du detail
-	 * @return Valeur du détail demande ou null si le detail n'existe pas
+	 *            Detail key.
+	 * @return The value of the detail key if it exists, else null.
 	 */
 	public final String getDetail(final String key) {
 		return details.get(key);
 	}
 	
 	/**
-	 * Fournit le nom demandé ou null si la clé n'existe pas .
+	 * Get the name of the key given as argument.
 	 * 
 	 * @param key
-	 *            Clé de la clé
-	 * @return Nom de la cle demande ou null si la cle n'existe pas
+	 *            Key of the requested key.
+	 * @return The value of the key name if the key exists, else null.
 	 */
 	public final String getKeyName(final String key) {
 		return keyName.get(key);
 	}
 
 	/**
-	 * Fournit la date/heure de début.
+	 * Get the begin time.
 	 * 
-	 * @return Le datetime de début
+	 * @return Begin time.
 	 */
 	public final Time getBeginTime() {
 		return begin;
 	}
 
 	/**
-	 * Fournit la date/heure de fin.
+	 * Get the end time.
 	 * 
-	 * @return Le datetime de fin
+	 * @return End time.
 	 */
 	public final Time getEndTime() {
 		return end;
@@ -204,19 +217,20 @@ public class Event {
 	}
 
 	/**
-	 * Fournit les heures de début et de fin.
+	 * Get a string that contains the begin and end hours in format "BH:BM - EH=EM"
+	 * where BH is the begin hour, BM is the begin minute, EH is the end hour and 
+	 * EM is the end minute.
 	 * 
-	 * @return Heures de début et de fin.
+	 * @return A string that contains the begin and end hours of the event.
 	 */
 	public final String getTime() {
 		return begin.format("%H:%M") + " - " + end.format("%H:%M");
 	}
 
 	/**
-	 * Fournit les clé-valeurs pour l'insertion dans la table Horaire de la base
-	 * de donnée.
+	 * Get the key-value for the insertion in the "Horaire" table of the database.
 	 * 
-	 * @return ContentValues pour l'insertion dans la base de donnée
+	 * @return ContentValues for insertion in database.
 	 */
 	public final ContentValues toContentValues() {
 		ContentValues cv = new ContentValues();
@@ -229,6 +243,12 @@ public class Event {
 		return cv;
 	}
 
+	/**
+	 * Get the coordinates for the Event (based on the location of the Auditorium referenced
+	 * in the database, uses the "room" key).
+	 * 
+	 * @return The coordinates of the Event.
+	 */
 	public Coordinates getCoordinates() {
 		if(!this.coordinates_loaded){
 			this.coordinates = Coordinates.getCoordinatesFromAuditorium(getDetail("room"));
@@ -238,7 +258,9 @@ public class Event {
 	}
 	
 	/**
-	 * Fournit la liste des évènements présents dans la base de donnée.
+	 * Get the list of Events in the database.
+	 * 
+	 * @returns The list of Events in the database.
 	 */
 	public static ArrayList<Event> getList() {
 		ArrayList<Event> events = new ArrayList<Event>();
@@ -260,18 +282,18 @@ public class Event {
 					"TIME_BEGIN ASC");
 		while (c.moveToNext()) {
 			Event e = new Event(c.getLong(1), c.getLong(2));
-			e.addDetail("course", c.getString(0));
-			e.addNameKey("course", LLNCampus.getContext().getString(R.string.course));
-			e.addDetail("trainees", c.getString(3));
-			e.addNameKey("trainees", LLNCampus.getContext().getString(R.string.trainees));
-			e.addDetail("trainers", c.getString(4));
-			e.addNameKey("trainers", LLNCampus.getContext().getString(R.string.trainers));
-			e.addDetail("room", c.getString(5));
-			e.addNameKey("room", LLNCampus.getContext().getString(R.string.room));
-			e.addDetail("activity_name", c.getString(6));
-			e.addNameKey("activity_name", LLNCampus.getContext().getString(R.string.activity_name));
-			e.addDetail("title", c.getString(7));
-			e.addNameKey("title", LLNCampus.getContext().getString(R.string.title));
+			e.addDetail(COURSE, c.getString(0));
+			e.addNameKey(COURSE, LLNCampus.getContext().getString(R.string.course));
+			e.addDetail(TRAINEES, c.getString(3));
+			e.addNameKey(TRAINEES, LLNCampus.getContext().getString(R.string.trainees));
+			e.addDetail(TRAINERS, c.getString(4));
+			e.addNameKey(TRAINERS, LLNCampus.getContext().getString(R.string.trainers));
+			e.addDetail(ROOM, c.getString(5));
+			e.addNameKey(ROOM, LLNCampus.getContext().getString(R.string.room));
+			e.addDetail(ACTIVITY_NAME, c.getString(6));
+			e.addNameKey(ACTIVITY_NAME, LLNCampus.getContext().getString(R.string.activity_name));
+			e.addDetail(TITLE, c.getString(7));
+			e.addNameKey(TITLE, LLNCampus.getContext().getString(R.string.title));
 			events.add(e);
 		}
 		c.close();

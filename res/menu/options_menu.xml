@@ -3,7 +3,7 @@
     <item
         android:id="@+id/ade_update"
         android:orderInCategory="100"
-        android:showAsAction="always"
+        android:showAsAction="ifRoom"
         android:title="@string/ade_update"
         android:visible="false"/>
      <item
@@ -19,7 +19,7 @@
         android:title="@string/menu_settings"/>
    
  <item
-        android:id="@+id/menu_resetDB"
+        android:id="@+id/menu_reset_database"
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/reset_DB"/> 

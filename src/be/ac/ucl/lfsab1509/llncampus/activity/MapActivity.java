@@ -8,6 +8,7 @@ import android.webkit.WebView;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,27 +22,26 @@ import android.webkit.WebView;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Cette classe ne sera appelée que si l'appareil ne possède pas de lecteur PDF
- * Elle consiste simplement à utiliser le GoogleDocs avec le PDF (requiert une connection Internet!)
- * Related with map.xml
+ */
+
+/**
+ * This Activity is called only if the device does not have PDF reader. 
+ * It only uses GoogleDocs to read the PDF stored on the drive (need an Internet connection).
+ * Related with map.xml.
  *
  */
 public class MapActivity extends LLNCampusActivity {
 	
-		// URL ou est stockee l'image (avec lecteur de PDF integre puisque Google Docs)
-		final String URL = "https://docs.google.com/file/d/0B2KSzm3Kdk4LSHZRMWNyTkJnbTA/edit?usp=sharing";
+		/** URL where the PDF file is stored. */
+		public static final String URL_MAP_PDF = 
+				"https://docs.google.com/file/d/0B2KSzm3Kdk4LSHZRMWNyTkJnbTA/edit?usp=sharing";
 		
 		@Override
 		protected void onCreate(Bundle savedInstanceState){
 			super.onCreate(savedInstanceState);
 	        setContentView(R.layout.map);
-	        
 	        WebView webview = (WebView) findViewById(R.id.map_webview);
-	        
-	        
-	        webview.loadUrl(URL);
-	        
+	        webview.loadUrl(URL_MAP_PDF);  
 	        finish();
 		}
 }

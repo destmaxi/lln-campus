@@ -47,7 +47,7 @@
 
         <EditTextPreference 
             android:defaultValue="5"
-            android:key="notify_vitesse_deplacement"
+            android:key="notify_speed_move"
             android:title="@string/notify_vitesse_deplacement"
             android:summary="@string/notify_vitesse_deplacement_summary"
             android:dependency="notify_with_gps"

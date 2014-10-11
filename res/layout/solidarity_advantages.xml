@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView
+       android:id="@+id/solidarity_advantages_title"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="top|center_horizontal"
+       android:textIsSelectable="false"
+       android:text="@string/button_solidarity_advantages"
+       android:textSize="20sp"/>
+    
+    <TextView
+       android:id="@+id/solidarity_advantages_text_1"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="top|center_horizontal"
+       android:textIsSelectable="false"
+       android:text="@string/solidarity_advantages_text_1"
+       android:textSize="16sp"
+       android:paddingTop="15dp"
+       android:paddingBottom="5dp"/>
+    <TextView
+       android:id="@+id/solidarity_advantages_text_2"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="top|center_horizontal"
+       android:textIsSelectable="false"
+       android:text="@string/solidarity_advantages_text_2"
+       android:textSize="14sp"/>
+    
+    <TextView
+       android:id="@+id/solidarity_advantages_text_3"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="top|center_horizontal"
+       android:textIsSelectable="false"
+       android:text="@string/solidarity_advantages_text_3"
+       android:textSize="16sp"
+       android:paddingTop="15dp"
+       android:paddingBottom="5dp"/>
+    <TextView
+       android:id="@+id/solidarity_advantages_text_4"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="top|center_horizontal"
+       android:textIsSelectable="false"
+       android:text="@string/solidarity_advantages_text_4"
+       android:textSize="14sp"/>
+    
+    <TextView
+       android:id="@+id/solidarity_advantages_text_5"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="top|center_horizontal"
+       android:textIsSelectable="false"
+       android:text="@string/solidarity_advantages_text_5"
+       android:textSize="16sp"
+       android:paddingTop="15dp"
+       android:paddingBottom="5dp"/>
+    <TextView
+       android:id="@+id/solidarity_advantages_text_6"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="top|center_horizontal"
+       android:textIsSelectable="false"
+       android:text="@string/solidarity_advantages_text_6"
+       android:textSize="14sp"/>
+    
+    <TextView
+       android:id="@+id/solidarity_advantages_text_7"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="top|center_horizontal"
+       android:textIsSelectable="false"
+       android:text="@string/solidarity_advantages_text_7"
+       android:textSize="16sp"
+       android:paddingTop="15dp"
+       android:paddingBottom="5dp"/>
+    <TextView
+       android:id="@+id/solidarity_advantages_text_8"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="top|center_horizontal"
+       android:textIsSelectable="false"
+       android:text="@string/solidarity_advantages_text_8"
+       android:textSize="14sp"/>
+   
+</LinearLayout>

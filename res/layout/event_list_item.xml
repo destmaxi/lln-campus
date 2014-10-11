@@ -11,7 +11,7 @@
                     android:paddingLeft="5dip">
 
     <TextView
-        android:id="@+id/cours_time"
+        android:id="@+id/course_time"
         android:layout_height="wrap_content"
         android:layout_column="0"
         android:layout_columnSpan="1"
@@ -24,7 +24,7 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/cours_code"
+        android:id="@+id/course_code_edit"
         android:layout_height="wrap_content"
         android:layout_column="1"
         android:layout_columnSpan="1"
@@ -37,7 +37,7 @@
         android:textSize="15sp" />
     
     <TextView
-        android:id="@+id/cours_room"
+        android:id="@+id/course_room"
 		android:singleLine="false"
 		android:maxLines="3"
         android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
       />
 
     <TextView
-        android:id="@+id/cours_title"
+        android:id="@+id/course_title"
         android:layout_height="wrap_content"
         android:singleLine="false"
 		android:maxLines="3"

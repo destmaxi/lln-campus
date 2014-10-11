@@ -11,6 +11,7 @@ import be.ac.ucl.lfsab1509.llncampus.R;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+	Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,41 +25,40 @@ import be.ac.ucl.lfsab1509.llncampus.R;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Class intended to show some buttons to redirect to
- * culture activity
- * Related with culture.xml
+ */
+
+/**
+ * Class intended to show some information about the culture card.
+ * Related with culture.xml.
  * */
-public class CultureActivity extends LLNCampusActivity implements OnClickListener{
-	private static final String CULTURE = "http://www.carteculture.be/";	
+public class CultureActivity extends LLNCampusActivity implements OnClickListener {
+	/** The URL for the culture card. */
+	private static final String URL_CULTURE = "http://www.carteculture.be/";	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.culture);
-		
 		setThisOnClickListener(R.id.button_culture_site);
 	}
 	
 	private void setThisOnClickListener(int btnId) {
-		Button tmp = (Button) findViewById(btnId);
-		tmp.setOnClickListener(this);
+		Button button = (Button) findViewById(btnId);
+		button.setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		Resources r = getResources();
+		Resources resources = getResources();
 		Intent intent = new Intent(this, WebviewActivity.class);
 		switch (v.getId()) {
 		case R.id.button_culture_site:
-				intent.putExtra("TITLE", r.getString(R.string.culture));
-				intent.putExtra("URL", CULTURE);
-				//intent.putExtra("CSS", "#menu, #header{display:none;}");
+				intent.putExtra(EXTRA_TITLE, resources.getString(R.string.culture));
+				intent.putExtra(EXTRA_URL, URL_CULTURE);
 				startActivity(intent);
 				break;	
 		default:
-			notify(r.getString(R.string.todo));
+			notify(resources.getString(R.string.todo));
 		}
 	}
 

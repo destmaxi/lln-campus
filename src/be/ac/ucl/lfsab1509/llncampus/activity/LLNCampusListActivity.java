@@ -5,8 +5,6 @@ import be.ac.ucl.lfsab1509.llncampus.LLNCampus;
 import be.ac.ucl.lfsab1509.llncampus.R;
 import android.app.ListActivity;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +12,7 @@ import android.view.MenuItem;
 /**
  * LLNCampus. A application for students at the UCL (Belgium).
     Copyright (C) 2013 Benjamin Baugnies, Quentin De Coninck, Ahn Tuan Le Pham and Damien Mercier
+    Copyright (C) 2014 Quentin De Coninck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,8 +26,11 @@ import android.view.MenuItem;
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Classe avec le meme objectif que LLNCampusActivity, mais pour les ListActivity
+ */
+
+/**
+ * Abstract class for ListActivities in order to share common menu and useful variables and 
+ * methods.
  */
 public abstract class LLNCampusListActivity extends ListActivity {
 	protected Database db;
@@ -39,20 +41,9 @@ public abstract class LLNCampusListActivity extends ListActivity {
 		this.db = LLNCampus.getDatabase();
 		super.onCreate(savedInstanceState);
 		
-		// Si on a un device petit (ou normal) (ecran < 4.5 pouces)
-		// On bloque la rotation 
-		if ((getResources().getConfiguration().screenLayout & 
-				Configuration.SCREENLAYOUT_SIZE_MASK) == 
-				Configuration.SCREENLAYOUT_SIZE_NORMAL ||
-				(getResources().getConfiguration().screenLayout & 
-						Configuration.SCREENLAYOUT_SIZE_MASK) == 
-						Configuration.SCREENLAYOUT_SIZE_SMALL)
-		{
-			this.setRequestedOrientation(
-					ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		}
+		// If small device, prevent rotation.
+		LLNCampus.blockRotationOnSmallDevices(this);
 		db.open();
-		
 	}
 	
 	@Override
