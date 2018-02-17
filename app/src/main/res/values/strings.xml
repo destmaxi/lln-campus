@@ -124,7 +124,7 @@
 	<string name="first_name">First name</string>
 	<string name="entity">Entity</string>
 	<string name="acronym">(sigle or acronym)</string>
-	<string name="directories">Répertory (UCL staff)</string>
+	<string name="directories">Repertory (UCL staff)</string>
 	
 	<!-- Used for settings -->
 	<string name="login_info">Login information</string>
