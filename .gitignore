@@ -1,5 +1,5 @@
 
-# Created by https://www.gitignore.io/api/androidstudio
+# Created by https://www.gitignore.io/api/vim,linux,macos,windows,androidstudio
 
 ### AndroidStudio ###
 # Covers files to be ignored for android development using Android Studio.
@@ -22,13 +22,7 @@ out/
 # Gradle files
 .gradle
 .gradle/
-gradlew
-gradlew.bat
-gradle/
-import-summary.txt
-lln-campus.iml
-build/*
-
+build/
 
 # Signing files
 .signing/
@@ -43,8 +37,6 @@ proguard/
 *.log
 
 # Android Studio
-.idea/
-.idea
 /*/build/
 /*/local.properties
 /*/out
@@ -136,5 +128,73 @@ fabric.properties
 
 !/gradle/wrapper/gradle-wrapper.jar
 
+### Linux ###
 
-# End of https://www.gitignore.io/api/androidstudio
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+
+### macOS ###
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.TemporaryItems
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### Vim ###
+# swap
+.sw[a-p]
+.*.sw[a-p]
+# session
+Session.vim
+# temporary
+.netrwhist
+# auto-generated tag files
+tags
+
+### Windows ###
+# Windows thumbnail cache files
+ehthumbs_vista.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+
+# End of https://www.gitignore.io/api/vim,linux,macos,windows,androidstudio
