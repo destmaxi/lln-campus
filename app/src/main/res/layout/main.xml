@@ -99,19 +99,6 @@
              />
 
         <Button
-            android:id="@+id/button_icampus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:contentDescription="@string/icampus"
-            android:scaleType="fitXY"
-            android:drawableTop="@drawable/icampus"
-            android:text="@string/icampus"
-            android:gravity="center_vertical|center_horizontal"
-            android:padding="20dp"
-             />
-
-        <Button
             android:id="@+id/button_moodle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

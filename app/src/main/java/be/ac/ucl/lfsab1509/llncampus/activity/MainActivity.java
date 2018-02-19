@@ -44,8 +44,6 @@ import android.widget.GridLayout;
  */
 public class MainActivity extends LLNCampusActivity implements OnClickListener {
 
-	/** URL fot the iCampus web site. */
-	private static final String ICAMPUS_URL = "https://www.uclouvain.be/cnx_icampus.html";
 	/** URL fot the Moodle web site. */
 	private static final String MOODLE_URL = "https://www.uclouvain.be/cnx_moodle.html";
 	/** URL fot the UCL virtual office. */
@@ -144,7 +142,6 @@ public class MainActivity extends LLNCampusActivity implements OnClickListener {
 		findViewById(R.id.button_library).setOnClickListener(this);
 		findViewById(R.id.button_map).setOnClickListener(this);
 		findViewById(R.id.button_directory).setOnClickListener(this);
-		findViewById(R.id.button_icampus).setOnClickListener(this);
 		findViewById(R.id.button_moodle).setOnClickListener(this);
 		findViewById(R.id.button_office).setOnClickListener(this);
 	}
@@ -196,9 +193,6 @@ public class MainActivity extends LLNCampusActivity implements OnClickListener {
 		case R.id.button_directory:
 			intent = new Intent(this, DirectoryActivity.class);
 			startActivity(intent);
-			break;
-		case R.id.button_icampus:
-			ExternalAppUtility.openBrowser(this, ICAMPUS_URL);
 			break;
 		case R.id.button_moodle:
 			ExternalAppUtility.openBrowser(this, MOODLE_URL);
